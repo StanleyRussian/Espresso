@@ -1,0 +1,63 @@
+﻿<Window x:Class="Espresso.Views.Home"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Espresso.Views"
+        mc:Ignorable="d"
+        Title="Home" Height="700" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel>
+            <Border Style="{StaticResource ButtonGroup}">
+                <StackPanel>
+                    <Label>Общее:</Label>
+                    <WrapPanel>
+                        <Border Style="{StaticResource ButtonGroup}">
+                            <StackPanel Orientation="Vertical">
+                                <Label>Денежные счета:</Label>
+                                <Button Click="NewAccount">Добавить счёт</Button>
+                                <Button Click="Accounts">Список счетов</Button>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource ButtonGroup}">
+                            <StackPanel Orientation="Vertical">
+                                <Label>Поставщики:</Label>
+                                <Button Click="NewSupplier">Добавить поставщика</Button>
+                                <Button Click="Suppliers">Список поставщиков</Button>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource ButtonGroup}">
+                <StackPanel>
+                    <Label>Кофе</Label>
+                    <WrapPanel>
+                        <Border Style="{StaticResource ButtonGroup}">
+                            <StackPanel Orientation="Vertical">
+                                <Label>Моносорта:</Label>
+                                <Button Click="NewCoffeeSort">Добавить новый моносорт</Button>
+                                <Button Click="CoffeeSorts">Список моносортов</Button>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource ButtonGroup}">
+                            <StackPanel Orientation="Vertical">
+                                <Label>Закупки зелёного кофе:</Label>
+                                <Button Click="NewCoffeePurchase">Новая закупка</Button>
+                                <Button Click="CoffeePurchases">Список закупок</Button>
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+        </WrapPanel>
+
+    </Grid>
+</Window>

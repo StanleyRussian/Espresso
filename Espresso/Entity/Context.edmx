@@ -1,0 +1,1543 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Context.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ContextStoreContainer">
+    <EntitySet Name="CoffeePurchases" EntityType="Context.Store.CoffeePurchases" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Suppliers" EntityType="Context.Store.Suppliers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CoffeePurchase_Details" EntityType="Context.Store.CoffeePurchase_Details" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CoffeeSorts" EntityType="Context.Store.CoffeeSorts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="dGreenStocks" EntityType="Context.Store.dGreenStocks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roastings" EntityType="Context.Store.Roastings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="dRoastedStocks" EntityType="Context.Store.dRoastedStocks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Mixes" EntityType="Context.Store.Mixes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Mix_Details" EntityType="Context.Store.Mix_Details" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Packings" EntityType="Context.Store.Packings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Packages" EntityType="Context.Store.Packages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PackagePurchases" EntityType="Context.Store.PackagePurchases" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="dPackedStocks" EntityType="Context.Store.dPackedStocks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="dPackageStocks" EntityType="Context.Store.dPackageStocks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CoffeeSales" EntityType="Context.Store.CoffeeSales" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Recipients" EntityType="Context.Store.Recipients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CoffeeSale_Details" EntityType="Context.Store.CoffeeSale_Details" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Accounts" EntityType="Context.Store.Accounts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PackedCategories" EntityType="Context.Store.PackedCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CoffeeTransfers" EntityType="Context.Store.CoffeeTransfers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="dCafeCoffeeStocks" EntityType="Context.Store.dCafeCoffeeStocks" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="SupplierCoffeePurchase" Association="Context.Store.SupplierCoffeePurchase">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="CoffeePurchase" EntitySet="CoffeePurchases" />
+    </AssociationSet>
+    <AssociationSet Name="CoffeePurchase_DetailsCoffeePurchase" Association="Context.Store.CoffeePurchase_DetailsCoffeePurchase">
+      <End Role="CoffeePurchase_Details" EntitySet="CoffeePurchase_Details" />
+      <End Role="CoffeePurchase" EntitySet="CoffeePurchases" />
+    </AssociationSet>
+    <AssociationSet Name="CoffeeSortCoffeePurchase_Details" Association="Context.Store.CoffeeSortCoffeePurchase_Details">
+      <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
+      <End Role="CoffeePurchase_Details" EntitySet="CoffeePurchase_Details" />
+    </AssociationSet>
+    <AssociationSet Name="CoffeeSortdGreenStocks" Association="Context.Store.CoffeeSortdGreenStocks">
+      <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
+      <End Role="dGreenStocks" EntitySet="dGreenStocks" />
+    </AssociationSet>
+    <AssociationSet Name="RoastingCoffeeSort" Association="Context.Store.RoastingCoffeeSort">
+      <End Role="Roasting" EntitySet="Roastings" />
+      <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
+    </AssociationSet>
+    <AssociationSet Name="dRoastedStockCoffeeSort" Association="Context.Store.dRoastedStockCoffeeSort">
+      <End Role="dRoastedStock" EntitySet="dRoastedStocks" />
+      <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
+    </AssociationSet>
+    <AssociationSet Name="Mix_DetailsMix" Association="Context.Store.Mix_DetailsMix">
+      <End Role="Mix_Details" EntitySet="Mix_Details" />
+      <End Role="Mix" EntitySet="Mixes" />
+    </AssociationSet>
+    <AssociationSet Name="Mix_DetailsCoffeeSort" Association="Context.Store.Mix_DetailsCoffeeSort">
+      <End Role="Mix_Details" EntitySet="Mix_Details" />
+      <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
+    </AssociationSet>
+    <AssociationSet Name="PackingMix" Association="Context.Store.PackingMix">
+      <End Role="Packing" EntitySet="Packings" />
+      <End Role="Mix" EntitySet="Mixes" />
+    </AssociationSet>
+    <AssociationSet Name="PackingPackage" Association="Context.Store.PackingPackage">
+      <End Role="Packing" EntitySet="Packings" />
+      <End Role="Package" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="PackagePackagePurchase" Association="Context.Store.PackagePackagePurchase">
+      <End Role="Package" EntitySet="Packages" />
+      <End Role="PackagePurchase" EntitySet="PackagePurchases" />
+    </AssociationSet>
+    <AssociationSet Name="dPackedStocksMix" Association="Context.Store.dPackedStocksMix">
+      <End Role="dPackedStocks" EntitySet="dPackedStocks" />
+      <End Role="Mix" EntitySet="Mixes" />
+    </AssociationSet>
+    <AssociationSet Name="PackagedPackedStocks" Association="Context.Store.PackagedPackedStocks">
+      <End Role="Package" EntitySet="Packages" />
+      <End Role="dPackedStocks" EntitySet="dPackedStocks" />
+    </AssociationSet>
+    <AssociationSet Name="dPackageStocksPackage" Association="Context.Store.dPackageStocksPackage">
+      <End Role="dPackageStocks" EntitySet="dPackageStocks" />
+      <End Role="Package" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="SaleSale_Details" Association="Context.Store.SaleSale_Details">
+      <End Role="Sale" EntitySet="CoffeeSales" />
+      <End Role="Sale_Details" EntitySet="CoffeeSale_Details" />
+    </AssociationSet>
+    <AssociationSet Name="RecipientSale" Association="Context.Store.RecipientSale">
+      <End Role="Recipient" EntitySet="Recipients" />
+      <End Role="Sale" EntitySet="CoffeeSales" />
+    </AssociationSet>
+    <AssociationSet Name="AccountSale" Association="Context.Store.AccountSale">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Sale" EntitySet="CoffeeSales" />
+    </AssociationSet>
+    <AssociationSet Name="MixSale_Details" Association="Context.Store.MixSale_Details">
+      <End Role="Mix" EntitySet="Mixes" />
+      <End Role="Sale_Details" EntitySet="CoffeeSale_Details" />
+    </AssociationSet>
+    <AssociationSet Name="PackageSale_Details" Association="Context.Store.PackageSale_Details">
+      <End Role="Package" EntitySet="Packages" />
+      <End Role="Sale_Details" EntitySet="CoffeeSale_Details" />
+    </AssociationSet>
+    <AssociationSet Name="PackedCategoryPacking" Association="Context.Store.PackedCategoryPacking">
+      <End Role="PackedCategory" EntitySet="PackedCategories" />
+      <End Role="Packing" EntitySet="Packings" />
+    </AssociationSet>
+    <AssociationSet Name="AccountCoffeePurchase" Association="Context.Store.AccountCoffeePurchase">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="CoffeePurchase" EntitySet="CoffeePurchases" />
+    </AssociationSet>
+    <AssociationSet Name="MixCoffeeTransfer" Association="Context.Store.MixCoffeeTransfer">
+      <End Role="Mix" EntitySet="Mixes" />
+      <End Role="CoffeeTransfer" EntitySet="CoffeeTransfers" />
+    </AssociationSet>
+    <AssociationSet Name="MixdCafeCoffeeStock" Association="Context.Store.MixdCafeCoffeeStock">
+      <End Role="Mix" EntitySet="Mixes" />
+      <End Role="dCafeCoffeeStock" EntitySet="dCafeCoffeeStocks" />
+    </AssociationSet>
+    <AssociationSet Name="AccountPackagePurchase" Association="Context.Store.AccountPackagePurchase">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="PackagePurchase" EntitySet="PackagePurchases" />
+    </AssociationSet>
+    <AssociationSet Name="SupplierPackagePurchase" Association="Context.Store.SupplierPackagePurchase">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="PackagePurchase" EntitySet="PackagePurchases" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CoffeePurchases">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+    <Property Name="Paid" Type="bit" Nullable="false" />
+    <Property Name="Supplier_Id" Type="int" Nullable="false" />
+    <Property Name="Account_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Suppliers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Contact" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ContactPerson" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Adress" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
+  </EntityType>
+  <EntityType Name="CoffeePurchase_Details">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="CoffeePurchases_Id" Type="int" Nullable="false" />
+    <Property Name="CoffeeSort_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CoffeeSorts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LastPrice" Type="int" Nullable="true" />
+    <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
+  </EntityType>
+  <EntityType Name="dGreenStocks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="CoffeeSort_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roastings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="InitialAmount" Type="int" Nullable="false" />
+    <Property Name="RoastedAmount" Type="int" Nullable="false" />
+    <Property Name="CoffeeSort_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="dRoastedStocks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="CoffeeSort_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mixes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
+  </EntityType>
+  <EntityType Name="Mix_Details">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ratio" Type="int" Nullable="false" />
+    <Property Name="Mix_Id" Type="int" Nullable="false" />
+    <Property Name="CoffeeSort_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Packings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="PackQuantity" Type="int" Nullable="false" />
+    <Property Name="Mixes_Id" Type="int" Nullable="false" />
+    <Property Name="Packages_Id" Type="int" Nullable="false" />
+    <Property Name="PackedCategory_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Packages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Capacity" Type="int" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
+  </EntityType>
+  <EntityType Name="PackagePurchases">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="PackQuantity" Type="int" Nullable="false" />
+    <Property Name="Package_Id" Type="int" Nullable="false" />
+    <Property Name="Account_Id" Type="int" Nullable="false" />
+    <Property Name="Supplier_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="dPackedStocks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PackQuantity" Type="int" Nullable="false" />
+    <Property Name="Mixes_Id" Type="int" Nullable="false" />
+    <Property Name="Package_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="dPackageStocks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quantity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Packages_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CoffeeSales">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+    <Property Name="Paid" Type="bit" Nullable="false" />
+    <Property Name="Recipient_Id" Type="int" Nullable="false" />
+    <Property Name="Account_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Recipients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Contact" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactPerson" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Adress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
+  </EntityType>
+  <EntityType Name="CoffeeSale_Details">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="PackQuantity" Type="int" Nullable="false" />
+    <Property Name="Sale_Id" Type="int" Nullable="false" />
+    <Property Name="Mix_Id" Type="int" Nullable="false" />
+    <Property Name="Package_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BankNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
+  </EntityType>
+  <EntityType Name="PackedCategories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
+  </EntityType>
+  <EntityType Name="CoffeeTransfers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Mix_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="dCafeCoffeeStocks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Mix_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="SupplierCoffeePurchase">
+    <End Role="Supplier" Type="Context.Store.Suppliers" Multiplicity="1" />
+    <End Role="CoffeePurchase" Type="Context.Store.CoffeePurchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CoffeePurchase">
+        <PropertyRef Name="Supplier_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CoffeePurchase_DetailsCoffeePurchase">
+    <End Role="CoffeePurchase_Details" Type="Context.Store.CoffeePurchase_Details" Multiplicity="*" />
+    <End Role="CoffeePurchase" Type="Context.Store.CoffeePurchases" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <ReferentialConstraint>
+      <Principal Role="CoffeePurchase">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CoffeePurchase_Details">
+        <PropertyRef Name="CoffeePurchases_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CoffeeSortCoffeePurchase_Details">
+    <End Role="CoffeeSort" Type="Context.Store.CoffeeSorts" Multiplicity="1" />
+    <End Role="CoffeePurchase_Details" Type="Context.Store.CoffeePurchase_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CoffeeSort">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CoffeePurchase_Details">
+        <PropertyRef Name="CoffeeSort_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CoffeeSortdGreenStocks">
+    <End Role="CoffeeSort" Type="Context.Store.CoffeeSorts" Multiplicity="1" />
+    <End Role="dGreenStocks" Type="Context.Store.dGreenStocks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CoffeeSort">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="dGreenStocks">
+        <PropertyRef Name="CoffeeSort_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RoastingCoffeeSort">
+    <End Role="Roasting" Type="Context.Store.Roastings" Multiplicity="*" />
+    <End Role="CoffeeSort" Type="Context.Store.CoffeeSorts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="CoffeeSort">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Roasting">
+        <PropertyRef Name="CoffeeSort_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="dRoastedStockCoffeeSort">
+    <End Role="dRoastedStock" Type="Context.Store.dRoastedStocks" Multiplicity="*" />
+    <End Role="CoffeeSort" Type="Context.Store.CoffeeSorts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="CoffeeSort">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="dRoastedStock">
+        <PropertyRef Name="CoffeeSort_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Mix_DetailsMix">
+    <End Role="Mix_Details" Type="Context.Store.Mix_Details" Multiplicity="*" />
+    <End Role="Mix" Type="Context.Store.Mixes" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <ReferentialConstraint>
+      <Principal Role="Mix">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mix_Details">
+        <PropertyRef Name="Mix_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Mix_DetailsCoffeeSort">
+    <End Role="Mix_Details" Type="Context.Store.Mix_Details" Multiplicity="*" />
+    <End Role="CoffeeSort" Type="Context.Store.CoffeeSorts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="CoffeeSort">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mix_Details">
+        <PropertyRef Name="CoffeeSort_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PackingMix">
+    <End Role="Packing" Type="Context.Store.Packings" Multiplicity="*" />
+    <End Role="Mix" Type="Context.Store.Mixes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Mix">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Packing">
+        <PropertyRef Name="Mixes_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PackingPackage">
+    <End Role="Packing" Type="Context.Store.Packings" Multiplicity="*" />
+    <End Role="Package" Type="Context.Store.Packages" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Packing">
+        <PropertyRef Name="Packages_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PackagePackagePurchase">
+    <End Role="Package" Type="Context.Store.Packages" Multiplicity="1" />
+    <End Role="PackagePurchase" Type="Context.Store.PackagePurchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PackagePurchase">
+        <PropertyRef Name="Package_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="dPackedStocksMix">
+    <End Role="dPackedStocks" Type="Context.Store.dPackedStocks" Multiplicity="*" />
+    <End Role="Mix" Type="Context.Store.Mixes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Mix">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="dPackedStocks">
+        <PropertyRef Name="Mixes_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PackagedPackedStocks">
+    <End Role="Package" Type="Context.Store.Packages" Multiplicity="1" />
+    <End Role="dPackedStocks" Type="Context.Store.dPackedStocks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="dPackedStocks">
+        <PropertyRef Name="Package_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="dPackageStocksPackage">
+    <End Role="dPackageStocks" Type="Context.Store.dPackageStocks" Multiplicity="*" />
+    <End Role="Package" Type="Context.Store.Packages" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="dPackageStocks">
+        <PropertyRef Name="Packages_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SaleSale_Details">
+    <End Role="Sale" Type="Context.Store.CoffeeSales" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sale_Details" Type="Context.Store.CoffeeSale_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sale">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sale_Details">
+        <PropertyRef Name="Sale_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RecipientSale">
+    <End Role="Recipient" Type="Context.Store.Recipients" Multiplicity="1" />
+    <End Role="Sale" Type="Context.Store.CoffeeSales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="Recipient_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccountSale">
+    <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1" />
+    <End Role="Sale" Type="Context.Store.CoffeeSales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="Account_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MixSale_Details">
+    <End Role="Mix" Type="Context.Store.Mixes" Multiplicity="1" />
+    <End Role="Sale_Details" Type="Context.Store.CoffeeSale_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mix">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sale_Details">
+        <PropertyRef Name="Mix_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PackageSale_Details">
+    <End Role="Package" Type="Context.Store.Packages" Multiplicity="1" />
+    <End Role="Sale_Details" Type="Context.Store.CoffeeSale_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sale_Details">
+        <PropertyRef Name="Package_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PackedCategoryPacking">
+    <End Role="PackedCategory" Type="Context.Store.PackedCategories" Multiplicity="1" />
+    <End Role="Packing" Type="Context.Store.Packings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PackedCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Packing">
+        <PropertyRef Name="PackedCategory_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccountCoffeePurchase">
+    <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1" />
+    <End Role="CoffeePurchase" Type="Context.Store.CoffeePurchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CoffeePurchase">
+        <PropertyRef Name="Account_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MixCoffeeTransfer">
+    <End Role="Mix" Type="Context.Store.Mixes" Multiplicity="1" />
+    <End Role="CoffeeTransfer" Type="Context.Store.CoffeeTransfers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mix">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CoffeeTransfer">
+        <PropertyRef Name="Mix_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MixdCafeCoffeeStock">
+    <End Role="Mix" Type="Context.Store.Mixes" Multiplicity="1" />
+    <End Role="dCafeCoffeeStock" Type="Context.Store.dCafeCoffeeStocks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mix">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="dCafeCoffeeStock">
+        <PropertyRef Name="Mix_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccountPackagePurchase">
+    <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1" />
+    <End Role="PackagePurchase" Type="Context.Store.PackagePurchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PackagePurchase">
+        <PropertyRef Name="Account_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SupplierPackagePurchase">
+    <End Role="Supplier" Type="Context.Store.Suppliers" Multiplicity="1" />
+    <End Role="PackagePurchase" Type="Context.Store.PackagePurchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PackagePurchase">
+        <PropertyRef Name="Supplier_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Context" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ContextContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CoffeePurchases" EntityType="Context.CoffeePurchase" />
+          <EntitySet Name="Suppliers" EntityType="Context.Supplier" />
+          <AssociationSet Name="SupplierCoffeePurchase" Association="Context.SupplierCoffeePurchase">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="CoffeePurchase" EntitySet="CoffeePurchases" />
+          </AssociationSet>
+          <EntitySet Name="CoffeePurchase_Details" EntityType="Context.CoffeePurchase_Details" />
+          <EntitySet Name="CoffeeSorts" EntityType="Context.CoffeeSort" />
+          <AssociationSet Name="CoffeePurchase_DetailsCoffeePurchase" Association="Context.CoffeePurchase_DetailsCoffeePurchase">
+            <End Role="CoffeePurchase_Details" EntitySet="CoffeePurchase_Details" />
+            <End Role="CoffeePurchase" EntitySet="CoffeePurchases" />
+          </AssociationSet>
+          <AssociationSet Name="CoffeeSortCoffeePurchase_Details" Association="Context.CoffeeSortCoffeePurchase_Details">
+            <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
+            <End Role="CoffeePurchase_Details" EntitySet="CoffeePurchase_Details" />
+          </AssociationSet>
+          <EntitySet Name="dGreenStocks" EntityType="Context.dGreenStock" />
+          <AssociationSet Name="CoffeeSortdGreenStocks" Association="Context.CoffeeSortdGreenStocks">
+            <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
+            <End Role="dGreenStocks" EntitySet="dGreenStocks" />
+          </AssociationSet>
+          <EntitySet Name="Roastings" EntityType="Context.Roasting" />
+          <EntitySet Name="dRoastedStocks" EntityType="Context.dRoastedStock" />
+          <AssociationSet Name="RoastingCoffeeSort" Association="Context.RoastingCoffeeSort">
+            <End Role="Roasting" EntitySet="Roastings" />
+            <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
+          </AssociationSet>
+          <AssociationSet Name="dRoastedStockCoffeeSort" Association="Context.dRoastedStockCoffeeSort">
+            <End Role="dRoastedStock" EntitySet="dRoastedStocks" />
+            <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
+          </AssociationSet>
+          <EntitySet Name="Mixes" EntityType="Context.Mix" />
+          <EntitySet Name="Mix_Details" EntityType="Context.Mix_Details" />
+          <AssociationSet Name="Mix_DetailsMix" Association="Context.Mix_DetailsMix">
+            <End Role="Mix_Details" EntitySet="Mix_Details" />
+            <End Role="Mix" EntitySet="Mixes" />
+          </AssociationSet>
+          <AssociationSet Name="Mix_DetailsCoffeeSort" Association="Context.Mix_DetailsCoffeeSort">
+            <End Role="Mix_Details" EntitySet="Mix_Details" />
+            <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
+          </AssociationSet>
+          <EntitySet Name="Packings" EntityType="Context.Packing" />
+          <EntitySet Name="Packages" EntityType="Context.Package" />
+          <AssociationSet Name="PackingMix" Association="Context.PackingMix">
+            <End Role="Packing" EntitySet="Packings" />
+            <End Role="Mix" EntitySet="Mixes" />
+          </AssociationSet>
+          <AssociationSet Name="PackingPackage" Association="Context.PackingPackage">
+            <End Role="Packing" EntitySet="Packings" />
+            <End Role="Package" EntitySet="Packages" />
+          </AssociationSet>
+          <EntitySet Name="PackagePurchases" EntityType="Context.PackagePurchase" />
+          <AssociationSet Name="PackagePackagePurchase" Association="Context.PackagePackagePurchase">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="PackagePurchase" EntitySet="PackagePurchases" />
+          </AssociationSet>
+          <EntitySet Name="dPackedStocks" EntityType="Context.dPackedStocks" />
+          <AssociationSet Name="dPackedStocksMix" Association="Context.dPackedStocksMix">
+            <End Role="dPackedStocks" EntitySet="dPackedStocks" />
+            <End Role="Mix" EntitySet="Mixes" />
+          </AssociationSet>
+          <AssociationSet Name="PackagedPackedStocks" Association="Context.PackagedPackedStocks">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="dPackedStocks" EntitySet="dPackedStocks" />
+          </AssociationSet>
+          <EntitySet Name="dPackageStocks" EntityType="Context.dPackageStocks" />
+          <AssociationSet Name="dPackageStocksPackage" Association="Context.dPackageStocksPackage">
+            <End Role="dPackageStocks" EntitySet="dPackageStocks" />
+            <End Role="Package" EntitySet="Packages" />
+          </AssociationSet>
+          <EntitySet Name="CoffeeSales" EntityType="Context.CoffeeSale" />
+          <EntitySet Name="Recipients" EntityType="Context.Recipient" />
+          <EntitySet Name="CoffeeSale_Details" EntityType="Context.CoffeeSale_Details" />
+          <AssociationSet Name="SaleSale_Details" Association="Context.SaleSale_Details">
+            <End Role="Sale" EntitySet="CoffeeSales" />
+            <End Role="Sale_Details" EntitySet="CoffeeSale_Details" />
+          </AssociationSet>
+          <AssociationSet Name="RecipientSale" Association="Context.RecipientSale">
+            <End Role="Recipient" EntitySet="Recipients" />
+            <End Role="Sale" EntitySet="CoffeeSales" />
+          </AssociationSet>
+          <EntitySet Name="Accounts" EntityType="Context.Account" />
+          <AssociationSet Name="AccountSale" Association="Context.AccountSale">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Sale" EntitySet="CoffeeSales" />
+          </AssociationSet>
+          <AssociationSet Name="MixSale_Details" Association="Context.MixSale_Details">
+            <End Role="Mix" EntitySet="Mixes" />
+            <End Role="Sale_Details" EntitySet="CoffeeSale_Details" />
+          </AssociationSet>
+          <AssociationSet Name="PackageSale_Details" Association="Context.PackageSale_Details">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="Sale_Details" EntitySet="CoffeeSale_Details" />
+          </AssociationSet>
+          <EntitySet Name="PackedCategories" EntityType="Context.PackedCategory" />
+          <AssociationSet Name="PackedCategoryPacking" Association="Context.PackedCategoryPacking">
+            <End Role="PackedCategory" EntitySet="PackedCategories" />
+            <End Role="Packing" EntitySet="Packings" />
+          </AssociationSet>
+          <AssociationSet Name="AccountCoffeePurchase" Association="Context.AccountCoffeePurchase">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="CoffeePurchase" EntitySet="CoffeePurchases" />
+          </AssociationSet>
+          <EntitySet Name="CoffeeTransfers" EntityType="Context.CoffeeTransfer" />
+          <AssociationSet Name="MixCoffeeTransfer" Association="Context.MixCoffeeTransfer">
+            <End Role="Mix" EntitySet="Mixes" />
+            <End Role="CoffeeTransfer" EntitySet="CoffeeTransfers" />
+          </AssociationSet>
+          <EntitySet Name="dCafeCoffeeStocks" EntityType="Context.dCafeCoffeeStock" />
+          <AssociationSet Name="MixdCafeCoffeeStock" Association="Context.MixdCafeCoffeeStock">
+            <End Role="Mix" EntitySet="Mixes" />
+            <End Role="dCafeCoffeeStock" EntitySet="dCafeCoffeeStocks" />
+          </AssociationSet>
+          <AssociationSet Name="AccountPackagePurchase" Association="Context.AccountPackagePurchase">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="PackagePurchase" EntitySet="PackagePurchases" />
+          </AssociationSet>
+          <AssociationSet Name="SupplierPackagePurchase" Association="Context.SupplierPackagePurchase">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="PackagePurchase" EntitySet="PackagePurchases" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="CoffeePurchase">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Supplier" Relationship="Context.SupplierCoffeePurchase" FromRole="CoffeePurchase" ToRole="Supplier" />
+          <NavigationProperty Name="CoffeePurchase_Details" Relationship="Context.CoffeePurchase_DetailsCoffeePurchase" FromRole="CoffeePurchase" ToRole="CoffeePurchase_Details" />
+          <NavigationProperty Name="Account" Relationship="Context.AccountCoffeePurchase" FromRole="CoffeePurchase" ToRole="Account" />
+          <Property Name="Paid" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Contact" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ContactPerson" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Adress" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CoffeePurchases" Relationship="Context.SupplierCoffeePurchase" FromRole="Supplier" ToRole="CoffeePurchase" />
+          <NavigationProperty Name="PackagePurchases" Relationship="Context.SupplierPackagePurchase" FromRole="Supplier" ToRole="PackagePurchase" />
+          <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
+        </EntityType>
+        <Association Name="SupplierCoffeePurchase">
+          <End Type="Context.Supplier" Role="Supplier" Multiplicity="1" >
+          </End>
+          <End Type="Context.CoffeePurchase" Role="CoffeePurchase" Multiplicity="*" >
+          </End>
+        </Association>
+        <EntityType Name="CoffeePurchase_Details">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CoffeePurchases" Relationship="Context.CoffeePurchase_DetailsCoffeePurchase" FromRole="CoffeePurchase_Details" ToRole="CoffeePurchase" />
+          <NavigationProperty Name="CoffeeSort" Relationship="Context.CoffeeSortCoffeePurchase_Details" FromRole="CoffeePurchase_Details" ToRole="CoffeeSort" />
+        </EntityType>
+        <EntityType Name="CoffeeSort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="CoffeePurchase_Details" Relationship="Context.CoffeeSortCoffeePurchase_Details" FromRole="CoffeeSort" ToRole="CoffeePurchase_Details" />
+          <NavigationProperty Name="dGreenStocks" Relationship="Context.CoffeeSortdGreenStocks" FromRole="CoffeeSort" ToRole="dGreenStocks" />
+          <NavigationProperty Name="Roastings" Relationship="Context.RoastingCoffeeSort" FromRole="CoffeeSort" ToRole="Roasting" />
+          <NavigationProperty Name="dRoastedStocks" Relationship="Context.dRoastedStockCoffeeSort" FromRole="CoffeeSort" ToRole="dRoastedStock" />
+          <NavigationProperty Name="Mix_Details" Relationship="Context.Mix_DetailsCoffeeSort" FromRole="CoffeeSort" ToRole="Mix_Details" />
+          <Property Name="LastPrice" Type="Int32" Nullable="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
+        </EntityType>
+        <Association Name="CoffeePurchase_DetailsCoffeePurchase">
+          <End Type="Context.CoffeePurchase_Details" Role="CoffeePurchase_Details" Multiplicity="*" />
+          <End Type="Context.CoffeePurchase" Role="CoffeePurchase" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+        </Association>
+        <Association Name="CoffeeSortCoffeePurchase_Details">
+          <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" />
+          <End Type="Context.CoffeePurchase_Details" Role="CoffeePurchase_Details" Multiplicity="*" />
+        </Association>
+        <EntityType Name="dGreenStock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CoffeeSort" Relationship="Context.CoffeeSortdGreenStocks" FromRole="dGreenStocks" ToRole="CoffeeSort" />
+        </EntityType>
+        <Association Name="CoffeeSortdGreenStocks">
+          <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" />
+          <End Type="Context.dGreenStock" Role="dGreenStocks" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Roasting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InitialAmount" Type="Int32" Nullable="false" />
+          <Property Name="RoastedAmount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CoffeeSort" Relationship="Context.RoastingCoffeeSort" FromRole="Roasting" ToRole="CoffeeSort" />
+        </EntityType>
+        <EntityType Name="dRoastedStock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CoffeeSort" Relationship="Context.dRoastedStockCoffeeSort" FromRole="dRoastedStock" ToRole="CoffeeSort" />
+        </EntityType>
+        <Association Name="RoastingCoffeeSort">
+          <End Type="Context.Roasting" Role="Roasting" Multiplicity="*" />
+          <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" />
+        </Association>
+        <Association Name="dRoastedStockCoffeeSort">
+          <End Type="Context.dRoastedStock" Role="dRoastedStock" Multiplicity="*" />
+          <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Mix">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <NavigationProperty Name="Mix_Details" Relationship="Context.Mix_DetailsMix" FromRole="Mix" ToRole="Mix_Details" />
+          <NavigationProperty Name="Packings" Relationship="Context.PackingMix" FromRole="Mix" ToRole="Packing" />
+          <NavigationProperty Name="dPackedStocks" Relationship="Context.dPackedStocksMix" FromRole="Mix" ToRole="dPackedStocks" />
+          <NavigationProperty Name="Sale_Details" Relationship="Context.MixSale_Details" FromRole="Mix" ToRole="Sale_Details" />
+          <NavigationProperty Name="CoffeeTransfers" Relationship="Context.MixCoffeeTransfer" FromRole="Mix" ToRole="CoffeeTransfer" />
+          <NavigationProperty Name="dCafeCoffeeStocks" Relationship="Context.MixdCafeCoffeeStock" FromRole="Mix" ToRole="dCafeCoffeeStock" />
+        </EntityType>
+        <EntityType Name="Mix_Details">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ratio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mix" Relationship="Context.Mix_DetailsMix" FromRole="Mix_Details" ToRole="Mix" />
+          <NavigationProperty Name="CoffeeSort" Relationship="Context.Mix_DetailsCoffeeSort" FromRole="Mix_Details" ToRole="CoffeeSort" />
+        </EntityType>
+        <Association Name="Mix_DetailsMix">
+          <End Type="Context.Mix_Details" Role="Mix_Details" Multiplicity="*" />
+          <End Type="Context.Mix" Role="Mix" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+        </Association>
+        <Association Name="Mix_DetailsCoffeeSort">
+          <End Type="Context.Mix_Details" Role="Mix_Details" Multiplicity="*" />
+          <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Packing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PackQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mixes" Relationship="Context.PackingMix" FromRole="Packing" ToRole="Mix" />
+          <NavigationProperty Name="Packages" Relationship="Context.PackingPackage" FromRole="Packing" ToRole="Package" />
+          <NavigationProperty Name="PackedCategory" Relationship="Context.PackedCategoryPacking" FromRole="Packing" ToRole="PackedCategory" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <NavigationProperty Name="Packing" Relationship="Context.PackingPackage" FromRole="Package" ToRole="Packing" />
+          <NavigationProperty Name="PackagePurchases" Relationship="Context.PackagePackagePurchase" FromRole="Package" ToRole="PackagePurchase" />
+          <NavigationProperty Name="dPackedStocks" Relationship="Context.PackagedPackedStocks" FromRole="Package" ToRole="dPackedStocks" />
+          <NavigationProperty Name="dPackageStocks" Relationship="Context.dPackageStocksPackage" FromRole="Package" ToRole="dPackageStocks" />
+          <NavigationProperty Name="Sale_Details" Relationship="Context.PackageSale_Details" FromRole="Package" ToRole="Sale_Details" />
+        </EntityType>
+        <Association Name="PackingMix">
+          <End Type="Context.Packing" Role="Packing" Multiplicity="*" />
+          <End Type="Context.Mix" Role="Mix" Multiplicity="1" />
+        </Association>
+        <Association Name="PackingPackage">
+          <End Type="Context.Packing" Role="Packing" Multiplicity="*" />
+          <End Type="Context.Package" Role="Package" Multiplicity="1" />
+        </Association>
+        <EntityType Name="PackagePurchase">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PackQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Package" Relationship="Context.PackagePackagePurchase" FromRole="PackagePurchase" ToRole="Package" />
+          <NavigationProperty Name="Account" Relationship="Context.AccountPackagePurchase" FromRole="PackagePurchase" ToRole="Account" />
+          <NavigationProperty Name="Supplier" Relationship="Context.SupplierPackagePurchase" FromRole="PackagePurchase" ToRole="Supplier" />
+        </EntityType>
+        <Association Name="PackagePackagePurchase">
+          <End Type="Context.Package" Role="Package" Multiplicity="1" />
+          <End Type="Context.PackagePurchase" Role="PackagePurchase" Multiplicity="*" />
+        </Association>
+        <EntityType Name="dPackedStocks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mixes" Relationship="Context.dPackedStocksMix" FromRole="dPackedStocks" ToRole="Mix" />
+          <NavigationProperty Name="Package" Relationship="Context.PackagedPackedStocks" FromRole="dPackedStocks" ToRole="Package" />
+        </EntityType>
+        <Association Name="dPackedStocksMix">
+          <End Type="Context.dPackedStocks" Role="dPackedStocks" Multiplicity="*" />
+          <End Type="Context.Mix" Role="Mix" Multiplicity="1" />
+        </Association>
+        <Association Name="PackagedPackedStocks">
+          <End Type="Context.Package" Role="Package" Multiplicity="1" />
+          <End Type="Context.dPackedStocks" Role="dPackedStocks" Multiplicity="*" />
+        </Association>
+        <EntityType Name="dPackageStocks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Packages" Relationship="Context.dPackageStocksPackage" FromRole="dPackageStocks" ToRole="Package" />
+          <Property Name="Quantity" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <Association Name="dPackageStocksPackage">
+          <End Type="Context.dPackageStocks" Role="dPackageStocks" Multiplicity="*" />
+          <End Type="Context.Package" Role="Package" Multiplicity="1" />
+        </Association>
+        <EntityType Name="CoffeeSale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Paid" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Sale_Details" Relationship="Context.SaleSale_Details" FromRole="Sale" ToRole="Sale_Details" />
+          <NavigationProperty Name="Recipient" Relationship="Context.RecipientSale" FromRole="Sale" ToRole="Recipient" />
+          <NavigationProperty Name="Account" Relationship="Context.AccountSale" FromRole="Sale" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Recipient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="CoffeeSales" Relationship="Context.RecipientSale" FromRole="Recipient" ToRole="Sale" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Contact" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Adress" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
+        </EntityType>
+        <EntityType Name="CoffeeSale_Details">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Sale" Relationship="Context.SaleSale_Details" FromRole="Sale_Details" ToRole="Sale" />
+          <NavigationProperty Name="Mix" Relationship="Context.MixSale_Details" FromRole="Sale_Details" ToRole="Mix" />
+          <NavigationProperty Name="Package" Relationship="Context.PackageSale_Details" FromRole="Sale_Details" ToRole="Package" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="PackQuantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="SaleSale_Details">
+          <End Type="Context.CoffeeSale" Role="Sale" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Context.CoffeeSale_Details" Role="Sale_Details" Multiplicity="*" />
+        </Association>
+        <Association Name="RecipientSale">
+          <End Type="Context.Recipient" Role="Recipient" Multiplicity="1" />
+          <End Type="Context.CoffeeSale" Role="Sale" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BankNumber" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <NavigationProperty Name="CoffeeSales" Relationship="Context.AccountSale" FromRole="Account" ToRole="Sale" />
+          <NavigationProperty Name="CoffeePurchases" Relationship="Context.AccountCoffeePurchase" FromRole="Account" ToRole="CoffeePurchase" />
+          <NavigationProperty Name="PackagePurchases" Relationship="Context.AccountPackagePurchase" FromRole="Account" ToRole="PackagePurchase" />
+        </EntityType>
+        <Association Name="AccountSale">
+          <End Type="Context.Account" Role="Account" Multiplicity="1" />
+          <End Type="Context.CoffeeSale" Role="Sale" Multiplicity="*" />
+        </Association>
+        <Association Name="MixSale_Details">
+          <End Type="Context.Mix" Role="Mix" Multiplicity="1" />
+          <End Type="Context.CoffeeSale_Details" Role="Sale_Details" Multiplicity="*" />
+        </Association>
+        <Association Name="PackageSale_Details">
+          <End Type="Context.Package" Role="Package" Multiplicity="1" />
+          <End Type="Context.CoffeeSale_Details" Role="Sale_Details" Multiplicity="*" />
+        </Association>
+        <EntityType Name="PackedCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <NavigationProperty Name="Packings" Relationship="Context.PackedCategoryPacking" FromRole="PackedCategory" ToRole="Packing" />
+        </EntityType>
+        <Association Name="PackedCategoryPacking">
+          <End Type="Context.PackedCategory" Role="PackedCategory" Multiplicity="1" />
+          <End Type="Context.Packing" Role="Packing" Multiplicity="*" />
+        </Association>
+        <Association Name="AccountCoffeePurchase">
+          <End Type="Context.Account" Role="Account" Multiplicity="1" />
+          <End Type="Context.CoffeePurchase" Role="CoffeePurchase" Multiplicity="*" />
+        </Association>
+        <EntityType Name="CoffeeTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Mix" Relationship="Context.MixCoffeeTransfer" FromRole="CoffeeTransfer" ToRole="Mix" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="MixCoffeeTransfer">
+          <End Type="Context.Mix" Role="Mix" Multiplicity="1" />
+          <End Type="Context.CoffeeTransfer" Role="CoffeeTransfer" Multiplicity="*" />
+        </Association>
+        <EntityType Name="dCafeCoffeeStock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mix" Relationship="Context.MixdCafeCoffeeStock" FromRole="dCafeCoffeeStock" ToRole="Mix" />
+        </EntityType>
+        <Association Name="MixdCafeCoffeeStock">
+          <End Type="Context.Mix" Role="Mix" Multiplicity="1" />
+          <End Type="Context.dCafeCoffeeStock" Role="dCafeCoffeeStock" Multiplicity="*" />
+        </Association>
+        <Association Name="AccountPackagePurchase">
+          <End Type="Context.Account" Role="Account" Multiplicity="1" />
+          <End Type="Context.PackagePurchase" Role="PackagePurchase" Multiplicity="*" />
+        </Association>
+        <Association Name="SupplierPackagePurchase">
+          <End Type="Context.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="Context.PackagePurchase" Role="PackagePurchase" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ContextStoreContainer" CdmEntityContainer="ContextContainer">
+    <EntitySetMapping Name="CoffeePurchases">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.CoffeePurchase)">
+        <MappingFragment StoreEntitySet="CoffeePurchases">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="Paid" ColumnName="Paid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suppliers">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.Supplier)">
+        <MappingFragment StoreEntitySet="Suppliers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CoffeePurchase_Details">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.CoffeePurchase_Details)">
+        <MappingFragment StoreEntitySet="CoffeePurchase_Details">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CoffeeSorts">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.CoffeeSort)">
+        <MappingFragment StoreEntitySet="CoffeeSorts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="LastPrice" ColumnName="LastPrice" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dGreenStocks">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.dGreenStock)">
+        <MappingFragment StoreEntitySet="dGreenStocks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roastings">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.Roasting)">
+        <MappingFragment StoreEntitySet="Roastings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="InitialAmount" ColumnName="InitialAmount" />
+          <ScalarProperty Name="RoastedAmount" ColumnName="RoastedAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dRoastedStocks">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.dRoastedStock)">
+        <MappingFragment StoreEntitySet="dRoastedStocks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mixes">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.Mix)">
+        <MappingFragment StoreEntitySet="Mixes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mix_Details">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.Mix_Details)">
+        <MappingFragment StoreEntitySet="Mix_Details">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ratio" ColumnName="Ratio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Packings">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.Packing)">
+        <MappingFragment StoreEntitySet="Packings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="PackQuantity" ColumnName="PackQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Packages">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.Package)">
+        <MappingFragment StoreEntitySet="Packages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PackagePurchases">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.PackagePurchase)">
+        <MappingFragment StoreEntitySet="PackagePurchases">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="PackQuantity" ColumnName="PackQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dPackedStocks">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.dPackedStocks)">
+        <MappingFragment StoreEntitySet="dPackedStocks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PackQuantity" ColumnName="PackQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dPackageStocks">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.dPackageStocks)">
+        <MappingFragment StoreEntitySet="dPackageStocks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CoffeeSales">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.CoffeeSale)">
+        <MappingFragment StoreEntitySet="CoffeeSales">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="Paid" ColumnName="Paid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recipients">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.Recipient)">
+        <MappingFragment StoreEntitySet="Recipients">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CoffeeSale_Details">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.CoffeeSale_Details)">
+        <MappingFragment StoreEntitySet="CoffeeSale_Details">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="PackQuantity" ColumnName="PackQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.Account)">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="BankNumber" ColumnName="BankNumber" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PackedCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.PackedCategory)">
+        <MappingFragment StoreEntitySet="PackedCategories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CoffeeTransfers">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.CoffeeTransfer)">
+        <MappingFragment StoreEntitySet="CoffeeTransfers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dCafeCoffeeStocks">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.dCafeCoffeeStock)">
+        <MappingFragment StoreEntitySet="dCafeCoffeeStocks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SupplierCoffeePurchase" TypeName="Context.SupplierCoffeePurchase" StoreEntitySet="CoffeePurchases">
+      <EndProperty Name="Supplier">
+        <ScalarProperty Name="Id" ColumnName="Supplier_Id" />
+      </EndProperty>
+      <EndProperty Name="CoffeePurchase">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CoffeePurchase_DetailsCoffeePurchase" TypeName="Context.CoffeePurchase_DetailsCoffeePurchase" StoreEntitySet="CoffeePurchase_Details">
+      <EndProperty Name="CoffeePurchase">
+        <ScalarProperty Name="Id" ColumnName="CoffeePurchases_Id" />
+      </EndProperty>
+      <EndProperty Name="CoffeePurchase_Details">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CoffeeSortCoffeePurchase_Details" TypeName="Context.CoffeeSortCoffeePurchase_Details" StoreEntitySet="CoffeePurchase_Details">
+      <EndProperty Name="CoffeeSort">
+        <ScalarProperty Name="Id" ColumnName="CoffeeSort_Id" />
+      </EndProperty>
+      <EndProperty Name="CoffeePurchase_Details">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CoffeeSortdGreenStocks" TypeName="Context.CoffeeSortdGreenStocks" StoreEntitySet="dGreenStocks">
+      <EndProperty Name="CoffeeSort">
+        <ScalarProperty Name="Id" ColumnName="CoffeeSort_Id" />
+      </EndProperty>
+      <EndProperty Name="dGreenStocks">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RoastingCoffeeSort" TypeName="Context.RoastingCoffeeSort" StoreEntitySet="Roastings">
+      <EndProperty Name="CoffeeSort">
+        <ScalarProperty Name="Id" ColumnName="CoffeeSort_Id" />
+      </EndProperty>
+      <EndProperty Name="Roasting">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="dRoastedStockCoffeeSort" TypeName="Context.dRoastedStockCoffeeSort" StoreEntitySet="dRoastedStocks">
+      <EndProperty Name="CoffeeSort">
+        <ScalarProperty Name="Id" ColumnName="CoffeeSort_Id" />
+      </EndProperty>
+      <EndProperty Name="dRoastedStock">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Mix_DetailsMix" TypeName="Context.Mix_DetailsMix" StoreEntitySet="Mix_Details">
+      <EndProperty Name="Mix">
+        <ScalarProperty Name="Id" ColumnName="Mix_Id" />
+      </EndProperty>
+      <EndProperty Name="Mix_Details">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Mix_DetailsCoffeeSort" TypeName="Context.Mix_DetailsCoffeeSort" StoreEntitySet="Mix_Details">
+      <EndProperty Name="CoffeeSort">
+        <ScalarProperty Name="Id" ColumnName="CoffeeSort_Id" />
+      </EndProperty>
+      <EndProperty Name="Mix_Details">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PackingMix" TypeName="Context.PackingMix" StoreEntitySet="Packings">
+      <EndProperty Name="Mix">
+        <ScalarProperty Name="Id" ColumnName="Mixes_Id" />
+      </EndProperty>
+      <EndProperty Name="Packing">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PackingPackage" TypeName="Context.PackingPackage" StoreEntitySet="Packings">
+      <EndProperty Name="Package">
+        <ScalarProperty Name="Id" ColumnName="Packages_Id" />
+      </EndProperty>
+      <EndProperty Name="Packing">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PackagePackagePurchase" TypeName="Context.PackagePackagePurchase" StoreEntitySet="PackagePurchases">
+      <EndProperty Name="Package">
+        <ScalarProperty Name="Id" ColumnName="Package_Id" />
+      </EndProperty>
+      <EndProperty Name="PackagePurchase">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="dPackedStocksMix" TypeName="Context.dPackedStocksMix" StoreEntitySet="dPackedStocks">
+      <EndProperty Name="Mix">
+        <ScalarProperty Name="Id" ColumnName="Mixes_Id" />
+      </EndProperty>
+      <EndProperty Name="dPackedStocks">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PackagedPackedStocks" TypeName="Context.PackagedPackedStocks" StoreEntitySet="dPackedStocks">
+      <EndProperty Name="Package">
+        <ScalarProperty Name="Id" ColumnName="Package_Id" />
+      </EndProperty>
+      <EndProperty Name="dPackedStocks">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="dPackageStocksPackage" TypeName="Context.dPackageStocksPackage" StoreEntitySet="dPackageStocks">
+      <EndProperty Name="Package">
+        <ScalarProperty Name="Id" ColumnName="Packages_Id" />
+      </EndProperty>
+      <EndProperty Name="dPackageStocks">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SaleSale_Details" TypeName="Context.SaleSale_Details" StoreEntitySet="CoffeeSale_Details">
+      <EndProperty Name="Sale">
+        <ScalarProperty Name="Id" ColumnName="Sale_Id" />
+      </EndProperty>
+      <EndProperty Name="Sale_Details">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RecipientSale" TypeName="Context.RecipientSale" StoreEntitySet="CoffeeSales">
+      <EndProperty Name="Recipient">
+        <ScalarProperty Name="Id" ColumnName="Recipient_Id" />
+      </EndProperty>
+      <EndProperty Name="Sale">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccountSale" TypeName="Context.AccountSale" StoreEntitySet="CoffeeSales">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="Account_Id" />
+      </EndProperty>
+      <EndProperty Name="Sale">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MixSale_Details" TypeName="Context.MixSale_Details" StoreEntitySet="CoffeeSale_Details">
+      <EndProperty Name="Mix">
+        <ScalarProperty Name="Id" ColumnName="Mix_Id" />
+      </EndProperty>
+      <EndProperty Name="Sale_Details">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PackageSale_Details" TypeName="Context.PackageSale_Details" StoreEntitySet="CoffeeSale_Details">
+      <EndProperty Name="Package">
+        <ScalarProperty Name="Id" ColumnName="Package_Id" />
+      </EndProperty>
+      <EndProperty Name="Sale_Details">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PackedCategoryPacking" TypeName="Context.PackedCategoryPacking" StoreEntitySet="Packings">
+      <EndProperty Name="PackedCategory">
+        <ScalarProperty Name="Id" ColumnName="PackedCategory_Id" />
+      </EndProperty>
+      <EndProperty Name="Packing">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccountCoffeePurchase" TypeName="Context.AccountCoffeePurchase" StoreEntitySet="CoffeePurchases">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="Account_Id" />
+      </EndProperty>
+      <EndProperty Name="CoffeePurchase">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MixCoffeeTransfer" TypeName="Context.MixCoffeeTransfer" StoreEntitySet="CoffeeTransfers">
+      <EndProperty Name="Mix">
+        <ScalarProperty Name="Id" ColumnName="Mix_Id" />
+      </EndProperty>
+      <EndProperty Name="CoffeeTransfer">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MixdCafeCoffeeStock" TypeName="Context.MixdCafeCoffeeStock" StoreEntitySet="dCafeCoffeeStocks">
+      <EndProperty Name="Mix">
+        <ScalarProperty Name="Id" ColumnName="Mix_Id" />
+      </EndProperty>
+      <EndProperty Name="dCafeCoffeeStock">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccountPackagePurchase" TypeName="Context.AccountPackagePurchase" StoreEntitySet="PackagePurchases">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="Account_Id" />
+      </EndProperty>
+      <EndProperty Name="PackagePurchase">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SupplierPackagePurchase" TypeName="Context.SupplierPackagePurchase" StoreEntitySet="PackagePurchases">
+      <EndProperty Name="Supplier">
+        <ScalarProperty Name="Id" ColumnName="Supplier_Id" />
+      </EndProperty>
+      <EndProperty Name="PackagePurchase">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

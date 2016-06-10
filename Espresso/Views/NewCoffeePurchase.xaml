@@ -1,0 +1,74 @@
+﻿<Window x:Class="Espresso.Views.NewCoffeePurchase"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Espresso.Views"
+        mc:Ignorable="d"
+        Title="NewCoffeePurchase" Height="400" Width="750">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Column="1" DataContext="{Binding NewPurchase}">
+            <Label>Новая закупка</Label>
+            <StackPanel Orientation="Horizontal" >
+                <StackPanel Orientation="Horizontal">
+                    <Label>Дата закупки:</Label>
+                    <DatePicker x:Name="datePurchased" 
+                                SelectedDate="{Binding Date}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label>Дата оплаты:</Label>
+                    <DatePicker x:Name="datePaid" 
+                                SelectedDate="{Binding PaymentDate}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label>Оплачено:</Label>
+                    <CheckBox x:Name="checkPaid" 
+                              IsChecked="{Binding Paid}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <Label>Поставщик:</Label>
+                    <ComboBox x:Name="comboSupplier"
+                              SelectedItem="{Binding Supplier}" 
+                              SelectedValuePath="Id" DisplayMemberPath="Name"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label>Счёт с которого произведена оплата:</Label>
+                    <ComboBox x:Name="comboAccount"
+                              SelectedItem="{Binding Account}" 
+                              SelectedValuePath="Id" DisplayMemberPath="Name"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <DataGrid x:Name="datagridDetails" Grid.Column="1" Grid.Row="1"
+                  AutoGenerateColumns="False" EnableRowVirtualization="True"
+                  RowDetailsVisibilityMode="VisibleWhenSelected"
+                  ItemsSource="{Binding Details}">
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn x:Name="columnCoffeeSort" Header="Coffee Sort" Width="SizeToHeader"
+                                        SelectedItemBinding="{Binding CoffeeSort}" ItemsSource="{Binding CoffeeSorts}"
+                                        SelectedValuePath="Id" DisplayMemberPath="Name"/>
+                <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" 
+                                    Header="Price" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="quantityColumn" Binding="{Binding Quantity}"
+                                    Header="Quantity" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel x:Name="panelButtons" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+            <Button Command="{Binding cmdSaveChanges}">Сохранить</Button>
+        </StackPanel>
+    </Grid>
+</Window>
