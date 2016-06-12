@@ -17,15 +17,15 @@ namespace Espresso.ViewModels
 
         public AccountsViewModel()
         {
-            cmdNewAccount = new Auxiliary.Command(cmdNewAccount_Execute);
-            cmdSaveChanges = new Auxiliary.Command(cmdSaveChanges_Execute);
-            cmdDeleteAccount = new Auxiliary.Command(cmdDeleteAccount_Execute);
+            cmdNew = new Auxiliary.Command(cmdNew_Execute);
+            cmdSave = new Auxiliary.Command(cmdSave_Execute);
+            cmdDelete = new Auxiliary.Command(cmdDelete_Execute);
 
             cmdToggleActive = new Auxiliary.Command(cmdToggleActive_Execute);
             cmdSelectActive = new Auxiliary.Command(cmdSelectActive_Execute, cmdSelectActive_CanExecute);
             cmdSelectInactive = new Auxiliary.Command(cmdSelectInactive_Execute, cmdSelectInactive_CanExecute);
             cmdSearch = new Auxiliary.Command(cmdSearch_Execute);
-            cmdCleanSearch = new Auxiliary.Command(cmdCleanSearch_Execute);
+            cmdClearSearch = new Auxiliary.Command(cmdClearSearch_Execute);
 
             _context = new Entity.ContextContainer();
             _context.Accounts.Load();
@@ -85,36 +85,36 @@ namespace Espresso.ViewModels
                 AccountsSelected.Where(p => p.Name.Contains(FilterName) == true));
         }
 
-        public ICommand cmdCleanSearch
+        public ICommand cmdClearSearch
         { get; private set; }
 
-        private void cmdCleanSearch_Execute()
+        private void cmdClearSearch_Execute()
         {
             FilterName = null;
             cmdSelectActive_Execute();
         }
 
-        public ICommand cmdSaveChanges
+        public ICommand cmdSave
         { get; private set; }
 
-        private void cmdSaveChanges_Execute()
+        private void cmdSave_Execute()
         {
             _context.SaveChanges();
         }
 
-        public ICommand cmdNewAccount
+        public ICommand cmdNew
         { get; private set; }
 
-        private void cmdNewAccount_Execute()
+        private void cmdNew_Execute()
         {
             new Views.NewAccount().ShowDialog();
             Refresh();
         }
 
-        public ICommand cmdDeleteAccount
+        public ICommand cmdDelete
         { get; private set; }
 
-        private void cmdDeleteAccount_Execute(object argSelected)
+        private void cmdDelete_Execute(object argSelected)
         {
             if (argSelected == null)
             {
