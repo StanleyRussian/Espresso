@@ -225,7 +225,7 @@ namespace Espresso.ViewModels
 
 
     // Helper class to represent individual CoffeePurchase
-    public class CoffeePurchaseViewModel : INotifyPropertyChanged
+    public class CoffeePurchaseViewModel /*: INotifyPropertyChanged*/
     {
         private Entity.CoffeePurchase _purchase;
 
@@ -253,26 +253,11 @@ namespace Espresso.ViewModels
 
         #region UI Properties and INotifyPropertyChanged implementation
 
-        protected bool isSelected = false;
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set
-            {
-                if (value != isSelected)
-                {
-                    isSelected = value;
-                    OnPropertyChanged("IsSelected");
-                }
-            }
-        }
 
         public string Title
         {
-            get { return Date.ToString("d")/* + " - " + Supplier.Name*/; }
+            get { return Date.ToString("d") + " - " + Supplier.Name; }
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

@@ -1,32 +1,22 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Espresso.ViewModels
 {
-    public class NewCoffeePurchaseViewModel: INotifyPropertyChanged
+    class NewMixViewModel : INotifyPropertyChanged
     {
         private Entity.ContextContainer _context;
 
-        // Constructor
-        public NewCoffeePurchaseViewModel()
+        public NewMixViewModel()
         {
             _context = new Entity.ContextContainer();
 
-            _activeAccounts = new ObservableCollection<Entity.Account>(
-                _context.Accounts.Where(x => x.Active == true));
             _activeCoffeeSorts = new ObservableCollection<Entity.CoffeeSort>(
                 _context.CoffeeSorts.Where(x => x.Active == true));
-            _activeSuppliers = new ObservableCollection<Entity.Supplier>(
-                _context.Suppliers.Where(x => x.Active == true));
 
             cmdSave = new Auxiliary.Command(cmdSave_Execute);
 
@@ -35,16 +25,8 @@ namespace Espresso.ViewModels
 
         private void Refresh()
         {
-            _newPurchase = new Entity.CoffeePurchase();
-            Details = new ObservableCollection<Entity.CoffeePurchase_Details>();
-
-            _newPurchase.Date = DateTime.Now;
-            _newPurchase.PaymentDate = DateTime.Now;
-            _newPurchase.Paid = true;
-            _newPurchase.Account = Accounts.FirstOrDefault();
-            _newPurchase.Supplier = Suppliers.FirstOrDefault();
-
-            NewPurchase = _newPurchase;
+            NewMix = new Entity.Mix();
+            Details = new ObservableCollection<Entity.Mix_Details>();
         }
 
         #region Binding Properties and INotifyPropertyChanged implementation
@@ -55,19 +37,19 @@ namespace Espresso.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private Entity.CoffeePurchase _newPurchase;
-        public Entity.CoffeePurchase NewPurchase
+        private Entity.Mix _newMix;
+        public Entity.Mix NewMix
         {
-            get { return _newPurchase; }
+            get { return _newMix; }
             set
             {
-                _newPurchase = value;
-                OnPropertyChanged("NewPurchase");
+                _newMix = value;
+                OnPropertyChanged("NewMix");
             }
         }
 
-        private ObservableCollection<Entity.CoffeePurchase_Details> _details;
-        public ObservableCollection<Entity.CoffeePurchase_Details> Details
+        private ObservableCollection<Entity.Mix_Details> _details;
+        public ObservableCollection<Entity.Mix_Details> Details
         {
             get { return _details; }
             set
@@ -75,18 +57,6 @@ namespace Espresso.ViewModels
                 _details = value;
                 OnPropertyChanged("Details");
             }
-        }
-
-        private ObservableCollection<Entity.Account> _activeAccounts;
-        public ObservableCollection<Entity.Account> Accounts
-        {
-            get { return _activeAccounts; }
-        }
-
-        private ObservableCollection<Entity.Supplier> _activeSuppliers;
-        public ObservableCollection<Entity.Supplier> Suppliers
-        {
-            get { return _activeSuppliers; }
         }
 
         private ObservableCollection<Entity.CoffeeSort> _activeCoffeeSorts;
@@ -102,13 +72,21 @@ namespace Espresso.ViewModels
         public ICommand cmdSave
         { get; private set; }
 
-
         private void cmdSave_Execute()
         {
-            _newPurchase.CoffeePurchase_Details.Clear();
+            double total = 0;
             foreach (var x in Details)
-                _newPurchase.CoffeePurchase_Details.Add(x);
-            _context.CoffeePurchases.Add(_newPurchase);
+                total += x.Ratio;
+            if (total != 100)
+            {
+                MessageBox.Show("Неправильные пропорции, общая сумма не равна 100%");
+                return;
+            }
+
+            _newMix.Mix_Details.Clear();
+            foreach (var x in Details)
+                _newMix.Mix_Details.Add(x);
+            _context.Mixes.Add(_newMix);
 
             try
             {
@@ -127,7 +105,7 @@ namespace Espresso.ViewModels
                 MessageBox.Show(ex.Message);
             }
         }
-
-        #endregion
     }
+
+    #endregion
 }

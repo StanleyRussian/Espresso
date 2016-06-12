@@ -150,6 +150,7 @@
     <Compile Include="Entity\Supplier.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Creation VMs\NewMixViewModel.cs" />
     <Compile Include="ViewModels\List VMs\AccountsViewModel.cs" />
     <Compile Include="ViewModels\List VMs\CoffeeSortsViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="ViewModels\Creation VMs\NewSupplierViewModel.cs" />
     <Compile Include="ViewModels\List VMs\RoastingsViewModel.cs" />
     <Compile Include="ViewModels\List VMs\SuppliersViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\MixesViewModel.cs" />
     <Compile Include="Views\List Forms\Accounts.xaml.cs">
       <DependentUpon>Accounts.xaml</DependentUpon>
     </Compile>
@@ -193,11 +195,17 @@
     <Compile Include="Views\Creation Forms\NewSupplier.xaml.cs">
       <DependentUpon>NewSupplier.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\List Forms\Mixes.xaml.cs">
+      <DependentUpon>Mixes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\List Forms\Roastings.xaml.cs">
       <DependentUpon>Roastings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\List Forms\Suppliers.xaml.cs">
       <DependentUpon>Suppliers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Creation Forms\NewMix.xaml.cs">
+      <DependentUpon>NewMix.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -314,11 +322,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\List Forms\Mixes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\List Forms\Roastings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\List Forms\Suppliers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Creation Forms\NewMix.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

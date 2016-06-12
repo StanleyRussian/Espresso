@@ -52,14 +52,11 @@
             </StackPanel>
         </StackPanel>
 
-        <DataGrid x:Name="datagridDetails" Grid.Column="1" Grid.Row="1"
-                  AutoGenerateColumns="False" EnableRowVirtualization="True"
-                  RowDetailsVisibilityMode="VisibleWhenSelected"
-                  ItemsSource="{Binding Details}">
+        <DataGrid Grid.Column="1" Grid.Row="1"
+                  AutoGenerateColumns="False" ItemsSource="{Binding Details}">
             <DataGrid.Columns>
                 <DataGridComboBoxColumn x:Name="columnCoffeeSort" Header="Coffee Sort" Width="SizeToHeader"
-                                        SelectedItemBinding="{Binding CoffeeSort}" ItemsSource="{Binding CoffeeSorts}"
-                                        SelectedValuePath="Id" DisplayMemberPath="Name"/>
+                                        SelectedItemBinding="{Binding CoffeeSort}" DisplayMemberPath="Name"/>
                 <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" 
                                     Header="Price" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="quantityColumn" Binding="{Binding Quantity}"

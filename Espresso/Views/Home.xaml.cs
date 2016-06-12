@@ -74,5 +74,15 @@ namespace Espresso.Views
         {
             new Roastings().ShowDialog();
         }
+
+        private void NewMix(object sender, RoutedEventArgs e)
+        {
+            new NewMix().ShowDialog();
+        }
+
+        private void Mixes(object sender, RoutedEventArgs e)
+        {
+            new Mixes().ShowDialog();
+        }
     }
 }

@@ -1,0 +1,58 @@
+﻿<Window x:Class="Espresso.Views.NewMix"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Espresso.Views"
+        mc:Ignorable="d"
+        Title="NewMix" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid DataContext="{Binding NewMix}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label>Название</Label>
+            <TextBox Grid.Column="1"
+                     Style="{StaticResource textMandatory}"
+                Text="{Binding Name}" MinWidth="150"></TextBox>
+
+            <Label Grid.Row="1">Описание</Label>
+            <TextBox Grid.Row="1" Grid.Column="1"
+                Text="{Binding Description}" MinHeight="100"></TextBox>
+        </Grid>
+
+
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="2"
+                      AutoGenerateColumns="False" ItemsSource="{Binding Details}">
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn x:Name="columnCoffeeSort" Header="Моносорт" Width="SizeToHeader"
+                                        SelectedItemBinding="{Binding CoffeeSort}" DisplayMemberPath="Name"/>
+                <DataGridTextColumn Binding="{Binding Ratio}" Header="Процентное содержание" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
+            <Button Command="{Binding cmdSave}">Сохранить</Button>
+            <Button Click="btnCancel_Click">Отмена</Button>
+        </StackPanel>
+    </Grid>
+</Window>
