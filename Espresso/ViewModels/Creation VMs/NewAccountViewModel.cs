@@ -16,9 +16,13 @@ namespace Espresso.ViewModels
         public NewAccountViewModel()
         {
             _context = new Entity.ContextContainer();
-            NewAccount = new Entity.Account();
-
             cmdSave = new Auxiliary.Command(cmdSave_Execute);
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            NewAccount = new Entity.Account();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -48,7 +52,7 @@ namespace Espresso.ViewModels
             {
                 _context.SaveChanges();
                 MessageBox.Show("Сохранение прошло успешно");
-                NewAccount = new Entity.Account();
+                Refresh();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {

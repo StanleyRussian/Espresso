@@ -27,7 +27,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBox Text="{Binding FilterName}" MinWidth="175"/>
                 <Button Command="{Binding cmdSearch}">Поиск</Button>
-                <Button Command="{Binding cmdCleanSearch}">Очистить</Button>
+                <Button Command="{Binding cmdClearSearch}">Очистить</Button>
             </StackPanel>
         </WrapPanel>
 
@@ -62,9 +62,9 @@
                     CommandParameter="{Binding ElementName=listCoffeeSorts, Path=SelectedItem}">Сделать активным/неактивным</Button>
 
         <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right">
-            <Button Command="{Binding cmdNewCoffeeSort}">Добавить моносорт</Button>
-            <Button Command="{Binding cmdSaveChanges}">Сохранить изменения</Button>
-            <Button Command="{Binding cmdDeleteCoffeeSort}"
+            <Button Command="{Binding cmdNew}">Добавить моносорт</Button>
+            <Button Command="{Binding cmdSave}">Сохранить изменения</Button>
+            <Button Command="{Binding cmdDelete}"
                     CommandParameter="{Binding ElementName=listCoffeeSorts, Path=SelectedItem}">Удалить моносорт</Button>
         </WrapPanel>
     </Grid>

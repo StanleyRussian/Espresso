@@ -68,7 +68,7 @@
         </DataGrid>
 
         <StackPanel x:Name="panelButtons" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-            <Button Command="{Binding cmdSaveChanges}">Сохранить</Button>
+            <Button Command="{Binding cmdSave}">Сохранить</Button>
         </StackPanel>
     </Grid>
 </Window>

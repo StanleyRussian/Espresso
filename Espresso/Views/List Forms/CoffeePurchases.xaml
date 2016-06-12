@@ -143,9 +143,9 @@
             </DataGrid>
 
             <StackPanel x:Name="panelButtons" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="2">
-                <Button Command="{Binding cmdDeletePurchase}" CommandParameter="{Binding ElementName=listPurchases, Path=SelectedItem}">Удалить выбранную закупку</Button>
-                <Button Command="{Binding cmdSaveChanges}">Сохранить изменения</Button>
-                <Button Command="{Binding cmdNewPurchase}">Добавить новую закупку</Button>
+                <Button Command="{Binding cmdDelete}" CommandParameter="{Binding ElementName=listPurchases, Path=SelectedItem}">Удалить выбранную закупку</Button>
+                <Button Command="{Binding cmdSave}">Сохранить изменения</Button>
+                <Button Command="{Binding cmdNew}">Добавить новую закупку</Button>
             </StackPanel>
         </Grid>
 

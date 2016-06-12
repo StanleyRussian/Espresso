@@ -14,10 +14,14 @@ namespace Espresso.ViewModels
 
         public NewCoffeeSortViewModel()
         {
-            NewCoffeeSort = new Entity.CoffeeSort();
             _context = new Entity.ContextContainer();
-
             cmdSave = new Auxiliary.Command(cmdSave_Execute);
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            NewCoffeeSort = new Entity.CoffeeSort();
         }
 
         public Entity.CoffeeSort NewCoffeeSort
@@ -32,6 +36,8 @@ namespace Espresso.ViewModels
             try
             {
                 _context.SaveChanges();
+                MessageBox.Show("Сохранение прошло успешно");
+                Refresh();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {

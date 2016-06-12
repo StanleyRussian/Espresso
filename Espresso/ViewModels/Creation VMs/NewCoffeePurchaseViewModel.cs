@@ -19,20 +19,24 @@ namespace Espresso.ViewModels
         // Constructor
         public NewCoffeePurchaseViewModel()
         {
-            cmdSaveChanges = new Auxiliary.Command(cmdSaveChanges_Execute);
+            _context = new Entity.ContextContainer();
+
+            //_context.Accounts.Load();
+            //_context.Suppliers.Load();
+            //_context.CoffeeSorts.Load();
+
+            //_activeAccounts = new ObservableCollection<Entity.Account>(
+            //    _context.Accounts.Where(x=> x.Active == true));
+
+            cmdSave = new Auxiliary.Command(cmdSave_Execute);
 
             Refresh();
         }
 
         private void Refresh()
         {
-            _context = new Entity.ContextContainer();
             NewPurchase = new Entity.CoffeePurchase();
             Details = new ObservableCollection<Entity.CoffeePurchase_Details>();
-
-            _context.Accounts.Load();
-            _context.Suppliers.Load();
-            _context.CoffeeSorts.Load();
 
             NewPurchase.Date = DateTime.Now;
             NewPurchase.PaymentDate = DateTime.Now;
@@ -71,30 +75,33 @@ namespace Espresso.ViewModels
             }
         }
 
+        private ObservableCollection<Entity.Account> _activeAccounts;
         public ObservableCollection<Entity.Account> Accounts
         {
-            get { return _context.Accounts.Local; }
+            get { return _activeAccounts; }
         }
 
+        private ObservableCollection<Entity.Supplier> _activeSuppliers;
         public ObservableCollection<Entity.Supplier> Suppliers
         {
-            get { return _context.Suppliers.Local; }
+            get { return _activeSuppliers; }
         }
 
+        private ObservableCollection<Entity.CoffeeSort> _activeCoffeeSorts;
         public ObservableCollection<Entity.CoffeeSort> CoffeeSorts
         {
-            get { return _context.CoffeeSorts.Local; }
+            get { return _activeCoffeeSorts; }
         }
 
         #endregion
 
         #region Commands
 
-        public ICommand cmdSaveChanges
+        public ICommand cmdSave
         { get; private set; }
 
 
-        private void cmdSaveChanges_Execute()
+        private void cmdSave_Execute()
         {
             foreach (var x in Details)
                 _newPurchase.CoffeePurchase_Details.Add(x);

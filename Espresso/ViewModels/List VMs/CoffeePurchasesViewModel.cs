@@ -23,9 +23,9 @@ namespace Espresso.ViewModels
             _filterAccount = argAccount;
             _filterSupplier = argSupplier;
 
-            cmdSaveChanges = new Auxiliary.Command(cmdSaveChanges_Execute);
-            cmdDeletePurchase = new Auxiliary.Command(cmdDeletePurchase_Execute);
-            cmdNewPurchase = new Auxiliary.Command(cmdNewPurchase_Execute);
+            cmdSave = new Auxiliary.Command(cmdSave_Execute);
+            cmdDelete = new Auxiliary.Command(cmdDelete_Execute);
+            cmdNew = new Auxiliary.Command(cmdNew_Execute);
             cmdFilter30Days = new Auxiliary.Command(cmdFilter30Days_Execute);
             cmdFilterAll = new Auxiliary.Command(cmdFilterAll_Execute);
             cmdClearSupplier = new Auxiliary.Command(cmdClearSupplier_Execute);
@@ -141,10 +141,10 @@ namespace Espresso.ViewModels
 
         #region Commands
 
-        public ICommand cmdSaveChanges
+        public ICommand cmdSave
         { get; private set; }
 
-        private void cmdSaveChanges_Execute()
+        private void cmdSave_Execute()
         {
             foreach (var p in CoffeePurchases)
                 p.SaveDetails();
@@ -153,10 +153,10 @@ namespace Espresso.ViewModels
             Refresh();
         }
 
-        public ICommand cmdDeletePurchase
+        public ICommand cmdDelete
         { get; private set; }
 
-        private void cmdDeletePurchase_Execute(object argSelected)
+        private void cmdDelete_Execute(object argSelected)
         {
             if (argSelected == null)
             {
@@ -173,10 +173,10 @@ namespace Espresso.ViewModels
             Refresh();
         }
 
-        public ICommand cmdNewPurchase
+        public ICommand cmdNew
         { get; private set; }
 
-        private void cmdNewPurchase_Execute(object argSelected)
+        private void cmdNew_Execute(object argSelected)
         {
             new Views.NewCoffeePurchase().ShowDialog();
             Refresh();

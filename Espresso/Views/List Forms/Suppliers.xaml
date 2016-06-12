@@ -76,9 +76,9 @@
                     CommandParameter="{Binding ElementName=listSuppliers, Path=SelectedItem}">Сделать активным/неактивным</Button>
 
         <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right">
-            <Button Command="{Binding cmdNewSupplier}">Добавить поставщика</Button>
-            <Button Command="{Binding cmdSaveChanges}">Сохранить изменения</Button>
-            <Button Command="{Binding cmdDeleteSupplier}" 
+            <Button Command="{Binding cmdNew}">Добавить поставщика</Button>
+            <Button Command="{Binding cmdSave}">Сохранить изменения</Button>
+            <Button Command="{Binding cmdDelete}" 
                     CommandParameter="{Binding ElementName=listSuppliers, Path=SelectedItem}">Удалить поставщика</Button>
         </WrapPanel>
     </Grid>
