@@ -15,8 +15,8 @@ namespace Espresso.Entity
     public partial class CoffeePurchase_Details
     {
         public int Id { get; set; }
-        public int Quantity { get; set; }
-        public int Price { get; set; }
+        public double Quantity { get; set; }
+        public double Price { get; set; }
     
         public virtual CoffeePurchase CoffeePurchases { get; set; }
         public virtual CoffeeSort CoffeeSort { get; set; }

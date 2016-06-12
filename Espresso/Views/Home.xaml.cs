@@ -64,5 +64,15 @@ namespace Espresso.Views
         {
             new CoffeePurchases().ShowDialog();
         }
+
+        private void NewRoasting(object sender, RoutedEventArgs e)
+        {
+            new NewRoasting().ShowDialog();
+        }
+
+        private void Roastings(object sender, RoutedEventArgs e)
+        {
+            new Roastings().ShowDialog();
+        }
     }
 }

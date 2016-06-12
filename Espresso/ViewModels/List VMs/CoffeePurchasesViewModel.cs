@@ -42,20 +42,6 @@ namespace Espresso.ViewModels
             Refresh();
         }
 
-        // Requeries context from database
-        //private void Requery()
-        //{
-        //    _context = new Entity.ContextContainer();
-        //    CoffeePurchases = new ObservableCollection<CoffeePurchaseViewModel>();
-
-        //    _context.Accounts.Load();
-        //    _context.Suppliers.Load();
-        //    _context.CoffeeSorts.Load();
-        //    _context.CoffeePurchases.Load();
-
-        //    Refresh();
-        //}
-
         // Refresh viewed items based on current filters without requering database
         private void Refresh()
         {

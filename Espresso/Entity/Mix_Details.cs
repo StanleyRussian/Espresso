@@ -15,7 +15,7 @@ namespace Espresso.Entity
     public partial class Mix_Details
     {
         public int Id { get; set; }
-        public int Ratio { get; set; }
+        public double Ratio { get; set; }
     
         public virtual Mix Mix { get; set; }
         public virtual CoffeeSort CoffeeSort { get; set; }

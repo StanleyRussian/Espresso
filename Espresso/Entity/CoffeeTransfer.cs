@@ -16,7 +16,7 @@ namespace Espresso.Entity
     {
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
     
         public virtual Mix Mix { get; set; }
     }

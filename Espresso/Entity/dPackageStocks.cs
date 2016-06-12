@@ -15,7 +15,7 @@ namespace Espresso.Entity
     public partial class dPackageStocks
     {
         public int Id { get; set; }
-        public string Quantity { get; set; }
+        public decimal Quantity { get; set; }
     
         public virtual Package Packages { get; set; }
     }
