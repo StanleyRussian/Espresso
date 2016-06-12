@@ -60,8 +60,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -148,45 +150,53 @@
     <Compile Include="Entity\Supplier.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\AccountsViewModel.cs" />
-    <Compile Include="ViewModels\CoffeeSortsViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\AccountsViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\CoffeeSortsViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\NewAccountViewModel.cs" />
-    <Compile Include="ViewModels\NewCoffeePurchaseViewModel.cs" />
-    <Compile Include="ViewModels\NewCoffeeSortViewModel.cs" />
-    <Compile Include="ViewModels\NewSupplierViewModel.cs" />
-    <Compile Include="ViewModels\SuppliersViewModel.cs" />
-    <Compile Include="Views\Accounts.xaml.cs">
+    <Compile Include="ViewModels\Creation VMs\NewAccountViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewCoffeePurchaseViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewCoffeeSortViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewRoastingViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewSupplierViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\RoastingsViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\SuppliersViewModel.cs" />
+    <Compile Include="Views\List Forms\Accounts.xaml.cs">
       <DependentUpon>Accounts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CoffeePurchases.xaml.cs">
+    <Compile Include="Views\List Forms\CoffeePurchases.xaml.cs">
       <DependentUpon>CoffeePurchases.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\CoffeePurchasesViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\CoffeePurchasesViewModel.cs" />
     <Compile Include="Entity\Context.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Context.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Views\CoffeeSorts.xaml.cs">
+    <Compile Include="Views\List Forms\CoffeeSorts.xaml.cs">
       <DependentUpon>CoffeeSorts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewAccount.xaml.cs">
+    <Compile Include="Views\Creation Forms\NewAccount.xaml.cs">
       <DependentUpon>NewAccount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewCoffeePurchase.xaml.cs">
+    <Compile Include="Views\Creation Forms\NewCoffeePurchase.xaml.cs">
       <DependentUpon>NewCoffeePurchase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewCoffeeSort.xaml.cs">
+    <Compile Include="Views\Creation Forms\NewCoffeeSort.xaml.cs">
       <DependentUpon>NewCoffeeSort.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewSupplier.xaml.cs">
+    <Compile Include="Views\Creation Forms\NewRoasting.xaml.cs">
+      <DependentUpon>NewRoasting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Creation Forms\NewSupplier.xaml.cs">
       <DependentUpon>NewSupplier.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Suppliers.xaml.cs">
+    <Compile Include="Views\List Forms\Roastings.xaml.cs">
+      <DependentUpon>Roastings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\List Forms\Suppliers.xaml.cs">
       <DependentUpon>Suppliers.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -268,15 +278,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\Accounts.xaml">
+    <Page Include="Views\List Forms\Accounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CoffeePurchases.xaml">
+    <Page Include="Views\List Forms\CoffeePurchases.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CoffeeSorts.xaml">
+    <Page Include="Views\List Forms\CoffeeSorts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -284,23 +294,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewAccount.xaml">
+    <Page Include="Views\Creation Forms\NewAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewCoffeePurchase.xaml">
+    <Page Include="Views\Creation Forms\NewCoffeePurchase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewCoffeeSort.xaml">
+    <Page Include="Views\Creation Forms\NewCoffeeSort.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewSupplier.xaml">
+    <Page Include="Views\Creation Forms\NewRoasting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Suppliers.xaml">
+    <Page Include="Views\Creation Forms\NewSupplier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\List Forms\Roastings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\List Forms\Suppliers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

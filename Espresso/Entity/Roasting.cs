@@ -16,8 +16,8 @@ namespace Espresso.Entity
     {
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
-        public int InitialAmount { get; set; }
-        public int RoastedAmount { get; set; }
+        public double InitialAmount { get; set; }
+        public double RoastedAmount { get; set; }
     
         public virtual CoffeeSort CoffeeSort { get; set; }
     }

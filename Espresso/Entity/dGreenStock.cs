@@ -15,7 +15,7 @@ namespace Espresso.Entity
     public partial class dGreenStock
     {
         public int Id { get; set; }
-        public int Quantity { get; set; }
+        public double Quantity { get; set; }
     
         public virtual CoffeeSort CoffeeSort { get; set; }
     }

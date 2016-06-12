@@ -27,8 +27,8 @@ namespace Espresso.Entity
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Capacity { get; set; }
-        public int Price { get; set; }
+        public decimal Capacity { get; set; }
+        public double Price { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
     

@@ -54,6 +54,14 @@
                                 <Button Click="CoffeePurchases">Список закупок</Button>
                             </StackPanel>
                         </Border>
+
+                        <Border Style="{StaticResource ButtonGroup}">
+                            <StackPanel Orientation="Vertical">
+                                <Label>Обжарка:</Label>
+                                <Button Click="NewRoasting">Новая обжарка</Button>
+                                <Button Click="Roastings">Список обжарок</Button>
+                            </StackPanel>
+                        </Border>
                     </WrapPanel>
                 </StackPanel>
             </Border>
