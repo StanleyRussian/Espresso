@@ -141,7 +141,7 @@ namespace Espresso.ViewModels
 
         private void cmdToggleActive_Execute(object argSelected)
         {
-            Entity.Supplier selected = _context.Suppliers.Local.Find(((Entity.Supplier)argSelected).Id);
+            Entity.Supplier selected = _context.Suppliers.Find(((Entity.Supplier)argSelected).Id);
             selected.Active = (selected.Active == true) ? false : true;
             _context.SaveChanges();
             Refresh();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,9 @@ using System.Windows.Input;
 
 namespace Espresso.ViewModels
 {
-    public class NewCoffeeSortViewModel
+    public class NewCoffeeSortViewModel: INotifyPropertyChanged
     {
-        protected Entity.ContextContainer _context;
+        private Entity.ContextContainer _context;
 
         public NewCoffeeSortViewModel()
         {
@@ -24,9 +25,22 @@ namespace Espresso.ViewModels
             NewCoffeeSort = new Entity.CoffeeSort();
         }
 
-        public Entity.CoffeeSort NewCoffeeSort
-        { get; private set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
+        private Entity.CoffeeSort _newCoffeeSort;
+        public Entity.CoffeeSort NewCoffeeSort
+        {
+            get { return _newCoffeeSort; }
+            set
+            {
+                _newCoffeeSort = value;
+                OnPropertyChanged("NewCoffeeSort");
+            }
+        }
         public ICommand cmdSave
         { get; private set; }
 

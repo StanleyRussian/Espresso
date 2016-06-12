@@ -21,12 +21,12 @@ namespace Espresso.ViewModels
         {
             _context = new Entity.ContextContainer();
 
-            //_context.Accounts.Load();
-            //_context.Suppliers.Load();
-            //_context.CoffeeSorts.Load();
-
-            //_activeAccounts = new ObservableCollection<Entity.Account>(
-            //    _context.Accounts.Where(x=> x.Active == true));
+            _activeAccounts = new ObservableCollection<Entity.Account>(
+                _context.Accounts.Where(x => x.Active == true));
+            _activeCoffeeSorts = new ObservableCollection<Entity.CoffeeSort>(
+                _context.CoffeeSorts.Where(x => x.Active == true));
+            _activeSuppliers = new ObservableCollection<Entity.Supplier>(
+                _context.Suppliers.Where(x => x.Active == true));
 
             cmdSave = new Auxiliary.Command(cmdSave_Execute);
 

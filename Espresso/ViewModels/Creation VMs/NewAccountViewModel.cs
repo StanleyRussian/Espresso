@@ -11,7 +11,7 @@ namespace Espresso.ViewModels
 {
     public class NewAccountViewModel: INotifyPropertyChanged
     {
-        protected Entity.ContextContainer _context;
+        private Entity.ContextContainer _context;
 
         public NewAccountViewModel()
         {

@@ -13,12 +13,14 @@ namespace Espresso.ViewModels
 {
     class NewRoastingViewModel: INotifyPropertyChanged
     {
-        protected Entity.ContextContainer _context;
+        private Entity.ContextContainer _context;
 
         public NewRoastingViewModel()
         {
             _context = new Entity.ContextContainer();
-            _context.CoffeeSorts.Load();
+
+            _activeCoffeeSorts = new ObservableCollection<Entity.CoffeeSort>(
+                _context.CoffeeSorts.Where(x => x.Active == true));
 
             NewRoasting = new Entity.Roasting();
             NewRoasting.Date = DateTime.Today;
@@ -27,9 +29,10 @@ namespace Espresso.ViewModels
             cmdSave = new Auxiliary.Command(cmdSave_Execute);
         }
 
+        private ObservableCollection<Entity.CoffeeSort> _activeCoffeeSorts;
         public ObservableCollection<Entity.CoffeeSort> CoffeeSorts
         {
-            get { return _context.CoffeeSorts.Local; }
+            get { return _activeCoffeeSorts; }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
