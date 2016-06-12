@@ -16,9 +16,12 @@ namespace Espresso.ViewModels
         public NewSupplierViewModel() 
         {
             _context = new Entity.ContextContainer();
-            NewSupplier = new Entity.Supplier();
-
             cmdSave = new Auxiliary.Command(cmdSave_Execute);
+            Refresh();
+        }
+        private void Refresh()
+        {
+            NewSupplier = new Entity.Supplier();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -48,7 +51,7 @@ namespace Espresso.ViewModels
             {
                 _context.SaveChanges();
                 MessageBox.Show("Сохранение прошло успешно");
-                NewSupplier = new Entity.Supplier();
+                Refresh();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {

@@ -17,15 +17,15 @@ namespace Espresso.ViewModels
 
         public CoffeeSortsViewModel()
         {
-            cmdNewCoffeeSort = new Auxiliary.Command(cmdNewCoffeeSort_Execute);
-            cmdSaveChanges = new Auxiliary.Command(cmdSaveChanges_Execute);
-            cmdDeleteCoffeeSort = new Auxiliary.Command(cmdDeleteCoffeeSort_Execute);
+            cmdNew = new Auxiliary.Command(cmdNew_Execute);
+            cmdSave = new Auxiliary.Command(cmdSave_Execute);
+            cmdDelete = new Auxiliary.Command(cmdDelete_Execute);
 
             cmdToggleActive = new Auxiliary.Command(cmdToggleActive_Execute);
             cmdSelectActive = new Auxiliary.Command(cmdSelectActive_Execute, cmdSelectActive_CanExecute);
             cmdSelectInactive = new Auxiliary.Command(cmdSelectInactive_Execute, cmdSelectInactive_CanExecute);
             cmdSearch = new Auxiliary.Command(cmdSearch_Execute);
-            cmdCleanSearch = new Auxiliary.Command(cmdCleanSearch_Execute);
+            cmdClearSearch = new Auxiliary.Command(cmdClearSearch_Execute);
 
             _context = new Entity.ContextContainer();
             _context.CoffeeSorts.Load();
@@ -85,36 +85,36 @@ namespace Espresso.ViewModels
                 CoffeeSortsSelected.Where(p => p.Name.Contains(FilterName) == true));
         }
 
-        public ICommand cmdCleanSearch
+        public ICommand cmdClearSearch
         { get; private set; }
 
-        private void cmdCleanSearch_Execute()
+        private void cmdClearSearch_Execute()
         {
             FilterName = null;
             cmdSelectActive_Execute();
         }
 
-        public ICommand cmdSaveChanges
+        public ICommand cmdSave
         { get; private set; }
 
-        private void cmdSaveChanges_Execute()
+        private void cmdSave_Execute()
         {
             _context.SaveChanges();
         }
 
-        public ICommand cmdNewCoffeeSort
+        public ICommand cmdNew
         { get; private set; }
 
-        private void cmdNewCoffeeSort_Execute()
+        private void cmdNew_Execute()
         {
             new Views.NewCoffeeSort().ShowDialog();
             Refresh();
         }
 
-        public ICommand cmdDeleteCoffeeSort
+        public ICommand cmdDelete
         { get; private set; }
 
-        private void cmdDeleteCoffeeSort_Execute(object argSelected)
+        private void cmdDelete_Execute(object argSelected)
         {
             if (argSelected == null)
             {

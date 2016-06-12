@@ -17,9 +17,9 @@ namespace Espresso.ViewModels
 
         public SuppliersViewModel()
         {
-            cmdDeleteSupplier = new Auxiliary.Command(cmdDeleteSupplier_Execute);
-            cmdNewSupplier = new Auxiliary.Command(cmdNewSupplier_Execute);
-            cmdSaveChanges = new Auxiliary.Command(cmdSaveChanges_Execute);
+            cmdDelete = new Auxiliary.Command(cmdDelete_Execute);
+            cmdNew = new Auxiliary.Command(cmdNew_Execute);
+            cmdSave = new Auxiliary.Command(cmdSave_Execute);
 
             cmdToggleActive = new Auxiliary.Command(cmdToggleActive_Execute);
             cmdSelectActive = new Auxiliary.Command(cmdSelectActive_Execute, cmdSelectActive_CanExecute);
@@ -94,28 +94,28 @@ namespace Espresso.ViewModels
             cmdSelectActive_Execute();
         }
 
-        public ICommand cmdSaveChanges
+        public ICommand cmdSave
         { get; private set; }
 
-        private void cmdSaveChanges_Execute()
+        private void cmdSave_Execute()
         {
 
             _context.SaveChanges();
         }
 
-        public ICommand cmdNewSupplier
+        public ICommand cmdNew
         { get; private set; }
 
-        private void cmdNewSupplier_Execute()
+        private void cmdNew_Execute()
         {
             new Views.NewSupplier().ShowDialog();
             Refresh();
         }
 
-        public ICommand cmdDeleteSupplier
+        public ICommand cmdDelete
         { get; private set; }
 
-        private void cmdDeleteSupplier_Execute(object argSelected)
+        private void cmdDelete_Execute(object argSelected)
         {
             if (argSelected == null)
             {
@@ -141,7 +141,7 @@ namespace Espresso.ViewModels
 
         private void cmdToggleActive_Execute(object argSelected)
         {
-            Entity.Supplier selected = _context.Suppliers.Find(((Entity.Supplier)argSelected).Id);
+            Entity.Supplier selected = _context.Suppliers.Local.Find(((Entity.Supplier)argSelected).Id);
             selected.Active = (selected.Active == true) ? false : true;
             _context.SaveChanges();
             Refresh();
