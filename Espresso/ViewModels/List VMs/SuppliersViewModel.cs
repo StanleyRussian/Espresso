@@ -99,7 +99,6 @@ namespace Espresso.ViewModels
 
         private void cmdSave_Execute()
         {
-
             _context.SaveChanges();
         }
 
@@ -109,6 +108,7 @@ namespace Espresso.ViewModels
         private void cmdNew_Execute()
         {
             new Views.NewSupplier().ShowDialog();
+            _context.Suppliers.Load();
             Refresh();
         }
 

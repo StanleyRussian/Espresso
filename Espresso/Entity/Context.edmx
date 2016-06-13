@@ -222,8 +222,8 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="PackQuantity" Type="int" Nullable="false" />
-    <Property Name="Mixes_Id" Type="int" Nullable="false" />
-    <Property Name="Packages_Id" Type="int" Nullable="false" />
+    <Property Name="Mix_Id" Type="int" Nullable="false" />
+    <Property Name="Package_Id" Type="int" Nullable="false" />
     <Property Name="PackedCategory_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Packages">
@@ -232,8 +232,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Capacity" Type="decimal" Nullable="false" />
-    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Capacity" Type="float" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
   </EntityType>
@@ -244,6 +243,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="PackQuantity" Type="int" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="Package_Id" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
     <Property Name="Supplier_Id" Type="int" Nullable="false" />
@@ -262,7 +262,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Quantity" Type="decimal" Nullable="false" />
+    <Property Name="Quantity" Type="decimal" Nullable="false" Precision="18" Scale="0" />
     <Property Name="Packages_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CoffeeSales">
@@ -293,7 +293,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="18" Scale="0" />
     <Property Name="PackQuantity" Type="int" Nullable="false" />
     <Property Name="Sale_Id" Type="int" Nullable="false" />
     <Property Name="Mix_Id" Type="int" Nullable="false" />
@@ -324,7 +324,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
-    <Property Name="Quantity" Type="decimal" Nullable="false" />
+    <Property Name="Quantity" Type="decimal" Nullable="false" Precision="18" Scale="0" />
     <Property Name="Mix_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="dCafeCoffeeStocks">
@@ -332,7 +332,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Quantity" Type="decimal" Nullable="false" />
+    <Property Name="Quantity" Type="decimal" Nullable="false" Precision="18" Scale="0" />
     <Property Name="Mix_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="SupplierCoffeePurchase">
@@ -443,7 +443,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Packing">
-        <PropertyRef Name="Mixes_Id" />
+        <PropertyRef Name="Mix_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -455,7 +455,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Packing">
-        <PropertyRef Name="Packages_Id" />
+        <PropertyRef Name="Package_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -914,8 +914,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PackQuantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Mixes" Relationship="Context.PackingMix" FromRole="Packing" ToRole="Mix" />
-          <NavigationProperty Name="Packages" Relationship="Context.PackingPackage" FromRole="Packing" ToRole="Package" />
+          <NavigationProperty Name="Mix" Relationship="Context.PackingMix" FromRole="Packing" ToRole="Mix" />
+          <NavigationProperty Name="Package" Relationship="Context.PackingPackage" FromRole="Packing" ToRole="Package" />
           <NavigationProperty Name="PackedCategory" Relationship="Context.PackedCategoryPacking" FromRole="Packing" ToRole="PackedCategory" />
         </EntityType>
         <EntityType Name="Package">
@@ -924,8 +924,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Capacity" Type="Decimal" Nullable="false" />
-          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Capacity" Type="Double" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
           <NavigationProperty Name="Packing" Relationship="Context.PackingPackage" FromRole="Package" ToRole="Packing" />
@@ -949,6 +948,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PackQuantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
           <NavigationProperty Name="Package" Relationship="Context.PackagePackagePurchase" FromRole="PackagePurchase" ToRole="Package" />
           <NavigationProperty Name="Account" Relationship="Context.AccountPackagePurchase" FromRole="PackagePurchase" ToRole="Account" />
           <NavigationProperty Name="Supplier" Relationship="Context.SupplierPackagePurchase" FromRole="PackagePurchase" ToRole="Supplier" />
@@ -980,7 +980,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Packages" Relationship="Context.dPackageStocksPackage" FromRole="dPackageStocks" ToRole="Package" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
         <Association Name="dPackageStocksPackage">
           <End Type="Context.dPackageStocks" Role="dPackageStocks" Multiplicity="*" />
@@ -1019,7 +1019,7 @@
           <NavigationProperty Name="Sale" Relationship="Context.SaleSale_Details" FromRole="Sale_Details" ToRole="Sale" />
           <NavigationProperty Name="Mix" Relationship="Context.MixSale_Details" FromRole="Sale_Details" ToRole="Mix" />
           <NavigationProperty Name="Package" Relationship="Context.PackageSale_Details" FromRole="Sale_Details" ToRole="Package" />
-          <Property Name="Price" Type="Decimal" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="PackQuantity" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="SaleSale_Details">
@@ -1082,7 +1082,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Mix" Relationship="Context.MixCoffeeTransfer" FromRole="CoffeeTransfer" ToRole="Mix" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
         <Association Name="MixCoffeeTransfer">
           <End Type="Context.Mix" Role="Mix" Multiplicity="1" />
@@ -1093,7 +1093,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="Mix" Relationship="Context.MixdCafeCoffeeStock" FromRole="dCafeCoffeeStock" ToRole="Mix" />
         </EntityType>
         <Association Name="MixdCafeCoffeeStock">
@@ -1216,7 +1216,6 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Capacity" ColumnName="Capacity" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Active" ColumnName="Active" />
         </MappingFragment>
@@ -1228,6 +1227,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="PackQuantity" ColumnName="PackQuantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1383,7 +1383,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="PackingMix" TypeName="Context.PackingMix" StoreEntitySet="Packings">
       <EndProperty Name="Mix">
-        <ScalarProperty Name="Id" ColumnName="Mixes_Id" />
+        <ScalarProperty Name="Id" ColumnName="Mix_Id" />
       </EndProperty>
       <EndProperty Name="Packing">
         <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1391,7 +1391,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="PackingPackage" TypeName="Context.PackingPackage" StoreEntitySet="Packings">
       <EndProperty Name="Package">
-        <ScalarProperty Name="Id" ColumnName="Packages_Id" />
+        <ScalarProperty Name="Id" ColumnName="Package_Id" />
       </EndProperty>
       <EndProperty Name="Packing">
         <ScalarProperty Name="Id" ColumnName="Id" />

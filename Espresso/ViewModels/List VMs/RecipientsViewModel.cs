@@ -11,31 +11,31 @@ using System.Windows.Input;
 
 namespace Espresso.ViewModels
 {
-    class AccountsViewModel : INotifyPropertyChanged
+    public class RecipientsViewModel : INotifyPropertyChanged
     {
         private Entity.ContextContainer _context;
 
-        public AccountsViewModel()
+        public RecipientsViewModel()
         {
+            cmdDelete = new Auxiliary.Command(cmdDelete_Execute);
             cmdNew = new Auxiliary.Command(cmdNew_Execute);
             cmdSave = new Auxiliary.Command(cmdSave_Execute);
-            cmdDelete = new Auxiliary.Command(cmdDelete_Execute);
 
             cmdToggleActive = new Auxiliary.Command(cmdToggleActive_Execute);
             cmdSelectActive = new Auxiliary.Command(cmdSelectActive_Execute, cmdSelectActive_CanExecute);
             cmdSelectInactive = new Auxiliary.Command(cmdSelectInactive_Execute, cmdSelectInactive_CanExecute);
             cmdSearch = new Auxiliary.Command(cmdSearch_Execute);
-            cmdClearSearch = new Auxiliary.Command(cmdClearSearch_Execute);
+            cmdCleanSearch = new Auxiliary.Command(cmdCleanSearch_Execute);
 
             _context = new Entity.ContextContainer();
-            _context.Accounts.Load();
+            _context.Recipients.Load();
             Refresh();
         }
 
         private void Refresh()
         {
-            AccountsSelected = new ObservableCollection<Entity.Account>(
-                _context.Accounts.Local.Where(p => p.Active == true));
+            RecipientsSelected = new ObservableCollection<Entity.Recipient>(
+                _context.Recipients.Local.Where(p => p.Active == true));
             activeIsSelected = true;
 
             cmdSelectActive.CanExecute(null);
@@ -50,14 +50,14 @@ namespace Espresso.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ObservableCollection<Entity.Account> _accountsSelected;
-        public ObservableCollection<Entity.Account> AccountsSelected
+        private ObservableCollection<Entity.Recipient> _suppliersSelected;
+        public ObservableCollection<Entity.Recipient> RecipientsSelected
         {
-            get { return _accountsSelected; }
+            get { return _suppliersSelected; }
             set
             {
-                _accountsSelected = value;
-                OnPropertyChanged("AccountsSelected");
+                _suppliersSelected = value;
+                OnPropertyChanged("RecipientsSelected");
             }
         }
 
@@ -81,14 +81,14 @@ namespace Espresso.ViewModels
 
         private void cmdSearch_Execute()
         {
-            AccountsSelected = new ObservableCollection<Entity.Account>(
-                AccountsSelected.Where(p => p.Name.Contains(FilterName) == true));
+            RecipientsSelected = new ObservableCollection<Entity.Recipient>(
+                RecipientsSelected.Where(p => p.Name.Contains(FilterName) == true));
         }
 
-        public ICommand cmdClearSearch
+        public ICommand cmdCleanSearch
         { get; private set; }
 
-        private void cmdClearSearch_Execute()
+        private void cmdCleanSearch_Execute()
         {
             FilterName = null;
             cmdSelectActive_Execute();
@@ -107,8 +107,8 @@ namespace Espresso.ViewModels
 
         private void cmdNew_Execute()
         {
-            new Views.NewAccount().ShowDialog();
-            _context.Accounts.Load();
+            new Views.NewRecipient().ShowDialog();
+            _context.Recipients.Load();
             Refresh();
         }
 
@@ -119,20 +119,20 @@ namespace Espresso.ViewModels
         {
             if (argSelected == null)
             {
-                MessageBox.Show("Вы не выбрали счёт!");
+                MessageBox.Show("Вы не выбрали клиента!");
                 return;
             }
 
-            var selected = argSelected as Entity.Account;
+            var selected = argSelected as Entity.Recipient;
             try
             {
-                _context.Accounts.Remove(selected);
+                _context.Recipients.Remove(selected);
                 _context.SaveChanges();
                 Refresh();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Имеются связанные закупки, невозможно удалить этот счёт");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -141,7 +141,7 @@ namespace Espresso.ViewModels
 
         private void cmdToggleActive_Execute(object argSelected)
         {
-            Entity.Account selected = _context.Accounts.Find(((Entity.Account)argSelected).Id);
+            Entity.Recipient selected = _context.Recipients.Find(((Entity.Recipient)argSelected).Id);
             selected.Active = (selected.Active == true) ? false : true;
             _context.SaveChanges();
             Refresh();
@@ -155,11 +155,11 @@ namespace Espresso.ViewModels
 
         private void cmdSelectActive_Execute()
         {
-            var query = _context.Accounts.Local.Where(p => p.Active == true);
+            var query = _context.Recipients.Local.Where(p => p.Active == true);
             if (FilterName != null)
                 query = query.Where(p => p.Name.Contains(FilterName) == true);
 
-            AccountsSelected = new ObservableCollection<Entity.Account>(query);
+            RecipientsSelected = new ObservableCollection<Entity.Recipient>(query);
             activeIsSelected = true;
 
             cmdSelectActive.CanExecute(null);
@@ -177,11 +177,11 @@ namespace Espresso.ViewModels
 
         private void cmdSelectInactive_Execute()
         {
-            var query = _context.Accounts.Local.Where(p => p.Active == false);
+            var query = _context.Recipients.Local.Where(p => p.Active == false);
             if (FilterName != null)
                 query = query.Where(p => p.Name.Contains(FilterName) == true);
 
-            AccountsSelected = new ObservableCollection<Entity.Account>(query);
+            RecipientsSelected = new ObservableCollection<Entity.Recipient>(query);
             activeIsSelected = false;
 
             cmdSelectActive.CanExecute(null);
@@ -192,6 +192,8 @@ namespace Espresso.ViewModels
         {
             return activeIsSelected;
         }
+
         #endregion
+
     }
 }

@@ -17,6 +17,7 @@ namespace Espresso.Entity
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
         public int PackQuantity { get; set; }
+        public double Price { get; set; }
     
         public virtual Package Package { get; set; }
         public virtual Account Account { get; set; }

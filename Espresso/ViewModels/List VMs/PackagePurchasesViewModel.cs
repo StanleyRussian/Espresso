@@ -11,15 +11,17 @@ using System.Windows.Input;
 
 namespace Espresso.ViewModels
 {
-    class RoastingsViewModel
+    class PackagePurchasesViewModel
     {
         private Entity.ContextContainer _context;
 
-        public RoastingsViewModel()
+        public PackagePurchasesViewModel()
         {
             _context = new Entity.ContextContainer();
-            _context.CoffeeSorts.Load();
-            _context.Roastings.Load();
+            _context.PackagePurchases.Load();
+            _context.Accounts.Load();
+            _context.Suppliers.Load();
+            _context.Packages.Load();
 
             _filterTo = DateTime.Now;
             _filterFrom = DateTime.Now.AddDays(-30);
@@ -35,8 +37,8 @@ namespace Espresso.ViewModels
 
         private void Refresh()
         {
-            var query = _context.Roastings.Local.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
-            Roastings = new ObservableCollection<Entity.Roasting>(query);
+            var query = _context.PackagePurchases.Local.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
+            PackagePurchases = new ObservableCollection<Entity.PackagePurchase>(query);
         }
 
         #region Binding Properties and INotifyPropertyChanged implementation
@@ -47,22 +49,31 @@ namespace Espresso.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ObservableCollection<Entity.Roasting> _roastings;
-        public ObservableCollection<Entity.Roasting> Roastings
+        private ObservableCollection<Entity.PackagePurchase> _roastings;
+        public ObservableCollection<Entity.PackagePurchase> PackagePurchases
         {
             get { return _roastings; }
             set
             {
                 _roastings = value;
-                OnPropertyChanged("Roastings");
+                OnPropertyChanged("PackagePurchases");
             }
         }
 
-        public ObservableCollection<Entity.CoffeeSort> CoffeeSorts
+        public ObservableCollection<Entity.Account> Accounts
         {
-            get { return _context.CoffeeSorts.Local; }
+            get { return _context.Accounts.Local; }
         }
 
+        public ObservableCollection<Entity.Supplier> Suppliers
+        {
+            get { return _context.Suppliers.Local; }
+        }
+
+        public ObservableCollection<Entity.Package> Packages
+        {
+            get { return _context.Packages.Local; }
+        }
         private DateTime _filterFrom;
         public DateTime FilterFrom
         {
@@ -111,10 +122,10 @@ namespace Espresso.ViewModels
                 return;
             }
 
-            var selected = argSelected as Entity.Roasting;
+            var selected = argSelected as Entity.PackagePurchase;
             try
             {
-                _context.Roastings.Remove(selected);
+                _context.PackagePurchases.Remove(selected);
                 _context.SaveChanges();
                 Refresh();
             }
@@ -129,8 +140,8 @@ namespace Espresso.ViewModels
 
         private void cmdNew_Execute(object argSelected)
         {
-            new Views.NewRoasting().ShowDialog();
-            _context.Roastings.Load();
+            new Views.NewPackagePurchase().ShowDialog();
+            _context.PackagePurchases.Load();
             Refresh();
         }
 

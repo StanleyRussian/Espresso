@@ -150,6 +150,7 @@
     <Compile Include="Entity\Supplier.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\List VMs\CoffeeSalesViewModel.cs" />
     <Compile Include="ViewModels\Creation VMs\NewMixViewModel.cs" />
     <Compile Include="ViewModels\List VMs\AccountsViewModel.cs" />
     <Compile Include="ViewModels\List VMs\CoffeeSortsViewModel.cs" />
@@ -162,6 +163,20 @@
     <Compile Include="ViewModels\List VMs\RoastingsViewModel.cs" />
     <Compile Include="ViewModels\List VMs\SuppliersViewModel.cs" />
     <Compile Include="ViewModels\List VMs\MixesViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewPackageViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\PackagesViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewPackedCategoryViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\PackedCategoriesViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewPackingViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\PackingsViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewPackagePurchaseViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\PackagePurchasesViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewRecipientViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\RecipientsViewModel.cs" />
+    <Compile Include="ViewModels\NewCoffeeSaleViewModel.cs" />
+    <Compile Include="Views\List Forms\CoffeeSales.xaml.cs">
+      <DependentUpon>CoffeeSales.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\List Forms\Accounts.xaml.cs">
       <DependentUpon>Accounts.xaml</DependentUpon>
     </Compile>
@@ -198,6 +213,9 @@
     <Compile Include="Views\List Forms\Mixes.xaml.cs">
       <DependentUpon>Mixes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\List Forms\Packages.xaml.cs">
+      <DependentUpon>Packages.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\List Forms\Roastings.xaml.cs">
       <DependentUpon>Roastings.xaml</DependentUpon>
     </Compile>
@@ -206,6 +224,36 @@
     </Compile>
     <Compile Include="Views\Creation Forms\NewMix.xaml.cs">
       <DependentUpon>NewMix.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Creation Forms\NewPackage.xaml.cs">
+      <DependentUpon>NewPackage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Creation Forms\NewPackedCategory.xaml.cs">
+      <DependentUpon>NewPackedCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\List Forms\PackedCategories.xaml.cs">
+      <DependentUpon>PackedCategories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Creation Forms\NewPacking.xaml.cs">
+      <DependentUpon>NewPacking.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\List Forms\Packings.xaml.cs">
+      <DependentUpon>Packings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Creation Forms\NewPackagePurchase.xaml.cs">
+      <DependentUpon>NewPackagePurchase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\List Forms\PackagePurchases.xaml.cs">
+      <DependentUpon>PackagePurchases.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Creation Forms\NewRecipient.xaml.cs">
+      <DependentUpon>NewRecipient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\List Forms\Recipients.xaml.cs">
+      <DependentUpon>Recipients.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Creation Forms\NewCoffeeSale.xaml.cs">
+      <DependentUpon>NewCoffeeSale.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +334,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\List Forms\CoffeeSales.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\List Forms\Accounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -326,6 +378,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\List Forms\Packages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\List Forms\Roastings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -335,6 +391,46 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Creation Forms\NewMix.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Creation Forms\NewPackage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Creation Forms\NewPackedCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\List Forms\PackedCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Creation Forms\NewPacking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\List Forms\Packings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Creation Forms\NewPackagePurchase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\List Forms\PackagePurchases.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Creation Forms\NewRecipient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\List Forms\Recipients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Creation Forms\NewCoffeeSale.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

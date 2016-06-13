@@ -23,7 +23,7 @@
         <AssociationConnector Association="Context.Mix_DetailsMix" />
         <AssociationConnector Association="Context.Mix_DetailsCoffeeSort" />
         <EntityTypeShape EntityType="Context.Packing" Width="1.5" PointX="7.125" PointY="6.375" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="Context.Package" Width="1.5" PointX="7.125" PointY="9.625" />
+        <EntityTypeShape EntityType="Context.Package" Width="1.5" PointX="7.125" PointY="9.625" IsExpanded="true" />
         <AssociationConnector Association="Context.PackingMix" />
         <AssociationConnector Association="Context.PackingPackage" />
         <EntityTypeShape EntityType="Context.PackagePurchase" Width="1.5" PointX="3.75" PointY="9.125" FillColor="Chocolate" />

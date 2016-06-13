@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Espresso.Views"
         mc:Ignorable="d"
-        Title="Home" Height="700" Width="1000">
+        Title="Home" Height="500" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -58,6 +58,54 @@
                     <Label>Смеси:</Label>
                     <Button Click="NewMix">Новый купаж</Button>
                     <Button Click="Mixes">Список купажей</Button>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource ButtonGroup}">
+                <StackPanel Orientation="Vertical">
+                    <Label>Виды упаковок:</Label>
+                    <Button Click="NewPackage">Добавить упаковку</Button>
+                    <Button Click="Packages">Список упаковок</Button>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource ButtonGroup}">
+                <StackPanel Orientation="Vertical">
+                    <Label>Закупка упаковки</Label>
+                    <Button Click="NewPackagePurchase">Добавить закупку</Button>
+                    <Button Click="PackagePurchases">Список закупок</Button>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource ButtonGroup}">
+                <StackPanel Orientation="Vertical">
+                    <Label>Категории упакованного кофе:</Label>
+                    <Button Click="NewCategory">Добавить категорию</Button>
+                    <Button Click="Categories">Список категорий</Button>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource ButtonGroup}">
+                <StackPanel Orientation="Vertical">
+                    <Label>Купажирование/упаковка:</Label>
+                    <Button Click="NewPacking">Добавить купажирование</Button>
+                    <Button Click="Packings">Список купажирований</Button>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource ButtonGroup}">
+                <StackPanel Orientation="Vertical">
+                    <Label>Клиенты:</Label>
+                    <Button Click="NewRecipient">Добавить нового клиента</Button>
+                    <Button Click="Recipients">Список клиентов</Button>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource ButtonGroup}">
+                <StackPanel Orientation="Vertical">
+                    <Label>Продажи кофе:</Label>
+                    <Button Click="NewCoffeeSale">Добавить новую продажу</Button>
+                    <Button Click="CoffeeSales">Список продаж</Button>
                 </StackPanel>
             </Border>
         </WrapPanel>

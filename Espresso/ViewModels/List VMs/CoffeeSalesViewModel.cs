@@ -11,33 +11,33 @@ using System.Windows.Input;
 
 namespace Espresso.ViewModels
 {
-    public class CoffeePurchasesViewModel : INotifyPropertyChanged
+    public class CoffeeSalesViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<CoffeePurchaseViewModel> _coffeePurchases;
+        private ObservableCollection<CoffeeSaleViewModel> _coffeeSales;
         private Entity.ContextContainer _context;
 
-        public CoffeePurchasesViewModel(Entity.Account argAccount = null, Entity.Supplier argSupplier = null)
+        public CoffeeSalesViewModel(Entity.Account argAccount = null, Entity.Recipient argRecipient = null)
         {
             _filterTo = DateTime.Now;
             _filterFrom = DateTime.Now.AddDays(-30);
             _filterAccount = argAccount;
-            _filterSupplier = argSupplier;
+            _filterRecipient = argRecipient;
 
             cmdSave = new Auxiliary.Command(cmdSave_Execute);
             cmdDelete = new Auxiliary.Command(cmdDelete_Execute);
             cmdNew = new Auxiliary.Command(cmdNew_Execute);
             cmdFilter30Days = new Auxiliary.Command(cmdFilter30Days_Execute);
             cmdFilterAll = new Auxiliary.Command(cmdFilterAll_Execute);
-            cmdClearSupplier = new Auxiliary.Command(cmdClearSupplier_Execute);
+            cmdClearRecipient = new Auxiliary.Command(cmdClearRecipient_Execute);
             cmdClearAccount = new Auxiliary.Command(cmdClearAccount_Execute);
 
             _context = new Entity.ContextContainer();
-            CoffeePurchases = new ObservableCollection<CoffeePurchaseViewModel>();
+            CoffeeSales = new ObservableCollection<CoffeeSaleViewModel>();
 
             _context.Accounts.Load();
-            _context.Suppliers.Load();
-            _context.CoffeeSorts.Load();
-            _context.CoffeePurchases.Load();
+            _context.Recipients.Load();
+            _context.Mixes.Load();
+            _context.CoffeeSales.Load();
 
             Refresh();
         }
@@ -45,15 +45,15 @@ namespace Espresso.ViewModels
         // Refresh viewed items based on current filters without requering database
         private void Refresh()
         {
-            var query = _context.CoffeePurchases.Local.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
-            if (_filterSupplier != null)
-                query = query.Where(p => p.Supplier.Id == _filterSupplier.Id);
+            var query = _context.CoffeeSales.Local.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
+            if (_filterRecipient != null)
+                query = query.Where(p => p.Recipient.Id == _filterRecipient.Id);
             if (_filterAccount != null)
                 query = query.Where(p => p.Account.Id == _filterAccount.Id);
 
-            CoffeePurchases.Clear();
+            CoffeeSales.Clear();
             foreach (var x in query)
-                CoffeePurchases.Add(new CoffeePurchaseViewModel(x));
+                CoffeeSales.Add(new CoffeeSaleViewModel(x));
         }
 
         #region Binding Properties and INotifyPropertyChanged implementation
@@ -64,13 +64,13 @@ namespace Espresso.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ObservableCollection<CoffeePurchaseViewModel> CoffeePurchases
+        public ObservableCollection<CoffeeSaleViewModel> CoffeeSales
         {
-            get { return _coffeePurchases; }
+            get { return _coffeeSales; }
             private set
             {
-                _coffeePurchases = value;
-                OnPropertyChanged("CoffeePurchases");
+                _coffeeSales = value;
+                OnPropertyChanged("CoffeeSales");
             }
         }
 
@@ -79,14 +79,14 @@ namespace Espresso.ViewModels
             get { return _context.Accounts.Local; }
         }
 
-        public ObservableCollection<Entity.Supplier> Suppliers
+        public ObservableCollection<Entity.Recipient> Recipients
         {
-            get { return _context.Suppliers.Local; }
+            get { return _context.Recipients.Local; }
         }
 
-        public ObservableCollection<Entity.CoffeeSort> CoffeeSorts
+        public ObservableCollection<Entity.Mix> Mixes
         {
-            get { return _context.CoffeeSorts.Local; }
+            get { return _context.Mixes.Local; }
         }
 
         private DateTime _filterFrom;
@@ -125,14 +125,14 @@ namespace Espresso.ViewModels
             }
         }
 
-        private Entity.Supplier _filterSupplier;
-        public Entity.Supplier FilterSupplier
+        private Entity.Recipient _filterRecipient;
+        public Entity.Recipient FilterRecipient
         {
-            get { return _filterSupplier; }
+            get { return _filterRecipient; }
             set
             {
-                _filterSupplier = value;
-                OnPropertyChanged("FilterSupplier");
+                _filterRecipient = value;
+                OnPropertyChanged("FilterRecipient");
                 Refresh();
             }
         }
@@ -146,7 +146,7 @@ namespace Espresso.ViewModels
 
         private void cmdSave_Execute()
         {
-            foreach (var p in CoffeePurchases)
+            foreach (var p in CoffeeSales)
                 p.SaveDetails();
 
             _context.SaveChanges();
@@ -164,11 +164,11 @@ namespace Espresso.ViewModels
                 return;
             }
 
-            CoffeePurchaseViewModel selected = argSelected as CoffeePurchaseViewModel;
+            CoffeeSaleViewModel selected = argSelected as CoffeeSaleViewModel;
             foreach (var detail in selected.Details)
-                _context.CoffeePurchase_Details.Remove(_context.CoffeePurchase_Details.Find(detail.Id));
+                _context.CoffeeSale_Details.Remove(_context.CoffeeSale_Details.Find(detail.Id));
 
-            _context.CoffeePurchases.Remove(_context.CoffeePurchases.Find(selected.Id));
+            _context.CoffeeSales.Remove(_context.CoffeeSales.Find(selected.Id));
             _context.SaveChanges();
             Refresh();
         }
@@ -178,8 +178,8 @@ namespace Espresso.ViewModels
 
         private void cmdNew_Execute(object argSelected)
         {
-            new Views.NewCoffeePurchase().ShowDialog();
-            _context.CoffeePurchases.Load();
+            new Views.NewCoffeeSale().ShowDialog();
+            _context.CoffeeSales.Load();
             Refresh();
         }
 
@@ -195,18 +195,18 @@ namespace Espresso.ViewModels
         public ICommand cmdFilterAll
         { get; private set; }
 
-         private void cmdFilterAll_Execute()
+        private void cmdFilterAll_Execute()
         {
             _filterTo = DateTime.Now;
             FilterFrom = DateTime.MinValue;
         }
 
-        public ICommand cmdClearSupplier
+        public ICommand cmdClearRecipient
         { get; private set; }
 
-        private void cmdClearSupplier_Execute()
+        private void cmdClearRecipient_Execute()
         {
-            FilterSupplier = null;
+            FilterRecipient = null;
         }
 
         public ICommand cmdClearAccount
@@ -225,18 +225,18 @@ namespace Espresso.ViewModels
 
 
 
-    // Helper class to represent individual CoffeePurchase
-    public class CoffeePurchaseViewModel /*: INotifyPropertyChanged*/
+    // Helper class to represent individual CoffeeSale
+    public class CoffeeSaleViewModel /*: INotifyPropertyChanged*/
     {
-        private Entity.CoffeePurchase _purchase;
+        private Entity.CoffeeSale _purchase;
 
         // Constructor
-        public CoffeePurchaseViewModel(Entity.CoffeePurchase argPurchase)
+        public CoffeeSaleViewModel(Entity.CoffeeSale argSale)
         {
-            _purchase = argPurchase;
+            _purchase = argSale;
 
-            Details = new ObservableCollection<Entity.CoffeePurchase_Details>();
-            foreach (var x in _purchase.CoffeePurchase_Details)
+            Details = new ObservableCollection<Entity.CoffeeSale_Details>();
+            foreach (var x in _purchase.Sale_Details)
             {
                 Details.Add(x);
             }
@@ -244,11 +244,11 @@ namespace Espresso.ViewModels
 
         public void SaveDetails()
         {
-            var context_Details = _purchase.CoffeePurchase_Details.ToList();
+            var context_Details = _purchase.Sale_Details.ToList();
             foreach (var detail in Details)
             {
                 if (!context_Details.Contains(detail))
-                    _purchase.CoffeePurchase_Details.Add(detail);
+                    _purchase.Sale_Details.Add(detail);
             }
         }
 
@@ -258,7 +258,7 @@ namespace Espresso.ViewModels
 
         public string Title
         {
-            get { return Date.ToString("d") + " - " + Supplier.Name; }
+            get { return Date.ToString("d") + " - " + Recipient.Name; }
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -291,10 +291,10 @@ namespace Espresso.ViewModels
             set { _purchase.Paid = value; }
         }
 
-        public Entity.Supplier Supplier
+        public Entity.Recipient Recipient
         {
-            get { return _purchase.Supplier; }
-            set { _purchase.Supplier = value; }
+            get { return _purchase.Recipient; }
+            set { _purchase.Recipient = value; }
         }
         public Entity.Account Account
         {
@@ -302,7 +302,7 @@ namespace Espresso.ViewModels
             set { _purchase.Account = value; }
         }
 
-        public ObservableCollection<Entity.CoffeePurchase_Details> Details
+        public ObservableCollection<Entity.CoffeeSale_Details> Details
         { get; set; }
 
         #endregion

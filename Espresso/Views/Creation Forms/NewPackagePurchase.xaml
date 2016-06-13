@@ -1,0 +1,62 @@
+﻿<Window x:Class="Espresso.Views.NewPackagePurchase"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Espresso.Views"
+        mc:Ignorable="d"
+        Title="NewPackagePurchase" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid DataContext="{Binding NewPacking}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label>Дата</Label>
+            <DatePicker Grid.Column="1" 
+                        SelectedDate="{Binding Date}"/>
+
+            <Label Grid.Row="1">Счёт</Label>
+            <ComboBox x:Name="comboAccount" Grid.Row="1" Grid.Column="1" Width="auto"
+                      SelectedItem="{Binding Account}" DisplayMemberPath="Name" />
+
+            <Label Grid.Row="2">Поставщик</Label>
+            <ComboBox x:Name="comboSupplier" Grid.Row="3" Grid.Column="1" Width="auto"
+                      SelectedItem="{Binding Supplier}" DisplayMemberPath="Name" />
+
+            <Label Grid.Row="3">Упаковка</Label>
+            <ComboBox x:Name="comboPackage" Grid.Row="2" Grid.Column="1" Width="auto"
+                      SelectedItem="{Binding Package}" DisplayMemberPath="Name" />
+
+            <Label Grid.Row="4">Стоимость</Label>
+            <TextBox Grid.Row="4" Grid.Column="1"
+                     Text="{Binding Price}"/>
+
+            <Label Grid.Row="5">Количество пачек</Label>
+            <TextBox Grid.Row="5" Grid.Column="1"
+                     Text="{Binding PackQuantity}"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
+            <Button Command="{Binding cmdSave}">Сохранить</Button>
+            <Button Click="btnCancel_Click">Отмена</Button>
+        </StackPanel>
+    </Grid>
+
+</Window>

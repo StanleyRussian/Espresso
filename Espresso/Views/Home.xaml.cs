@@ -84,5 +84,65 @@ namespace Espresso.Views
         {
             new Mixes().ShowDialog();
         }
+
+        private void NewPackage(object sender, RoutedEventArgs e)
+        {
+            new NewPackage().ShowDialog();
+        }
+
+        private void Packages(object sender, RoutedEventArgs e)
+        {
+            new Packages().ShowDialog();
+        }
+
+        private void NewCategory(object sender, RoutedEventArgs e)
+        {
+            new NewPackedCategory().ShowDialog();
+        }
+
+        private void Categories(object sender, RoutedEventArgs e)
+        {
+            new PackedCategories().ShowDialog();
+        }
+
+        private void NewPacking(object sender, RoutedEventArgs e)
+        {
+            new NewPacking().ShowDialog();
+        }
+
+        private void Packings(object sender, RoutedEventArgs e)
+        {
+            new Packings().ShowDialog();
+        }
+
+        private void NewPackagePurchase(object sender, RoutedEventArgs e)
+        {
+            new PackagePurchases().ShowDialog();
+        }
+
+        private void PackagePurchases(object sender, RoutedEventArgs e)
+        {
+            new PackagePurchases().ShowDialog();
+        }
+
+        private void NewRecipient(object sender, RoutedEventArgs e)
+        {
+            new NewRecipient().ShowDialog();
+        }
+
+        private void Recipients(object sender, RoutedEventArgs e)
+        {
+            new Recipients().ShowDialog();
+        }
+
+        private void NewCoffeeSale(object sender, RoutedEventArgs e)
+        {
+            new NewCoffeeSale().ShowDialog();
+        }
+
+        private void CoffeeSales(object sender, RoutedEventArgs e)
+        {
+            new CoffeeSales().ShowDialog();
+        }
     }
 }

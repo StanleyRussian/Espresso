@@ -11,15 +11,17 @@ using System.Windows.Input;
 
 namespace Espresso.ViewModels
 {
-    class RoastingsViewModel
+    class PackingsViewModel
     {
         private Entity.ContextContainer _context;
 
-        public RoastingsViewModel()
+        public PackingsViewModel()
         {
             _context = new Entity.ContextContainer();
-            _context.CoffeeSorts.Load();
-            _context.Roastings.Load();
+            _context.Packings.Load();
+            _context.Mixes.Load();
+            _context.Packages.Load();
+            _context.PackedCategories.Load();
 
             _filterTo = DateTime.Now;
             _filterFrom = DateTime.Now.AddDays(-30);
@@ -35,8 +37,8 @@ namespace Espresso.ViewModels
 
         private void Refresh()
         {
-            var query = _context.Roastings.Local.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
-            Roastings = new ObservableCollection<Entity.Roasting>(query);
+            var query = _context.Packings.Local.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
+            Packings = new ObservableCollection<Entity.Packing>(query);
         }
 
         #region Binding Properties and INotifyPropertyChanged implementation
@@ -47,20 +49,30 @@ namespace Espresso.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ObservableCollection<Entity.Roasting> _roastings;
-        public ObservableCollection<Entity.Roasting> Roastings
+        private ObservableCollection<Entity.Packing> _roastings;
+        public ObservableCollection<Entity.Packing> Packings
         {
             get { return _roastings; }
             set
             {
                 _roastings = value;
-                OnPropertyChanged("Roastings");
+                OnPropertyChanged("Packings");
             }
         }
 
-        public ObservableCollection<Entity.CoffeeSort> CoffeeSorts
+        public ObservableCollection<Entity.Mix> Mixes
         {
-            get { return _context.CoffeeSorts.Local; }
+            get { return _context.Mixes.Local; }
+        }
+
+        public ObservableCollection<Entity.Package> Packages
+        {
+            get { return _context.Packages.Local; }
+        }
+
+        public ObservableCollection<Entity.PackedCategory> PackedCategories
+        {
+            get { return _context.PackedCategories.Local; }
         }
 
         private DateTime _filterFrom;
@@ -107,14 +119,14 @@ namespace Espresso.ViewModels
         {
             if (argSelected == null)
             {
-                MessageBox.Show("Вы не выбрали счёт!");
+                MessageBox.Show("Вы не выбрали обжжарку!");
                 return;
             }
 
-            var selected = argSelected as Entity.Roasting;
+            var selected = argSelected as Entity.Packing;
             try
             {
-                _context.Roastings.Remove(selected);
+                _context.Packings.Remove(selected);
                 _context.SaveChanges();
                 Refresh();
             }
@@ -124,13 +136,13 @@ namespace Espresso.ViewModels
             }
         }
 
-    public ICommand cmdNew
+        public ICommand cmdNew
         { get; private set; }
 
         private void cmdNew_Execute(object argSelected)
         {
-            new Views.NewRoasting().ShowDialog();
-            _context.Roastings.Load();
+            new Views.NewPacking().ShowDialog();
+            _context.Packings.Load();
             Refresh();
         }
 

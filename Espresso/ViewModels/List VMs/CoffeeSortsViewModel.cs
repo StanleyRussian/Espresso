@@ -108,6 +108,7 @@ namespace Espresso.ViewModels
         private void cmdNew_Execute()
         {
             new Views.NewCoffeeSort().ShowDialog();
+            _context.CoffeeSorts.Load();
             Refresh();
         }
 

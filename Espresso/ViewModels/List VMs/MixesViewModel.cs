@@ -145,6 +145,7 @@ namespace Espresso.ViewModels
         private void cmdNew_Execute(object argSelected)
         {
             new Views.NewMix().ShowDialog();
+            _context.Mixes.Load();
             Refresh();
         }
 
