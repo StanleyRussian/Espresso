@@ -23,13 +23,13 @@ namespace Espresso.Entity
             this.dPackedStocks = new HashSet<dPackedStocks>();
             this.Sale_Details = new HashSet<CoffeeSale_Details>();
             this.CoffeeTransfers = new HashSet<CoffeeTransfer>();
-            this.dCafeCoffeeStocks = new HashSet<dCafeCoffeeStock>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
+        public Nullable<double> Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mix_Details> Mix_Details { get; set; }
@@ -41,7 +41,5 @@ namespace Espresso.Entity
         public virtual ICollection<CoffeeSale_Details> Sale_Details { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoffeeTransfer> CoffeeTransfers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<dCafeCoffeeStock> dCafeCoffeeStocks { get; set; }
     }
 }

@@ -244,3 +244,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /Espresso/Notes
+/Espresso/Entity/Context.edmx.sql

@@ -12,12 +12,13 @@ namespace Espresso.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class CoffeeTransfer
+    public partial class OtherProfit
     {
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
-        public double Quantity { get; set; }
+        public double Amount { get; set; }
+        public string Designation { get; set; }
     
-        public virtual Mix Mix { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

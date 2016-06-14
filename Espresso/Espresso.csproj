@@ -76,6 +76,30 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -108,7 +132,7 @@
     <Compile Include="Entity\CoffeeTransfer.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\dCafeCoffeeStock.cs">
+    <Compile Include="Entity\dAccountsBalance.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\dGreenStock.cs">
@@ -129,6 +153,15 @@
     <Compile Include="Entity\Mix_Details.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\MonthlyExpense.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\MonthlyPayment.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\OtherProfit.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Package.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -141,6 +174,9 @@
     <Compile Include="Entity\Packing.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Payment.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Recipient.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -150,6 +186,7 @@
     <Compile Include="Entity\Supplier.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\List VMs\CoffeeTransfersViewModel.cs" />
     <Compile Include="ViewModels\List VMs\CoffeeSalesViewModel.cs" />
     <Compile Include="ViewModels\Creation VMs\NewMixViewModel.cs" />
     <Compile Include="ViewModels\List VMs\AccountsViewModel.cs" />
@@ -173,7 +210,17 @@
     <Compile Include="ViewModels\List VMs\PackagePurchasesViewModel.cs" />
     <Compile Include="ViewModels\Creation VMs\NewRecipientViewModel.cs" />
     <Compile Include="ViewModels\List VMs\RecipientsViewModel.cs" />
-    <Compile Include="ViewModels\NewCoffeeSaleViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewCoffeeSaleViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewCoffeeTansferViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\MonthlyExpensesViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewPaymentViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewMonthlyExpenseViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\PaymentsViewModel.cs" />
+    <Compile Include="ViewModels\Creation VMs\NewOtherProfitViewModel.cs" />
+    <Compile Include="ViewModels\List VMs\OtherProfitsViewModel.cs" />
+    <Compile Include="Views\List Forms\CoffeeTranfers.xaml.cs">
+      <DependentUpon>CoffeeTranfers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\List Forms\CoffeeSales.xaml.cs">
       <DependentUpon>CoffeeSales.xaml</DependentUpon>
     </Compile>
@@ -255,6 +302,27 @@
     <Compile Include="Views\Creation Forms\NewCoffeeSale.xaml.cs">
       <DependentUpon>NewCoffeeSale.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Creation Forms\NewCoffeeTransfer.xaml.cs">
+      <DependentUpon>NewCoffeeTransfer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\List Forms\MonthlyExpenses.xaml.cs">
+      <DependentUpon>MonthlyExpenses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Creation Forms\NewPayment.xaml.cs">
+      <DependentUpon>NewPayment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Creation Forms\NewMonthlyExpense.xaml.cs">
+      <DependentUpon>NewMonthlyExpense.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\List Forms\Payments.xaml.cs">
+      <DependentUpon>Payments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Creation Forms\NewOtherProfit.xaml.cs">
+      <DependentUpon>NewOtherProfit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\List Forms\OtherProfits.xaml.cs">
+      <DependentUpon>OtherProfits.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\Model.Context.cs">
@@ -305,6 +373,7 @@
     <Resource Include="Notes\Usage.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Entity\Context.edmx.sql" />
     <Content Include="Entity\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model.Context.cs</LastGenOutput>
@@ -334,6 +403,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\List Forms\CoffeeTranfers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\List Forms\CoffeeSales.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -431,6 +504,34 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Creation Forms\NewCoffeeSale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Creation Forms\NewCoffeeTransfer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\List Forms\MonthlyExpenses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Creation Forms\NewPayment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Creation Forms\NewMonthlyExpense.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\List Forms\Payments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Creation Forms\NewOtherProfit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\List Forms\OtherProfits.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

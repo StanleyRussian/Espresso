@@ -11,11 +11,11 @@ using System.Windows.Input;
 
 namespace Espresso.ViewModels
 {
-    class AccountsViewModel : INotifyPropertyChanged
+    class MonthlyExpensesViewModel : INotifyPropertyChanged
     {
         private Entity.ContextContainer _context;
 
-        public AccountsViewModel()
+        public MonthlyExpensesViewModel()
         {
             cmdNew = new Auxiliary.Command(cmdNew_Execute);
             cmdSave = new Auxiliary.Command(cmdSave_Execute);
@@ -28,14 +28,14 @@ namespace Espresso.ViewModels
             cmdClearSearch = new Auxiliary.Command(cmdClearSearch_Execute);
 
             _context = new Entity.ContextContainer();
-            _context.Accounts.Load();
+            _context.MonthlyExpenses.Load();
             Refresh();
         }
 
         private void Refresh()
         {
-            AccountsSelected = new ObservableCollection<Entity.Account>(
-                _context.Accounts.Local.Where(p => p.Active == true));
+            MonthlyExpensesSelected = new ObservableCollection<Entity.MonthlyExpense>(
+                _context.MonthlyExpenses.Local.Where(p => p.Active == true));
             activeIsSelected = true;
 
             cmdSelectActive.CanExecute(null);
@@ -50,14 +50,14 @@ namespace Espresso.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ObservableCollection<Entity.Account> _accountsSelected;
-        public ObservableCollection<Entity.Account> AccountsSelected
+        private ObservableCollection<Entity.MonthlyExpense> _packagesSelected;
+        public ObservableCollection<Entity.MonthlyExpense> MonthlyExpensesSelected
         {
-            get { return _accountsSelected; }
+            get { return _packagesSelected; }
             set
             {
-                _accountsSelected = value;
-                OnPropertyChanged("AccountsSelected");
+                _packagesSelected = value;
+                OnPropertyChanged("MonthlyExpensesSelected");
             }
         }
 
@@ -81,8 +81,8 @@ namespace Espresso.ViewModels
 
         private void cmdSearch_Execute()
         {
-            AccountsSelected = new ObservableCollection<Entity.Account>(
-                AccountsSelected.Where(p => p.Name.Contains(FilterName) == true));
+            MonthlyExpensesSelected = new ObservableCollection<Entity.MonthlyExpense>(
+                MonthlyExpensesSelected.Where(p => p.Designation.Contains(FilterName) == true));
         }
 
         public ICommand cmdClearSearch
@@ -107,8 +107,8 @@ namespace Espresso.ViewModels
 
         private void cmdNew_Execute()
         {
-            new Views.NewAccount().ShowDialog();
-            _context.Accounts.Load();
+            new Views.NewMonthlyExpense().ShowDialog();
+            _context.MonthlyExpenses.Load();
             Refresh();
         }
 
@@ -119,14 +119,14 @@ namespace Espresso.ViewModels
         {
             if (argSelected == null)
             {
-                MessageBox.Show("Вы не выбрали счёт!");
+                MessageBox.Show("Вы не выбрали расход!");
                 return;
             }
 
-            var selected = argSelected as Entity.Account;
+            var selected = argSelected as Entity.MonthlyExpense;
             try
             {
-                _context.Accounts.Remove(selected);
+                _context.MonthlyExpenses.Remove(selected);
                 _context.SaveChanges();
                 Refresh();
             }
@@ -141,7 +141,7 @@ namespace Espresso.ViewModels
 
         private void cmdToggleActive_Execute(object argSelected)
         {
-            Entity.Account selected = _context.Accounts.Find(((Entity.Account)argSelected).Id);
+            Entity.MonthlyExpense selected = _context.MonthlyExpenses.Find(((Entity.MonthlyExpense)argSelected).Id);
             selected.Active = (selected.Active == true) ? false : true;
             _context.SaveChanges();
             Refresh();
@@ -155,11 +155,11 @@ namespace Espresso.ViewModels
 
         private void cmdSelectActive_Execute()
         {
-            var query = _context.Accounts.Local.Where(p => p.Active == true);
+            var query = _context.MonthlyExpenses.Local.Where(p => p.Active == true);
             if (FilterName != null)
-                query = query.Where(p => p.Name.Contains(FilterName) == true);
+                query = query.Where(p => p.Designation.Contains(FilterName) == true);
 
-            AccountsSelected = new ObservableCollection<Entity.Account>(query);
+            MonthlyExpensesSelected = new ObservableCollection<Entity.MonthlyExpense>(query);
             activeIsSelected = true;
 
             cmdSelectActive.CanExecute(null);
@@ -177,11 +177,11 @@ namespace Espresso.ViewModels
 
         private void cmdSelectInactive_Execute()
         {
-            var query = _context.Accounts.Local.Where(p => p.Active == false);
+            var query = _context.MonthlyExpenses.Local.Where(p => p.Active == false);
             if (FilterName != null)
-                query = query.Where(p => p.Name.Contains(FilterName) == true);
+                query = query.Where(p => p.Designation.Contains(FilterName) == true);
 
-            AccountsSelected = new ObservableCollection<Entity.Account>(query);
+            MonthlyExpensesSelected = new ObservableCollection<Entity.MonthlyExpense>(query);
             activeIsSelected = false;
 
             cmdSelectActive.CanExecute(null);

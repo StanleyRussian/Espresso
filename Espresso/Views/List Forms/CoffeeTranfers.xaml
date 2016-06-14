@@ -1,0 +1,92 @@
+﻿<Window x:Class="Espresso.Views.CoffeeTranfers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Espresso.Views"
+        mc:Ignorable="d"
+        Title="CoffeeTranfers" Height="500" Width="750">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="panelFilter">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.ColumnSpan="2">Фильтрация по дате:</Label>
+
+            <Button Grid.Row="1"
+                Command="{Binding cmdFilter30Days}">За 30 дней</Button>
+
+            <Button Grid.Row="2"
+                Command="{Binding cmdFilterAll}">Все</Button>
+
+            <StackPanel Grid.Row="1" Grid.Column="1"
+                Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label>С даты:</Label>
+                <DatePicker Width="100" SelectedDate="{Binding FilterFrom, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.Column="1"
+                Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label>По дату:</Label>
+                <DatePicker Width="100" SelectedDate="{Binding FilterTo, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </Grid>
+
+        <ListBox x:Name="listCoffeeTransfers" Grid.Row="1"
+                 ItemsSource="{Binding CoffeeTransfers}" 
+                 DisplayMemberPath="Date" IsSynchronizedWithCurrentItem="True"/>
+
+        <Grid Grid.Row="1" Grid.Column="1"
+              DataContext="{Binding CoffeeTransfers}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label>Дата</Label>
+            <DatePicker Grid.Column="1" 
+                        SelectedDate="{Binding Date}"/>
+
+            <Label Grid.Row="1">Купаж</Label>
+            <ComboBox x:Name="comboMix" Grid.Row="1" Grid.Column="1" Width="auto"
+                      SelectedItem="{Binding Mix}" DisplayMemberPath="Name" />
+
+            <Label Grid.Row="2">Количество</Label>
+            <TextBox Grid.Row="2" Grid.Column="1"
+                     Text="{Binding Quantity}"/>
+        </Grid>
+
+        <WrapPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">
+            <Button Command="{Binding cmdNew}">Добавить перевод</Button>
+            <Button Command="{Binding cmdSave}">Сохранить изменения</Button>
+            <Button Command="{Binding cmdDelete}"
+                    CommandParameter="{Binding ElementName=listCoffeeTransfers, Path=SelectedItem}">Удалить перевод</Button>
+        </WrapPanel>
+    </Grid>
+</Window>

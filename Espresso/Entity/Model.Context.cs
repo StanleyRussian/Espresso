@@ -45,6 +45,10 @@ namespace Espresso.Entity
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<PackedCategory> PackedCategories { get; set; }
         public virtual DbSet<CoffeeTransfer> CoffeeTransfers { get; set; }
-        public virtual DbSet<dCafeCoffeeStock> dCafeCoffeeStocks { get; set; }
+        public virtual DbSet<dAccountsBalance> dAccountsBalances { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<MonthlyExpense> MonthlyExpenses { get; set; }
+        public virtual DbSet<OtherProfit> OtherProfits { get; set; }
+        public virtual DbSet<MonthlyPayment> MonthlyPayments { get; set; }
     }
 }

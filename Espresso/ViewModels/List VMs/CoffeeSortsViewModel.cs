@@ -132,7 +132,7 @@ namespace Espresso.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Имеются связанные закупки, невозможно удалить этот счёт");
+                MessageBox.Show(ex.Message);
             }
         }
 

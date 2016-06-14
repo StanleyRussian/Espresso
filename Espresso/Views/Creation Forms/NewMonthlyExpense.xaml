@@ -1,0 +1,52 @@
+﻿<Window x:Class="Espresso.Views.NewMonthlyExpense"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:Espresso.Views"
+        mc:Ignorable="d"
+        Title="NewMonthlyExpense" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid DataContext="{Binding NewMonthlyExpense}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label>Число оплаты</Label>
+            <xctk:IntegerUpDown Grid.Column="1"
+                Value="{Binding Day}" Increment="1" Maximum="31" Minimum="1"/>
+
+            <Label Grid.Row="1">Число напоминания</Label>
+            <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1"
+                Value="{Binding RemindingDay}" Increment="1" Maximum="31" Minimum="1"/>
+            
+            <Label Grid.Row="2">Сумма</Label>
+            <TextBox Grid.Row="2" Grid.Column="1"
+                     Text="{Binding Amount}"/>
+
+            <Label Grid.Row="3">Назначение</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" Height="100"
+                     Text="{Binding Designation}"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
+            <Button Command="{Binding cmdSave}">Сохранить</Button>
+            <Button Click="btnCancel_Click">Отмена</Button>
+        </StackPanel>
+    </Grid>
+</Window>

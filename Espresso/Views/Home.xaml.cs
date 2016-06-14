@@ -144,5 +144,35 @@ namespace Espresso.Views
         {
             new CoffeeSales().ShowDialog();
         }
+
+        private void CoffeeTranfers(object sender, RoutedEventArgs e)
+        {
+            new CoffeeTranfers().ShowDialog();
+        }
+
+        private void NewCoffeeTranfer(object sender, RoutedEventArgs e)
+        {
+            new NewCoffeeTransfer().ShowDialog();
+        }
+
+        private void NewPayment(object sender, RoutedEventArgs e)
+        {
+            new NewPayment().ShowDialog();
+        }
+
+        private void Payments(object sender, RoutedEventArgs e)
+        {
+            new Payments().ShowDialog();
+        }
+
+        private void NewMonthlyExpense(object sender, RoutedEventArgs e)
+        {
+            new NewMonthlyExpense().ShowDialog();
+        }
+
+        private void MontlyExpenses(object sender, RoutedEventArgs e)
+        {
+            new MonthlyExpenses().ShowDialog();
+        }
     }
 }

@@ -12,11 +12,11 @@ namespace Espresso.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class dCafeCoffeeStock
+    public partial class dAccountsBalance
     {
         public int Id { get; set; }
-        public decimal Quantity { get; set; }
+        public double Balance { get; set; }
     
-        public virtual Mix Mix { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

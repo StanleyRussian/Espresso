@@ -108,6 +108,30 @@
                     <Button Click="CoffeeSales">Список продаж</Button>
                 </StackPanel>
             </Border>
+
+            <Border Style="{StaticResource ButtonGroup}">
+                <StackPanel Orientation="Vertical">
+                    <Label>Coffee Transfer</Label>
+                    <Button Click="NewCoffeeTranfer">Добавить</Button>
+                    <Button Click="CoffeeTranfers">Список</Button>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource ButtonGroup}">
+                <StackPanel Orientation="Vertical">
+                    <Label>Расходы</Label>
+                    <Button Click="NewPayment">Добавить</Button>
+                    <Button Click="Payments">Список</Button>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource ButtonGroup}">
+                <StackPanel Orientation="Vertical">
+                    <Label>Ежемесячные платежи</Label>
+                    <Button Click="NewMonthlyExpense">Добавить</Button>
+                    <Button Click="MontlyExpenses">Список</Button>
+                </StackPanel>
+            </Border>
         </WrapPanel>
     </Grid>
 </Window>

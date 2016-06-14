@@ -11,28 +11,28 @@ using System.Windows.Input;
 
 namespace Espresso.ViewModels
 {
-    class NewRoastingViewModel: INotifyPropertyChanged
+    class NewCoffeeTransferViewModel : INotifyPropertyChanged
     {
         private Entity.ContextContainer _context;
 
-        public NewRoastingViewModel()
+        public NewCoffeeTransferViewModel()
         {
             _context = new Entity.ContextContainer();
 
-            _activeCoffeeSorts = new ObservableCollection<Entity.CoffeeSort>(
-                _context.CoffeeSorts.Where(x => x.Active == true));
+            _activeMixes = new ObservableCollection<Entity.Mix>(
+                _context.Mixes.Where(x => x.Active == true));
 
-            NewRoasting = new Entity.Roasting();
-            NewRoasting.Date = DateTime.Now;
-            NewRoasting.CoffeeSort = _context.CoffeeSorts.Local.FirstOrDefault();
+            NewCoffeeTransfer = new Entity.CoffeeTransfer();
+            NewCoffeeTransfer.Date = DateTime.Now;
+            NewCoffeeTransfer.Mix = _context.Mixes.Local.FirstOrDefault();
 
             cmdSave = new Auxiliary.Command(cmdSave_Execute);
         }
 
-        private ObservableCollection<Entity.CoffeeSort> _activeCoffeeSorts;
-        public ObservableCollection<Entity.CoffeeSort> CoffeeSorts
+        private ObservableCollection<Entity.Mix> _activeMixes;
+        public ObservableCollection<Entity.Mix> Mixes
         {
-            get { return _activeCoffeeSorts; }
+            get { return _activeMixes; }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -41,28 +41,14 @@ namespace Espresso.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // Since DB doesn't store srinkage percentage rather then both quantities
-        // some additional magic required in view model
-        private int _shrinkagePercent;
-        public int ShrinkagePercent
+        private Entity.CoffeeTransfer _newCoffeeTransfer;
+        public Entity.CoffeeTransfer NewCoffeeTransfer
         {
-            get { return _shrinkagePercent; }
+            get { return _newCoffeeTransfer; }
             set
             {
-                _shrinkagePercent = value;
-                OnPropertyChanged("ShrinkagePercent");
-            }
-
-        }
-
-        private Entity.Roasting _newRoasting;
-        public Entity.Roasting NewRoasting
-        {
-            get { return _newRoasting; }
-            set
-            {
-                _newRoasting = value;
-                OnPropertyChanged("NewRoasting");
+                _newCoffeeTransfer = value;
+                OnPropertyChanged("NewCoffeeTransfer");
             }
         }
 
@@ -71,13 +57,12 @@ namespace Espresso.ViewModels
 
         private void cmdSave_Execute()
         {
-            NewRoasting.RoastedAmount = NewRoasting.InitialAmount * (100-ShrinkagePercent) /100;
-            _context.Roastings.Add(NewRoasting);
+            _context.CoffeeTransfers.Add(NewCoffeeTransfer);
             try
             {
                 _context.SaveChanges();
                 MessageBox.Show("Сохранение прошло успешно");
-                NewRoasting = new Entity.Roasting();
+                NewCoffeeTransfer = new Entity.CoffeeTransfer();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {

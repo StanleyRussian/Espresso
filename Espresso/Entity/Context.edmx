@@ -26,7 +26,11 @@
     <EntitySet Name="Accounts" EntityType="Context.Store.Accounts" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PackedCategories" EntityType="Context.Store.PackedCategories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CoffeeTransfers" EntityType="Context.Store.CoffeeTransfers" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="dCafeCoffeeStocks" EntityType="Context.Store.dCafeCoffeeStocks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="dAccountsBalances" EntityType="Context.Store.dAccountsBalances" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Payments" EntityType="Context.Store.Payments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MonthlyExpenses" EntityType="Context.Store.MonthlyExpenses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OtherProfits" EntityType="Context.Store.OtherProfits" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MonthlyPayments" EntityType="Context.Store.MonthlyPayments" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="SupplierCoffeePurchase" Association="Context.Store.SupplierCoffeePurchase">
       <End Role="Supplier" EntitySet="Suppliers" />
       <End Role="CoffeePurchase" EntitySet="CoffeePurchases" />
@@ -115,10 +119,6 @@
       <End Role="Mix" EntitySet="Mixes" />
       <End Role="CoffeeTransfer" EntitySet="CoffeeTransfers" />
     </AssociationSet>
-    <AssociationSet Name="MixdCafeCoffeeStock" Association="Context.Store.MixdCafeCoffeeStock">
-      <End Role="Mix" EntitySet="Mixes" />
-      <End Role="dCafeCoffeeStock" EntitySet="dCafeCoffeeStocks" />
-    </AssociationSet>
     <AssociationSet Name="AccountPackagePurchase" Association="Context.Store.AccountPackagePurchase">
       <End Role="Account" EntitySet="Accounts" />
       <End Role="PackagePurchase" EntitySet="PackagePurchases" />
@@ -126,6 +126,26 @@
     <AssociationSet Name="SupplierPackagePurchase" Association="Context.Store.SupplierPackagePurchase">
       <End Role="Supplier" EntitySet="Suppliers" />
       <End Role="PackagePurchase" EntitySet="PackagePurchases" />
+    </AssociationSet>
+    <AssociationSet Name="AccountdAccountsBalance" Association="Context.Store.AccountdAccountsBalance">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="dAccountsBalance" EntitySet="dAccountsBalances" />
+    </AssociationSet>
+    <AssociationSet Name="AccountExpense" Association="Context.Store.AccountExpense">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Expense" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="AccountOtherProfit" Association="Context.Store.AccountOtherProfit">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="OtherProfit" EntitySet="OtherProfits" />
+    </AssociationSet>
+    <AssociationSet Name="MonthlyExpenseMonthlyPayments" Association="Context.Store.MonthlyExpenseMonthlyPayments">
+      <End Role="MonthlyExpense" EntitySet="MonthlyExpenses" />
+      <End Role="MonthlyPayments" EntitySet="MonthlyPayments" />
+    </AssociationSet>
+    <AssociationSet Name="AccountMonthlyPayments" Association="Context.Store.AccountMonthlyPayments">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="MonthlyPayments" EntitySet="MonthlyPayments" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="CoffeePurchases">
@@ -168,8 +188,8 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="LastPrice" Type="float" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="dLastPrice" Type="float" Nullable="true" />
   </EntityType>
   <EntityType Name="dGreenStocks">
     <Key>
@@ -205,6 +225,7 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="Price" Type="float" Nullable="true" />
   </EntityType>
   <EntityType Name="Mix_Details">
     <Key>
@@ -262,7 +283,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Quantity" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="float" Nullable="false" />
     <Property Name="Packages_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CoffeeSales">
@@ -293,7 +314,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Price" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="PackQuantity" Type="int" Nullable="false" />
     <Property Name="Sale_Id" Type="int" Nullable="false" />
     <Property Name="Mix_Id" Type="int" Nullable="false" />
@@ -324,16 +345,58 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
-    <Property Name="Quantity" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="float" Nullable="false" />
     <Property Name="Mix_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="dCafeCoffeeStocks">
+  <EntityType Name="dAccountsBalances">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Quantity" Type="decimal" Nullable="false" Precision="18" Scale="0" />
-    <Property Name="Mix_Id" Type="int" Nullable="false" />
+    <Property Name="Balance" Type="float" Nullable="false" />
+    <Property Name="Account_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Designation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Account_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MonthlyExpenses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Designation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Day" Type="int" Nullable="false" />
+    <Property Name="RemindingDay" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="dLastPaidDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="OtherProfits">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Designation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Account_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MonthlyPayments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="PaidAmount" Type="float" Nullable="false" />
+    <Property Name="MonthlyExpense_Id" Type="int" Nullable="false" />
+    <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="SupplierCoffeePurchase">
     <End Role="Supplier" Type="Context.Store.Suppliers" Multiplicity="1" />
@@ -605,18 +668,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="MixdCafeCoffeeStock">
-    <End Role="Mix" Type="Context.Store.Mixes" Multiplicity="1" />
-    <End Role="dCafeCoffeeStock" Type="Context.Store.dCafeCoffeeStocks" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Mix">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="dCafeCoffeeStock">
-        <PropertyRef Name="Mix_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="AccountPackagePurchase">
     <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1" />
     <End Role="PackagePurchase" Type="Context.Store.PackagePurchases" Multiplicity="*" />
@@ -638,6 +689,66 @@
       </Principal>
       <Dependent Role="PackagePurchase">
         <PropertyRef Name="Supplier_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccountdAccountsBalance">
+    <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1" />
+    <End Role="dAccountsBalance" Type="Context.Store.dAccountsBalances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="dAccountsBalance">
+        <PropertyRef Name="Account_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccountExpense">
+    <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1" />
+    <End Role="Expense" Type="Context.Store.Payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Expense">
+        <PropertyRef Name="Account_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccountOtherProfit">
+    <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1" />
+    <End Role="OtherProfit" Type="Context.Store.OtherProfits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OtherProfit">
+        <PropertyRef Name="Account_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MonthlyExpenseMonthlyPayments">
+    <End Role="MonthlyExpense" Type="Context.Store.MonthlyExpenses" Multiplicity="1" />
+    <End Role="MonthlyPayments" Type="Context.Store.MonthlyPayments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MonthlyExpense">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MonthlyPayments">
+        <PropertyRef Name="MonthlyExpense_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccountMonthlyPayments">
+    <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1" />
+    <End Role="MonthlyPayments" Type="Context.Store.MonthlyPayments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MonthlyPayments">
+        <PropertyRef Name="Account_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -754,11 +865,6 @@
             <End Role="Mix" EntitySet="Mixes" />
             <End Role="CoffeeTransfer" EntitySet="CoffeeTransfers" />
           </AssociationSet>
-          <EntitySet Name="dCafeCoffeeStocks" EntityType="Context.dCafeCoffeeStock" />
-          <AssociationSet Name="MixdCafeCoffeeStock" Association="Context.MixdCafeCoffeeStock">
-            <End Role="Mix" EntitySet="Mixes" />
-            <End Role="dCafeCoffeeStock" EntitySet="dCafeCoffeeStocks" />
-          </AssociationSet>
           <AssociationSet Name="AccountPackagePurchase" Association="Context.AccountPackagePurchase">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="PackagePurchase" EntitySet="PackagePurchases" />
@@ -766,6 +872,31 @@
           <AssociationSet Name="SupplierPackagePurchase" Association="Context.SupplierPackagePurchase">
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="PackagePurchase" EntitySet="PackagePurchases" />
+          </AssociationSet>
+          <EntitySet Name="dAccountsBalances" EntityType="Context.dAccountsBalance" />
+          <AssociationSet Name="AccountdAccountsBalance" Association="Context.AccountdAccountsBalance">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="dAccountsBalance" EntitySet="dAccountsBalances" />
+          </AssociationSet>
+          <EntitySet Name="Payments" EntityType="Context.Payment" />
+          <EntitySet Name="MonthlyExpenses" EntityType="Context.MonthlyExpense" />
+          <AssociationSet Name="AccountExpense" Association="Context.AccountExpense">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Expense" EntitySet="Payments" />
+          </AssociationSet>
+          <EntitySet Name="OtherProfits" EntityType="Context.OtherProfit" />
+          <AssociationSet Name="AccountOtherProfit" Association="Context.AccountOtherProfit">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="OtherProfit" EntitySet="OtherProfits" />
+          </AssociationSet>
+          <EntitySet Name="MonthlyPayments" EntityType="Context.MonthlyPayment" />
+          <AssociationSet Name="MonthlyExpenseMonthlyPayments" Association="Context.MonthlyExpenseMonthlyPayments">
+            <End Role="MonthlyExpense" EntitySet="MonthlyExpenses" />
+            <End Role="MonthlyPayments" EntitySet="MonthlyPayments" />
+          </AssociationSet>
+          <AssociationSet Name="AccountMonthlyPayments" Association="Context.AccountMonthlyPayments">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="MonthlyPayments" EntitySet="MonthlyPayments" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="CoffeePurchase">
@@ -822,8 +953,8 @@
           <NavigationProperty Name="Roastings" Relationship="Context.RoastingCoffeeSort" FromRole="CoffeeSort" ToRole="Roasting" />
           <NavigationProperty Name="dRoastedStocks" Relationship="Context.dRoastedStockCoffeeSort" FromRole="CoffeeSort" ToRole="dRoastedStock" />
           <NavigationProperty Name="Mix_Details" Relationship="Context.Mix_DetailsCoffeeSort" FromRole="CoffeeSort" ToRole="Mix_Details" />
-          <Property Name="LastPrice" Type="Double" Nullable="true" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <Property Name="dLastPrice" Type="Double" Nullable="true" />
         </EntityType>
         <Association Name="CoffeePurchase_DetailsCoffeePurchase">
           <End Type="Context.CoffeePurchase_Details" Role="CoffeePurchase_Details" Multiplicity="*" />
@@ -881,12 +1012,12 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <Property Name="Price" Type="Double" Nullable="true" />
           <NavigationProperty Name="Mix_Details" Relationship="Context.Mix_DetailsMix" FromRole="Mix" ToRole="Mix_Details" />
           <NavigationProperty Name="Packings" Relationship="Context.PackingMix" FromRole="Mix" ToRole="Packing" />
           <NavigationProperty Name="dPackedStocks" Relationship="Context.dPackedStocksMix" FromRole="Mix" ToRole="dPackedStocks" />
           <NavigationProperty Name="Sale_Details" Relationship="Context.MixSale_Details" FromRole="Mix" ToRole="Sale_Details" />
           <NavigationProperty Name="CoffeeTransfers" Relationship="Context.MixCoffeeTransfer" FromRole="Mix" ToRole="CoffeeTransfer" />
-          <NavigationProperty Name="dCafeCoffeeStocks" Relationship="Context.MixdCafeCoffeeStock" FromRole="Mix" ToRole="dCafeCoffeeStock" />
         </EntityType>
         <EntityType Name="Mix_Details">
           <Key>
@@ -980,7 +1111,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Packages" Relationship="Context.dPackageStocksPackage" FromRole="dPackageStocks" ToRole="Package" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
         </EntityType>
         <Association Name="dPackageStocksPackage">
           <End Type="Context.dPackageStocks" Role="dPackageStocks" Multiplicity="*" />
@@ -1019,7 +1150,7 @@
           <NavigationProperty Name="Sale" Relationship="Context.SaleSale_Details" FromRole="Sale_Details" ToRole="Sale" />
           <NavigationProperty Name="Mix" Relationship="Context.MixSale_Details" FromRole="Sale_Details" ToRole="Mix" />
           <NavigationProperty Name="Package" Relationship="Context.PackageSale_Details" FromRole="Sale_Details" ToRole="Package" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="PackQuantity" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="SaleSale_Details">
@@ -1044,6 +1175,10 @@
           <NavigationProperty Name="CoffeeSales" Relationship="Context.AccountSale" FromRole="Account" ToRole="Sale" />
           <NavigationProperty Name="CoffeePurchases" Relationship="Context.AccountCoffeePurchase" FromRole="Account" ToRole="CoffeePurchase" />
           <NavigationProperty Name="PackagePurchases" Relationship="Context.AccountPackagePurchase" FromRole="Account" ToRole="PackagePurchase" />
+          <NavigationProperty Name="dAccountsBalances" Relationship="Context.AccountdAccountsBalance" FromRole="Account" ToRole="dAccountsBalance" />
+          <NavigationProperty Name="Expenses" Relationship="Context.AccountExpense" FromRole="Account" ToRole="Expense" />
+          <NavigationProperty Name="OtherProfits" Relationship="Context.AccountOtherProfit" FromRole="Account" ToRole="OtherProfit" />
+          <NavigationProperty Name="MonthlyPayments" Relationship="Context.AccountMonthlyPayments" FromRole="Account" ToRole="MonthlyPayments" />
         </EntityType>
         <Association Name="AccountSale">
           <End Type="Context.Account" Role="Account" Multiplicity="1" />
@@ -1082,23 +1217,11 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Mix" Relationship="Context.MixCoffeeTransfer" FromRole="CoffeeTransfer" ToRole="Mix" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
         </EntityType>
         <Association Name="MixCoffeeTransfer">
           <End Type="Context.Mix" Role="Mix" Multiplicity="1" />
           <End Type="Context.CoffeeTransfer" Role="CoffeeTransfer" Multiplicity="*" />
-        </Association>
-        <EntityType Name="dCafeCoffeeStock">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <NavigationProperty Name="Mix" Relationship="Context.MixdCafeCoffeeStock" FromRole="dCafeCoffeeStock" ToRole="Mix" />
-        </EntityType>
-        <Association Name="MixdCafeCoffeeStock">
-          <End Type="Context.Mix" Role="Mix" Multiplicity="1" />
-          <End Type="Context.dCafeCoffeeStock" Role="dCafeCoffeeStock" Multiplicity="*" />
         </Association>
         <Association Name="AccountPackagePurchase">
           <End Type="Context.Account" Role="Account" Multiplicity="1" />
@@ -1107,6 +1230,77 @@
         <Association Name="SupplierPackagePurchase">
           <End Type="Context.Supplier" Role="Supplier" Multiplicity="1" />
           <End Type="Context.PackagePurchase" Role="PackagePurchase" Multiplicity="*" />
+        </Association>
+        <EntityType Name="dAccountsBalance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Balance" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Context.AccountdAccountsBalance" FromRole="dAccountsBalance" ToRole="Account" />
+        </EntityType>
+        <Association Name="AccountdAccountsBalance">
+          <End Type="Context.Account" Role="Account" Multiplicity="1" />
+          <End Type="Context.dAccountsBalance" Role="dAccountsBalance" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Designation" Type="String" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Context.AccountExpense" FromRole="Expense" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="MonthlyExpense">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Designation" Type="String" Nullable="false" />
+          <Property Name="Day" Type="Int32" Nullable="false" />
+          <Property Name="RemindingDay" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <Property Name="dLastPaidDate" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="MonthlyPayments" Relationship="Context.MonthlyExpenseMonthlyPayments" FromRole="MonthlyExpense" ToRole="MonthlyPayments" />
+        </EntityType>
+        <Association Name="AccountExpense">
+          <End Type="Context.Account" Role="Account" Multiplicity="1" />
+          <End Type="Context.Payment" Role="Expense" Multiplicity="*" />
+        </Association>
+        <EntityType Name="OtherProfit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Designation" Type="String" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Context.AccountOtherProfit" FromRole="OtherProfit" ToRole="Account" />
+        </EntityType>
+        <Association Name="AccountOtherProfit">
+          <End Type="Context.Account" Role="Account" Multiplicity="1" />
+          <End Type="Context.OtherProfit" Role="OtherProfit" Multiplicity="*" />
+        </Association>
+        <EntityType Name="MonthlyPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaidAmount" Type="Double" Nullable="false" />
+          <NavigationProperty Name="MonthlyExpense" Relationship="Context.MonthlyExpenseMonthlyPayments" FromRole="MonthlyPayments" ToRole="MonthlyExpense" />
+          <NavigationProperty Name="Account" Relationship="Context.AccountMonthlyPayments" FromRole="MonthlyPayments" ToRole="Account" />
+        </EntityType>
+        <Association Name="MonthlyExpenseMonthlyPayments">
+          <End Type="Context.MonthlyExpense" Role="MonthlyExpense" Multiplicity="1" />
+          <End Type="Context.MonthlyPayment" Role="MonthlyPayments" Multiplicity="*" />
+        </Association>
+        <Association Name="AccountMonthlyPayments">
+          <End Type="Context.Account" Role="Account" Multiplicity="1" />
+          <End Type="Context.MonthlyPayment" Role="MonthlyPayments" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1152,8 +1346,8 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="LastPrice" ColumnName="LastPrice" />
           <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="dLastPrice" ColumnName="dLastPrice" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1190,6 +1384,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1309,11 +1504,53 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="dCafeCoffeeStocks">
-      <EntityTypeMapping TypeName="IsTypeOf(Context.dCafeCoffeeStock)">
-        <MappingFragment StoreEntitySet="dCafeCoffeeStocks">
+    <EntitySetMapping Name="dAccountsBalances">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.dAccountsBalance)">
+        <MappingFragment StoreEntitySet="dAccountsBalances">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.Payment)">
+        <MappingFragment StoreEntitySet="Payments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MonthlyExpenses">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.MonthlyExpense)">
+        <MappingFragment StoreEntitySet="MonthlyExpenses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="RemindingDay" ColumnName="RemindingDay" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="dLastPaidDate" ColumnName="dLastPaidDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OtherProfits">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.OtherProfit)">
+        <MappingFragment StoreEntitySet="OtherProfits">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MonthlyPayments">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.MonthlyPayment)">
+        <MappingFragment StoreEntitySet="MonthlyPayments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1493,14 +1730,6 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="MixdCafeCoffeeStock" TypeName="Context.MixdCafeCoffeeStock" StoreEntitySet="dCafeCoffeeStocks">
-      <EndProperty Name="Mix">
-        <ScalarProperty Name="Id" ColumnName="Mix_Id" />
-      </EndProperty>
-      <EndProperty Name="dCafeCoffeeStock">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="AccountPackagePurchase" TypeName="Context.AccountPackagePurchase" StoreEntitySet="PackagePurchases">
       <EndProperty Name="Account">
         <ScalarProperty Name="Id" ColumnName="Account_Id" />
@@ -1514,6 +1743,46 @@
         <ScalarProperty Name="Id" ColumnName="Supplier_Id" />
       </EndProperty>
       <EndProperty Name="PackagePurchase">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccountdAccountsBalance" TypeName="Context.AccountdAccountsBalance" StoreEntitySet="dAccountsBalances">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="Account_Id" />
+      </EndProperty>
+      <EndProperty Name="dAccountsBalance">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccountExpense" TypeName="Context.AccountExpense" StoreEntitySet="Payments">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="Account_Id" />
+      </EndProperty>
+      <EndProperty Name="Expense">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccountOtherProfit" TypeName="Context.AccountOtherProfit" StoreEntitySet="OtherProfits">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="Account_Id" />
+      </EndProperty>
+      <EndProperty Name="OtherProfit">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MonthlyExpenseMonthlyPayments" TypeName="Context.MonthlyExpenseMonthlyPayments" StoreEntitySet="MonthlyPayments">
+      <EndProperty Name="MonthlyExpense">
+        <ScalarProperty Name="Id" ColumnName="MonthlyExpense_Id" />
+      </EndProperty>
+      <EndProperty Name="MonthlyPayments">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccountMonthlyPayments" TypeName="Context.AccountMonthlyPayments" StoreEntitySet="MonthlyPayments">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="Account_Id" />
+      </EndProperty>
+      <EndProperty Name="MonthlyPayments">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
