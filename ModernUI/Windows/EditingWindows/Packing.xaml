@@ -1,0 +1,123 @@
+﻿<controls:MetroWindow x:Class="ModernUI.Windows.EditingWindows.Packing"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        dialog:DialogParticipation.Register="{Binding}"
+        xmlns:combo="clr-namespace:ModernUI.Controls.Combo"
+        Title="Фасовки" Height="500" Width="650"
+        GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding cmdOnClosing}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  />
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="2" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Style="{StaticResource Header3}" Grid.ColumnSpan="3">Фильтрация по дате</TextBlock>
+
+            <Button Grid.Row="1" Command="{Binding cmdFilter30Days}"
+                        Margin="{StaticResource ControlMargin}">За 30 дней</Button>
+            <Label Grid.Row="1" Grid.Column="1" 
+                       Margin="{StaticResource ControlMargin}">С даты:</Label>
+            <DatePicker Grid.Row="1" Grid.Column="2" Margin="{StaticResource ControlMargin}"
+                            SelectedDate="{Binding FilterFrom, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Button Grid.Row="2" Command="{Binding cmdFilterAll}"
+                        Margin="{StaticResource ControlMargin}">Все</Button>
+            <Label Grid.Row="2" Grid.Column="1"
+                       Margin="{StaticResource ControlMargin}">По дату:</Label>
+            <DatePicker Grid.Row="2" Grid.Column="2" Margin="{StaticResource ControlMargin}"
+                            SelectedDate="{Binding FilterTo, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+
+        <Separator Grid.Row="2" Grid.Column="1"/>
+
+        <Grid RowSpan="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Style="{StaticResource Header1}">Список фасовок</TextBlock>
+
+            <ListBox x:Name="List" Grid.Row="1" Margin="{StaticResource ControlMargin}"
+                     ItemsSource="{Binding CoffeePurchases}" DisplayMemberPath="Title" 
+                     IsSynchronizedWithCurrentItem="True"/>
+        </Grid>
+
+        <TextBlock Grid.Row="3" Grid.Column="1"
+                   Style="{StaticResource Header1Accent}">Выбранная фасовка</TextBlock>
+
+        <Grid Grid.Row="4" Grid.Column="1"
+              DataContext="{Binding CoffeeTranfers}"
+              Margin="{StaticResource ControlMargin}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Margin="{StaticResource ControlMargin}">Дата</Label>
+            <DatePicker Grid.Column="1" Margin="{StaticResource ControlMargin}"
+                        SelectedDate="{Binding Date}"/>
+
+            <Label Grid.Row="1" Margin="{StaticResource ControlMargin}">Купаж</Label>
+            <combo:ComboActiveMixes Grid.Row="1" Grid.Column="1"/>
+
+            <Label Grid.Row="2" Margin="{StaticResource ControlMargin}">Упаковка</Label>
+            <combo:ComboActivePackages Grid.Row="2" Grid.Column="1"/>
+
+            <Label Grid.Row="3" Margin="{StaticResource ControlMargin}">Категория</Label>
+            <combo:ComboActivePackedCategories Grid.Row="3" Grid.Column="1"/>
+
+            <Label Grid.Row="4" Margin="{StaticResource ControlMargin}">Количество пачек</Label>
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="{StaticResource ControlMargin}"
+                     Text="{Binding PackQuantity}"/>
+        </Grid>
+
+        <WrapPanel Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Button Click="New" Margin="{StaticResource ControlMargin}">Добавить</Button>
+            <Button Command="{Binding cmdSave}" Margin="{StaticResource ControlMargin}">Сохранить</Button>
+            <Button Command="{Binding cmdDelete}" Margin="{StaticResource ControlMargin}"
+                    CommandParameter="{Binding ElementName=List, Path=SelectedItem}">Удалить</Button>
+        </WrapPanel>
+    </Grid>
+</controls:MetroWindow>

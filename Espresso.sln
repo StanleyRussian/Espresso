@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Espresso", "Espresso\Espresso.csproj", "{AB9F20D7-7C05-474B-A73A-24847DF38211}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Espresso\Core.csproj", "{AB9F20D7-7C05-474B-A73A-24847DF38211}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modern UI", "ModernUI\Modern UI.csproj", "{83B9EF37-2612-4B7C-92CD-AD5E489897B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,11 @@ Global
 		{AB9F20D7-7C05-474B-A73A-24847DF38211}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB9F20D7-7C05-474B-A73A-24847DF38211}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB9F20D7-7C05-474B-A73A-24847DF38211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB9F20D7-7C05-474B-A73A-24847DF38211}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{83B9EF37-2612-4B7C-92CD-AD5E489897B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83B9EF37-2612-4B7C-92CD-AD5E489897B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83B9EF37-2612-4B7C-92CD-AD5E489897B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83B9EF37-2612-4B7C-92CD-AD5E489897B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

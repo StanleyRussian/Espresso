@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Espresso.Entity
+namespace Core.Entity
 {
     using System;
     using System.Collections.Generic;
@@ -17,6 +17,6 @@ namespace Espresso.Entity
         public int Id { get; set; }
         public double Quantity { get; set; }
     
-        public virtual Package Packages { get; set; }
+        public virtual Package Package { get; set; }
     }
 }

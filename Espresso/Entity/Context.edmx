@@ -284,7 +284,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Quantity" Type="float" Nullable="false" />
-    <Property Name="Packages_Id" Type="int" Nullable="false" />
+    <Property Name="Package_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CoffeeSales">
     <Key>
@@ -566,7 +566,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="dPackageStocks">
-        <PropertyRef Name="Packages_Id" />
+        <PropertyRef Name="Package_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1058,7 +1058,7 @@
           <Property Name="Capacity" Type="Double" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
-          <NavigationProperty Name="Packing" Relationship="Context.PackingPackage" FromRole="Package" ToRole="Packing" />
+          <NavigationProperty Name="Packings" Relationship="Context.PackingPackage" FromRole="Package" ToRole="Packing" />
           <NavigationProperty Name="PackagePurchases" Relationship="Context.PackagePackagePurchase" FromRole="Package" ToRole="PackagePurchase" />
           <NavigationProperty Name="dPackedStocks" Relationship="Context.PackagedPackedStocks" FromRole="Package" ToRole="dPackedStocks" />
           <NavigationProperty Name="dPackageStocks" Relationship="Context.dPackageStocksPackage" FromRole="Package" ToRole="dPackageStocks" />
@@ -1094,7 +1094,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PackQuantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Mixes" Relationship="Context.dPackedStocksMix" FromRole="dPackedStocks" ToRole="Mix" />
+          <NavigationProperty Name="Mix" Relationship="Context.dPackedStocksMix" FromRole="dPackedStocks" ToRole="Mix" />
           <NavigationProperty Name="Package" Relationship="Context.PackagedPackedStocks" FromRole="dPackedStocks" ToRole="Package" />
         </EntityType>
         <Association Name="dPackedStocksMix">
@@ -1110,7 +1110,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Packages" Relationship="Context.dPackageStocksPackage" FromRole="dPackageStocks" ToRole="Package" />
+          <NavigationProperty Name="Package" Relationship="Context.dPackageStocksPackage" FromRole="dPackageStocks" ToRole="Package" />
           <Property Name="Quantity" Type="Double" Nullable="false" />
         </EntityType>
         <Association Name="dPackageStocksPackage">
@@ -1660,7 +1660,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="dPackageStocksPackage" TypeName="Context.dPackageStocksPackage" StoreEntitySet="dPackageStocks">
       <EndProperty Name="Package">
-        <ScalarProperty Name="Id" ColumnName="Packages_Id" />
+        <ScalarProperty Name="Id" ColumnName="Package_Id" />
       </EndProperty>
       <EndProperty Name="dPackageStocks">
         <ScalarProperty Name="Id" ColumnName="Id" />

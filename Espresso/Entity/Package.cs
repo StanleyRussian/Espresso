@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Espresso.Entity
+namespace Core.Entity
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace Espresso.Entity
         public Package()
         {
             this.Active = true;
-            this.Packing = new HashSet<Packing>();
+            this.Packings = new HashSet<Packing>();
             this.PackagePurchases = new HashSet<PackagePurchase>();
             this.dPackedStocks = new HashSet<dPackedStocks>();
             this.dPackageStocks = new HashSet<dPackageStocks>();
@@ -32,7 +32,7 @@ namespace Espresso.Entity
         public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Packing> Packing { get; set; }
+        public virtual ICollection<Packing> Packings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PackagePurchase> PackagePurchases { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

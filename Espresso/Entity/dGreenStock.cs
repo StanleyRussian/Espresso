@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Espresso.Entity
+namespace Core.Entity
 {
     using System;
     using System.Collections.Generic;

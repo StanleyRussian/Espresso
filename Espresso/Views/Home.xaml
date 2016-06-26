@@ -132,6 +132,14 @@
                     <Button Click="MontlyExpenses">Список</Button>
                 </StackPanel>
             </Border>
+
+            <Border Style="{StaticResource ButtonGroup}">
+                <StackPanel Orientation="Vertical">
+                    <Label>Прочие доходы</Label>
+                    <Button Click="NewOtherProfit">Добавить</Button>
+                    <Button Click="OtherProfits">Список</Button>
+                </StackPanel>
+            </Border>
         </WrapPanel>
     </Grid>
 </Window>
