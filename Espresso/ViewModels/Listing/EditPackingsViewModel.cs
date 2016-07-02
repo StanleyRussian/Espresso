@@ -5,24 +5,24 @@ using Core.ViewModels.Listing.Abstract;
 
 namespace Core.ViewModels.Listing
 {
-    public class PaymentsViewModel : aProcessListingViewModel
+    public class EditPackingsViewModel : aProcessListingViewModel
     {
         protected override void Refresh()
         {
-            var query = _context.Payments.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
-            Payments = new ObservableCollection<Payment>(query);
+            var query = _context.Packings.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
+            Packings = new ObservableCollection<Packing>(query);
         }
 
         #region Binding Properties
 
-        private ObservableCollection<Payment> _payments;
-        public ObservableCollection<Payment> Payments
+        private ObservableCollection<Packing> _packings;
+        public ObservableCollection<Packing> Packings
         {
-            get { return _payments; }
+            get { return _packings; }
             set
             {
-                _payments = value;
-                OnPropertyChanged("Payments");
+                _packings = value;
+                OnPropertyChanged();
             }
         }
 
@@ -33,8 +33,8 @@ namespace Core.ViewModels.Listing
         protected override void cmdDelete_Execute(object argSelected)
         {
             if (IsEmpty(argSelected)) return;
-            var selected = argSelected as Payment;
-            _context.Payments.Remove(selected);
+            var selected = argSelected as Packing;
+            _context.Packings.Remove(selected);
             SaveContext();
         }
 

@@ -11,7 +11,7 @@ namespace ModernUI.Windows.EditingWindows
         public Accounts()
         {
             InitializeComponent();
-            DataContext = new AccountsViewModel();
+            DataContext = new EditAccountsViewModel();
         }
 
         private void New(object sender, RoutedEventArgs e)

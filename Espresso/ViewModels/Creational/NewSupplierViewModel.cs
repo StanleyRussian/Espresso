@@ -2,8 +2,6 @@
 {
     public class NewSupplierViewModel: Abstract.aCreationalViewModel
     {
-        public NewSupplierViewModel() : base() { }
-
         protected override void Refresh()
         {
             NewSupplier = new Entity.Supplier();
@@ -16,7 +14,7 @@
             set
             {
                 _newSupplier = value;
-                OnPropertyChanged("NewSupplier");
+                OnPropertyChanged();
             }
         }
 

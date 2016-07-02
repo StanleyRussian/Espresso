@@ -5,13 +5,13 @@ namespace Core.ViewModels.Creational
 {
     public class NewOtherProfitViewModel : Abstract.aCreationalViewModel
     {
-        public NewOtherProfitViewModel() : base() { }
-
         protected override void Refresh()
         {
-            NewOtherProfit = new Entity.OtherProfit();
-            NewOtherProfit.Date = DateTime.Now;
-            NewOtherProfit.Account = ContextManager.ActiveAccounts.FirstOrDefault();
+            NewOtherProfit = new Entity.OtherProfit
+            {
+                Date = DateTime.Now,
+                Account = ContextManager.ActiveAccounts.FirstOrDefault()
+            };
         }
 
         #region Binding Properties 
@@ -23,7 +23,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _newOtherProfit = value;
-                OnPropertyChanged("NewOtherProfit");
+                OnPropertyChanged();
             }
         }
 

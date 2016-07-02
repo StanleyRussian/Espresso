@@ -29,7 +29,7 @@
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
         </Grid.Resources>
         
-        <TabControl>
+        <TabControl >
             <TabItem Header="Главная"
                      controls:ControlsHelper.HeaderFontWeight="Light">
                 <pages:Home/>
@@ -37,7 +37,7 @@
 
             <TabItem Header="Статистика"
                      controls:ControlsHelper.HeaderFontWeight="Light">
-                <TextBlock FontSize="18" Text="placeholder" />
+                <pages:Statistics/>
             </TabItem>
         </TabControl>
     </Grid>

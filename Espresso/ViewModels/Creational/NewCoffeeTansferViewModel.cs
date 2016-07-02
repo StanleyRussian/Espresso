@@ -5,13 +5,13 @@ namespace Core.ViewModels.Creational
 {
     public class NewCoffeeTransferViewModel: Abstract.aCreationalViewModel
     {
-        public NewCoffeeTransferViewModel() : base() { }
-
         protected override void Refresh()
         {
-            NewCoffeeTransfer = new Entity.CoffeeTransfer();
-            NewCoffeeTransfer.Date = DateTime.Now;
-            NewCoffeeTransfer.Mix = ContextManager.ActiveMixes.FirstOrDefault();
+            NewCoffeeTransfer = new Entity.CoffeeTransfer
+            {
+                Date = DateTime.Now,
+                Mix = ContextManager.ActiveMixes.FirstOrDefault()
+            };
         }
 
         private Entity.CoffeeTransfer _newCoffeeTransfer;
@@ -21,7 +21,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _newCoffeeTransfer = value;
-                OnPropertyChanged("NewCoffeeTransfer");
+                OnPropertyChanged();
             }
         }
 

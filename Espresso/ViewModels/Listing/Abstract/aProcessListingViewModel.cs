@@ -27,7 +27,7 @@ namespace Core.ViewModels.Listing.Abstract
             set
             {
                 _filterFrom = value;
-                OnPropertyChanged("FilterFrom");
+                OnPropertyChanged();
                 Refresh();
             }
         }
@@ -39,7 +39,7 @@ namespace Core.ViewModels.Listing.Abstract
             set
             {
                 _filterTo = value;
-                OnPropertyChanged("FilterTo");
+                OnPropertyChanged();
                 Refresh();
             }
         }
@@ -63,7 +63,7 @@ namespace Core.ViewModels.Listing.Abstract
         protected void cmdFilter30Days_Execute()
         {
             _filterTo = DateTime.Now;
-            OnPropertyChanged("FilterTo");
+            OnPropertyChanged(nameof(FilterTo));
             FilterFrom = DateTime.Now.AddDays(-30);
         }
 
@@ -72,7 +72,7 @@ namespace Core.ViewModels.Listing.Abstract
         protected void cmdFilterAll_Execute()
         {
             _filterTo = DateTime.Now;
-            OnPropertyChanged("FilterTo");
+            OnPropertyChanged(nameof(FilterTo));
             FilterFrom = DateTime.MinValue;
         }
 

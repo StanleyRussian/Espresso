@@ -2,8 +2,6 @@
 {
     public class NewPackedCategoryViewModel :Abstract.aCreationalViewModel
     {
-        public NewPackedCategoryViewModel() : base() { }
-
         protected override void Refresh()
         {
             NewPackedCategory = new Entity.PackedCategory();
@@ -18,7 +16,7 @@
             set
             {
                 _newPackedCategory = value;
-                OnPropertyChanged("NewPackedCategory");
+                OnPropertyChanged();
             }
         }
 

@@ -10,7 +10,7 @@
         </Grid.ColumnDefinitions>
 
         <ComboBox x:Name="ComboBox" ItemsSource="{Binding Source={x:Static core:ContextManager.ActiveCoffeeSorts}}"
-                  SelectedItem="{Binding Account}" DisplayMemberPath="Name" SelectedValue="Id" Width="auto"/>
+                  SelectedItem="{Binding CoffeeSort}" DisplayMemberPath="Name" SelectedValue="Id" Width="auto"/>
 
         <Button Grid.Column="1" Click="New" Content="Новый" Margin="5,0,0,0"/>
     </Grid>

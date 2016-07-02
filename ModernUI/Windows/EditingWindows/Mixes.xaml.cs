@@ -12,7 +12,7 @@ namespace ModernUI.Windows.EditingWindows
         public Mixes()
         {
             InitializeComponent();
-            DataContext = new MixesViewModel();
+            DataContext = new EditMixesViewModel();
         }
 
         private void New(object sender, RoutedEventArgs e)

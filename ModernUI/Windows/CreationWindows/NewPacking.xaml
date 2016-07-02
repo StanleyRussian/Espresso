@@ -17,9 +17,9 @@
             </controls:Flyout>
             <controls:Flyout Header="Ошибка" IsModal="True" Position="Right" Width="200"
                              Background="LightCoral" Foreground="{StaticResource GrayBrush1}" IsOpen="{Binding IsFlyErrorOpened}">
-                <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
-                    <TextBlock Text="{Binding FlyErrorMsg}"/>
-                </StackPanel>
+                <Grid Margin="5,5,5,5">
+                    <TextBlock Text="{Binding FlyErrorMsg}" TextWrapping="Wrap"/>
+                </Grid>
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
@@ -31,7 +31,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Grid DataContext="{Binding NewRoasting}">
+        <Grid DataContext="{Binding NewPacking}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -60,7 +60,8 @@
 
             <Label Grid.Row="4" Margin="{StaticResource ControlMargin}">Количество пачек</Label>
             <TextBox Grid.Row="4" Grid.Column="1" Margin="{StaticResource ControlMargin}"
-                     Text="{Binding PackQuantity}"/>
+                     Text="{Binding PackQuantity}" Style="{StaticResource Mandatory}"
+                     controls:TextBoxHelper.ClearTextButton="True"/>
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">

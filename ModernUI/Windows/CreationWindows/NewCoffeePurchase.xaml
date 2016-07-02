@@ -23,7 +23,7 @@
             <controls:Flyout Header="Ошибка" IsModal="True" Position="Right" Width="200"
                              Background="LightCoral" Foreground="{StaticResource GrayBrush1}" IsOpen="{Binding IsFlyErrorOpened}">
                 <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
-                    <TextBlock Text="{Binding FlyErrorMsg}"/>
+                    <TextBlock Text="{Binding FlyErrorMsg}" TextWrapping="Wrap"/>
                 </StackPanel>
             </controls:Flyout>
         </controls:FlyoutsControl>
@@ -72,16 +72,17 @@
         <DataGrid Grid.Column="0" Grid.Row="1" 
                   AutoGenerateColumns="False" ItemsSource="{Binding Details}">
             <DataGrid.Columns>
-                <DataGridComboBoxColumn Header="Моносорт"
+                <DataGridComboBoxColumn x:Name="comboColumnSort" Header="Сорт"
                                         SelectedItemBinding="{Binding CoffeeSort}" DisplayMemberPath="Name" SelectedValuePath="Id"
                                         ItemsSource="{Binding Source={x:Static core:ContextManager.ActiveCoffeeSorts}}"/>
-                <DataGridTextColumn Binding="{Binding Price}" Header="Цена"/>
-                <DataGridTextColumn Binding="{Binding Quantity}" Header="Количество"/>
+                <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} кг}" Header="Количество"/>
+                <DataGridTextColumn Binding="{Binding Price, StringFormat={}{0} грн/кг}" Header="Цена за кг"/>
             </DataGrid.Columns>
         </DataGrid>
 
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
+            <Button Click="btnNewSort_Click" 
+                    Margin="{StaticResource ControlMargin}">Новый сорт кофе</Button>
             <Button Command="{Binding cmdSave}" 
                     Margin="{StaticResource ControlMargin}">Сохранить</Button>
             <Button Click="btnCancel_Click" 

@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Linq;
 
 namespace Core.ViewModels.Creational
 {
     public class NewPackingViewModel :Abstract.aCreationalViewModel
     {
-        public NewPackingViewModel() : base() { }
-
         protected override void Refresh()
         {
-            NewPacking = new Entity.Packing();
-            NewPacking.Date = DateTime.Now;
+            NewPacking = new Entity.Packing
+            {
+                Date = DateTime.Now,
+                Mix = ContextManager.ActiveMixes.FirstOrDefault(),
+                Package = ContextManager.ActivePackages.FirstOrDefault(),
+                PackedCategory = ContextManager.ActivePackedCategories.FirstOrDefault()
+            };
         }
 
         #region Binding Properties 
@@ -21,7 +25,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _newPacking = value;
-                OnPropertyChanged("NewPacking");
+                OnPropertyChanged();
             }
         }
 

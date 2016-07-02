@@ -92,7 +92,7 @@ namespace Core.ViewModels.Listing.Abstract
             protected set
             {
                 _isActiveSelected = value;
-                OnPropertyChanged("IsActiveSelected");
+                OnPropertyChanged();
             }
         }
 
@@ -103,7 +103,7 @@ namespace Core.ViewModels.Listing.Abstract
             set
             {
                 _filterName = value;
-                OnPropertyChanged("FilterName");
+                OnPropertyChanged();
             }
         }
 

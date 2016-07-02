@@ -22,9 +22,10 @@ namespace Core.Entity
             this.CoffeePurchases = new HashSet<CoffeePurchase>();
             this.PackagePurchases = new HashSet<PackagePurchase>();
             this.dAccountsBalances = new HashSet<dAccountsBalance>();
-            this.Expenses = new HashSet<Payment>();
+            this.Payments = new HashSet<Payment>();
             this.OtherProfits = new HashSet<OtherProfit>();
             this.MonthlyPayments = new HashSet<MonthlyPayment>();
+            this.dTransactions = new HashSet<dTransaction>();
         }
     
         public int Id { get; set; }
@@ -42,10 +43,12 @@ namespace Core.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dAccountsBalance> dAccountsBalances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Expenses { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OtherProfit> OtherProfits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MonthlyPayment> MonthlyPayments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<dTransaction> dTransactions { get; set; }
     }
 }

@@ -2,8 +2,6 @@
 {
     public class NewPackageViewModel :Abstract.aCreationalViewModel
     {
-        public NewPackageViewModel() : base() { }
-
         protected override void Refresh()
         {
             NewPackage = new Entity.Package();
@@ -18,7 +16,7 @@
             set
             {
                 _newPackage = value;
-                OnPropertyChanged("NewPackage");
+                OnPropertyChanged();
             }
         }
 

@@ -95,11 +95,17 @@
     <Compile Include="Controls\SubjectsList.xaml.cs">
       <DependentUpon>SubjectsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Editing.xaml.cs">
-      <DependentUpon>Editing.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Statistics.xaml.cs">
+      <DependentUpon>Statistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Statistic\AccountsParent.xaml.cs">
+      <DependentUpon>AccountsParent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Statistic\Accounts\Individual.xaml.cs">
+      <DependentUpon>Individual.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\CreationWindows\NewAccount.xaml.cs">
       <DependentUpon>NewAccount.xaml</DependentUpon>
@@ -136,7 +142,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Editing.xaml">
+    <Page Include="Pages\Statistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Statistic\AccountsParent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Statistic\Accounts\Individual.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

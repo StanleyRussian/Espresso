@@ -7,15 +7,7 @@ namespace Core
     public static class ContextManager
     {
         private static Entity.ContextContainer _context;
-        public static Entity.ContextContainer Context
-        {
-            get
-            {
-                if (_context == null)
-                    _context = new Entity.ContextContainer();
-                return _context;
-            }
-        }
+        public static Entity.ContextContainer Context => _context ?? (_context = new Entity.ContextContainer());
 
         #region "Local" helper properties
 
@@ -81,16 +73,6 @@ namespace Core
                 if (_context.Packages.Local.Count == 0)
                     _context.Packages.Load();
                 return _context.Packages.Local;
-            }
-        }
-
-        public static ObservableCollection<Entity.CoffeePurchase> LocalCoffeePurchases
-        {
-            get
-            {
-                if (_context.CoffeePurchases.Local.Count == 0)
-                    _context.CoffeePurchases.Load();
-                return _context.CoffeePurchases.Local;
             }
         }
 

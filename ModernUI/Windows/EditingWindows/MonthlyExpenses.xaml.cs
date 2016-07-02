@@ -11,7 +11,7 @@ namespace ModernUI.Windows.EditingWindows
         public MonthlyExpenses()
         {
             InitializeComponent();
-            DataContext = new MonthlyExpensesViewModel();
+            DataContext = new EditMonthlyExpensesViewModel();
         }
 
         private void New(object sender, RoutedEventArgs e)

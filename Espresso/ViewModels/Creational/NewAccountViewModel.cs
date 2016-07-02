@@ -2,9 +2,6 @@
 {
     public class NewAccountViewModel: Abstract.aCreationalViewModel
     {
-
-        public NewAccountViewModel() : base() { }
-
         protected override void Refresh()
         {
             NewAccount = new Entity.Account();
@@ -19,7 +16,7 @@
             set
             {
                 _newAccount = value;
-                OnPropertyChanged("NewAccount");
+                OnPropertyChanged();
             }
         }
 

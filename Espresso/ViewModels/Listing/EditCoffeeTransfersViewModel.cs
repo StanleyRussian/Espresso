@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Core.ViewModels.Listing
 {
-    public class CoffeeTransfersViewModel : Abstract.aProcessListingViewModel
+    public class EditCoffeeTransfersViewModel : Abstract.aProcessListingViewModel
     {
         protected override void Refresh()
         {
@@ -20,7 +20,7 @@ namespace Core.ViewModels.Listing
             set
             {
                 _coffeeTransfers = value;
-                OnPropertyChanged("CoffeeTransfers");
+                OnPropertyChanged();
             }
         }
 

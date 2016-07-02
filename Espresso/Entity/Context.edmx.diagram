@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="844978446e6c4118a652e88511224bb2" Name="Diagram1" >
+      <Diagram DiagramId="844978446e6c4118a652e88511224bb2" Name="Diagram1" ZoomLevel="97" >
         <EntityTypeShape EntityType="Context.CoffeePurchase" Width="1.875" PointX="5" PointY="1.875" FillColor="Chocolate" />
         <EntityTypeShape EntityType="Context.Supplier" Width="1.625" PointX="2" PointY="3" />
         <AssociationConnector Association="Context.SupplierCoffeePurchase" />
@@ -18,27 +18,27 @@
         <EntityTypeShape EntityType="Context.dRoastedStock" Width="1.5" PointX="10" PointY="4.625" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.RoastingCoffeeSort" />
         <AssociationConnector Association="Context.dRoastedStockCoffeeSort" />
-        <EntityTypeShape EntityType="Context.Mix" Width="1.5" PointX="7.625" PointY="6.25" />
-        <EntityTypeShape EntityType="Context.Mix_Details" Width="1.5" PointX="5" PointY="5.125" />
+        <EntityTypeShape EntityType="Context.Mix" Width="1.5" PointX="7.75" PointY="6.25" />
+        <EntityTypeShape EntityType="Context.Mix_Details" Width="1.5" PointX="5.375" PointY="5.125" />
         <AssociationConnector Association="Context.Mix_DetailsMix" />
         <AssociationConnector Association="Context.Mix_DetailsCoffeeSort" />
         <EntityTypeShape EntityType="Context.Packing" Width="1.5" PointX="10" PointY="6.875" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="Context.Package" Width="1.5" PointX="9.875" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Context.Package" Width="1.5" PointX="9.5" PointY="9.875" IsExpanded="true" />
         <AssociationConnector Association="Context.PackingMix" />
         <AssociationConnector Association="Context.PackingPackage" />
         <EntityTypeShape EntityType="Context.PackagePurchase" Width="1.625" PointX="6.875" PointY="10" FillColor="Chocolate" />
         <AssociationConnector Association="Context.PackagePackagePurchase" />
-        <EntityTypeShape EntityType="Context.dPackedStocks" Width="1.5" PointX="5" PointY="7.25" FillColor="YellowGreen" />
+        <EntityTypeShape EntityType="Context.dPackedStocks" Width="1.5" PointX="11.875" PointY="9.625" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.dPackedStocksMix" />
         <AssociationConnector Association="Context.PackagedPackedStocks" />
-        <EntityTypeShape EntityType="Context.dPackageStocks" Width="1.5" PointX="12.25" PointY="10.5" FillColor="YellowGreen" />
+        <EntityTypeShape EntityType="Context.dPackageStocks" Width="1.5" PointX="11.75" PointY="12" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.dPackageStocksPackage" />
-        <EntityTypeShape EntityType="Context.CoffeeSale" Width="1.5" PointX="5.875" PointY="13.5" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="Context.Recipient" Width="1.5" PointX="3.875" PointY="13.5" />
-        <EntityTypeShape EntityType="Context.CoffeeSale_Details" Width="1.625" PointX="7.875" PointY="13.5" FillColor="Sienna" />
+        <EntityTypeShape EntityType="Context.CoffeeSale" Width="1.5" PointX="6.125" PointY="13.125" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="Context.Recipient" Width="1.5" PointX="6.125" PointY="16.5" />
+        <EntityTypeShape EntityType="Context.CoffeeSale_Details" Width="1.625" PointX="8.5" PointY="13.25" FillColor="Sienna" />
         <AssociationConnector Association="Context.SaleSale_Details" />
         <AssociationConnector Association="Context.RecipientSale" />
-        <EntityTypeShape EntityType="Context.Account" Width="1.75" PointX="3.75" PointY="9.5" />
+        <EntityTypeShape EntityType="Context.Account" Width="1.75" PointX="3.75" PointY="10" />
         <AssociationConnector Association="Context.AccountSale" />
         <AssociationConnector Association="Context.MixSale_Details" />
         <AssociationConnector Association="Context.PackageSale_Details" />
@@ -46,22 +46,25 @@
         <AssociationConnector Association="Context.PackedCategoryPacking" />
         <AssociationConnector Association="Context.AccountCoffeePurchase" ManuallyRouted="false" >
         </AssociationConnector>
-        <EntityTypeShape EntityType="Context.CoffeeTransfer" Width="1.5" PointX="13.875" PointY="6.75" FillColor="SlateBlue" />
+        <EntityTypeShape EntityType="Context.CoffeeTransfer" Width="1.5" PointX="5.375" PointY="7.25" FillColor="SlateBlue" />
         <AssociationConnector Association="Context.MixCoffeeTransfer" />
         <EntityTypeShape EntityType="Context.dIngridientStock" Width="1.5" PointX="15.5" PointY="4.125" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.IngredientdIngridientStock" />
         <AssociationConnector Association="Context.AccountPackagePurchase" />
         <AssociationConnector Association="Context.SupplierPackagePurchase" />
-        <EntityTypeShape EntityType="Context.dAccountsBalance" Width="1.625" PointX="1.375" PointY="12" FillColor="YellowGreen" />
+        <EntityTypeShape EntityType="Context.dAccountsBalance" Width="1.625" PointX="1.625" PointY="14.75" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.AccountdAccountsBalance" />
         <EntityTypeShape EntityType="Context.Payment" Width="1.5" PointX="0.5" PointY="9.625" FillColor="Chocolate" />
         <EntityTypeShape EntityType="Context.MonthlyExpense" Width="1.625" PointX="0.5" PointY="6.75" />
         <AssociationConnector Association="Context.AccountExpense" />
-        <EntityTypeShape EntityType="Context.OtherProfit" Width="1.5" PointX="1.5" PointY="13.875" />
+        <EntityTypeShape EntityType="Context.OtherProfit" Width="1.5" PointX="0.5" PointY="12.25" FillColor="Chocolate" />
         <AssociationConnector Association="Context.AccountOtherProfit" />
         <EntityTypeShape EntityType="Context.MonthlyPayment" Width="1.625" PointX="2.625" PointY="6.75" FillColor="Chocolate" />
         <AssociationConnector Association="Context.MonthlyExpenseMonthlyPayments" />
         <AssociationConnector Association="Context.AccountMonthlyPayments" />
+        <EntityTypeShape EntityType="Context.dTransaction" Width="1.5" PointX="4.125" PointY="15.75" FillColor="YellowGreen" />
+        <AssociationConnector Association="Context.AccountdTransaction" />
+        <AssociationConnector Association="Context.PackedCategorydPackedStocks" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -50,5 +50,6 @@ namespace Core.Entity
         public virtual DbSet<MonthlyExpense> MonthlyExpenses { get; set; }
         public virtual DbSet<OtherProfit> OtherProfits { get; set; }
         public virtual DbSet<MonthlyPayment> MonthlyPayments { get; set; }
+        public virtual DbSet<dTransaction> dTransactions { get; set; }
     }
 }

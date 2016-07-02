@@ -2,8 +2,6 @@
 {
     public class NewCoffeeSortViewModel: Abstract.aCreationalViewModel
     {
-        public NewCoffeeSortViewModel() : base() { }
-
         protected override void Refresh()
         {
             NewCoffeeSort = new Entity.CoffeeSort();
@@ -16,7 +14,7 @@
             set
             {
                 _newCoffeeSort = value;
-                OnPropertyChanged("NewCoffeeSort");
+                OnPropertyChanged();
             }
         }
 

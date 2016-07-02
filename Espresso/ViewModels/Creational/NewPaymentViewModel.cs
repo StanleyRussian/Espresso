@@ -6,13 +6,13 @@ namespace Core.ViewModels.Creational
 {
     public class NewPaymentViewModel :Abstract.aCreationalViewModel
     {
-        public NewPaymentViewModel() : base() { }
-
         protected override void Refresh()
         {
-            NewPayment = new Entity.Payment();
-            NewPayment.Date = DateTime.Now;
-            NewPayment.Account = ContextManager.ActiveAccounts.FirstOrDefault();
+            NewPayment = new Entity.Payment
+            {
+                Date = DateTime.Now,
+                Account = ContextManager.ActiveAccounts.FirstOrDefault()
+            };
         }
 
         #region Binding Properties 
@@ -24,7 +24,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _newPayment = value;
-                OnPropertyChanged("NewPayment");
+                OnPropertyChanged();
             }
         }
 
@@ -46,7 +46,7 @@ namespace Core.ViewModels.Creational
         {
             Entity.MonthlyExpense NewMonthlyExpense = new Entity.MonthlyExpense
             {
-                Amount = NewPayment.Amount,
+                Amount = NewPayment.Sum,
                 Designation = NewPayment.Designation,
                 Day = NewPayment.Date.Day,
                 RemindingDay = NewPayment.Date.AddDays(-5).Day
@@ -56,7 +56,7 @@ namespace Core.ViewModels.Creational
             Entity.MonthlyPayment NewMonthlyPayment = new Entity.MonthlyPayment
             {
                 Date = DateTime.Now,
-                PaidAmount = NewPayment.Amount,
+                PaidAmount = NewPayment.Sum,
                 MonthlyExpense = addedExpense,
                 Account = _context.Accounts.FirstOrDefault()
             };

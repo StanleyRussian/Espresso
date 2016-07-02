@@ -19,6 +19,7 @@ namespace Core.Entity
         {
             this.Active = true;
             this.Packings = new HashSet<Packing>();
+            this.dPackedStocks = new HashSet<dPackedStocks>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace Core.Entity
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Packing> Packings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<dPackedStocks> dPackedStocks { get; set; }
     }
 }

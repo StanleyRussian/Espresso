@@ -6,9 +6,9 @@ using Core.ViewModels.Listing.Abstract;
 
 namespace Core.ViewModels.Listing
 {
-    public class CoffeeSalesViewModel : aProcessListingViewModel
+    public class EditCoffeeSalesViewModel : aProcessListingViewModel
     {
-        public CoffeeSalesViewModel(Account argAccount = null, Recipient argRecipient = null)
+        public EditCoffeeSalesViewModel(Account argAccount = null, Recipient argRecipient = null)
         {
             _filterAccount = argAccount;
             _filterRecipient = argRecipient;
@@ -36,7 +36,7 @@ namespace Core.ViewModels.Listing
             private set
             {
                 _coffeeSales = value;
-                OnPropertyChanged("CoffeeSales");
+                OnPropertyChanged();
             }
         }
 
@@ -47,7 +47,7 @@ namespace Core.ViewModels.Listing
             set
             {
                 _filterAccount = value;
-                OnPropertyChanged("FilterAccount");
+                OnPropertyChanged();
                 Refresh();
             }
         }
@@ -59,7 +59,7 @@ namespace Core.ViewModels.Listing
             set
             {
                 _filterRecipient = value;
-                OnPropertyChanged("FilterRecipient");
+                OnPropertyChanged();
                 Refresh();
             }
         }

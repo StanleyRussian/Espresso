@@ -3,13 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ModernUI.Windows.CreationWindows"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:prefab="clr-namespace:ModernUI.Controls"
-        xmlns:combo="clr-namespace:ModernUI.Controls.Combo"
+        xmlns:prefabcombo="clr-namespace:ModernUI.Controls.Combo"
         xmlns:core="clr-namespace:Core;assembly=Core"
         mc:Ignorable="d"
-        Title="Новая продажа упакованного кофе" Height="400" Width="450"
+        Title="Новая продажа упакованного кофе" Height="450" Width="450"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen">
 
     <controls:MetroWindow.Flyouts>
@@ -24,7 +22,7 @@
             <controls:Flyout Header="Ошибка" IsModal="True" Position="Right" Width="200"
                              Background="LightCoral" Foreground="{StaticResource GrayBrush1}" IsOpen="{Binding IsFlyErrorOpened}">
                 <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
-                    <TextBlock Text="{Binding FlyErrorMsg}"/>
+                    <TextBlock Text="{Binding FlyErrorMsg}" TextWrapping="Wrap"/>
                 </StackPanel>
             </controls:Flyout>
         </controls:FlyoutsControl>
@@ -62,10 +60,10 @@
                       IsChecked="{Binding Paid}"/>
 
             <Label Grid.Row="3">Покупатель</Label>
-            <combo:ComboActiveRecipients Grid.Row="3" Grid.Column="1"/>
+            <prefabcombo:ComboActiveRecipients Grid.Row="3" Grid.Column="1"/>
 
             <Label Grid.Row="4">Счёт</Label>
-            <combo:ComboActiveAccounts Grid.Row="4" Grid.Column="1"/>
+            <prefabcombo:ComboActiveAccounts Grid.Row="4" Grid.Column="1"/>
         </Grid>
 
         <DataGrid Grid.Row="1" Margin="{StaticResource ControlMargin}"
@@ -77,8 +75,8 @@
                 <DataGridComboBoxColumn Header="Упаковка"
                                         SelectedItemBinding="{Binding Package}" DisplayMemberPath="Name" SelectedValuePath="Id"
                                         ItemsSource="{Binding Source={x:Static core:ContextManager.ActivePackages}}"/>
-                <DataGridTextColumn Binding="{Binding Price}" Header="Цена"/>
-                <DataGridTextColumn Binding="{Binding Quantity}" Header="Количество"/>
+                <DataGridTextColumn Binding="{Binding Price, StringFormat={}{0} грн}" Header="Цена за пачку"/>
+                <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} шт}" Header="Количество"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -91,6 +89,10 @@
     </Grid>
 
 </controls:MetroWindow>
+
+
+
+
 
 
 

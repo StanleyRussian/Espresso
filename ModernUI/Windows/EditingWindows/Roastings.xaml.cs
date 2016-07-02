@@ -11,7 +11,7 @@ namespace ModernUI.Windows.EditingWindows
         public Roastings()
         {
             InitializeComponent();
-            DataContext = new RoastingsViewModel();
+            DataContext = new EditRoastingsViewModel();
         }
 
         private void New(object sender, RoutedEventArgs e)

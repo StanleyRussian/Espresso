@@ -4,8 +4,6 @@ namespace Core.ViewModels.Creational
 {
     public class NewMixViewModel : Abstract.aCreationalViewModel
     {
-        public NewMixViewModel() : base() { }
-
         protected override void Refresh()
         {
             NewMix = new Entity.Mix();
@@ -21,7 +19,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _newMix = value;
-                OnPropertyChanged("NewMix");
+                OnPropertyChanged();
             }
         }
 
@@ -32,7 +30,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _details = value;
-                OnPropertyChanged("Details");
+                OnPropertyChanged();
             }
         }
 

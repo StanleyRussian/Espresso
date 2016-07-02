@@ -19,5 +19,6 @@ namespace Core.Entity
     
         public virtual Mix Mix { get; set; }
         public virtual Package Package { get; set; }
+        public virtual PackedCategory PackedCategory { get; set; }
     }
 }

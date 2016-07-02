@@ -11,7 +11,7 @@ namespace ModernUI.Windows.EditingWindows
         public Packages()
         {
             InitializeComponent();
-            DataContext = new PackagesViewModel();
+            DataContext = new EditPackagesViewModel();
         }
 
         private void New(object sender, RoutedEventArgs e)

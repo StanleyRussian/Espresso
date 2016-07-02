@@ -11,7 +11,7 @@ namespace ModernUI.Windows.EditingWindows
         public OtherProfits()
         {
             InitializeComponent();
-            DataContext = new OtherProfitsViewModel();
+            DataContext = new EditOtherProfitsViewModel();
         }
 
         private void New(object sender, RoutedEventArgs e)

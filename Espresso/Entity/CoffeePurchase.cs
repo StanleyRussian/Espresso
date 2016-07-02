@@ -24,6 +24,8 @@ namespace Core.Entity
         public System.DateTime Date { get; set; }
         public System.DateTime PaymentDate { get; set; }
         public bool Paid { get; set; }
+        public double Sum { get; set; }
+        public int TransactionId { get; set; }
     
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

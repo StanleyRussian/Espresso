@@ -11,7 +11,7 @@ namespace ModernUI.Windows.EditingWindows
         public CoffeeTransfers()
         {
             InitializeComponent();
-            DataContext = new CoffeeTransfersViewModel();
+            DataContext = new EditCoffeeTransfersViewModel();
         }
 
         private void New(object sender, RoutedEventArgs e)

@@ -6,18 +6,18 @@ namespace Core.ViewModels.Creational
 {
     public class NewCoffeeSaleViewModel: Abstract.aCreationalViewModel
     {
-        public NewCoffeeSaleViewModel() : base() { }
-
         protected override void Refresh()
         {
-            NewSale = new Entity.CoffeeSale();
+            NewSale = new Entity.CoffeeSale
+            {
+                Date = DateTime.Now,
+                PaymentDate = DateTime.Now,
+                Paid = true,
+                Account = ContextManager.ActiveAccounts.FirstOrDefault(),
+                Recipient = ContextManager.ActiveRecipients.FirstOrDefault()
+            };
             Details = new ObservableCollection<Entity.CoffeeSale_Details>();
 
-            NewSale.Date = DateTime.Now;
-            NewSale.PaymentDate = DateTime.Now;
-            NewSale.Paid = true;
-            NewSale.Account = ContextManager.ActiveAccounts.FirstOrDefault();
-            NewSale.Recipient = ContextManager.ActiveRecipients.FirstOrDefault();
         }
 
         #region Binding Properties
@@ -29,7 +29,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _newSale = value;
-                OnPropertyChanged("NewSale");
+                OnPropertyChanged();
             }
         }
 
@@ -40,7 +40,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _details = value;
-                OnPropertyChanged("Details");
+                OnPropertyChanged();
             }
         }
         #endregion

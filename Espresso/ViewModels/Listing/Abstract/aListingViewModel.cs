@@ -2,7 +2,9 @@
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Core.Annotations;
 using Core.Auxiliary;
 using Core.Entity;
 using MahApps.Metro.Controls.Dialogs;
@@ -11,21 +13,23 @@ namespace Core.ViewModels.Listing.Abstract
 {
     public abstract class aListingViewModel : INotifyPropertyChanged
     {
+        protected ContextContainer _context = ContextManager.Context;
+
         public aListingViewModel()
         {
             cmdOnClosing = new Command(cmdOnClosing_Execute);
         }
 
-        protected ContextContainer _context = ContextManager.Context;
+        public event PropertyChangedEventHandler PropertyChanged;
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public string Header
         { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         protected abstract void Refresh();
 

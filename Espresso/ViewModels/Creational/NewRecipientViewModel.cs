@@ -2,8 +2,6 @@
 {
     public class NewRecipientViewModel :Abstract.aCreationalViewModel
     {
-        public NewRecipientViewModel() : base() { }
-
         protected override void Refresh()
         {
             NewRecipient = new Entity.Recipient();
@@ -16,7 +14,7 @@
             set
             {
                 _newRecipient = value;
-                OnPropertyChanged("NewRecipient");
+                OnPropertyChanged();
             }
         }
 

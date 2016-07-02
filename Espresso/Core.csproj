@@ -127,6 +127,9 @@
     <Compile Include="Entity\dRoastedStock.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\dTransaction.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Mix.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -166,49 +169,51 @@
     <Compile Include="Entity\Supplier.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\Creational\Abstract\aCreationalViewModel.cs" />
-    <Compile Include="ViewModels\EditingTabsViewModel.cs" />
     <Compile Include="ViewModels\Listing\Abstract\aProcessListingViewModel.cs" />
     <Compile Include="ViewModels\Listing\Abstract\aSubjectsListingViewModel.cs" />
     <Compile Include="ViewModels\Listing\Abstract\aListingViewModel.cs" />
-    <Compile Include="ViewModels\Listing\CoffeeTransfersViewModel.cs" />
-    <Compile Include="ViewModels\Listing\CoffeeSalesViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditCoffeeTransfersViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditCoffeeSalesViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewMixViewModel.cs" />
-    <Compile Include="ViewModels\Listing\AccountsViewModel.cs" />
-    <Compile Include="ViewModels\Listing\CoffeeSortsViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditAccountsViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditCoffeeSortsViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewAccountViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewCoffeePurchaseViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewCoffeeSortViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewRoastingViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewSupplierViewModel.cs" />
-    <Compile Include="ViewModels\Listing\RoastingsViewModel.cs" />
-    <Compile Include="ViewModels\Listing\SuppliersViewModel.cs" />
-    <Compile Include="ViewModels\Listing\MixesViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditRoastingsViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditSuppliersViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditMixesViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewPackageViewModel.cs" />
-    <Compile Include="ViewModels\Listing\PackagesViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditPackagesViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewPackedCategoryViewModel.cs" />
-    <Compile Include="ViewModels\Listing\PackedCategoriesViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditPackedCategoriesViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewPackingViewModel.cs" />
-    <Compile Include="ViewModels\Listing\PackingsViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditPackingsViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewPackagePurchaseViewModel.cs" />
-    <Compile Include="ViewModels\Listing\PackagePurchasesViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditPackagePurchasesViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewRecipientViewModel.cs" />
-    <Compile Include="ViewModels\Listing\RecipientsViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditRecipientsViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewCoffeeSaleViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewCoffeeTansferViewModel.cs" />
-    <Compile Include="ViewModels\Listing\MonthlyExpensesViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditMonthlyExpensesViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewPaymentViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewMonthlyExpenseViewModel.cs" />
-    <Compile Include="ViewModels\Listing\PaymentsViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditPaymentsViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewOtherProfitViewModel.cs" />
-    <Compile Include="ViewModels\Listing\OtherProfitsViewModel.cs" />
-    <Compile Include="ViewModels\Listing\CoffeePurchasesViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditOtherProfitsViewModel.cs" />
+    <Compile Include="ViewModels\Listing\EditCoffeePurchasesViewModel.cs" />
     <Compile Include="Entity\Context.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Context.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Statistic\iTabViewModel.cs" />
+    <Compile Include="ViewModels\Statistic\ParentAccounts.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\Model.Context.cs">
@@ -228,6 +233,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Context.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="Entity\Context.edmx.diagram">
       <DependentUpon>Context.edmx</DependentUpon>
     </None>
@@ -235,6 +241,8 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Entity\Context.edmx.sql" />
+    <Content Include="Entity\CreateTriggers.sql" />
     <Content Include="Entity\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model.Context.cs</LastGenOutput>

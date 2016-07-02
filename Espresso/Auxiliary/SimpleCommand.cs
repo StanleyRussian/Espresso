@@ -70,16 +70,11 @@ namespace Core.Auxiliary
         {
             if (_canExecute == null)
                 return true;
-            else
-            {
-                if (canExecute != _canExecute(parameter))
-                {
-                    canExecute = _canExecute(parameter);
-                    if (CanExecuteChanged != null)
-                        CanExecuteChanged(this, EventArgs.Empty);
-                }
+            if (canExecute == _canExecute(parameter))
                 return canExecute;
-            }
+            canExecute = _canExecute(parameter);
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+            return canExecute;
         }
 
         /// <summary>
@@ -92,8 +87,7 @@ namespace Core.Auxiliary
         {
             if (_action != null)
                 _action();
-            else if (_parameterizedAction != null)
-                _parameterizedAction(parameter);
+            else _parameterizedAction?.Invoke(parameter);
         }
 
         /// <summary>

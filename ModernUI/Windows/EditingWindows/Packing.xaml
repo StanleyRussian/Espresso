@@ -80,7 +80,7 @@
                    Style="{StaticResource Header1Accent}">Выбранная фасовка</TextBlock>
 
         <Grid Grid.Row="4" Grid.Column="1"
-              DataContext="{Binding CoffeeTranfers}"
+              DataContext="{Binding Packings}"
               Margin="{StaticResource ControlMargin}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -110,7 +110,8 @@
 
             <Label Grid.Row="4" Margin="{StaticResource ControlMargin}">Количество пачек</Label>
             <TextBox Grid.Row="4" Grid.Column="1" Margin="{StaticResource ControlMargin}"
-                     Text="{Binding PackQuantity}"/>
+                     Text="{Binding PackQuantity}" Style="{StaticResource Mandatory}"
+                     controls:TextBoxHelper.ClearTextButton="True"/>
         </Grid>
 
         <WrapPanel Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Center">

@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using System.Windows;
+using Core;
 using Core.ViewModels.Creational;
 
 namespace ModernUI.Windows.CreationWindows
@@ -18,6 +19,12 @@ namespace ModernUI.Windows.CreationWindows
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void btnNewSort_Click(object sender, RoutedEventArgs e)
+        {
+            new NewCoffeeSort().ShowDialog();
+            comboColumnSort.ItemsSource = ContextManager.ActiveCoffeeSorts;
         }
     }
 }

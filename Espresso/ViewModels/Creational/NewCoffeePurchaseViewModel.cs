@@ -6,18 +6,20 @@ namespace Core.ViewModels.Creational
 {
     public class NewCoffeePurchaseViewModel: Abstract.aCreationalViewModel
     {
-        public NewCoffeePurchaseViewModel() : base() { }
-
         protected override void Refresh()
         {
-            NewPurchase = new Entity.CoffeePurchase();
+            NewPurchase = new Entity.CoffeePurchase
+            {
+                Date = DateTime.Now,
+                PaymentDate = DateTime.Now,
+                Paid = true,
+                Account = ContextManager.ActiveAccounts.FirstOrDefault(),
+                Supplier = ContextManager.ActiveSuppliers.FirstOrDefault(),
+                Sum = 0
+            };
+
             Details = new ObservableCollection<Entity.CoffeePurchase_Details>();
 
-            NewPurchase.Date = DateTime.Now;
-            NewPurchase.PaymentDate = DateTime.Now;
-            NewPurchase.Paid = true;
-            NewPurchase.Account = ContextManager.ActiveAccounts.FirstOrDefault();
-            NewPurchase.Supplier = ContextManager.ActiveSuppliers.FirstOrDefault();
         }
 
         #region Binding Properties
@@ -29,7 +31,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _newPurchase = value;
-                OnPropertyChanged("NewPurchase");
+                OnPropertyChanged();
             }
         }
 
@@ -40,7 +42,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _details = value;
-                OnPropertyChanged("Details");
+                OnPropertyChanged();
             }
         }
 
@@ -50,6 +52,8 @@ namespace Core.ViewModels.Creational
 
         protected override void cmdSave_Execute()
         {
+            foreach (var detail in Details)
+                _newPurchase.Sum += (detail.Price*detail.Quantity);
             _newPurchase.CoffeePurchase_Details.Clear();
             foreach (var x in Details)
                 _newPurchase.CoffeePurchase_Details.Add(x);

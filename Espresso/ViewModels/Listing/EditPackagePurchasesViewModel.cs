@@ -5,7 +5,7 @@ using Core.ViewModels.Listing.Abstract;
 
 namespace Core.ViewModels.Listing
 {
-    public class PackagePurchasesViewModel : aProcessListingViewModel
+    public class EditPackagePurchasesViewModel : aProcessListingViewModel
     {
         protected override void Refresh()
         {
@@ -22,7 +22,7 @@ namespace Core.ViewModels.Listing
             set
             {
                 _packagePurchases = value;
-                OnPropertyChanged("PackagePurchases");
+                OnPropertyChanged();
             }
         }
 

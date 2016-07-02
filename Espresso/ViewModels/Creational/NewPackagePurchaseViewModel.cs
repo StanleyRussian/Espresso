@@ -5,14 +5,14 @@ namespace Core.ViewModels.Creational
 {
     public class NewPackagePurchaseViewModel : Abstract.aCreationalViewModel
     {
-        public NewPackagePurchaseViewModel() : base() { }
-
         protected override void Refresh()
         {
-            NewPackagePurchase = new Entity.PackagePurchase();
-            NewPackagePurchase.Date = DateTime.Now;
-            NewPackagePurchase.Account = ContextManager.ActiveAccounts.FirstOrDefault();
-            NewPackagePurchase.Supplier = ContextManager.ActiveSuppliers.FirstOrDefault();
+            NewPackagePurchase = new Entity.PackagePurchase
+            {
+                Date = DateTime.Now,
+                Account = ContextManager.ActiveAccounts.FirstOrDefault(),
+                Supplier = ContextManager.ActiveSuppliers.FirstOrDefault()
+            };
         }
 
         private Entity.PackagePurchase _newPackagePurchase;
@@ -22,7 +22,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _newPackagePurchase = value;
-                OnPropertyChanged("NewPackagePurchase");
+                OnPropertyChanged();
             }
         }
 

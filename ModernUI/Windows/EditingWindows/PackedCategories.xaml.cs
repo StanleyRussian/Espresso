@@ -11,7 +11,7 @@ namespace ModernUI.Windows.EditingWindows
         public PackedCategories()
         {
             InitializeComponent();
-            DataContext = new PackedCategoriesViewModel();
+            DataContext = new EditPackedCategoriesViewModel();
         }
 
         private void New(object sender, RoutedEventArgs e)

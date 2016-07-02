@@ -12,7 +12,7 @@ namespace ModernUI.Windows.EditingWindows
         public CoffeePurchases()
         {
             InitializeComponent();
-            DataContext = new CoffeePurchasesViewModel();
+            DataContext = new EditCoffeePurchasesViewModel();
         }
 
         private void New(object sender, RoutedEventArgs e)

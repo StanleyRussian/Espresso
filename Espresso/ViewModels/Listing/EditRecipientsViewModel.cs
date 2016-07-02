@@ -5,7 +5,7 @@ using Core.ViewModels.Listing.Abstract;
 
 namespace Core.ViewModels.Listing
 {
-    public class RecipientsViewModel : aSubjectsListingViewModel
+    public class EditRecipientsViewModel : aSubjectsListingViewModel
     {
         protected override void Refresh()
         {
@@ -26,7 +26,7 @@ namespace Core.ViewModels.Listing
             set
             {
                 _selected = value;
-                OnPropertyChanged("Selected");
+                OnPropertyChanged();
             }
         }
 

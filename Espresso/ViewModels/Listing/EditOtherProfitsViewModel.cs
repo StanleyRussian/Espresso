@@ -5,7 +5,7 @@ using Core.ViewModels.Listing.Abstract;
 
 namespace Core.ViewModels.Listing
 {
-    public class OtherProfitsViewModel : aProcessListingViewModel
+    public class EditOtherProfitsViewModel : aProcessListingViewModel
     {
         protected override void Refresh()
         {
@@ -22,7 +22,7 @@ namespace Core.ViewModels.Listing
             set
             {
                 _otherProfits = value;
-                OnPropertyChanged("OtherProfits");
+                OnPropertyChanged();
             }
         }
 

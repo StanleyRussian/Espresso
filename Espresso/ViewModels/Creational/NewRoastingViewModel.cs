@@ -5,17 +5,17 @@ namespace Core.ViewModels.Creational
 {
     public class NewRoastingViewModel: Abstract.aCreationalViewModel
     {
-        public NewRoastingViewModel() : base() { }
-
         protected override void Refresh()
         {
-            NewRoasting = new Entity.Roasting();
-            NewRoasting.Date = DateTime.Now;
-            NewRoasting.CoffeeSort = ContextManager.ActiveCoffeeSorts.FirstOrDefault();
+            NewRoasting = new Entity.Roasting
+            {
+                Date = DateTime.Now,
+                CoffeeSort = ContextManager.ActiveCoffeeSorts.FirstOrDefault()
+            };
         }
 
         // Since DB doesn't store srinkage percentage rather then both quantities
-        // some additional magic required in view model
+        // addtional property required in view model
         private int _shrinkagePercent;
         public int ShrinkagePercent
         {
@@ -23,7 +23,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _shrinkagePercent = value;
-                OnPropertyChanged("ShrinkagePercent");
+                OnPropertyChanged();
             }
 
         }
@@ -35,7 +35,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _newRoasting = value;
-                OnPropertyChanged("NewRoasting");
+                OnPropertyChanged();
             }
         }
 

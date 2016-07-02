@@ -11,7 +11,7 @@ namespace ModernUI.Windows.EditingWindows
         public Suppliers()
         {
             InitializeComponent();
-            DataContext = new SuppliersViewModel();
+            DataContext = new EditSuppliersViewModel();
         }
 
         private void New(object sender, RoutedEventArgs e)

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Core.Annotations;
 
 namespace Core.ViewModels.Creational.Abstract
 {
@@ -16,7 +18,8 @@ namespace Core.ViewModels.Creational.Abstract
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+        [NotifyPropertyChangedInvocator]
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -28,7 +31,7 @@ namespace Core.ViewModels.Creational.Abstract
             set
             {
                 _isFlySuccessOpened = value;
-                OnPropertyChanged("IsFlySuccessOpened");
+                OnPropertyChanged();
             }
         }
 
@@ -39,7 +42,7 @@ namespace Core.ViewModels.Creational.Abstract
             set
             {
                 _isFlyErrorOpened = value;
-                OnPropertyChanged("IsFlyErrorOpened");
+                OnPropertyChanged();
             }
         }
 
@@ -50,7 +53,7 @@ namespace Core.ViewModels.Creational.Abstract
             set
             {
                 _flyErrorMsg = value;
-                OnPropertyChanged("FlyErrorMsg");
+                OnPropertyChanged();
             }
         }
 

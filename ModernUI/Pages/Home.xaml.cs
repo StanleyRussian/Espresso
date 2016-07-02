@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using Core.ViewModels;
 
 namespace ModernUI.Pages
@@ -7,7 +6,7 @@ namespace ModernUI.Pages
     /// <summary>
     /// Interaction logic for Home.xaml
     /// </summary>
-    public partial class Home : UserControl
+    public partial class Home
     {
         public Home()
         {

@@ -4,13 +4,13 @@ namespace Core.ViewModels.Creational
 {
     public class NewMonthlyExpenseViewModel : Abstract.aCreationalViewModel
     {
-        public NewMonthlyExpenseViewModel() : base() { }
-
         protected override void Refresh()
         {
-            NewMonthlyExpense = new Entity.MonthlyExpense();
-            NewMonthlyExpense.Day = DateTime.Now.Day;
-            NewMonthlyExpense.RemindingDay = DateTime.Now.AddDays(-5).Day;
+            NewMonthlyExpense = new Entity.MonthlyExpense
+            {
+                Day = DateTime.Now.Day,
+                RemindingDay = DateTime.Now.AddDays(-5).Day
+            };
         }
 
         #region Binding Properties
@@ -22,7 +22,7 @@ namespace Core.ViewModels.Creational
             set
             {
                 _newMonthlyExpense = value;
-                OnPropertyChanged("NewMonthlyExpense");
+                OnPropertyChanged();
             }
         }
 

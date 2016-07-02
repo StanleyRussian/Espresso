@@ -11,7 +11,7 @@ namespace ModernUI.Windows.EditingWindows
         public Recipients()
         {
             InitializeComponent();
-            DataContext = new RecipientsViewModel();
+            DataContext = new EditRecipientsViewModel();
         }
 
         private void New(object sender, RoutedEventArgs e)
