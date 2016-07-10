@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="Context.dRoastedStock" Width="1.5" PointX="10" PointY="4.625" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.RoastingCoffeeSort" />
         <AssociationConnector Association="Context.dRoastedStockCoffeeSort" />
-        <EntityTypeShape EntityType="Context.Mix" Width="1.5" PointX="7.75" PointY="6.25" />
+        <EntityTypeShape EntityType="Context.Mix" Width="1.5" PointX="7.75" PointY="6.5" />
         <EntityTypeShape EntityType="Context.Mix_Details" Width="1.5" PointX="5.375" PointY="5.125" />
         <AssociationConnector Association="Context.Mix_DetailsMix" />
         <AssociationConnector Association="Context.Mix_DetailsCoffeeSort" />

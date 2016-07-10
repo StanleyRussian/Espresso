@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="ModernUI.Pages.Statistic.Accounts.ParentAccounts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:views="clr-namespace:ModernUI.Pages.Statistic.Accounts"
+             xmlns:viewmodels="clr-namespace:Core.ViewModels.Statistics.Accounts;assembly=Core"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Horizontal">
+            <Button Click="btnNew_CLick" Margin="{StaticResource ControlMargin}"
+                    Style="{DynamicResource _AccentedSquareButtonStyle}">Новый счёт</Button>
+            <Button Click="btnEdit_Click" Margin="{StaticResource ControlMargin}"
+                    Style="{DynamicResource _AccentedSquareButtonStyle}">Редактировать счета</Button>
+        </StackPanel>
+
+        <TabControl Grid.Row="1" TabStripPlacement="Left"
+                    Margin="0,10,0,0"
+                    ItemsSource="{Binding Tabs}">
+            <TabControl.Resources>
+                <DataTemplate DataType="{x:Type viewmodels:IndividualAccountViewModel}">
+                    <views:IndividualAccounts/>
+                </DataTemplate>
+            </TabControl.Resources>
+
+            <TabControl.ItemContainerStyle>
+                <Style BasedOn="{StaticResource MetroTabItem}" TargetType="TabItem">
+                    <Setter Property="Header" Value="{Binding Header}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                    <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="16"/>
+                </Style>
+            </TabControl.ItemContainerStyle>
+        </TabControl>
+    </Grid>
+</UserControl>

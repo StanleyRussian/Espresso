@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="ModernUI.Pages.Statistic.CoffeeSorts.IndividualCoffeeSort"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Separator Grid.Column="1" Grid.RowSpan="10"/>
+
+            <TextBlock Style="{StaticResource Header2}">Сорт:</TextBlock>
+            <TextBlock Style="{StaticResource Title}" Grid.Column="2"
+                       DataContext="{Binding CoffeeSort}" Text="{Binding Name}"/>
+
+            <TextBlock Grid.Row="1" Style="{StaticResource Header3}">Зелёный кофе:</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="2" 
+                       Style="{StaticResource Header3}">Обжареный кофе:</TextBlock>
+
+            <WrapPanel Grid.Row="2">
+                <TextBlock Style="{StaticResource Header2}">Текущие остатки:</TextBlock>
+                <TextBlock Style="{StaticResource Header2Accent}" Text="{Binding CurrentGreenStocks}"/>
+            </WrapPanel>
+            <WrapPanel Grid.Row="2" Grid.Column="2">
+                <TextBlock Style="{StaticResource Header2}">Текущие остатки:</TextBlock>
+                <TextBlock Style="{StaticResource Header2Accent}" Text="{Binding CurrentRoastedStocks}"/>
+            </WrapPanel>
+
+            <WrapPanel Grid.Row="2">
+                <TextBlock Style="{StaticResource Header2}">Минимальные остатки:</TextBlock>
+                <TextBlock Style="{StaticResource Header2Accent}" Text="{Binding MinGreenStocks}"/>
+            </WrapPanel>
+            <WrapPanel Grid.Row="2" Grid.Column="2">
+                <TextBlock Style="{StaticResource Header2}">Минимальные остатки:</TextBlock>
+                <TextBlock Style="{StaticResource Header2Accent}" Text="{Binding MinRoastedStocks}"/>
+            </WrapPanel>
+
+            <WrapPanel Grid.Row="3">
+                <TextBlock Style="{StaticResource Header2}">Кофе хватит на: </TextBlock>
+                <TextBlock Style="{StaticResource Header2Accent}" Text="{Binding ForecastDaysGreenStocks}"/>
+                <TextBlock Style="{StaticResource Header2}"> дней</TextBlock>
+                <Button Command="{Binding cmdRefreshForecastDaysGreenStocks}">Обновить</Button>
+            </WrapPanel>
+            <WrapPanel Grid.Row="3" Grid.Column="2">
+                <TextBlock Style="{StaticResource Header2}">Кофе хватит на:</TextBlock>
+                <TextBlock Style="{StaticResource Header2Accent}" Text="{Binding ForecastDaysRoastedStocks}"/>
+                <TextBlock Style="{StaticResource Header2}"> дней</TextBlock>
+                <Button Command="{Binding cmdRefreshForecastDaysRoastedStocks}">Обновить</Button>
+            </WrapPanel>
+        </Grid>
+
+        <TextBlock Grid.Row="1" Grid.RowSpan="2" 
+                   Style="{StaticResource Header2}">Закупки за последние 30 дней:</TextBlock>
+
+        <DataGrid Grid.Row="2" Margin="0,10,0,0"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding Purchases}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Date}" Header="Дата"/>
+                <DataGridTextColumn Binding="{Binding Supplier}" Header="Поставщик"/>
+                <DataGridTextColumn Binding="{Binding Quantity}" Header="Количество"/>
+                <DataGridTextColumn Binding="{Binding Price}" Header="Цена"/>
+                <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <WrapPanel Grid.Row="3">
+            <TextBlock Style="{StaticResource Header2}">Шаг закупок:</TextBlock>
+            <TextBlock Style="{StaticResource Header2Accent}" Text="{Binding PurchaseStep}"/>
+            <TextBlock Style="{StaticResource Header2}">Рассчитано на основе данных за </TextBlock>
+            <TextBlock Style="{StaticResource Header2Accent}" Text="{Binding PurchaseStepMonths}"/>
+            <TextBlock Style="{StaticResource Header2}"> месяцев</TextBlock>
+            <Button Command="{Binding cmdPurchaseStepRefresh}">Обновить</Button>
+        </WrapPanel>
+    </Grid>
+</UserControl>

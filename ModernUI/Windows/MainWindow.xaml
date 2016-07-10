@@ -3,42 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                      
+        xmlns:pagesVM="clr-namespace:Core.ViewModels.Pages;assembly=Core"
+        xmlns:pages="clr-namespace:ModernUI.Pages"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         dialog:DialogParticipation.Register="{Binding}"      
-                      
-        xmlns:local="clr-namespace:ModernUI"
-        xmlns:pages="clr-namespace:ModernUI.Pages"
-                      
         mc:Ignorable="d"
         Title="Espresso" 
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         Width="900" Height="750">
-    
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/Icons.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
 
     <Grid>
         <Grid.Resources>
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
         </Grid.Resources>
         
-        <TabControl >
-            <TabItem Header="Главная"
-                     controls:ControlsHelper.HeaderFontWeight="Light">
-                <pages:Home/>
-            </TabItem>
+        <TabControl ItemsSource="{Binding Tabs}">
+            <TabControl.Resources>
+                <DataTemplate DataType="{x:Type pagesVM:HomeViewModel}">
+                    <pages:Home/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type pagesVM:StatisticsViewModel}">
+                    <pages:Statistics/>
+                </DataTemplate>
+            </TabControl.Resources>
 
-            <TabItem Header="Статистика"
-                     controls:ControlsHelper.HeaderFontWeight="Light">
-                <pages:Statistics/>
-            </TabItem>
+            <TabControl.ItemContainerStyle>
+                <Style BasedOn="{StaticResource MetroTabItem}" TargetType="TabItem">
+                    <Setter Property="Header" Value="{Binding Header}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                    <Setter Property="controls:ControlsHelper.HeaderFontWeight" Value="Light"/>
+                </Style>
+            </TabControl.ItemContainerStyle>
         </TabControl>
     </Grid>
 </controls:MetroWindow>

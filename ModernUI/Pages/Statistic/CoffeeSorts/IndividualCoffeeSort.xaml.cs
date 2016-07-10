@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ModernUI.Pages.Statistic.Accounts
+namespace ModernUI.Pages.Statistic.CoffeeSorts
 {
     /// <summary>
     /// Interaction logic for Individual.xaml
     /// </summary>
-    public partial class Individual : UserControl
+    public partial class IndividualCoffeeSort : UserControl
     {
-        public Individual()
+        public IndividualCoffeeSort()
         {
             InitializeComponent();
         }

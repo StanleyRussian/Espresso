@@ -101,11 +101,20 @@
     <Compile Include="Pages\Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\AccountsParent.xaml.cs">
-      <DependentUpon>AccountsParent.xaml</DependentUpon>
+    <Compile Include="Pages\Statistic\Accounts\ParentAccounts.xaml.cs">
+      <DependentUpon>ParentAccounts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\Accounts\Individual.xaml.cs">
-      <DependentUpon>Individual.xaml</DependentUpon>
+    <Compile Include="Pages\Statistic\Accounts\IndividualAccount.xaml.cs">
+      <DependentUpon>IndividualAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Statistic\CoffeeSorts\IndividualCoffeeSort.xaml.cs">
+      <DependentUpon>IndividualCoffeeSort.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Statistic\CoffeeSorts\ParentCoffeeSorts.xaml.cs">
+      <DependentUpon>ParentCoffeeSorts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Statistic\CoffeeSorts\SummaryCoffeeSorts.xaml.cs">
+      <DependentUpon>SummaryCoffeeSorts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\CreationWindows\NewAccount.xaml.cs">
       <DependentUpon>NewAccount.xaml</DependentUpon>
@@ -146,11 +155,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\AccountsParent.xaml">
+    <Page Include="Pages\Statistic\Accounts\ParentAccounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\Accounts\Individual.xaml">
+    <Page Include="Pages\Statistic\Accounts\IndividualAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Statistic\CoffeeSorts\IndividualCoffeeSort.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Statistic\CoffeeSorts\ParentCoffeeSorts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Statistic\CoffeeSorts\SummaryCoffeeSorts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

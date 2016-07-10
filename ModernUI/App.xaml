@@ -17,6 +17,21 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <Style x:Key="Title" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="40" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="{StaticResource GrayBrush1}"/>
+            </Style>
+
+            <Style x:Key="TitleAccent" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="40" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="{StaticResource AccentColorBrush}"/>
+            </Style>
+
+
             <Style x:Key="Header1" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="22" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -65,7 +80,8 @@
                 <Setter Property="Foreground" Value="{StaticResource GrayBrush1}"/>
             </Style>
 
-            <Style BasedOn="{StaticResource MetroTextBox}" TargetType="TextBox" x:Key="Mandatory">
+            <Style x:Key="Mandatory" TargetType="TextBox"
+                   BasedOn="{StaticResource MetroTextBox}">
                 <Style.Triggers>
                     <Trigger Property="Text" Value="">
                         <Setter Property="BorderBrush" Value="Red"/>
@@ -73,6 +89,13 @@
                         <Setter Property="Background" Value="{StaticResource ValidationSummaryFillColor2}"/>
                     </Trigger>
                 </Style.Triggers>
+            </Style>
+
+            <Style x:Key="_AccentedSquareButtonStyle" TargetType="Button"
+                   BasedOn="{StaticResource AccentedSquareButtonStyle}" >
+                <Setter Property="Border.BorderThickness" Value="1"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontWeight" Value="Normal"/>
             </Style>
 
             <Thickness x:Key="ControlMargin">4</Thickness>

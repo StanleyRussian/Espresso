@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Core.ViewModels;
+using Core.ViewModels.Pages;
 
 namespace ModernUI.Pages
 {
@@ -11,7 +12,6 @@ namespace ModernUI.Pages
         public Home()
         {
             InitializeComponent();
-            DataContext = new HomeViewModel();
         }
 
         private void NewPurchase(object sender, RoutedEventArgs e)

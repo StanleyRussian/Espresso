@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ModernUI.Pages.Statistic
+namespace ModernUI.Pages.Statistic.CoffeeSorts
 {
     /// <summary>
-    /// Interaction logic for AccountsParent.xaml
+    /// Interaction logic for Summary.xaml
     /// </summary>
-    public partial class AccountsParent : UserControl
+    public partial class SummaryCoffeeSorts : UserControl
     {
-        public AccountsParent()
+        public SummaryCoffeeSorts()
         {
             InitializeComponent();
-            DataContext = new Core.ViewModels.Statistic.ParentAccounts();
         }
     }
 }

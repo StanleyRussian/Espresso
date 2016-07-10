@@ -15,14 +15,14 @@ namespace Core.ViewModels.Listing.Abstract
     {
         protected ContextContainer _context = ContextManager.Context;
 
-        public aListingViewModel()
+        protected aListingViewModel()
         {
             cmdOnClosing = new Command(cmdOnClosing_Execute);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

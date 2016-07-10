@@ -179,7 +179,8 @@
     <Compile Include="ViewModels\Creational\NewMixViewModel.cs" />
     <Compile Include="ViewModels\Listing\EditAccountsViewModel.cs" />
     <Compile Include="ViewModels\Listing\EditCoffeeSortsViewModel.cs" />
-    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Pages\HomeViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewAccountViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewCoffeePurchaseViewModel.cs" />
     <Compile Include="ViewModels\Creational\NewCoffeeSortViewModel.cs" />
@@ -212,8 +213,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Context.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Statistic\iTabViewModel.cs" />
-    <Compile Include="ViewModels\Statistic\ParentAccounts.cs" />
+    <Compile Include="ViewModels\Pages\StatisticsViewModel.cs" />
+    <Compile Include="ViewModels\Statistics\Abstract\aParentTabViewModel.cs" />
+    <Compile Include="ViewModels\Statistics\Accounts\ParentAccountsViewModel.cs" />
+    <Compile Include="ViewModels\Statistics\Accounts\IndividualAccountViewModel.cs" />
+    <Compile Include="ViewModels\Statistics\Abstract\aTabViewModel.cs" />
+    <Compile Include="ViewModels\Statistics\CoffeeSorts\IndividualCoffeeSort.cs" />
+    <Compile Include="ViewModels\Statistics\CoffeeSorts\ParentCoffeeSorts.cs" />
+    <Compile Include="ViewModels\Statistics\CoffeeSorts\SummaryCoffeeSorts.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\Model.Context.cs">

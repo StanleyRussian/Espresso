@@ -200,6 +200,7 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="MinStocks" Type="nvarchar(max)" Nullable="false" />
     <Property Name="dLastPrice" Type="float" Nullable="true" />
   </EntityType>
   <EntityType Name="dGreenStocks">
@@ -236,7 +237,8 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
-    <Property Name="Price" Type="float" Nullable="true" />
+    <Property Name="dPrice" Type="float" Nullable="true" />
+    <Property Name="dCost" Type="float" Nullable="true" />
   </EntityType>
   <EntityType Name="Mix_Details">
     <Key>
@@ -1019,6 +1021,7 @@
           <NavigationProperty Name="dRoastedStocks" Relationship="Context.dRoastedStockCoffeeSort" FromRole="CoffeeSort" ToRole="dRoastedStock" />
           <NavigationProperty Name="Mix_Details" Relationship="Context.Mix_DetailsCoffeeSort" FromRole="CoffeeSort" ToRole="Mix_Details" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <Property Name="MinStocks" Type="String" Nullable="false" />
           <Property Name="dLastPrice" Type="Double" Nullable="true" />
         </EntityType>
         <Association Name="CoffeePurchase_DetailsCoffeePurchase">
@@ -1077,7 +1080,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
-          <Property Name="Price" Type="Double" Nullable="true" />
+          <Property Name="dPrice" Type="Double" Nullable="true" />
+          <Property Name="dCost" Type="Double" Nullable="true" />
           <NavigationProperty Name="Mix_Details" Relationship="Context.Mix_DetailsMix" FromRole="Mix" ToRole="Mix_Details" />
           <NavigationProperty Name="Packings" Relationship="Context.PackingMix" FromRole="Mix" ToRole="Packing" />
           <NavigationProperty Name="dPackedStocks" Relationship="Context.dPackedStocksMix" FromRole="Mix" ToRole="dPackedStocks" />
@@ -1443,6 +1447,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="MinStocks" ColumnName="MinStocks" />
           <ScalarProperty Name="dLastPrice" ColumnName="dLastPrice" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1480,7 +1485,8 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="dPrice" ColumnName="dPrice" />
+          <ScalarProperty Name="dCost" ColumnName="dCost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
