@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Espresso.Entity
+namespace Model.Entity
 {
     using System;
     using System.Collections.Generic;
@@ -17,6 +17,7 @@ namespace Espresso.Entity
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
         public double PaidAmount { get; set; }
+        public int TransactionId { get; set; }
     
         public virtual MonthlyExpense MonthlyExpense { get; set; }
         public virtual Account Account { get; set; }

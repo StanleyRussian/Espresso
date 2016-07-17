@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Espresso.Entity
+namespace Model.Entity
 {
     using System;
     using System.Collections.Generic;
@@ -29,7 +29,10 @@ namespace Espresso.Entity
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
+        public string MinGreenStocks { get; set; }
+        public string MinRoastedStocks { get; set; }
         public Nullable<double> dLastPrice { get; set; }
+        public Nullable<double> dPurchaseStep { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoffeePurchase_Details> CoffeePurchase_Details { get; set; }

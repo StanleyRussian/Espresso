@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="UI.Controls.Combo.ComboActiveRecipients"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:model="clr-namespace:Model;assembly=Model">
+    
+    <Grid Margin="{StaticResource ControlMargin}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <ComboBox x:Name="ComboBox" ItemsSource="{Binding Source={x:Static model:ContextManager.ActiveRecipients}}"
+                  SelectedItem="{Binding Recipient}" DisplayMemberPath="Name" SelectedValue="Id" Width="auto"/>
+
+        <Button Grid.Column="1" Click="New" Content="Новый" Margin="5,0,0,0"/>
+    </Grid>
+</UserControl>

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Espresso.Entity
+namespace Model.Entity
 {
     using System;
     using System.Data.Entity;
@@ -50,5 +50,7 @@ namespace Espresso.Entity
         public virtual DbSet<MonthlyExpense> MonthlyExpenses { get; set; }
         public virtual DbSet<OtherProfit> OtherProfits { get; set; }
         public virtual DbSet<MonthlyPayment> MonthlyPayments { get; set; }
+        public virtual DbSet<dTransaction> dTransactions { get; set; }
+        public virtual DbSet<MoneyTransfer> MoneyTransfers { get; set; }
     }
 }

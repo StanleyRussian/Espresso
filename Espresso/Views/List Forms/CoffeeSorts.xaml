@@ -32,11 +32,11 @@
         </WrapPanel>
 
         <ListBox x:Name="listCoffeeSorts" Grid.Row="1"
-                 ItemsSource="{Binding CoffeeSortsSelected}" 
+                 ItemsSource="{Binding Selected}" 
                  DisplayMemberPath="Name" IsSynchronizedWithCurrentItem="True"/>
 
         <Grid Grid.Row="1" Grid.Column="1"
-              DataContext="{Binding CoffeeSortsSelected}">
+              DataContext="{Binding Selected}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>

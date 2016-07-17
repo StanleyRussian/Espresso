@@ -1,0 +1,77 @@
+﻿<controls:MetroWindow x:Class="UI.Windows.EntityWindows.CoffeeTransfer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:combo="clr-namespace:UI.Controls.Combo"
+        Title="Новый перевод кофе" Height="300" Width="300"
+        GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding cmdOnClosing}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl>
+            <controls:Flyout Header="Сохранение" IsModal="True" Position="Right" Width="200"
+                             Background="LightGreen" Foreground="{StaticResource GrayBrush1}"
+                             IsOpen="{Binding IsFlySuccessOpened}">
+                <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                    <TextBlock>Сохранение успешно завершено</TextBlock>
+                </StackPanel>
+            </controls:Flyout>
+            <controls:Flyout Header="Ошибка" IsModal="True" Position="Right" Width="200"
+                             Background="LightCoral" Foreground="{StaticResource GrayBrush1}" IsOpen="{Binding IsFlyErrorOpened}">
+                <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                    <TextBlock Text="{Binding FlyErrorMsg}" TextWrapping="Wrap"/>
+                </StackPanel>
+            </controls:Flyout>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid DataContext="{Binding Transfer}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Margin="{StaticResource ControlMargin}">Дата</Label>
+            <DatePicker Grid.Column="1" Margin="{StaticResource ControlMargin}"
+                        SelectedDate="{Binding Date}"/>
+
+            <Label Grid.Row="1" Margin="{StaticResource ControlMargin}">Купаж</Label>
+            <combo:ComboActiveMixes Grid.Row="1" Grid.Column="1"/>
+
+            <Label Grid.Row="2" Margin="{StaticResource ControlMargin}">Количество</Label>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="{StaticResource ControlMargin}"
+                     Text="{Binding Quantity}" 
+                     controls:TextBoxHelper.ClearTextButton="True"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
+            <Button Command="{Binding cmdSave}" 
+                    Margin="{StaticResource ControlMargin}">Сохранить</Button>
+            <Button Click="btnCancel_Click" 
+                    Margin="{StaticResource ControlMargin}">Отмена</Button>
+        </StackPanel>
+    </Grid>
+
+</controls:MetroWindow>
+
+
+
