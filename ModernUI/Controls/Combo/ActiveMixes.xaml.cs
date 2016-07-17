@@ -1,8 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Core;
+using Model;
+using Mix = UI.Windows.EntityWindows.Mix;
 
-namespace ModernUI.Controls.Combo
+namespace UI.Controls.Combo
 {
     /// <summary>
     /// Interaction logic for comboActiveMixes.xaml
@@ -16,7 +17,7 @@ namespace ModernUI.Controls.Combo
 
         private void New(object sender, RoutedEventArgs e)
         {
-            new Windows.CreationWindows.NewMix().ShowDialog();
+            new Mix().ShowDialog();
             ComboBox.ItemsSource = ContextManager.ActiveMixes;
         }
     }

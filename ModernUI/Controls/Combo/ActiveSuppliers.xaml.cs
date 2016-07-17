@@ -1,8 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Core;
+using Model;
+using Supplier = UI.Windows.EntityWindows.Supplier;
 
-namespace ModernUI.Controls.Combo
+namespace UI.Controls.Combo
 {
     /// <summary>
     /// Interaction logic for comboSupplier.xaml
@@ -16,7 +17,7 @@ namespace ModernUI.Controls.Combo
 
         private void New(object sender, RoutedEventArgs e)
         {
-            new Windows.CreationWindows.NewSupplier().ShowDialog();
+            new Supplier().ShowDialog();
             ComboBox.ItemsSource = ContextManager.ActiveSuppliers;
         }
     }

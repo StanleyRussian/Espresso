@@ -1,8 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Core;
+using Model;
+using Account = UI.Windows.EntityWindows.Account;
 
-namespace ModernUI.Controls.Combo
+namespace UI.Controls.Combo
 {
     /// <summary>
     /// Interaction logic for comboAccount.xaml
@@ -16,7 +17,7 @@ namespace ModernUI.Controls.Combo
 
         private void New(object sender, RoutedEventArgs e)
         {
-            new Windows.CreationWindows.NewAccount().ShowDialog();
+            new Account().ShowDialog();
             ComboBox.ItemsSource = ContextManager.ActiveAccounts;
         }
     }

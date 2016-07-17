@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Core.Entity
+namespace Model.Entity
 {
     using System;
     using System.Collections.Generic;

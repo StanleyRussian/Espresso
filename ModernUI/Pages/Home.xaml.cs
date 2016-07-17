@@ -1,8 +1,10 @@
 ﻿using System.Windows;
-using Core.ViewModels;
-using Core.ViewModels.Pages;
+using CoffeePurchase = UI.Windows.EntityWindows.CoffeePurchase;
+using CoffeeSale = UI.Windows.EntityWindows.CoffeeSale;
+using Packing = UI.Windows.EntityWindows.Packing;
+using Roasting = UI.Windows.EntityWindows.Roasting;
 
-namespace ModernUI.Pages
+namespace UI.Pages
 {
     /// <summary>
     /// Interaction logic for Home.xaml
@@ -16,22 +18,22 @@ namespace ModernUI.Pages
 
         private void NewPurchase(object sender, RoutedEventArgs e)
         {
-            new Windows.CreationWindows.NewCoffeePurchase().ShowDialog();
+            new CoffeePurchase().ShowDialog();
         }
 
         private void NewRoasting(object sender, RoutedEventArgs e)
         {
-            new Windows.CreationWindows.NewRoasting().ShowDialog();
+            new Roasting().ShowDialog();
         }
 
         private void NewPacking(object sender, RoutedEventArgs e)
         {
-            new Windows.CreationWindows.NewPacking().ShowDialog();
+            new Packing().ShowDialog();
         }
 
         private void NewSale(object sender, RoutedEventArgs e)
         {
-            new Windows.CreationWindows.NewCoffeeSale().ShowDialog();
+            new CoffeeSale().ShowDialog();
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿using Core.ViewModels.Statistics.Accounts;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using ViewModels.Statistics.Accounts;
+using Account = UI.Windows.EntityWindows.Account;
 
-namespace ModernUI.Pages.Statistic.Accounts
+namespace UI.Pages.Statistic.Accounts
 {
     /// <summary>
     /// Interaction logic for Parent.xaml
@@ -13,14 +14,16 @@ namespace ModernUI.Pages.Statistic.Accounts
             InitializeComponent();
         }
 
-        private void btnNew_CLick(object sender, System.Windows.RoutedEventArgs e)
+        private void OnNewClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            new Windows.CreationWindows.NewAccount().ShowDialog();
+            new Account().ShowDialog();
         }
 
-        private void btnEdit_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void OnEditClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            new Windows.EditingWindows.Accounts().ShowDialog();
+            var selected = tabs.SelectedItem as IndividualAccountViewModel;
+            if (selected != null)
+                new Account(selected.Account).ShowDialog();
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Core;
+using Model;
+using CoffeeSort = UI.Windows.EntityWindows.CoffeeSort;
 
-namespace ModernUI.Controls.Combo
+namespace UI.Controls.Combo
 {
     /// <summary>
     /// Interaction logic for comboActiveCoffeeSorts.xaml
@@ -16,7 +17,7 @@ namespace ModernUI.Controls.Combo
 
         private void New(object sender, RoutedEventArgs e)
         {
-            new Windows.CreationWindows.NewCoffeeSort().ShowDialog();
+            new CoffeeSort().ShowDialog();
             ComboBox.ItemsSource = ContextManager.ActiveCoffeeSorts;
         }
     }

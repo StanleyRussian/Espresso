@@ -898,7 +898,7 @@ GO
 
 ---- MonthlyPayments
 -- on INSERT
-IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].AccountsBalances_Insert_OtherProfits'))
+IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].AccountsBalances_Insert_MonthlyPayments'))
 DROP TRIGGER [dbo].AccountsBalances_Insert_MonthlyPayments
 GO
 CREATE TRIGGER AccountsBalances_Insert_MonthlyPayments
@@ -964,5 +964,70 @@ BEGIN
 	DELETE FROM dTransactions
 	WHERE Id = (SELECT d.TransactionId
 				FROM DELETED d)
+END
+GO
+
+
+---- MoneyTransfers
+-- on INSERT
+IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].AccountsBalances_Insert_MoneyTransfers'))
+DROP TRIGGER [dbo].AccountsBalances_Insert_MoneyTransfers
+GO
+CREATE TRIGGER AccountsBalances_Insert_MoneyTransfers
+ON MoneyTransfers
+AFTER INSERT AS
+BEGIN
+	UPDATE dAccountsBalances
+	SET Balance -= i.Sum
+	FROM INSERTED i
+	WHERE dAccountsBalances.Id = i.InitialAccount_Id
+END
+BEGIN
+	UPDATE dAccountsBalances
+	SET Balance += i.Sum
+	FROM INSERTED i
+	WHERE dAccountsBalances.Id = i.TargetAccount_Id
+END
+GO
+
+-- on UPDATE
+IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].AccountsBalances_Update_MoneyTransfers'))
+DROP TRIGGER [dbo].AccountsBalances_Update_MoneyTransfers
+GO
+CREATE TRIGGER AccountsBalances_Update_MoneyTransfers
+ON MoneyTransfers
+AFTER UPDATE AS
+BEGIN
+	UPDATE dAccountsBalances
+	SET Balance -= (i.Sum - d.Sum)
+	FROM INSERTED i, DELETED d
+	WHERE dAccountsBalances.Id = i.InitialAccount_Id
+END
+BEGIN
+	UPDATE dAccountsBalances
+	SET Balance += (i.Sum - d.Sum)
+	FROM INSERTED i, DELETED d
+	WHERE dAccountsBalances.Id = i.TargetAccount_Id
+END
+GO
+
+-- on DELETE
+IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].AccountsBalances_Delete_MoneyTransfers'))
+DROP TRIGGER [dbo].AccountsBalances_Delete_MoneyTransfers
+GO
+CREATE TRIGGER AccountsBalances_Delete_MoneyTransfers
+ON MoneyTransfers
+AFTER DELETE AS
+BEGIN
+	UPDATE dAccountsBalances
+	SET Balance += d.Sum
+	FROM DELETED d
+	WHERE dAccountsBalances.Id = d.InitialAccount_Id
+END
+BEGIN
+	UPDATE dAccountsBalances
+	SET Balance -= d.Sum
+	FROM DELETED d
+	WHERE dAccountsBalances.Id = d.TargetAccount_Id
 END
 GO

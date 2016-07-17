@@ -1,4 +1,4 @@
-﻿namespace ModernUI.Windows
+﻿namespace UI.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -8,7 +8,7 @@
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new Core.ViewModels.MainWindowViewModel();
+            DataContext = new ViewModels.MainWindowViewModel();
         }
     }
 }

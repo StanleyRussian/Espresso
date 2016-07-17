@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Core.Entity
+namespace Model.Entity
 {
     using System;
     using System.Collections.Generic;
@@ -26,6 +26,8 @@ namespace Core.Entity
             this.OtherProfits = new HashSet<OtherProfit>();
             this.MonthlyPayments = new HashSet<MonthlyPayment>();
             this.dTransactions = new HashSet<dTransaction>();
+            this.MoneyTransfers = new HashSet<MoneyTransfer>();
+            this.MoneyTransfers1 = new HashSet<MoneyTransfer>();
         }
     
         public int Id { get; set; }
@@ -50,5 +52,9 @@ namespace Core.Entity
         public virtual ICollection<MonthlyPayment> MonthlyPayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dTransaction> dTransactions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MoneyTransfer> MoneyTransfers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MoneyTransfer> MoneyTransfers1 { get; set; }
     }
 }

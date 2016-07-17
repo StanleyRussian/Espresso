@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ViewModels.Statistics.CoffeeSorts;
+using CoffeeSort = UI.Windows.EntityWindows.CoffeeSort;
 
-namespace ModernUI.Pages.Statistic.CoffeeSorts
+namespace UI.Pages.Statistic.CoffeeSorts
 {
     /// <summary>
     /// Interaction logic for ParentCoffeeSorts.xaml
@@ -25,14 +15,16 @@ namespace ModernUI.Pages.Statistic.CoffeeSorts
             InitializeComponent();
         }
 
-        private void btnNew_CLick(object sender, System.Windows.RoutedEventArgs e)
+        private void OnNewClick(object sender, RoutedEventArgs e)
         {
-            new Windows.CreationWindows.NewCoffeeSort().ShowDialog();
+            new CoffeeSort().ShowDialog();
         }
 
-        private void btnEdit_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void OnEditClick(object sender, RoutedEventArgs e)
         {
-            new Windows.EditingWindows.CoffeeSorts().ShowDialog();
+            var selected = tabs.SelectedItem as IndividualCoffeeSortViewModel;
+            if (selected != null)
+                new CoffeeSort(selected.CoffeeSort).ShowDialog();
         }
     }
 }

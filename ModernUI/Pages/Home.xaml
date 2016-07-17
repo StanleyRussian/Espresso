@@ -1,8 +1,9 @@
-﻿<UserControl x:Class="ModernUI.Pages.Home"
+﻿<UserControl x:Class="UI.Pages.Home"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:model="clr-namespace:Model;assembly=Model"
              mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -38,7 +39,7 @@
 
         <TextBlock Text="Текущий баланс:" Style="{StaticResource Header1}" Grid.ColumnSpan="2"/>
 
-        <ItemsControl x:Name="ItemsAccounts" ItemsSource="{Binding AccountsBalances}" 
+        <ItemsControl x:Name="ItemsAccounts" ItemsSource="{Binding AccountsBalances}"
                       Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -125,7 +126,7 @@
 
             <TextBlock Grid.Row="5" Text="Остатки упакованного кофе:" Style="{StaticResource Header1}" Margin="0,25,0,0"/>
             <DataGrid x:Name="GridPacked" Grid.Row="6" Margin="3,0" IsReadOnly="True"
-                      AutoGenerateColumns="False" ItemsSource="{Binding PackedStocks}" >
+                      AutoGenerateColumns="False" ItemsSource="{Binding PackedStocks}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Mix.Name}" Header="Купаж"/>
                     <DataGridTextColumn Binding="{Binding Package.Name, StringFormat={}{0} кг}" Header="Фасовка"/>
@@ -148,7 +149,7 @@
 
             <TextBlock Grid.Row="5" Text="Остатки упаковки:" Style="{StaticResource Header1}" Grid.Column="1" Margin="3,0"/>
             <DataGrid x:Name="GridPackage" Grid.Row="6" Grid.Column="1" Margin="3,0" IsReadOnly="True"
-                      AutoGenerateColumns="False" ItemsSource="{Binding PackageStocks}" >
+                      AutoGenerateColumns="False" ItemsSource="{Binding PackageStocks}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Package.Name}" Header="Название"/>
                     <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} шт}" Header="Количество"/>

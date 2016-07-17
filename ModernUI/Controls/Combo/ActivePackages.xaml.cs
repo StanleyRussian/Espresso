@@ -1,8 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Core;
+using Model;
+using Package = UI.Windows.EntityWindows.Package;
 
-namespace ModernUI.Controls.Combo
+namespace UI.Controls.Combo
 {
     /// <summary>
     /// Interaction logic for comboActivePackages.xaml
@@ -16,7 +17,7 @@ namespace ModernUI.Controls.Combo
 
         private void New(object sender, RoutedEventArgs e)
         {
-            new Windows.CreationWindows.NewPackage().ShowDialog();
+            new Package().ShowDialog();
             ComboBox.ItemsSource = ContextManager.ActivePackages;
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ModernUI
+namespace UI
 {
     /// <summary>
     /// Interaction logic for App.xaml

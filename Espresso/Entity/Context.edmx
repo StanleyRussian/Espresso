@@ -32,6 +32,7 @@
     <EntitySet Name="OtherProfits" EntityType="Context.Store.OtherProfits" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MonthlyPayments" EntityType="Context.Store.MonthlyPayments" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="dTransactions" EntityType="Context.Store.dTransactions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MoneyTransfers" EntityType="Context.Store.MoneyTransfers" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="SupplierCoffeePurchase" Association="Context.Store.SupplierCoffeePurchase">
       <End Role="Supplier" EntitySet="Suppliers" />
       <End Role="CoffeePurchase" EntitySet="CoffeePurchases" />
@@ -156,6 +157,14 @@
       <End Role="PackedCategory" EntitySet="PackedCategories" />
       <End Role="dPackedStocks" EntitySet="dPackedStocks" />
     </AssociationSet>
+    <AssociationSet Name="AccountMoneyTransfer" Association="Context.Store.AccountMoneyTransfer">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="MoneyTransfer" EntitySet="MoneyTransfers" />
+    </AssociationSet>
+    <AssociationSet Name="AccountMoneyTransfer1" Association="Context.Store.AccountMoneyTransfer1">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="MoneyTransfer" EntitySet="MoneyTransfers" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="CoffeePurchases">
     <Key>
@@ -200,8 +209,10 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
-    <Property Name="MinStocks" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MinGreenStocks" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="MinRoastedStocks" Type="nvarchar(max)" Nullable="true" />
     <Property Name="dLastPrice" Type="float" Nullable="true" />
+    <Property Name="dPurchaseStep" Type="float" Nullable="true" />
   </EntityType>
   <EntityType Name="dGreenStocks">
     <Key>
@@ -429,6 +440,16 @@
     <Property Name="Participant" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MoneyTransfers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Sum" Type="float" Nullable="false" />
+    <Property Name="InitialAccount_Id" Type="int" Nullable="false" />
+    <Property Name="TargetAccount_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="SupplierCoffeePurchase">
     <End Role="Supplier" Type="Context.Store.Suppliers" Multiplicity="1" />
@@ -808,6 +829,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="AccountMoneyTransfer">
+    <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1" />
+    <End Role="MoneyTransfer" Type="Context.Store.MoneyTransfers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MoneyTransfer">
+        <PropertyRef Name="InitialAccount_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccountMoneyTransfer1">
+    <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1" />
+    <End Role="MoneyTransfer" Type="Context.Store.MoneyTransfers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MoneyTransfer">
+        <PropertyRef Name="TargetAccount_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -963,6 +1008,15 @@
             <End Role="PackedCategory" EntitySet="PackedCategories" />
             <End Role="dPackedStocks" EntitySet="dPackedStocks" />
           </AssociationSet>
+          <EntitySet Name="MoneyTransfers" EntityType="Context.MoneyTransfer" />
+          <AssociationSet Name="AccountMoneyTransfer" Association="Context.AccountMoneyTransfer">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="MoneyTransfer" EntitySet="MoneyTransfers" />
+          </AssociationSet>
+          <AssociationSet Name="AccountMoneyTransfer1" Association="Context.AccountMoneyTransfer1">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="MoneyTransfer" EntitySet="MoneyTransfers" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CoffeePurchase">
           <Key>
@@ -1021,8 +1075,10 @@
           <NavigationProperty Name="dRoastedStocks" Relationship="Context.dRoastedStockCoffeeSort" FromRole="CoffeeSort" ToRole="dRoastedStock" />
           <NavigationProperty Name="Mix_Details" Relationship="Context.Mix_DetailsCoffeeSort" FromRole="CoffeeSort" ToRole="Mix_Details" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
-          <Property Name="MinStocks" Type="String" Nullable="false" />
+          <Property Name="MinGreenStocks" Type="String" Nullable="true" />
+          <Property Name="MinRoastedStocks" Type="String" Nullable="true" />
           <Property Name="dLastPrice" Type="Double" Nullable="true" />
+          <Property Name="dPurchaseStep" Type="Double" Nullable="true" />
         </EntityType>
         <Association Name="CoffeePurchase_DetailsCoffeePurchase">
           <End Type="Context.CoffeePurchase_Details" Role="CoffeePurchase_Details" Multiplicity="*" />
@@ -1254,6 +1310,8 @@
           <NavigationProperty Name="OtherProfits" Relationship="Context.AccountOtherProfit" FromRole="Account" ToRole="OtherProfit" />
           <NavigationProperty Name="MonthlyPayments" Relationship="Context.AccountMonthlyPayments" FromRole="Account" ToRole="MonthlyPayments" />
           <NavigationProperty Name="dTransactions" Relationship="Context.AccountdTransaction" FromRole="Account" ToRole="dTransaction" />
+          <NavigationProperty Name="MoneyTransfers" Relationship="Context.AccountMoneyTransfer" FromRole="Account" ToRole="MoneyTransfer" />
+          <NavigationProperty Name="MoneyTransfers1" Relationship="Context.AccountMoneyTransfer1" FromRole="Account" ToRole="MoneyTransfer" />
         </EntityType>
         <Association Name="AccountSale">
           <End Type="Context.Account" Role="Account" Multiplicity="1" />
@@ -1400,6 +1458,24 @@
           <End Type="Context.PackedCategory" Role="PackedCategory" Multiplicity="1" />
           <End Type="Context.dPackedStocks" Role="dPackedStocks" Multiplicity="*" />
         </Association>
+        <EntityType Name="MoneyTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sum" Type="Double" Nullable="false" />
+          <NavigationProperty Name="InitialAccount" Relationship="Context.AccountMoneyTransfer" FromRole="MoneyTransfer" ToRole="Account" />
+          <NavigationProperty Name="TargetAccount" Relationship="Context.AccountMoneyTransfer1" FromRole="MoneyTransfer" ToRole="Account" />
+        </EntityType>
+        <Association Name="AccountMoneyTransfer">
+          <End Type="Context.Account" Role="Account" Multiplicity="1" />
+          <End Type="Context.MoneyTransfer" Role="MoneyTransfer" Multiplicity="*" />
+        </Association>
+        <Association Name="AccountMoneyTransfer1">
+          <End Type="Context.Account" Role="Account" Multiplicity="1" />
+          <End Type="Context.MoneyTransfer" Role="MoneyTransfer" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1447,8 +1523,10 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="MinStocks" ColumnName="MinStocks" />
+          <ScalarProperty Name="MinGreenStocks" ColumnName="MinGreenStocks" />
+          <ScalarProperty Name="MinRoastedStocks" ColumnName="MinRoastedStocks" />
           <ScalarProperty Name="dLastPrice" ColumnName="dLastPrice" />
+          <ScalarProperty Name="dPurchaseStep" ColumnName="dPurchaseStep" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1671,6 +1749,15 @@
           <ScalarProperty Name="Sum" ColumnName="Sum" />
           <ScalarProperty Name="Participant" ColumnName="Participant" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MoneyTransfers">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.MoneyTransfer)">
+        <MappingFragment StoreEntitySet="MoneyTransfers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Sum" ColumnName="Sum" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1919,6 +2006,22 @@
         <ScalarProperty Name="Id" ColumnName="PackedCategory_Id" />
       </EndProperty>
       <EndProperty Name="dPackedStocks">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccountMoneyTransfer" TypeName="Context.AccountMoneyTransfer" StoreEntitySet="MoneyTransfers">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="InitialAccount_Id" />
+      </EndProperty>
+      <EndProperty Name="MoneyTransfer">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AccountMoneyTransfer1" TypeName="Context.AccountMoneyTransfer1" StoreEntitySet="MoneyTransfers">
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="TargetAccount_Id" />
+      </EndProperty>
+      <EndProperty Name="MoneyTransfer">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

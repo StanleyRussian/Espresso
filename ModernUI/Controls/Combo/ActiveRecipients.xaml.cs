@@ -1,8 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Core;
+using Model;
+using Recipient = UI.Windows.EntityWindows.Recipient;
 
-namespace ModernUI.Controls.Combo
+namespace UI.Controls.Combo
 {
     /// <summary>
     /// Interaction logic for comboActiveRecipients.xaml
@@ -16,7 +17,7 @@ namespace ModernUI.Controls.Combo
 
         private void New(object sender, RoutedEventArgs e)
         {
-            new Windows.CreationWindows.NewRecipient().ShowDialog();
+            new Recipient().ShowDialog();
             ComboBox.ItemsSource = ContextManager.ActiveRecipients;
         }
     }

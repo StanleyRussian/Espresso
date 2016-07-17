@@ -1,13 +1,13 @@
 ﻿using System.Windows.Controls;
 
-namespace ModernUI.Pages.Statistic.Accounts
+namespace UI.Pages.Statistic.Accounts
 {
     /// <summary>
     /// Interaction logic for IndividualAccount.xaml
     /// </summary>
-    public partial class IndividualAccounts : UserControl
+    public partial class IndividualAccount : UserControl
     {
-        public IndividualAccounts()
+        public IndividualAccount()
         {
             InitializeComponent();
         }

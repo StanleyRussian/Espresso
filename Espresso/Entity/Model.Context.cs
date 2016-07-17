@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Core.Entity
+namespace Model.Entity
 {
     using System;
     using System.Data.Entity;
@@ -51,5 +51,6 @@ namespace Core.Entity
         public virtual DbSet<OtherProfit> OtherProfits { get; set; }
         public virtual DbSet<MonthlyPayment> MonthlyPayments { get; set; }
         public virtual DbSet<dTransaction> dTransactions { get; set; }
+        public virtual DbSet<MoneyTransfer> MoneyTransfers { get; set; }
     }
 }

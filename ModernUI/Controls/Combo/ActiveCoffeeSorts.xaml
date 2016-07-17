@@ -1,7 +1,7 @@
-﻿<UserControl x:Class="ModernUI.Controls.Combo.ComboActiveCoffeeSorts"
+﻿<UserControl x:Class="UI.Controls.Combo.ComboActiveCoffeeSorts"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:core="clr-namespace:Core;assembly=Core">
+             xmlns:model="clr-namespace:Model;assembly=Model">
     
     <Grid Margin="{StaticResource ControlMargin}">
         <Grid.ColumnDefinitions>
@@ -9,7 +9,7 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <ComboBox x:Name="ComboBox" ItemsSource="{Binding Source={x:Static core:ContextManager.ActiveCoffeeSorts}}"
+        <ComboBox x:Name="ComboBox" ItemsSource="{Binding Source={x:Static model:ContextManager.ActiveCoffeeSorts}}"
                   SelectedItem="{Binding CoffeeSort}" DisplayMemberPath="Name" SelectedValue="Id" Width="auto"/>
 
         <Button Grid.Column="1" Click="New" Content="Новый" Margin="5,0,0,0"/>
