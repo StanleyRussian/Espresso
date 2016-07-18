@@ -87,6 +87,8 @@
     <Compile Include="Statistics\CoffeeSorts\IndividualCoffeeSortViewModel.cs" />
     <Compile Include="Statistics\CoffeeSorts\ParentCoffeeSortsViewModel.cs" />
     <Compile Include="Statistics\CoffeeSorts\SummaryCoffeeSortsViewModel.cs" />
+    <Compile Include="Statistics\Suppliers\IndividualSupplierViewModel.cs" />
+    <Compile Include="Statistics\Suppliers\ParentSuppliersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Espresso\Model.csproj">

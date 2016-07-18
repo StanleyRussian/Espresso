@@ -2,6 +2,7 @@
 using ViewModels.Statistics.Abstract;
 using ViewModels.Statistics.Accounts;
 using ViewModels.Statistics.CoffeeSorts;
+using ViewModels.Statistics.Suppliers;
 
 namespace ViewModels.Pages
 {
@@ -13,7 +14,8 @@ namespace ViewModels.Pages
             StatisticTabs = new ObservableCollection<aTabViewModel>
             {
                 new ParentAccountsViewModel(),
-                new ParentCoffeeSortsViewModel()
+                new ParentCoffeeSortsViewModel(),
+                new ParentSuppliersViewModel()
             };
         }
 

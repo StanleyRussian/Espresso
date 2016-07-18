@@ -1,8 +1,8 @@
-﻿<UserControl x:Class="UI.Pages.Statistic.Accounts.ParentAccounts"
+﻿<UserControl x:Class="UI.Pages.Statistic.Suppliers.ParentSuppliers"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:accounts="clr-namespace:UI.Pages.Statistic.Accounts"
              xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             xmlns:suppliers="clr-namespace:UI.Pages.Statistic.Suppliers"
              dialog:DialogParticipation.Register="{Binding}"
              Margin="5">
     <Grid>
@@ -11,7 +11,7 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="3*"/>
@@ -40,9 +40,8 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <accounts:IndividualAccount Grid.Row="1" Grid.Column="1"
-                                 DataContext="{Binding Selected}"/>
-        
+        <suppliers:IndividualSupplier Grid.Row="1" Grid.Column="1" DataContext="{Binding Selected}"/>
+
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -81,4 +80,5 @@
                     Style="{StaticResource AccentedMetroButton}">Редактировать</Button>
         </Grid>
     </Grid>
+
 </UserControl>
