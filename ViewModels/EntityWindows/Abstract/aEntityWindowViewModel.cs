@@ -70,7 +70,7 @@ namespace ViewModels.EntityWindows.Abstract
                 _context.SaveChanges();
                 IsFlySuccessOpened = true;
                 _context.Accounts.Load();
-                if (!CreatingNew)
+                if (CreatingNew)
                     Refresh();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
@@ -100,9 +100,10 @@ namespace ViewModels.EntityWindows.Abstract
         public ICommand cmdOnClosing { get; private set; }
         protected void cmdOnClosing_Execute()
         {
-            foreach (DbEntityEntry entry in _context.ChangeTracker.Entries())
-                if (entry.State == EntityState.Deleted || entry.State == EntityState.Modified)
-                    entry.State = EntityState.Unchanged;
+            ContextManager.ReloadContext();
+            //foreach (DbEntityEntry entry in _context.ChangeTracker.Entries())
+            //    if (entry.State == EntityState.Deleted || entry.State == EntityState.Modified)
+            //        entry.State = EntityState.Unchanged;
         }
 
         #endregion

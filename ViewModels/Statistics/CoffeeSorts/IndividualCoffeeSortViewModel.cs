@@ -39,6 +39,7 @@ namespace ViewModels.Statistics.CoffeeSorts
 
         protected override void Load()
         {
+            _context = ContextManager.Context;
             _filterTo = DateTime.Now;
             _filterFrom = DateTime.Now.AddDays(-30);
 

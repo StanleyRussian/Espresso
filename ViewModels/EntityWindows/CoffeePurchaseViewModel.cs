@@ -11,7 +11,10 @@ namespace ViewModels.EntityWindows
         public CoffeePurchaseViewModel(object argPurchase)
         {
             if (argPurchase != null)
+            {
                 Purchase = argPurchase as CoffeePurchase;
+                Details = new ObservableCollection<CoffeePurchase_Details>(Purchase.CoffeePurchase_Details);
+            }
             else
             {
                 CreatingNew = true;
@@ -65,15 +68,13 @@ namespace ViewModels.EntityWindows
 
         protected override void cmdSave_Execute()
         {
+            foreach (var detail in Details)
+                _purchase.Sum += (detail.Price*detail.Quantity);
+            _purchase.CoffeePurchase_Details.Clear();
+            foreach (var x in Details)
+                _purchase.CoffeePurchase_Details.Add(x);
             if (CreatingNew)
-            {
-                foreach (var detail in Details)
-                    _purchase.Sum += (detail.Price*detail.Quantity);
-                _purchase.CoffeePurchase_Details.Clear();
-                foreach (var x in Details)
-                    _purchase.CoffeePurchase_Details.Add(x);
                 _context.CoffeePurchases.Add(_purchase);
-            }
             SaveContext();
         }
 

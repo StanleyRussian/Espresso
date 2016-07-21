@@ -10,10 +10,8 @@ using ViewModels.Statistics.Abstract;
 
 namespace ViewModels.Statistics.Accounts
 {
-    public class IndividualAccountViewModel : aTabViewModel
+    public class IndividualAccountViewModel : aProcessListingViewModel
     {
-        private ContextContainer _context = ContextManager.Context;
-
         public IndividualAccountViewModel(Account account)
         {
             Account = account;
@@ -23,6 +21,7 @@ namespace ViewModels.Statistics.Accounts
         public Account Account { get; }
         public double Balance { get; private set; }
 
+        private ObservableCollection<dTransaction> _transactions;
         public ObservableCollection<dTransaction> Transactions
         {
             get { return _transactions; }
@@ -35,13 +34,9 @@ namespace ViewModels.Statistics.Accounts
 
         protected override void Load()
         {
+            _context = ContextManager.Context;
             _filterTo = DateTime.Now;
             _filterFrom = DateTime.Now.AddDays(-30);
-
-            cmdSave = new Command(cmdSave_Execute);
-            cmdDelete = new Command(cmdDelete_Execute);
-            cmdFilter30Days = new Command(cmdFilter30Days_Execute);
-            cmdFilterAll = new Command(cmdFilterAll_Execute);
 
             Balance = _context.dAccountsBalances.Find(Account.Id).Balance;
             Transactions = new ObservableCollection<dTransaction>(_context.dTransactions
@@ -50,75 +45,14 @@ namespace ViewModels.Statistics.Accounts
                 .Take(5));
         }
 
-        private void ReloadTransactions()
+        protected override void Refresh()
         {
             Transactions = new ObservableCollection<dTransaction>(
                 _context.dTransactions.Where(p => p.Account.Id == Account.Id
                 && p.Date >= _filterFrom && p.Date <= _filterTo));
         }
 
-        #region Binding Properties
-
-        protected DateTime _filterFrom;
-        public DateTime FilterFrom
-        {
-            get { return _filterFrom; }
-            set
-            {
-                _filterFrom = value;
-                OnPropertyChanged();
-                ReloadTransactions();
-            }
-        }
-
-        protected DateTime _filterTo;
-        private ObservableCollection<dTransaction> _transactions;
-
-        public DateTime FilterTo
-        {
-            get { return _filterTo; }
-            set
-            {
-                _filterTo = value;
-                OnPropertyChanged();
-                ReloadTransactions();
-            }
-        }
-
-        #endregion
-
-        #region Commands
-
-        public ICommand cmdSave
-        { get; private set; }
-        protected void cmdSave_Execute()
-        {
-            _context.SaveChanges();
-            DialogCoordinator.Instance.ShowMessageAsync(this, "Успех", "Сохранение завершено");
-        }
-
-        public ICommand cmdDelete
-        { get; private set; }
-        protected void cmdDelete_Execute(object argSelected) { }
-
-        public ICommand cmdFilter30Days
-        { get; private set; }
-        protected void cmdFilter30Days_Execute()
-        {
-            _filterTo = DateTime.Now;
-            OnPropertyChanged(nameof(FilterTo));
-            FilterFrom = DateTime.Now.AddDays(-30);
-        }
-
-        public ICommand cmdFilterAll
-        { get; private set; }
-        protected void cmdFilterAll_Execute()
-        {
-            _filterTo = DateTime.Now;
-            OnPropertyChanged(nameof(FilterTo));
-            FilterFrom = DateTime.MinValue;
-        }
-
-        #endregion
+        protected override void cmdDelete_Execute(object argSelected)
+        { }
     }
 }

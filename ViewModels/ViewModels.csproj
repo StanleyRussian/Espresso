@@ -79,10 +79,13 @@
     <Compile Include="Pages\HomeViewModel.cs" />
     <Compile Include="Pages\StatisticsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statistics\Abstract\aProcessListingViewModel.cs" />
     <Compile Include="Statistics\Abstract\aSubjectsListingViewModel.cs" />
     <Compile Include="Statistics\Abstract\aTabViewModel.cs" />
     <Compile Include="Statistics\Accounts\IndividualAccountViewModel.cs" />
     <Compile Include="Statistics\Accounts\ParentAccountsViewModel.cs" />
+    <Compile Include="Statistics\CoffeePurchases\IndividualCoffeePurchaseViewModel.cs" />
+    <Compile Include="Statistics\CoffeePurchases\ParentCoffeePurchasesViewModel.cs" />
     <Compile Include="Statistics\CoffeeSorts\hCoffeePurchaseViewModel.cs" />
     <Compile Include="Statistics\CoffeeSorts\IndividualCoffeeSortViewModel.cs" />
     <Compile Include="Statistics\CoffeeSorts\ParentCoffeeSortsViewModel.cs" />
@@ -100,6 +103,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

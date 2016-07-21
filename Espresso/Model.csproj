@@ -207,6 +207,7 @@
   <ItemGroup>
     <Content Include="Entity\Context.edmx.sql" />
     <Content Include="Entity\CreateTriggers.sql" />
+    <Resource Include="Entity\Database Notes.txt" />
     <Content Include="Entity\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model.Context.cs</LastGenOutput>
@@ -217,9 +218,6 @@
       <LastGenOutput>Model.cs</LastGenOutput>
       <DependentUpon>Context.edmx</DependentUpon>
     </Content>
-    <Resource Include="Notes\Guidelines.txt" />
-    <Resource Include="Notes\ToDo.txt" />
-    <Resource Include="Notes\Notes.txt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

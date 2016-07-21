@@ -1,4 +1,5 @@
-﻿using Model.Entity;
+﻿
+using Model.Entity;
 
 namespace ViewModels.EntityWindows
 {

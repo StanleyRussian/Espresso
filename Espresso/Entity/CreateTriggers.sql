@@ -402,6 +402,19 @@ WHERE dPackedStocks.Mix_Id = d.Mix_Id
 GO
 
 
+---- SELF MOUNTED TRIGGERS
+-- on UPDATE
+IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].PackedStocks_Update_PackedStocks'))
+DROP TRIGGER [dbo].PackedStocks_Update_PackedStocks
+GO
+CREATE TRIGGER PackedStocks_Update_PackedStocks
+ON CoffeeSale_Details
+AFTER UPDATE AS
+IF (SELECT i.PackQuantity FROM INSERTED i) = 0
+DELETE FROM dPackedStocks
+WHERE Id = (SELECT i.Id FROM INSERTED i)
+GO
+
 
 ------ dPackageStocks
 ---- Packages
@@ -421,13 +434,13 @@ GO
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].PackageStocks_Delete_Package'))
 DROP TRIGGER [dbo].PackageStocks_Delete_Package
 GO
-CREATE TRIGGER PackageStocks_Delete_Package
-ON Packages
-AFTER DELETE AS
-DELETE FROM dPackageStocks
-WHERE Package_Id = (SELECT d.Id 
-					FROM DELETED d)
-GO
+--CREATE TRIGGER PackageStocks_Delete_Package
+--ON Packages
+--AFTER DELETE AS
+--DELETE FROM dPackageStocks
+--WHERE Package_Id = (SELECT d.Id 
+--					FROM DELETED d)
+--GO
 
 
 ---- PackagePurchases
@@ -531,13 +544,13 @@ GO
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].AccountsBalances_Delete_Account'))
 DROP TRIGGER [dbo].AccountsBalances_Delete_Account
 GO
-CREATE TRIGGER AccountsBalances_Delete_Account
-ON Accounts
-AFTER DELETE AS
-DELETE FROM dAccountsBalances
-WHERE Account_Id = (SELECT d.Id 
-					   FROM DELETED d)
-GO
+--CREATE TRIGGER AccountsBalances_Delete_Account
+--ON Accounts
+--AFTER DELETE AS
+--DELETE FROM dAccountsBalances
+--WHERE Account_Id = (SELECT d.Id 
+--					   FROM DELETED d)
+--GO
 
 
 ---- CoffeeSale

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using Model;
@@ -9,7 +11,7 @@ namespace ViewModels.Statistics.Abstract
 {
     public abstract class aSubjectsListViewModel :aTabViewModel
     {
-        protected ContextContainer _context = ContextManager.Context;
+        protected ContextContainer _context;
 
         protected aSubjectsListViewModel()
         {
@@ -29,15 +31,15 @@ namespace ViewModels.Statistics.Abstract
             try
             {
                 _context.SaveChanges();
+                ContextManager.ReloadContext();
             }
             catch (Exception ex)
             {
                 DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка", ex.Message,
                     MessageDialogStyle.Affirmative, new MetroDialogSettings { ColorScheme = MetroDialogColorScheme.Accented });
-            }
-            finally
-            {
-                Load();
+                foreach (DbEntityEntry entry in _context.ChangeTracker.Entries())
+                    if (entry.State == EntityState.Deleted)
+                        entry.State = EntityState.Unchanged;
             }
         }
 

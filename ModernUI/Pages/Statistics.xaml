@@ -7,7 +7,9 @@
              xmlns:coffeeSortsVM="clr-namespace:ViewModels.Statistics.CoffeeSorts;assembly=ViewModels"
              xmlns:accountsVM="clr-namespace:ViewModels.Statistics.Accounts;assembly=ViewModels"
              xmlns:suppliersVM="clr-namespace:ViewModels.Statistics.Suppliers;assembly=ViewModels"
-             xmlns:suppliers="clr-namespace:UI.Pages.Statistic.Suppliers">
+             xmlns:suppliers="clr-namespace:UI.Pages.Statistic.Suppliers"
+             xmlns:coffeePurchasesVM="clr-namespace:ViewModels.Statistics.CoffeePurchases;assembly=ViewModels"
+             xmlns:coffeePurchases="clr-namespace:UI.Pages.Statistic.CoffeePurchases">
     <Grid>
         <TabControl ItemsSource="{Binding StatisticTabs, Mode=TwoWay}">
             <TabControl.Resources>
@@ -19,6 +21,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type suppliersVM:ParentSuppliersViewModel}">
                     <suppliers:ParentSuppliers/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type coffeePurchasesVM:ParentCoffeePurchasesViewModel}">
+                    <coffeePurchases:ParentCoffeePurchases/>
                 </DataTemplate>
             </TabControl.Resources>
 

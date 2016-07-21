@@ -106,6 +106,12 @@
     <Compile Include="Pages\Statistic\Accounts\IndividualAccount.xaml.cs">
       <DependentUpon>IndividualAccount.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Statistic\CoffeePurchases\IndividualCoffeePurchase.xaml.cs">
+      <DependentUpon>IndividualCoffeePurchase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Statistic\CoffeePurchases\ParentCoffeePurchases.xaml.cs">
+      <DependentUpon>ParentCoffeePurchases.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Statistic\CoffeeSorts\IndividualCoffeeSort.xaml.cs">
       <DependentUpon>IndividualCoffeeSort.xaml</DependentUpon>
     </Compile>
@@ -206,6 +212,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Statistic\Accounts\IndividualAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Statistic\CoffeePurchases\IndividualCoffeePurchase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Statistic\CoffeePurchases\ParentCoffeePurchases.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

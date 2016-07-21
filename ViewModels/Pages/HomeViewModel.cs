@@ -5,6 +5,7 @@ using Model.Entity;
 using ViewModels.Auxiliary;
 using ViewModels.Statistics.Abstract;
 using System.Data.Entity;
+using System.Linq;
 
 namespace ViewModels.Pages
 {
@@ -22,9 +23,14 @@ namespace ViewModels.Pages
             cmdReload = new Command(Load);
             Header = "Главная";
             IsSelected = true;
-        }
 
-        public string Header { get; set; }
+            //_context = new ContextContainer();
+            //Account[] array = new Account[1000];
+            //for (int i = 0; i < 1000; i++)
+            //    array[i] = new Account {Name = "account" + i};
+            //_context.Accounts.AddRange(array);
+            //_context.SaveChanges();
+        }
 
         protected override void Load()
         {
@@ -38,7 +44,10 @@ namespace ViewModels.Pages
             PackageStocks = 
                 new ObservableCollection<dPackageStocks>(_context.dPackageStocks.Include(p => p.Package));
             AccountsBalances =
-                new ObservableCollection<dAccountsBalance>(_context.dAccountsBalances.Include(p => p.Account));
+                new ObservableCollection<dAccountsBalance>(
+                    _context.dAccountsBalances
+                        .Where(p => p.Account.Active)
+                        .Include(p => p.Account));
         }
 
         #region Binding Properties
@@ -49,7 +58,7 @@ namespace ViewModels.Pages
             private set
             {
                 _greenStocks = value;
-                OnPropertyChanged();
+                OnPropertyChanged(); 
             }
         }
 

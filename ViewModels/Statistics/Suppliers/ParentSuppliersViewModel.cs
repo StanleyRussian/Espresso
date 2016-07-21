@@ -6,6 +6,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
 using ViewModels.Statistics.Abstract;
 using ViewModels.Statistics.Accounts;
 
@@ -23,24 +24,19 @@ namespace ViewModels.Statistics.Suppliers
 
         protected override void Load()
         {
+            _context = ContextManager.Context;
             if (IsActiveSelected)
             {
-                if (_active == null)
-                {
-                    _active = new ObservableCollection<IndividualSupplierViewModel>();
-                    foreach (var active in _context.Suppliers.Where(p => p.Active))
-                        _active.Add(new IndividualSupplierViewModel(active));
-                }
+                _active = new ObservableCollection<IndividualSupplierViewModel>();
+                foreach (var active in _context.Suppliers.Where(p => p.Active))
+                    _active.Add(new IndividualSupplierViewModel(active));
                 Selected = _active;
             }
             else
             {
-                if (_inactive == null)
-                {
-                    _inactive = new ObservableCollection<IndividualSupplierViewModel>();
-                    foreach (var inactive in _context.Suppliers.Where(p => !p.Active))
-                        _inactive.Add(new IndividualSupplierViewModel(inactive));
-                }
+                _inactive = new ObservableCollection<IndividualSupplierViewModel>();
+                foreach (var inactive in _context.Suppliers.Where(p => !p.Active))
+                    _inactive.Add(new IndividualSupplierViewModel(inactive));
                 Selected = _inactive;
             }
 

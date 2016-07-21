@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using ViewModels.Statistics.Abstract;
 using ViewModels.Statistics.Accounts;
+using ViewModels.Statistics.CoffeePurchases;
 using ViewModels.Statistics.CoffeeSorts;
 using ViewModels.Statistics.Suppliers;
 
@@ -15,12 +16,12 @@ namespace ViewModels.Pages
             {
                 new ParentAccountsViewModel(),
                 new ParentCoffeeSortsViewModel(),
-                new ParentSuppliersViewModel()
+                new ParentSuppliersViewModel(),
+                new ParentCoffeePurchasesViewModel()
             };
         }
 
         public ObservableCollection<aTabViewModel> StatisticTabs { get; private set; }
-        public string Header { get; set; }
 
         protected override void Load() {}
     }

@@ -22,7 +22,7 @@
         <EntityTypeShape EntityType="Context.Mix_Details" Width="1.5" PointX="5.375" PointY="5.875" />
         <AssociationConnector Association="Context.Mix_DetailsMix" />
         <AssociationConnector Association="Context.Mix_DetailsCoffeeSort" />
-        <EntityTypeShape EntityType="Context.Packing" Width="1.5" PointX="10" PointY="7.625" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="Context.Packing" Width="1.5" PointX="9.875" PointY="7.625" FillColor="Chocolate" />
         <EntityTypeShape EntityType="Context.Package" Width="1.5" PointX="9.5" PointY="10.625" IsExpanded="true" />
         <AssociationConnector Association="Context.PackingMix" />
         <AssociationConnector Association="Context.PackingPackage" />
@@ -31,7 +31,7 @@
         <EntityTypeShape EntityType="Context.dPackedStocks" Width="1.5" PointX="11.875" PointY="10.375" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.dPackedStocksMix" />
         <AssociationConnector Association="Context.PackagedPackedStocks" />
-        <EntityTypeShape EntityType="Context.dPackageStocks" Width="1.5" PointX="11.75" PointY="12.75" FillColor="YellowGreen" />
+        <EntityTypeShape EntityType="Context.dPackageStocks" Width="1.5" PointX="11.875" PointY="12.75" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.dPackageStocksPackage" />
         <EntityTypeShape EntityType="Context.CoffeeSale" Width="1.5" PointX="6.875" PointY="14" FillColor="Chocolate" />
         <EntityTypeShape EntityType="Context.Recipient" Width="1.5" PointX="7" PointY="17.25" />
@@ -65,7 +65,7 @@
         <EntityTypeShape EntityType="Context.dTransaction" Width="1.5" PointX="5.125" PointY="16.5" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.AccountdTransaction" />
         <AssociationConnector Association="Context.PackedCategorydPackedStocks" />
-        <EntityTypeShape EntityType="Context.MoneyTransfer" Width="1.5" PointX="0.5" PointY="15.75" />
+        <EntityTypeShape EntityType="Context.MoneyTransfer" Width="1.5" PointX="0.5" PointY="15.75" FillColor="Chocolate" />
         <AssociationConnector Association="Context.AccountMoneyTransfer" />
         <AssociationConnector Association="Context.AccountMoneyTransfer1" />
         </Diagram>

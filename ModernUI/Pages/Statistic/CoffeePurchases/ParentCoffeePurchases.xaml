@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="UI.Pages.Statistic.CoffeePurchases.ParentCoffeePurchases"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             xmlns:coffeePurchases="clr-namespace:UI.Pages.Statistic.CoffeePurchases"
+             dialog:DialogParticipation.Register="{Binding}"
+             Margin="5">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
+                <Button Command="{Binding cmdFilter30Days}" 
+                    Margin="{StaticResource ControlMargin}">За последние 30 дней</Button>
+                <Button Command="{Binding cmdFilterAll}" 
+                    Margin="{StaticResource ControlMargin}">Все</Button>
+            </StackPanel>
+
+            <Label Margin="{StaticResource ControlMargin}"
+                   Grid.Row="1">С даты:</Label>
+            <DatePicker Margin="{StaticResource ControlMargin}" Grid.Row="1" Grid.Column="1"
+                        SelectedDate="{Binding FilterFrom, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Margin="{StaticResource ControlMargin}"
+                   Grid.Row="2">По дату:</Label>
+            <DatePicker Margin="{StaticResource ControlMargin}" Grid.Row="2" Grid.Column="1"
+                        SelectedDate="{Binding FilterTo, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+
+        <ListBox x:Name="tabs" Grid.Row="1" ItemsSource="{Binding Tabs}" 
+                 DisplayMemberPath="Header" IsSynchronizedWithCurrentItem="True">
+            <ListBox.ItemContainerStyle>
+                <Style BasedOn="{StaticResource MetroListBoxItem}" TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+
+        <coffeePurchases:IndividualCoffeePurchase Grid.Row="1" Grid.Column="1" DataContext="{Binding Tabs}"/>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Click="OnNewClick" Grid.Row="0" Style="{StaticResource AccentedMetroButton}"
+                    Margin="{StaticResource ControlMargin}">Добавить</Button>
+            <Button Command="{Binding cmdReload}" Grid.Row="0" Grid.Column="1"
+                    Margin="{StaticResource ControlMargin}">Обновить</Button>
+            <Button Command="{Binding cmdDelete}" Grid.Row="1"
+                    Margin="{StaticResource ControlMargin}"
+                    CommandParameter="{Binding ElementName=tabs, Path=SelectedItem}">Удалить</Button>
+            <Button Click="OnEditClick" Grid.Row="1" Grid.Column="1"
+                    Margin="{StaticResource ControlMargin}" 
+                    Style="{StaticResource AccentedMetroButton}">Редактировать</Button>
+        </Grid>
+    </Grid>
+</UserControl>

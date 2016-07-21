@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using Model;
 using ViewModels.Statistics.Abstract;
 
 namespace ViewModels.Statistics.CoffeeSorts
@@ -13,26 +14,22 @@ namespace ViewModels.Statistics.CoffeeSorts
         {
             Header = "Сорта кофе";
         }
+
         protected override void Load()
         {
+            _context = ContextManager.Context;
             if (IsActiveSelected)
             {
-                if (_active == null)
-                {
-                    _active = new ObservableCollection<IndividualCoffeeSortViewModel>();
-                    foreach (var active in _context.CoffeeSorts.Where(p => p.Active))
-                        _active.Add(new IndividualCoffeeSortViewModel(active));
-                }
+                _active = new ObservableCollection<IndividualCoffeeSortViewModel>();
+                foreach (var active in _context.CoffeeSorts.Where(p => p.Active))
+                    _active.Add(new IndividualCoffeeSortViewModel(active));
                 Selected = _active;
             }
             else
             {
-                if (_inactive == null)
-                {
-                    _inactive = new ObservableCollection<IndividualCoffeeSortViewModel>();
-                    foreach (var inactive in _context.CoffeeSorts.Where(p => !p.Active))
-                        _inactive.Add(new IndividualCoffeeSortViewModel(inactive));
-                }
+                _inactive = new ObservableCollection<IndividualCoffeeSortViewModel>();
+                foreach (var inactive in _context.CoffeeSorts.Where(p => !p.Active))
+                    _inactive.Add(new IndividualCoffeeSortViewModel(inactive));
                 Selected = _inactive;
             }
         }

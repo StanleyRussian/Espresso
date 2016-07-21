@@ -746,7 +746,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="AccountdAccountsBalance">
-    <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1" />
+    <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="dAccountsBalance" Type="Context.Store.dAccountsBalances" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Account">
@@ -1099,7 +1101,9 @@
           <NavigationProperty Name="CoffeeSort" Relationship="Context.CoffeeSortdGreenStocks" FromRole="dGreenStocks" ToRole="CoffeeSort" />
         </EntityType>
         <Association Name="CoffeeSortdGreenStocks">
-          <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" />
+          <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Context.dGreenStock" Role="dGreenStocks" Multiplicity="*" />
         </Association>
         <EntityType Name="Roasting">
@@ -1126,7 +1130,9 @@
         </Association>
         <Association Name="dRoastedStockCoffeeSort">
           <End Type="Context.dRoastedStock" Role="dRoastedStock" Multiplicity="*" />
-          <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" />
+          <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
         </Association>
         <EntityType Name="Mix">
           <Key>
@@ -1227,7 +1233,8 @@
         </EntityType>
         <Association Name="dPackedStocksMix">
           <End Type="Context.dPackedStocks" Role="dPackedStocks" Multiplicity="*" />
-          <End Type="Context.Mix" Role="Mix" Multiplicity="1" />
+          <End Type="Context.Mix" Role="Mix" Multiplicity="1" >
+          </End>
         </Association>
         <Association Name="PackagedPackedStocks">
           <End Type="Context.Package" Role="Package" Multiplicity="1" />
@@ -1243,7 +1250,9 @@
         </EntityType>
         <Association Name="dPackageStocksPackage">
           <End Type="Context.dPackageStocks" Role="dPackageStocks" Multiplicity="*" />
-          <End Type="Context.Package" Role="Package" Multiplicity="1" />
+          <End Type="Context.Package" Role="Package" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
         </Association>
         <EntityType Name="CoffeeSale">
           <Key>
@@ -1374,7 +1383,9 @@
           <NavigationProperty Name="Account" Relationship="Context.AccountdAccountsBalance" FromRole="dAccountsBalance" ToRole="Account" />
         </EntityType>
         <Association Name="AccountdAccountsBalance">
-          <End Type="Context.Account" Role="Account" Multiplicity="1" />
+          <End Type="Context.Account" Role="Account" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Context.dAccountsBalance" Role="dAccountsBalance" Multiplicity="*" />
         </Association>
         <EntityType Name="Payment">
