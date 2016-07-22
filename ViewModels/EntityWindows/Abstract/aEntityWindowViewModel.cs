@@ -69,7 +69,7 @@ namespace ViewModels.EntityWindows.Abstract
             {
                 _context.SaveChanges();
                 IsFlySuccessOpened = true;
-                _context.Accounts.Load();
+                ContextManager.ReloadContext();
                 if (CreatingNew)
                     Refresh();
             }

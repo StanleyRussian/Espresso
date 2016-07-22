@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -35,7 +36,16 @@ namespace ViewModels.Statistics.CoffeeSorts
             }
         }
 
-        public double PurchaseStep { get; private set; }
+        private string _purchaseStepMessage;
+        public string PurchaseStepMessage
+        {
+            get { return _purchaseStepMessage; }
+            private set
+            {
+                _purchaseStepMessage = value;
+                OnPropertyChanged();
+            }
+        }
 
         protected override void Load()
         {
@@ -61,8 +71,8 @@ namespace ViewModels.Statistics.CoffeeSorts
             foreach (var purchase in query)
                 Purchases.Add(new hCoffeePurchaseViewModel(purchase, CoffeeSort));
 
-            if (CoffeeSort.dPurchaseStep != null)
-                PurchaseStep = CoffeeSort.dPurchaseStep.Value;
+            if (CoffeeSort.dLastPurchaseStep != null)
+                PurchaseStepMessage = "По последним расчётам: " + CoffeeSort.dLastPurchaseStep;
         }
 
         private void ReloadPurchases()
@@ -113,10 +123,31 @@ namespace ViewModels.Statistics.CoffeeSorts
         public ICommand cmdRefreshPurchaseStep { get; private set; }
         private void cmdRefreshPurchaseStep_Execute()
         {
+            // Querying all coffee purchases for last year for current coffee sort
+            DateTime yearAgo = DateTime.Today.AddDays(-365);
             var query = _context.CoffeePurchases
-                .Where(p => p.CoffeePurchase_Details
-                    .FirstOrDefault(x => x.CoffeeSort.Id == CoffeeSort.Id) != null);
-            PurchaseStep = query.Count()/12d;
+                .Where(
+                    p =>
+                        p.Date >= yearAgo &&
+                        p.CoffeePurchase_Details.FirstOrDefault(x => x.CoffeeSort.Id == CoffeeSort.Id) != null);
+
+            // Finding all months with purchases
+            List<string> months = new List<string>();
+            foreach (CoffeePurchase purchase in query)
+            {
+                string month = purchase.Date.Month.ToString();
+                if (!months.Contains(month))
+                    months.Add(month);
+            }
+
+            double step = (double)query.Count()/ months.Count;
+
+            PurchaseStepMessage = query.Count() + " раз за последние " + months.Count + " месяц. ";
+                PurchaseStepMessage += "В среднем, " + step + " раз в месяц. ";
+                PurchaseStepMessage += "Или каждые " + 30/step + " дней";
+
+            CoffeeSort.dLastPurchaseStep = PurchaseStepMessage;
+            _context.SaveChanges();
         }
 
         public ICommand cmdSave { get; private set; }

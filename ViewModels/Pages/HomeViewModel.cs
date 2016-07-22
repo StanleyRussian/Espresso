@@ -23,13 +23,6 @@ namespace ViewModels.Pages
             cmdReload = new Command(Load);
             Header = "Главная";
             IsSelected = true;
-
-            //_context = new ContextContainer();
-            //Account[] array = new Account[1000];
-            //for (int i = 0; i < 1000; i++)
-            //    array[i] = new Account {Name = "account" + i};
-            //_context.Accounts.AddRange(array);
-            //_context.SaveChanges();
         }
 
         protected override void Load()

@@ -212,7 +212,7 @@
     <Property Name="MinGreenStocks" Type="nvarchar(max)" Nullable="true" />
     <Property Name="MinRoastedStocks" Type="nvarchar(max)" Nullable="true" />
     <Property Name="dLastPrice" Type="float" Nullable="true" />
-    <Property Name="dPurchaseStep" Type="float" Nullable="true" />
+    <Property Name="dLastPurchaseStep" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="dGreenStocks">
     <Key>
@@ -490,7 +490,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="CoffeeSortdGreenStocks">
-    <End Role="CoffeeSort" Type="Context.Store.CoffeeSorts" Multiplicity="1" />
+    <End Role="CoffeeSort" Type="Context.Store.CoffeeSorts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="dGreenStocks" Type="Context.Store.dGreenStocks" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CoffeeSort">
@@ -515,7 +517,9 @@
   </Association>
   <Association Name="dRoastedStockCoffeeSort">
     <End Role="dRoastedStock" Type="Context.Store.dRoastedStocks" Multiplicity="*" />
-    <End Role="CoffeeSort" Type="Context.Store.CoffeeSorts" Multiplicity="1" />
+    <End Role="CoffeeSort" Type="Context.Store.CoffeeSorts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <ReferentialConstraint>
       <Principal Role="CoffeeSort">
         <PropertyRef Name="Id" />
@@ -613,7 +617,9 @@
   </Association>
   <Association Name="dPackageStocksPackage">
     <End Role="dPackageStocks" Type="Context.Store.dPackageStocks" Multiplicity="*" />
-    <End Role="Package" Type="Context.Store.Packages" Multiplicity="1" />
+    <End Role="Package" Type="Context.Store.Packages" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <ReferentialConstraint>
       <Principal Role="Package">
         <PropertyRef Name="Id" />
@@ -1080,7 +1086,7 @@
           <Property Name="MinGreenStocks" Type="String" Nullable="true" />
           <Property Name="MinRoastedStocks" Type="String" Nullable="true" />
           <Property Name="dLastPrice" Type="Double" Nullable="true" />
-          <Property Name="dPurchaseStep" Type="Double" Nullable="true" />
+          <Property Name="dLastPurchaseStep" Type="String" Nullable="true" />
         </EntityType>
         <Association Name="CoffeePurchase_DetailsCoffeePurchase">
           <End Type="Context.CoffeePurchase_Details" Role="CoffeePurchase_Details" Multiplicity="*" />
@@ -1537,7 +1543,7 @@
           <ScalarProperty Name="MinGreenStocks" ColumnName="MinGreenStocks" />
           <ScalarProperty Name="MinRoastedStocks" ColumnName="MinRoastedStocks" />
           <ScalarProperty Name="dLastPrice" ColumnName="dLastPrice" />
-          <ScalarProperty Name="dPurchaseStep" ColumnName="dPurchaseStep" />
+          <ScalarProperty Name="dLastPurchaseStep" ColumnName="dLastPurchaseStep" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

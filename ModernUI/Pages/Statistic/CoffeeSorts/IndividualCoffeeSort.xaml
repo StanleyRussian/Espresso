@@ -78,10 +78,20 @@
             </DataGrid>
         </Grid>
 
-        <WrapPanel Grid.Row="2">
-            <TextBlock Style="{StaticResource Header2}">Шаг закупок:</TextBlock>
-            <TextBlock Style="{StaticResource Header2Accent}" Text="{Binding PurchaseStep}"/>
-            <Button Command="{Binding cmdRefreshPurchaseStep}">Пересчитать</Button>
-        </WrapPanel>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Command="{Binding cmdRefreshPurchaseStep}" Content="Шаг закупок" VerticalAlignment="Center"/>
+            <TextBlock Style="{StaticResource Header2Accent}" Margin="5,0,0,0" Grid.Column="1"
+                       Text="{Binding PurchaseStepMessage}" TextWrapping="Wrap"/>
+        </Grid>
     </Grid>
 </UserControl>
+
