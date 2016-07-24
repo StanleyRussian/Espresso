@@ -784,8 +784,8 @@ BEGIN
 			INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
 			SELECT i.Account_Id, i.Date, i.Sum, rc.Name, N'Продажа кофе'
 			FROM INSERTED i
-			INNER JOIN dbo.Recipients rc
-				ON rc.Id = i.Recipient_Id
+			INNER JOIN dbo.Suppliers rc
+				ON rc.Id = i.Supplier_Id
 		END
 		BEGIN
 			UPDATE CoffeeSales
