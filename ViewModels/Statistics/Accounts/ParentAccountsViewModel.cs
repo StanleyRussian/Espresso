@@ -17,18 +17,17 @@ namespace ViewModels.Statistics.Accounts
 
         protected override void Load()
         {
-            _context = ContextManager.Context;
             if (IsActiveSelected)
             {
                 _active = new ObservableCollection<IndividualAccountViewModel>();
-                foreach (var active in _context.Accounts.Where(p => p.Active))
+                foreach (var active in ContextManager.Context.Accounts.Where(p => p.Active))
                     _active.Add(new IndividualAccountViewModel(active));
                 Selected = _active;
             }
             else
             {
                 _inactive = new ObservableCollection<IndividualAccountViewModel>();
-                foreach (var inactive in _context.Accounts.Where(p => !p.Active))
+                foreach (var inactive in ContextManager.Context.Accounts.Where(p => !p.Active))
                     _inactive.Add(new IndividualAccountViewModel(inactive));
                 Selected = _inactive;
             }
@@ -56,6 +55,7 @@ namespace ViewModels.Statistics.Accounts
         {
             _active = null;
             _inactive = null;
+            ContextManager.ReloadContext();
             Load();
         }
 
@@ -69,7 +69,7 @@ namespace ViewModels.Statistics.Accounts
         {
             if (IsEmpty(argSelected)) return;
             var selected = argSelected as IndividualAccountViewModel;
-            _context.Accounts.Remove(selected.Account);
+            ContextManager.Context.Accounts.Remove(selected.Account);
             SaveContext();
             cmdReload_Execute();
         }

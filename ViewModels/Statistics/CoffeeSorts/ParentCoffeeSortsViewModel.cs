@@ -17,18 +17,17 @@ namespace ViewModels.Statistics.CoffeeSorts
 
         protected override void Load()
         {
-            _context = ContextManager.Context;
             if (IsActiveSelected)
             {
                 _active = new ObservableCollection<IndividualCoffeeSortViewModel>();
-                foreach (var active in _context.CoffeeSorts.Where(p => p.Active))
+                foreach (var active in ContextManager.Context.CoffeeSorts.Where(p => p.Active))
                     _active.Add(new IndividualCoffeeSortViewModel(active));
                 Selected = _active;
             }
             else
             {
                 _inactive = new ObservableCollection<IndividualCoffeeSortViewModel>();
-                foreach (var inactive in _context.CoffeeSorts.Where(p => !p.Active))
+                foreach (var inactive in ContextManager.Context.CoffeeSorts.Where(p => !p.Active))
                     _inactive.Add(new IndividualCoffeeSortViewModel(inactive));
                 Selected = _inactive;
             }
@@ -53,6 +52,7 @@ namespace ViewModels.Statistics.CoffeeSorts
         {
             _active = null;
             _inactive = null;
+            ContextManager.ReloadContext();
             Load();
         }
 
@@ -64,7 +64,7 @@ namespace ViewModels.Statistics.CoffeeSorts
         {
             if (IsEmpty(argSelected)) return;
             var selected = argSelected as IndividualCoffeeSortViewModel;
-            _context.CoffeeSorts.Remove(selected.CoffeeSort);
+            ContextManager.Context.CoffeeSorts.Remove(selected.CoffeeSort);
             SaveContext();
         }
 

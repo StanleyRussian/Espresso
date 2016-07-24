@@ -9,21 +9,20 @@ namespace ViewModels.Statistics.Abstract
 {
     public abstract class aProcessListingViewModel: aTabViewModel
     {
-        protected ContextContainer _context;
-
         protected aProcessListingViewModel()
         {
             cmdSave = new Command(cmdSave_Execute);
             cmdDelete = new Command(cmdDelete_Execute);
             cmdFilter30Days = new Command(cmdFilter30Days_Execute);
             cmdFilterAll = new Command(cmdFilterAll_Execute);
-            cmdReload = new Command(Load);
+            cmdReload = new Command(cmdReload_Execute);
         }
+
         protected void SaveContext()
         {
             try
             {
-                _context.SaveChanges();
+                ContextManager.Context.SaveChanges();
                 ContextManager.ReloadContext();
             }
             catch (Exception ex)
@@ -78,12 +77,17 @@ namespace ViewModels.Statistics.Abstract
 
         public ICommand cmdReload
         { get; private set; }
+        private void cmdReload_Execute()
+        {
+            ContextManager.ReloadContext();
+            Load();
+        }
 
         public ICommand cmdSave
         { get; private set; }
         protected virtual void cmdSave_Execute()
         {
-            _context.SaveChanges();
+            ContextManager.Context.SaveChanges();
             DialogCoordinator.Instance.ShowMessageAsync(this, "Успех", "Сохранение завершено");
         }
 

@@ -74,7 +74,7 @@ namespace ViewModels.EntityWindows
             foreach (var x in Details)
                 _purchase.CoffeePurchase_Details.Add(x);
             if (CreatingNew)
-                _context.CoffeePurchases.Add(_purchase);
+                ContextManager.Context.CoffeePurchases.Add(_purchase);
             SaveContext();
         }
 

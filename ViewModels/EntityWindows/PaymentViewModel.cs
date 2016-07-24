@@ -48,7 +48,7 @@ namespace ViewModels.EntityWindows
         protected override void cmdSave_Execute()
         {
             if (CreatingNew)
-                _context.Payments.Add(Payment);
+                ContextManager.Context.Payments.Add(Payment);
             SaveContext();
         }
 
@@ -67,16 +67,16 @@ namespace ViewModels.EntityWindows
                     Day = Payment.Date.Day,
                     RemindingDay = Payment.Date.AddDays(-5).Day
                 };
-                var addedExpense = _context.MonthlyExpenses.Add(NewMonthlyExpense);
+                var addedExpense = ContextManager.Context.MonthlyExpenses.Add(NewMonthlyExpense);
 
                 MonthlyPayment NewMonthlyPayment = new MonthlyPayment
                 {
                     Date = DateTime.Now,
                     PaidAmount = Payment.Sum,
                     MonthlyExpense = addedExpense,
-                    Account = _context.Accounts.FirstOrDefault()
+                    Account = ContextManager.Context.Accounts.FirstOrDefault()
                 };
-                _context.MonthlyPayments.Add(NewMonthlyPayment);
+                ContextManager.Context.MonthlyPayments.Add(NewMonthlyPayment);
             }
             SaveContext();
         }

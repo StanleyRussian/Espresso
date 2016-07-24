@@ -40,7 +40,7 @@ namespace ViewModels.EntityWindows
 
         protected override void cmdSave_Execute()
         {
-            _context.CoffeeTransfers.Add(Transfer);
+            ContextManager.Context.CoffeeTransfers.Add(Transfer);
             SaveContext();
         }
     }

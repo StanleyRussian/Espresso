@@ -1,4 +1,5 @@
 ﻿
+using Model;
 using Model.Entity;
 
 namespace ViewModels.EntityWindows
@@ -41,7 +42,7 @@ namespace ViewModels.EntityWindows
         protected override void cmdSave_Execute()
         {
             if (CreatingNew)
-                _context.Accounts.Add(Account);
+                ContextManager.Context.Accounts.Add(Account);
             SaveContext();
         }
 

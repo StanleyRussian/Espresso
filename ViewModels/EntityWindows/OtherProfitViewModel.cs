@@ -47,7 +47,7 @@ namespace ViewModels.EntityWindows
         protected override void cmdSave_Execute()
         {
             if (CreatingNew)
-                _context.OtherProfits.Add(Profit);
+                ContextManager.Context.OtherProfits.Add(Profit);
             SaveContext();
         }
         #endregion

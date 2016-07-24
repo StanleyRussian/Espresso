@@ -11,7 +11,7 @@ namespace ViewModels.Pages
 {
     public class HomeViewModel : aTabViewModel
     {
-        private ContextContainer _context;
+        //private ContextContainer _context;
         private ObservableCollection<dGreenStock> _greenStocks;
         private ObservableCollection<dRoastedStock> _roastedStocks;
         private ObservableCollection<dPackedStocks> _packedStocks;
@@ -20,25 +20,24 @@ namespace ViewModels.Pages
 
         public HomeViewModel()
         {
-            cmdReload = new Command(Load);
+            cmdReload = new Command(cmdReload_Execute);
             Header = "Главная";
             IsSelected = true;
         }
 
         protected override void Load()
         {
-            _context = ContextManager.Context;
             GreenStocks = 
-                new ObservableCollection<dGreenStock>(_context.dGreenStocks.Include(p => p.CoffeeSort));
+                new ObservableCollection<dGreenStock>(ContextManager.Context.dGreenStocks.Include(p => p.CoffeeSort));
             RoastedStocks = 
-                new ObservableCollection<dRoastedStock>(_context.dRoastedStocks.Include(p=>p.CoffeeSort));
+                new ObservableCollection<dRoastedStock>(ContextManager.Context.dRoastedStocks.Include(p=>p.CoffeeSort));
             PackedStocks = 
-                new ObservableCollection<dPackedStocks>(_context.EagerPackedStocks());
+                new ObservableCollection<dPackedStocks>(ContextManager.Context.EagerPackedStocks());
             PackageStocks = 
-                new ObservableCollection<dPackageStocks>(_context.dPackageStocks.Include(p => p.Package));
+                new ObservableCollection<dPackageStocks>(ContextManager.Context.dPackageStocks.Include(p => p.Package));
             AccountsBalances =
                 new ObservableCollection<dAccountsBalance>(
-                    _context.dAccountsBalances
+                    ContextManager.Context.dAccountsBalances
                         .Where(p => p.Account.Active)
                         .Include(p => p.Account));
         }
@@ -102,6 +101,11 @@ namespace ViewModels.Pages
         public ICommand cmdReload
         { get; private set; }
 
+        private void cmdReload_Execute()
+        {
+            ContextManager.ReloadContext();
+            Load();
+        }
         #endregion
     }
 }

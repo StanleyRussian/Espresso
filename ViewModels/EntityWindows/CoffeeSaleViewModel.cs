@@ -67,7 +67,7 @@ namespace ViewModels.EntityWindows
                 _sale.Sale_Details.Clear();
                 foreach (var x in Details)
                     _sale.Sale_Details.Add(x);
-                _context.CoffeeSales.Add(_sale);
+                ContextManager.Context.CoffeeSales.Add(_sale);
             }
             SaveContext();
         }

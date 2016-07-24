@@ -1,4 +1,5 @@
-﻿using Model.Entity;
+﻿using Model;
+using Model.Entity;
 
 namespace ViewModels.EntityWindows
 {
@@ -29,7 +30,7 @@ namespace ViewModels.EntityWindows
         protected override void cmdSave_Execute()
         {
             if (CreatingNew)
-                _context.Recipients.Add(Recipient);
+                ContextManager.Context.Recipients.Add(Recipient);
             SaveContext();
         }
 

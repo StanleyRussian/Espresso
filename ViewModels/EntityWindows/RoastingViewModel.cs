@@ -56,7 +56,7 @@ namespace ViewModels.EntityWindows
         {
             Roasting.RoastedAmount = Roasting.InitialAmount * (100-ShrinkagePercent) /100;
             if (CreatingNew)
-                _context.Roastings.Add(Roasting);
+                ContextManager.Context.Roastings.Add(Roasting);
             SaveContext();
         }
     }

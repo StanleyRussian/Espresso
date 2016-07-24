@@ -31,19 +31,18 @@ namespace ViewModels.Statistics.CoffeePurchases
 
         protected override void Load()
         {
-            _context = ContextManager.Context;
             _filterTo = DateTime.Now;
             _filterFrom = DateTime.Now.AddDays(-30);
 
             Tabs = new ObservableCollection<IndividualCoffeePurchaseViewModel>();
-            foreach (var purchase in _context.CoffeePurchases.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo))
+            foreach (var purchase in ContextManager.Context.CoffeePurchases.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo))
                 Tabs.Add(new IndividualCoffeePurchaseViewModel(purchase));
         }
 
         protected override void Refresh()
         {
             Tabs = new ObservableCollection<IndividualCoffeePurchaseViewModel>();
-            foreach (var purchase in _context.CoffeePurchases.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo))
+            foreach (var purchase in ContextManager.Context.CoffeePurchases.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo))
                 Tabs.Add(new IndividualCoffeePurchaseViewModel(purchase));
         }
 
@@ -51,7 +50,7 @@ namespace ViewModels.Statistics.CoffeePurchases
         {
             if (IsEmpty(argSelected)) return;
             var selected = argSelected as IndividualCoffeePurchaseViewModel;
-            _context.CoffeePurchases.Remove(selected.Purchase);
+            ContextManager.Context.CoffeePurchases.Remove(selected.Purchase);
             SaveContext();
             Refresh();
         }

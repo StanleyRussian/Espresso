@@ -13,7 +13,6 @@ namespace ViewModels.EntityWindows.Abstract
 {
     public abstract class aEntityWindowViewModel: INotifyPropertyChanged
     {
-        protected ContextContainer _context = ContextManager.Context;
         protected bool CreatingNew = false;
 
         protected aEntityWindowViewModel()
@@ -67,9 +66,9 @@ namespace ViewModels.EntityWindows.Abstract
         {
             try
             {
-                _context.SaveChanges();
+                ContextManager.Context.SaveChanges();
                 IsFlySuccessOpened = true;
-                ContextManager.ReloadContext();
+                //ContextManager.ReloadContext();
                 if (CreatingNew)
                     Refresh();
             }
@@ -100,10 +99,10 @@ namespace ViewModels.EntityWindows.Abstract
         public ICommand cmdOnClosing { get; private set; }
         protected void cmdOnClosing_Execute()
         {
-            ContextManager.ReloadContext();
-            //foreach (DbEntityEntry entry in _context.ChangeTracker.Entries())
-            //    if (entry.State == EntityState.Deleted || entry.State == EntityState.Modified)
-            //        entry.State = EntityState.Unchanged;
+            //ContextManager.ReloadContext();
+            foreach (DbEntityEntry entry in ContextManager.Context.ChangeTracker.Entries())
+                if (entry.State == EntityState.Deleted || entry.State == EntityState.Modified)
+                    entry.State = EntityState.Unchanged;
         }
 
         #endregion

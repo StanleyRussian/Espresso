@@ -49,7 +49,7 @@ namespace ViewModels.EntityWindows
         protected override void cmdSave_Execute()
         {
             if (CreatingNew)
-                _context.Packings.Add(Packing);
+                ContextManager.Context.Packings.Add(Packing);
             SaveContext();
         }
 

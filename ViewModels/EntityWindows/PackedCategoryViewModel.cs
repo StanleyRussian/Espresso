@@ -1,4 +1,5 @@
-﻿using Model.Entity;
+﻿using Model;
+using Model.Entity;
 
 namespace ViewModels.EntityWindows
 {
@@ -39,7 +40,7 @@ namespace ViewModels.EntityWindows
 
         protected override void cmdSave_Execute()
         {
-            _context.PackedCategories.Add(Category);
+            ContextManager.Context.PackedCategories.Add(Category);
             SaveContext();
         }
     }

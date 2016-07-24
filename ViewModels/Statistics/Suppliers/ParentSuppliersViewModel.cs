@@ -24,18 +24,17 @@ namespace ViewModels.Statistics.Suppliers
 
         protected override void Load()
         {
-            _context = ContextManager.Context;
             if (IsActiveSelected)
             {
                 _active = new ObservableCollection<IndividualSupplierViewModel>();
-                foreach (var active in _context.Suppliers.Where(p => p.Active))
+                foreach (var active in ContextManager.Context.Suppliers.Where(p => p.Active))
                     _active.Add(new IndividualSupplierViewModel(active));
                 Selected = _active;
             }
             else
             {
                 _inactive = new ObservableCollection<IndividualSupplierViewModel>();
-                foreach (var inactive in _context.Suppliers.Where(p => !p.Active))
+                foreach (var inactive in ContextManager.Context.Suppliers.Where(p => !p.Active))
                     _inactive.Add(new IndividualSupplierViewModel(inactive));
                 Selected = _inactive;
             }
@@ -61,6 +60,7 @@ namespace ViewModels.Statistics.Suppliers
         {
             _active = null;
             _inactive = null;
+            ContextManager.ReloadContext();
             Load();
         }
 
@@ -71,7 +71,7 @@ namespace ViewModels.Statistics.Suppliers
         {
             if (IsEmpty(argSelected)) return;
             var selected = argSelected as IndividualSupplierViewModel;
-            _context.Suppliers.Remove(selected.Supplier);
+            ContextManager.Context.Suppliers.Remove(selected.Supplier);
             SaveContext();
         }
 

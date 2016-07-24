@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using Model;
 using Model.Entity;
 
 namespace ViewModels.EntityWindows
@@ -68,7 +69,7 @@ namespace ViewModels.EntityWindows
                 _mix.Mix_Details.Clear();
                 foreach (var x in Details)
                     _mix.Mix_Details.Add(x);
-                _context.Mixes.Add(_mix);
+                ContextManager.Context.Mixes.Add(_mix);
             }
             SaveContext();
         }

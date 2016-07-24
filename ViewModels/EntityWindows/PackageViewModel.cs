@@ -1,4 +1,5 @@
-﻿using Model.Entity;
+﻿using Model;
+using Model.Entity;
 
 namespace ViewModels.EntityWindows
 {
@@ -40,7 +41,7 @@ namespace ViewModels.EntityWindows
         protected override void cmdSave_Execute()
         {
             if (CreatingNew)
-                _context.Packages.Add(Package);
+                ContextManager.Context.Packages.Add(Package);
             SaveContext();
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Windows.Input;
@@ -11,8 +12,6 @@ namespace ViewModels.Statistics.Abstract
 {
     public abstract class aSubjectsListViewModel :aTabViewModel
     {
-        protected ContextContainer _context;
-
         protected aSubjectsListViewModel()
         {
             cmdToggleActive = new Command(cmdToggleActive_Execute);
@@ -30,14 +29,14 @@ namespace ViewModels.Statistics.Abstract
         {
             try
             {
-                _context.SaveChanges();
+                ContextManager.Context.SaveChanges();
                 ContextManager.ReloadContext();
             }
             catch (Exception ex)
             {
                 DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка", ex.Message,
                     MessageDialogStyle.Affirmative, new MetroDialogSettings { ColorScheme = MetroDialogColorScheme.Accented });
-                foreach (DbEntityEntry entry in _context.ChangeTracker.Entries())
+                foreach (DbEntityEntry entry in ContextManager.Context.ChangeTracker.Entries())
                     if (entry.State == EntityState.Deleted)
                         entry.State = EntityState.Unchanged;
             }

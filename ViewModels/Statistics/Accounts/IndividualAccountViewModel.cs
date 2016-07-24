@@ -34,12 +34,11 @@ namespace ViewModels.Statistics.Accounts
 
         protected override void Load()
         {
-            _context = ContextManager.Context;
             _filterTo = DateTime.Now;
             _filterFrom = DateTime.Now.AddDays(-30);
 
-            Balance = _context.dAccountsBalances.Find(Account.Id).Balance;
-            Transactions = new ObservableCollection<dTransaction>(_context.dTransactions
+            Balance = ContextManager.Context.dAccountsBalances.Find(Account.Id).Balance;
+            Transactions = new ObservableCollection<dTransaction>(ContextManager.Context.dTransactions
                 .Where(p => p.Account.Id == Account.Id)
                 .OrderBy(p=>p.Date)
                 .Take(5));
@@ -48,7 +47,7 @@ namespace ViewModels.Statistics.Accounts
         protected override void Refresh()
         {
             Transactions = new ObservableCollection<dTransaction>(
-                _context.dTransactions.Where(p => p.Account.Id == Account.Id
+                ContextManager.Context.dTransactions.Where(p => p.Account.Id == Account.Id
                 && p.Date >= _filterFrom && p.Date <= _filterTo));
         }
 
