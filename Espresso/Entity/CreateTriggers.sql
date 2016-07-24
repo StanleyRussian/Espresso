@@ -560,26 +560,30 @@ DROP TRIGGER [dbo].AccountsBalances_Insert_CoffeeSale
 GO
 CREATE TRIGGER AccountsBalances_Insert_CoffeeSale
 ON CoffeeSales
-AFTER INSERT AS
+AFTER INSERT AS	
+-- If it wasn't paid no actions on account's balance and transactions will be made
+IF (SELECT i.Paid FROM INSERTED i) = 1
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance += i.Sum
-	FROM INSERTED i
-	WHERE dAccountsBalances.Id = i.Account_Id
-END
-BEGIN
-	INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-	SELECT i.Account_Id, i.Date, i.Sum, rc.Name,'Продажа кофе'
-	FROM INSERTED i
-	INNER JOIN dbo.Recipients rc
-		ON rc.Id = i.Recipient_Id
-END
-BEGIN
-	UPDATE CoffeeSales
-	SET TransactionId = (SELECT MAX(Id)
-						 FROM dTransactions)
-	FROM INSERTED i
-	WHERE CoffeeSales.Id = i.Id
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance += i.Sum
+		FROM INSERTED i
+		WHERE dAccountsBalances.Id = i.Account_Id
+	END
+	BEGIN
+		INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
+		SELECT i.Account_Id, i.Date, i.Sum, rc.Name,'Продажа кофе'
+		FROM INSERTED i
+		INNER JOIN dbo.Recipients rc
+			ON rc.Id = i.Recipient_Id
+	END
+	BEGIN
+		UPDATE CoffeeSales
+		SET TransactionId = (SELECT MAX(Id)
+								FROM dTransactions)
+		FROM INSERTED i
+		WHERE CoffeeSales.Id = i.Id
+	END
 END
 GO
 
@@ -590,17 +594,72 @@ GO
 CREATE TRIGGER AccountsBalances_Update_CoffeeSale
 ON CoffeeSales
 AFTER UPDATE AS
+-- If it was paid before
+IF (SELECT d.Paid FROM DELETED d) = 1
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance += (i.Sum - d.Sum)
-	FROM INSERTED i, DELETED d
-	WHERE dAccountsBalances.Id = i.Account_Id
+	-- If it was paid before AND stay paid
+	IF (SELECT i.Paid FROM INSERTED i) = 1
+	BEGIN
+		-- Correct account's balance
+		BEGIN
+			UPDATE dAccountsBalances
+			SET Balance += (i.Sum - d.Sum)
+			FROM INSERTED i, DELETED d
+			WHERE dAccountsBalances.Id = i.Account_Id
+		END
+		-- Correct transaction's sum
+		BEGIN
+			UPDATE dTransactions
+			SET Sum = i.Sum
+			FROM INSERTED i
+			WHERE dTransactions.Id = i.TransactionId
+		END
+	END
+	-- If it was paid before BUT now it's not
+	ELSE
+	BEGIN
+		-- Correct account's balance
+		BEGIN
+			UPDATE dAccountsBalances
+			SET Balance += d.Sum
+			FROM INSERTED i, DELETED d
+			WHERE dAccountsBalances.Id = i.Account_Id
+		END
+		-- Delete corresponding transaction
+		BEGIN
+			DELETE FROM dTransactions
+			WHERE Id = (SELECT d.TransactionId
+						FROM DELETED d)
+		END
+	END
 END
+ELSE
+-- If it wasn't paid before
 BEGIN
-	UPDATE dTransactions
-	SET Sum = i.Sum
-	FROM INSERTED i
-	WHERE dTransactions.Id = i.TransactionId
+	-- If it wasn't paid before BUT now it's paid
+	IF (SELECT i.Paid FROM INSERTED i) = 1
+	BEGIN
+		BEGIN
+			UPDATE dAccountsBalances
+			SET Balance -= i.Sum
+			FROM INSERTED i
+			WHERE dAccountsBalances.Id = i.Account_Id
+		END
+		BEGIN
+			INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
+			SELECT i.Account_Id, i.Date, i.Sum, rc.Name,'Продажа кофе'
+			FROM INSERTED i
+			INNER JOIN dbo.Recipients rc
+				ON rc.Id = i.Recipient_Id
+		END
+		BEGIN
+			UPDATE CoffeeSales
+			SET TransactionId = (SELECT MAX(Id)
+									FROM dTransactions)
+			FROM INSERTED i
+			WHERE CoffeeSales.Id = i.Id
+		END
+	END
 END
 GO
 
@@ -611,16 +670,20 @@ GO
 CREATE TRIGGER AccountsBalances_Delete_CoffeeSale
 ON CoffeeSales
 AFTER DELETE AS
+-- If it wasn't paid no actions needed
+IF (SELECT d.Paid FROM DELETED d) = 1
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= d.Sum
-	FROM DELETED d
-	WHERE dAccountsBalances.Id = d.Account_Id
-END
-BEGIN
-	DELETE FROM dTransactions
-	WHERE Id = (SELECT d.TransactionId
-				FROM DELETED d)
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance -= d.Sum
+		FROM DELETED d
+		WHERE dAccountsBalances.Id = d.Account_Id
+	END
+	BEGIN
+		DELETE FROM dTransactions
+		WHERE Id = (SELECT d.TransactionId
+					FROM DELETED d)
+	END
 END
 GO
 
@@ -633,25 +696,29 @@ GO
 CREATE TRIGGER AccountsBalances_Insert_CoffeePurchase
 ON CoffeePurchases
 AFTER INSERT AS
+-- If it wasn't paid no actions on account's balance and transactions will be made
+IF (SELECT i.Paid FROM INSERTED i) = 1
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= i.Sum
-	FROM INSERTED i
-	WHERE dAccountsBalances.Id = i.Account_Id
-END
-BEGIN
-	INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-	SELECT i.Account_Id, i.Date, i.Sum, rc.Name,'Закупка кофе'
-	FROM INSERTED i
-	INNER JOIN dbo.Suppliers rc
-		ON rc.Id = i.Supplier_Id
-END
-BEGIN
-	UPDATE CoffeePurchases
-	SET TransactionId = (SELECT MAX(Id)
-						 FROM dTransactions)
-	FROM INSERTED i
-	WHERE CoffeePurchases.Id = i.Id
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance -= i.Sum
+		FROM INSERTED i
+		WHERE dAccountsBalances.Id = i.Account_Id
+	END
+	BEGIN
+		INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
+		SELECT i.Account_Id, i.Date, i.Sum, rc.Name, N'Закупка кофе'
+		FROM INSERTED i
+		INNER JOIN dbo.Suppliers rc
+			ON rc.Id = i.Supplier_Id
+	END
+	BEGIN
+		UPDATE CoffeePurchases
+		SET TransactionId = (SELECT MAX(Id)
+							 FROM dTransactions)
+		FROM INSERTED i
+		WHERE CoffeePurchases.Id = i.Id
+	END
 END
 GO
 
@@ -662,17 +729,72 @@ GO
 CREATE TRIGGER AccountsBalances_Update_CoffeePurchase
 ON CoffeePurchases
 AFTER UPDATE AS
+-- If it was paid before
+IF (SELECT d.Paid FROM DELETED d) = 1
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= (i.Sum - d.Sum)
-	FROM INSERTED i, DELETED d
-	WHERE dAccountsBalances.Id = i.Account_Id
+	-- If it was paid before AND stay paid
+	IF (SELECT i.Paid FROM INSERTED i) = 1
+	BEGIN
+		-- Correct account's balance
+		BEGIN
+			UPDATE dAccountsBalances
+			SET Balance -= (i.Sum - d.Sum)
+			FROM INSERTED i, DELETED d
+			WHERE dAccountsBalances.Id = i.Account_Id
+		END
+		-- Correct transaction's sum
+		BEGIN
+			UPDATE dTransactions
+			SET Sum = i.Sum
+			FROM INSERTED i
+			WHERE dTransactions.Id = i.TransactionId
+		END
+	END
+		-- If it was paid before BUT now it's not
+	ELSE
+	BEGIN
+		-- Correct account's balance
+		BEGIN
+			UPDATE dAccountsBalances
+			SET Balance -= d.Sum
+			FROM INSERTED i, DELETED d
+			WHERE dAccountsBalances.Id = i.Account_Id
+		END
+		-- Delete corresponding transaction
+		BEGIN
+			DELETE FROM dTransactions
+			WHERE Id = (SELECT d.TransactionId
+						FROM DELETED d)
+		END
+	END
 END
+ELSE
+-- If it wasn't paid before
 BEGIN
-	UPDATE dTransactions
-	SET Sum = i.Sum
-	FROM INSERTED i
-	WHERE dTransactions.Id = i.TransactionId
+	-- If it wasn't paid before BUT now it's paid
+	IF (SELECT i.Paid FROM INSERTED i) = 1
+	BEGIN
+		BEGIN
+			UPDATE dAccountsBalances
+			SET Balance += i.Sum
+			FROM INSERTED i
+			WHERE dAccountsBalances.Id = i.Account_Id
+		END
+		BEGIN
+			INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
+			SELECT i.Account_Id, i.Date, i.Sum, rc.Name, N'Продажа кофе'
+			FROM INSERTED i
+			INNER JOIN dbo.Recipients rc
+				ON rc.Id = i.Recipient_Id
+		END
+		BEGIN
+			UPDATE CoffeeSales
+			SET TransactionId = (SELECT MAX(Id)
+									FROM dTransactions)
+			FROM INSERTED i
+			WHERE CoffeeSales.Id = i.Id
+		END
+	END
 END
 GO
 
@@ -683,16 +805,20 @@ GO
 CREATE TRIGGER AccountsBalances_Delete_CoffeePurchase
 ON CoffeePurchases
 AFTER DELETE AS
+-- If it wasn't paid no actions needed
+IF (SELECT d.Paid FROM DELETED d) = 1
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance += d.Sum
-	FROM DELETED d
-	WHERE dAccountsBalances.Id = d.Account_Id
-END
-BEGIN
-	DELETE FROM dTransactions
-	WHERE Id = (SELECT d.TransactionId
-				FROM DELETED d)
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance += d.Sum
+		FROM DELETED d
+		WHERE dAccountsBalances.Id = d.Account_Id
+	END
+	BEGIN
+		DELETE FROM dTransactions
+		WHERE Id = (SELECT d.TransactionId
+					FROM DELETED d)
+	END
 END
 GO
 

@@ -175,7 +175,7 @@
     <Property Name="PaymentDate" Type="datetime" Nullable="false" />
     <Property Name="Paid" Type="bit" Nullable="false" />
     <Property Name="Sum" Type="float" Nullable="false" />
-    <Property Name="TransactionId" Type="int" Nullable="false" />
+    <Property Name="TransactionId" Type="int" Nullable="true" />
     <Property Name="Supplier_Id" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -322,7 +322,7 @@
     <Property Name="PaymentDate" Type="datetime" Nullable="false" />
     <Property Name="Paid" Type="bit" Nullable="false" />
     <Property Name="Sum" Type="float" Nullable="false" />
-    <Property Name="TransactionId" Type="int" Nullable="false" />
+    <Property Name="TransactionId" Type="int" Nullable="true" />
     <Property Name="Recipient_Id" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -1038,7 +1038,7 @@
           <NavigationProperty Name="Account" Relationship="Context.AccountCoffeePurchase" FromRole="CoffeePurchase" ToRole="Account" />
           <Property Name="Paid" Type="Boolean" Nullable="false" />
           <Property Name="Sum" Type="Double" Nullable="false" />
-          <Property Name="TransactionId" Type="Int32" Nullable="false" />
+          <Property Name="TransactionId" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -1269,7 +1269,7 @@
           <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Paid" Type="Boolean" Nullable="false" />
           <Property Name="Sum" Type="Double" Nullable="false" />
-          <Property Name="TransactionId" Type="Int32" Nullable="false" />
+          <Property Name="TransactionId" Type="Int32" Nullable="true" />
           <NavigationProperty Name="Sale_Details" Relationship="Context.SaleSale_Details" FromRole="Sale" ToRole="Sale_Details" />
           <NavigationProperty Name="Recipient" Relationship="Context.RecipientSale" FromRole="Sale" ToRole="Recipient" />
           <NavigationProperty Name="Account" Relationship="Context.AccountSale" FromRole="Sale" ToRole="Account" />
