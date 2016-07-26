@@ -22,7 +22,7 @@ namespace Model.Entity
     
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
-        public System.DateTime PaymentDate { get; set; }
+        public Nullable<System.DateTime> PaymentDate { get; set; }
         public bool Paid { get; set; }
         public double Sum { get; set; }
         public Nullable<int> TransactionId { get; set; }

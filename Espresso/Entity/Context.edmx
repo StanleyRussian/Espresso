@@ -172,7 +172,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
-    <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+    <Property Name="PaymentDate" Type="datetime" Nullable="true" />
     <Property Name="Paid" Type="bit" Nullable="false" />
     <Property Name="Sum" Type="float" Nullable="false" />
     <Property Name="TransactionId" Type="int" Nullable="true" />
@@ -319,7 +319,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
-    <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+    <Property Name="PaymentDate" Type="datetime" Nullable="true" />
     <Property Name="Paid" Type="bit" Nullable="false" />
     <Property Name="Sum" Type="float" Nullable="false" />
     <Property Name="TransactionId" Type="int" Nullable="true" />
@@ -1032,7 +1032,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="true" Precision="3" />
           <NavigationProperty Name="Supplier" Relationship="Context.SupplierCoffeePurchase" FromRole="CoffeePurchase" ToRole="Supplier" />
           <NavigationProperty Name="CoffeePurchase_Details" Relationship="Context.CoffeePurchase_DetailsCoffeePurchase" FromRole="CoffeePurchase" ToRole="CoffeePurchase_Details" />
           <NavigationProperty Name="Account" Relationship="Context.AccountCoffeePurchase" FromRole="CoffeePurchase" ToRole="Account" />
@@ -1266,7 +1266,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Paid" Type="Boolean" Nullable="false" />
           <Property Name="Sum" Type="Double" Nullable="false" />
           <Property Name="TransactionId" Type="Int32" Nullable="true" />

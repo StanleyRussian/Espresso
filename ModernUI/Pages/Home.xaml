@@ -228,6 +228,17 @@
                     <TextBlock Style="{StaticResource ButtonText}" Text="Обновить"/>
                 </StackPanel>
             </Button>
+
+            <Button Click="UnpaidWindow" Margin="{StaticResource ControlMargin}">
+                <StackPanel Margin="10">
+                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource appbar_refresh}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Style="{StaticResource ButtonText}" Text="Неоплаченные"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
     </Grid>
 

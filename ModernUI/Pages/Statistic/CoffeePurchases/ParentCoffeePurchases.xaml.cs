@@ -38,5 +38,10 @@ namespace UI.Pages.Statistic.CoffeePurchases
             if (selected != null)
                 new CoffeePurchase(selected.Purchase).ShowDialog();
         }
+
+        private void UnpaidPurchasesWindow(object sender, RoutedEventArgs e)
+        {
+            new Windows.UnpaidPurchasesWindow().ShowDialog();
+        }
     }
 }

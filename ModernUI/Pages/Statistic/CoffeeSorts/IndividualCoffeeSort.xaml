@@ -54,9 +54,12 @@
 
             <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
                 <Button Command="{Binding cmdFilter30Days}"
-                        Margin="{StaticResource ControlMargin}">За последние 30 дней</Button>
+                        Margin="{StaticResource ControlMargin}">За 30 дней</Button>
                 <Button Command="{Binding cmdFilterAll}"
                         Margin="{StaticResource ControlMargin}">Все</Button>
+                <Button Click="UnpaidPurchasesWindow"
+                    Margin="{StaticResource ControlMargin}">Неоплаченные</Button>
+
 
                 <Label Margin="{StaticResource ControlMargin}">С даты:</Label>
                 <DatePicker Margin="{StaticResource ControlMargin}"

@@ -756,7 +756,7 @@ BEGIN
 		-- Correct account's balance
 		BEGIN
 			UPDATE dAccountsBalances
-			SET Balance -= d.Sum
+			SET Balance += d.Sum
 			FROM INSERTED i, DELETED d
 			WHERE dAccountsBalances.Id = i.Account_Id
 		END
@@ -776,7 +776,7 @@ BEGIN
 	BEGIN
 		BEGIN
 			UPDATE dAccountsBalances
-			SET Balance += i.Sum
+			SET Balance -= i.Sum
 			FROM INSERTED i
 			WHERE dAccountsBalances.Id = i.Account_Id
 		END

@@ -31,9 +31,11 @@
             
             <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
                 <Button Command="{Binding cmdFilter30Days}" 
-                    Margin="{StaticResource ControlMargin}">За последние 30 дней</Button>
+                    Margin="{StaticResource ControlMargin}">За 30 дней</Button>
                 <Button Command="{Binding cmdFilterAll}" 
                     Margin="{StaticResource ControlMargin}">Все</Button>
+                <Button Click="UnpaidPurchasesWindow"
+                    Margin="{StaticResource ControlMargin}">Неоплаченные</Button>
             </StackPanel>
 
             <Label Margin="{StaticResource ControlMargin}"

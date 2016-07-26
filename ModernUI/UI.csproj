@@ -175,6 +175,12 @@
     <Compile Include="Windows\EntityWindows\Supplier.xaml.cs">
       <DependentUpon>Supplier.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\UnpaidPurchasesWindow.xaml.cs">
+      <DependentUpon>UnpaidPurchasesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\UnpaidSalesWindow.xaml.cs">
+      <DependentUpon>UnpaidSalesWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\Combo\ActiveAccounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -328,6 +334,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UnpaidPurchasesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UnpaidSalesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

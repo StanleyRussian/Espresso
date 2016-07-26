@@ -68,6 +68,7 @@ namespace ViewModels.EntityWindows
 
         protected override void cmdSave_Execute()
         {
+            _purchase.Sum = 0;
             foreach (var detail in Details)
                 _purchase.Sum += (detail.Price*detail.Quantity);
             _purchase.CoffeePurchase_Details.Clear();

@@ -56,12 +56,37 @@
             <Label Margin="{StaticResource ControlMargin}">Дата продажи</Label>
             <DatePicker Grid.Column="1" Margin="{StaticResource ControlMargin}"
                         SelectedDate="{Binding Date}"/>
-            <Label Grid.Row="1" Margin="{StaticResource ControlMargin}">Дата оплаты</Label>
-            <DatePicker Grid.Row="1" Grid.Column="1" Margin="{StaticResource ControlMargin}"
-                        SelectedDate="{Binding PaymentDate}"/>
-            <Label Grid.Row="2" Margin="{StaticResource ControlMargin}">Оплачено</Label>
-            <CheckBox Grid.Row="2" Grid.Column="1" Margin="{StaticResource ControlMargin}"
+
+            <Label Grid.Row="1" Margin="{StaticResource ControlMargin}">Оплачено</Label>
+            <CheckBox x:Name="checkPaid" Grid.Row="1" Grid.Column="1" Margin="{StaticResource ControlMargin}"
                       IsChecked="{Binding Paid}"/>
+
+            <Label Grid.Row="2" Margin="{StaticResource ControlMargin}" Content="Дата оплаты">
+                <Label.Style>
+                    <Style BasedOn="{StaticResource MetroLabel}" TargetType="Label">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=checkPaid}" Value="true">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+
+            <DatePicker Grid.Row="2" Grid.Column="1" Margin="{StaticResource ControlMargin}"
+                        SelectedDate="{Binding PaymentDate}">
+                <DatePicker.Style>
+                    <Style BasedOn="{StaticResource MetroDatePicker}" TargetType="DatePicker">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=checkPaid}" Value="true">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DatePicker.Style>
+            </DatePicker>
 
             <Label Grid.Row="3">Покупатель</Label>
             <combo:ComboActiveRecipients Grid.Row="3" Grid.Column="1"/>

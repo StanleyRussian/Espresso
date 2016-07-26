@@ -76,6 +76,8 @@
     <Compile Include="EntityWindows\RoastingViewModel.cs" />
     <Compile Include="EntityWindows\SupplierViewModel.cs" />
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="OtherWindows\UnpaidPurchasesWindowViewModel.cs" />
+    <Compile Include="OtherWindows\UnpaidSalesWindowViewModel.cs" />
     <Compile Include="Pages\HomeViewModel.cs" />
     <Compile Include="Pages\StatisticsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

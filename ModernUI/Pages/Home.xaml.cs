@@ -35,5 +35,10 @@ namespace UI.Pages
         {
             new CoffeeSale().ShowDialog();
         }
+
+        private void UnpaidWindow(object sender, RoutedEventArgs e)
+        {
+            new Windows.UnpaidPurchasesWindow().ShowDialog();
+        }
     }
 }
