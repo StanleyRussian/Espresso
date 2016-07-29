@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using ViewModels.EntityWindows;
+using ViewModels.Windows.EntityWindows;
 
 namespace UI.Windows.EntityWindows
 {
@@ -11,7 +11,7 @@ namespace UI.Windows.EntityWindows
         public Roasting(object argRoasting = null)
         {
             InitializeComponent();
-            DataContext = new RoastingViewModel(argRoasting);
+            DataContext = new vmWinRoasting(argRoasting);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="UI.Pages.Explorer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:accounts="clr-namespace:UI.Pages.Explore.Accounts"
+             xmlns:coffeeSorts="clr-namespace:UI.Pages.Explore.CoffeeSorts"
+             xmlns:suppliers="clr-namespace:UI.Pages.Explore.Suppliers"
+             xmlns:coffeePurchases="clr-namespace:UI.Pages.Explore.CoffeePurchases"
+             xmlns:ExploreVM="clr-namespace:ViewModels.Pages.Explore;assembly=ViewModels"
+             xmlns:roastings="clr-namespace:UI.Pages.Explore.Roastings">
+    
+    <Grid>
+        <TabControl ItemsSource="{Binding Tabs, Mode=TwoWay}">
+            <TabControl.Resources>
+                <DataTemplate DataType="{x:Type ExploreVM:vmAccounts}">
+                    <accounts:ParentAccounts/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type ExploreVM:vmCoffeeSorts}">
+                    <coffeeSorts:ParentCoffeeSorts/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type ExploreVM:vmSuppliers}">
+                    <suppliers:ParentSuppliers/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type ExploreVM:vmCoffeePurchases}">
+                    <coffeePurchases:ParentCoffeePurchases/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type ExploreVM:vmRoastings}">
+                    <roastings:ParentRoastings/>
+                </DataTemplate>
+            </TabControl.Resources>
+
+            <TabControl.ItemContainerStyle>
+                <Style BasedOn="{StaticResource MetroTabItem}" TargetType="TabItem">
+                    <Setter Property="Header" Value="{Binding Header}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                    <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="18"/>
+                </Style>
+            </TabControl.ItemContainerStyle>
+        </TabControl>
+    </Grid>
+
+</UserControl>

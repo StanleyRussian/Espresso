@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using MahApps.Metro.Controls;
-using ViewModels.EntityWindows;
+using ViewModels.Windows.EntityWindows;
 
 namespace UI.Windows.EntityWindows
 {
@@ -12,7 +12,7 @@ namespace UI.Windows.EntityWindows
         public Payment(object argPayment = null)
         {
             InitializeComponent();
-            DataContext = new PaymentViewModel(argPayment);
+            DataContext = new vmWinPayment(argPayment);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

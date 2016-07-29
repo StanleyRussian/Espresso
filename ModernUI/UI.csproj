@@ -48,19 +48,12 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -94,38 +87,50 @@
     <Compile Include="Controls\Combo\ActiveSuppliers.xaml.cs">
       <DependentUpon>ActiveSuppliers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Explorer.xaml.cs">
+      <DependentUpon>Explorer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Roastings\IndividualRoasting.xaml.cs">
+      <DependentUpon>IndividualRoasting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Roastings\ParentRoastings.xaml.cs">
+      <DependentUpon>ParentRoastings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\Accounts\ParentAccounts.xaml.cs">
+    <Compile Include="Pages\Explore\Accounts\ParentAccounts.xaml.cs">
       <DependentUpon>ParentAccounts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\Accounts\IndividualAccount.xaml.cs">
+    <Compile Include="Pages\Explore\Accounts\IndividualAccount.xaml.cs">
       <DependentUpon>IndividualAccount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\CoffeePurchases\IndividualCoffeePurchase.xaml.cs">
+    <Compile Include="Pages\Explore\CoffeePurchases\IndividualCoffeePurchase.xaml.cs">
       <DependentUpon>IndividualCoffeePurchase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\CoffeePurchases\ParentCoffeePurchases.xaml.cs">
+    <Compile Include="Pages\Explore\CoffeePurchases\ParentCoffeePurchases.xaml.cs">
       <DependentUpon>ParentCoffeePurchases.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\CoffeeSorts\IndividualCoffeeSort.xaml.cs">
+    <Compile Include="Pages\Explore\CoffeeSorts\IndividualCoffeeSort.xaml.cs">
       <DependentUpon>IndividualCoffeeSort.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\CoffeeSorts\ParentCoffeeSorts.xaml.cs">
+    <Compile Include="Pages\Explore\CoffeeSorts\ParentCoffeeSorts.xaml.cs">
       <DependentUpon>ParentCoffeeSorts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\CoffeeSorts\SummaryCoffeeSorts.xaml.cs">
-      <DependentUpon>SummaryCoffeeSorts.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Statistic\Suppliers\IndividualSupplier.xaml.cs">
+    <Compile Include="Pages\Explore\Suppliers\IndividualSupplier.xaml.cs">
       <DependentUpon>IndividualSupplier.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\Suppliers\ParentSuppliers.xaml.cs">
+    <Compile Include="Pages\Explore\Suppliers\ParentSuppliers.xaml.cs">
       <DependentUpon>ParentSuppliers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Statistic\StatsAccounts.xaml.cs">
+      <DependentUpon>StatsAccounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Statistic\StatsCoffeeSorts.xaml.cs">
+      <DependentUpon>StatsCoffeeSorts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\EntityWindows\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
@@ -209,43 +214,59 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Explorer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Roastings\IndividualRoasting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Roastings\ParentRoastings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Statistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\Accounts\ParentAccounts.xaml">
+    <Page Include="Pages\Explore\Accounts\ParentAccounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\Accounts\IndividualAccount.xaml">
+    <Page Include="Pages\Explore\Accounts\IndividualAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\CoffeePurchases\IndividualCoffeePurchase.xaml">
+    <Page Include="Pages\Explore\CoffeePurchases\IndividualCoffeePurchase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\CoffeePurchases\ParentCoffeePurchases.xaml">
+    <Page Include="Pages\Explore\CoffeePurchases\ParentCoffeePurchases.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\CoffeeSorts\IndividualCoffeeSort.xaml">
+    <Page Include="Pages\Explore\CoffeeSorts\IndividualCoffeeSort.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\CoffeeSorts\ParentCoffeeSorts.xaml">
+    <Page Include="Pages\Explore\CoffeeSorts\ParentCoffeeSorts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\CoffeeSorts\SummaryCoffeeSorts.xaml">
+    <Page Include="Pages\Explore\Suppliers\IndividualSupplier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\Suppliers\IndividualSupplier.xaml">
+    <Page Include="Pages\Explore\Suppliers\ParentSuppliers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\Suppliers\ParentSuppliers.xaml">
+    <Page Include="Pages\Statistic\StatsAccounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Statistic\StatsCoffeeSorts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

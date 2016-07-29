@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using MahApps.Metro.Controls;
-using ViewModels.EntityWindows;
+using ViewModels.Windows.EntityWindows;
 
 namespace UI.Windows.EntityWindows
 {
@@ -12,7 +12,7 @@ namespace UI.Windows.EntityWindows
         public MonthlyExpense(object argExpense = null)
         {
             InitializeComponent();
-            DataContext = new MonthlyExpenseViewModel(argExpense);
+            DataContext = new vmWinMonthlyExpense(argExpense);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

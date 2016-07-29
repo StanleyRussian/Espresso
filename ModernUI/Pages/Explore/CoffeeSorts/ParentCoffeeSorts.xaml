@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="UI.Pages.Explore.CoffeeSorts.ParentCoffeeSorts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             xmlns:coffeeSorts="clr-namespace:UI.Pages.Explore.CoffeeSorts"
+             dialog:DialogParticipation.Register="{Binding}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border BorderBrush="{StaticResource AccentColorBrush3}" 
+                BorderThickness="1" Margin="3"
+                Grid.RowSpan="2">
+            <Grid Background="{StaticResource GrayBrush10}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Command="{Binding cmdSelectActive}" Margin="{StaticResource ControlMargin}">Активные</Button>
+                    <Button Command="{Binding cmdSelectInactive}" Margin="{StaticResource ControlMargin}">Удалённые</Button>
+                </StackPanel>
+
+                <ListBox x:Name="tabs" Grid.Row="1" ItemsSource="{Binding Selected}" 
+                         DisplayMemberPath="Name" IsSynchronizedWithCurrentItem="True"
+                         Background="{StaticResource GrayBrush10}">
+                    <ListBox.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource MetroListBoxItem}" TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Margin="{StaticResource ControlMargin}" Grid.ColumnSpan="2"
+                    Command="{Binding cmdToggleActive}" 
+                    CommandParameter="{Binding ElementName=tabs, Path=SelectedItem}">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource MetroButton}" TargetType="Button">
+                                <Setter Property="Content" Value="Восстановить"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsActiveSelected}" Value="true">
+                                        <Setter Property="Content" Value="Удалить"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Click="OnNewClick" Grid.Row="1"
+                    Margin="{StaticResource ControlMargin}">Добавить</Button>
+                    <Button Click="OnEditClick" Grid.Row="1" Grid.Column="1"
+                    Margin="{StaticResource ControlMargin}">Редактировать</Button>
+                </Grid>
+            </Grid>
+        </Border>
+        
+        <!--<WrapPanel Grid.Column="1" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Margin="{StaticResource ControlMargin}" MinWidth="200" Text="{Binding FilterName}"
+                         controls:TextBoxHelper.Watermark="Поиск по названию..."/>
+                <Button Command="{Binding cmdSearch}" Margin="{StaticResource ControlMargin}">Поиск</Button>
+                <Button Command="{Binding cmdClearSearch}" Margin="{StaticResource ControlMargin}">Сбросить</Button>
+            </StackPanel>
+        </WrapPanel>-->
+        
+        <coffeeSorts:IndividualCoffeeSort Grid.Row="1" Grid.Column="1" DataContext="{Binding Selected}"/>
+    </Grid>
+</UserControl>

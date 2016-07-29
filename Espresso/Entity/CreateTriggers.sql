@@ -782,17 +782,17 @@ BEGIN
 		END
 		BEGIN
 			INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-			SELECT i.Account_Id, i.Date, i.Sum, rc.Name, N'Продажа кофе'
+			SELECT i.Account_Id, i.Date, i.Sum, rc.Name, N'Закупка кофе'
 			FROM INSERTED i
 			INNER JOIN dbo.Suppliers rc
 				ON rc.Id = i.Supplier_Id
 		END
 		BEGIN
-			UPDATE CoffeeSales
+			UPDATE CoffeePurchases
 			SET TransactionId = (SELECT MAX(Id)
 									FROM dTransactions)
 			FROM INSERTED i
-			WHERE CoffeeSales.Id = i.Id
+			WHERE CoffeePurchases.Id = i.Id
 		END
 	END
 END

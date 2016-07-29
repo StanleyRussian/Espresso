@@ -26,6 +26,7 @@ namespace Model.Entity
         public bool Paid { get; set; }
         public double Sum { get; set; }
         public Nullable<int> TransactionId { get; set; }
+        public string InvoiceNumber { get; set; }
     
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

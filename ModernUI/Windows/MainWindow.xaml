@@ -20,11 +20,14 @@
         
         <TabControl ItemsSource="{Binding Tabs}">
             <TabControl.Resources>
-                <DataTemplate DataType="{x:Type pagesVM:HomeViewModel}">
+                <DataTemplate DataType="{x:Type pagesVM:vmHome}">
                     <pages:Home/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type pagesVM:StatisticsViewModel}">
+                <DataTemplate DataType="{x:Type pagesVM:vmStatistics}">
                     <pages:Statistics/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type pagesVM:vmExplorer}">
+                    <pages:Explorer/>
                 </DataTemplate>
             </TabControl.Resources>
 

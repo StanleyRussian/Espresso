@@ -2,28 +2,17 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:accounts="clr-namespace:UI.Pages.Statistic.Accounts"
-             xmlns:coffeeSorts="clr-namespace:UI.Pages.Statistic.CoffeeSorts"
-             xmlns:coffeeSortsVM="clr-namespace:ViewModels.Statistics.CoffeeSorts;assembly=ViewModels"
-             xmlns:accountsVM="clr-namespace:ViewModels.Statistics.Accounts;assembly=ViewModels"
-             xmlns:suppliersVM="clr-namespace:ViewModels.Statistics.Suppliers;assembly=ViewModels"
-             xmlns:suppliers="clr-namespace:UI.Pages.Statistic.Suppliers"
-             xmlns:coffeePurchasesVM="clr-namespace:ViewModels.Statistics.CoffeePurchases;assembly=ViewModels"
-             xmlns:coffeePurchases="clr-namespace:UI.Pages.Statistic.CoffeePurchases">
+             xmlns:accounts="clr-namespace:ViewModels.Pages.Statistics.Accounts;assembly=ViewModels"
+             xmlns:statistic="clr-namespace:UI.Pages.Statistic"
+             xmlns:coffeeSorts="clr-namespace:ViewModels.Pages.Statistics.CoffeeSorts;assembly=ViewModels">
     <Grid>
-        <TabControl ItemsSource="{Binding StatisticTabs, Mode=TwoWay}">
+        <TabControl ItemsSource="{Binding Tabs, Mode=TwoWay}">
             <TabControl.Resources>
-                <DataTemplate DataType="{x:Type accountsVM:ParentAccountsViewModel}">
-                    <accounts:ParentAccounts/>
+                <DataTemplate DataType="{x:Type accounts:vmStatsAccounts}">
+                    <statistic:StatsAccounts/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type coffeeSortsVM:ParentCoffeeSortsViewModel}">
-                    <coffeeSorts:ParentCoffeeSorts/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type suppliersVM:ParentSuppliersViewModel}">
-                    <suppliers:ParentSuppliers/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type coffeePurchasesVM:ParentCoffeePurchasesViewModel}">
-                    <coffeePurchases:ParentCoffeePurchases/>
+                <DataTemplate DataType="{x:Type coffeeSorts:vmStatsCoffeeSorts}">
+                    <statistic:StatsCoffeeSorts/>
                 </DataTemplate>
             </TabControl.Resources>
 

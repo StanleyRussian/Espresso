@@ -1,4 +1,6 @@
-﻿namespace UI.Windows
+﻿using ViewModels.Windows;
+
+namespace UI.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -8,7 +10,7 @@
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModels.MainWindowViewModel();
+            DataContext = new vmWinMain();
         }
     }
 }

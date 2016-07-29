@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using MahApps.Metro.Controls;
 using Model;
-using ViewModels.EntityWindows;
+using ViewModels.Windows.EntityWindows;
 
 namespace UI.Windows.EntityWindows
 {
@@ -13,7 +13,7 @@ namespace UI.Windows.EntityWindows
         public CoffeePurchase(object argPurchase = null)
         {
             InitializeComponent();
-            DataContext = new CoffeePurchaseViewModel(argPurchase);
+            DataContext = new vmWinCoffeePurchase(argPurchase);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

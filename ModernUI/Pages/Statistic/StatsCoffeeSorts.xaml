@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="UI.Pages.Statistic.StatsCoffeeSorts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding CoffeeSorts}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Sort.Name}" Header="Сорт"/>
+                <DataGridTextColumn Binding="{Binding GreenStocks, StringFormat={}{0} кг}" Header="Остатки зелёного кофе"/>
+                <DataGridTextColumn Binding="{Binding RoastedStocks, StringFormat={}{0} кг}" Header="Остатки жареного кофе"/>
+                <DataGridTextColumn Binding="{Binding PurchaseStepMessage}" Header="Шаг закупки"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding cmdPurchaseStep}" Content="Пересчитать"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

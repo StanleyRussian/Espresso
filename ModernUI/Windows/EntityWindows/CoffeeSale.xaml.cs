@@ -1,5 +1,5 @@
 ﻿using MahApps.Metro.Controls;
-using ViewModels.EntityWindows;
+using ViewModels.Windows.EntityWindows;
 
 namespace UI.Windows.EntityWindows
 {
@@ -11,7 +11,7 @@ namespace UI.Windows.EntityWindows
         public CoffeeSale(object argSale = null)
         {
             InitializeComponent();
-            DataContext = new CoffeeSaleViewModel(argSale);
+            DataContext = new vmWinCoffeeSale(argSale);
         }
 
         private void btnCancel_Click(object sender, System.Windows.RoutedEventArgs e)

@@ -46,6 +46,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -93,6 +94,12 @@
 
             <Label Grid.Row="4" Margin="{StaticResource ControlMargin}">Счёт</Label>
             <combo:ComboActiveAccounts Grid.Row="4" Grid.Column="1" />
+
+            <Label Grid.Row="5">Номер накладной</Label>
+            <TextBox Text="{Binding InvoiceNumber}" Grid.Row="5" Grid.Column="1"
+                     Style="{StaticResource Mandatory}"
+                     Margin="{StaticResource ControlMargin}"
+                     controls:TextBoxHelper.ClearTextButton="True"/>
         </Grid>
 
         <DataGrid Grid.Column="0" Grid.Row="1" 

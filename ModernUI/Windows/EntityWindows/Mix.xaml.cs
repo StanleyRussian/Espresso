@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using MahApps.Metro.Controls;
-using ViewModels.EntityWindows;
+using ViewModels.Windows.EntityWindows;
 
 namespace UI.Windows.EntityWindows
 {
@@ -12,7 +12,7 @@ namespace UI.Windows.EntityWindows
         public Mix(object argMix = null)
         {
             InitializeComponent();
-            DataContext = new MixViewModel(argMix);
+            DataContext = new vmWinMix(argMix);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
