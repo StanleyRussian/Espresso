@@ -10,7 +10,6 @@ namespace ViewModels.Pages
 {
     public class vmHome : aTabViewModel
     {
-        //private ContextContainer _context;
         private ObservableCollection<dGreenStock> _greenStocks;
         private ObservableCollection<dRoastedStock> _roastedStocks;
         private ObservableCollection<dPackedStocks> _packedStocks;
@@ -26,6 +25,7 @@ namespace ViewModels.Pages
 
         protected override void Load()
         {
+            ContextManager.ReloadContext();
             GreenStocks = 
                 new ObservableCollection<dGreenStock>(ContextManager.Context.dGreenStocks.Include(p => p.CoffeeSort));
             RoastedStocks = 
@@ -36,9 +36,7 @@ namespace ViewModels.Pages
                 new ObservableCollection<dPackageStocks>(ContextManager.Context.dPackageStocks.Include(p => p.Package));
             AccountsBalances =
                 new ObservableCollection<dAccountsBalance>(
-                    ContextManager.Context.dAccountsBalances
-                        .Where(p => p.Account.Active)
-                        .Include(p => p.Account));
+                    ContextManager.Context.dAccountsBalances.Where(p => p.Account.Active).Include(p => p.Account));
         }
 
         #region Binding Properties

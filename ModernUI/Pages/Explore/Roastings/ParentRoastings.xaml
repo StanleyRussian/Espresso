@@ -63,11 +63,6 @@
                 <ListBox x:Name="tabs" Grid.Row="1" ItemsSource="{Binding Tabs}"
                          DisplayMemberPath="Date" IsSynchronizedWithCurrentItem="True"
                          Background="{StaticResource GrayBrush10}">
-                    <ListBox.ItemContainerStyle>
-                        <Style BasedOn="{StaticResource MetroListBoxItem}" TargetType="{x:Type ListBoxItem}">
-                            <Setter Property="IsSelected" Value="{Binding IsSelected}" />
-                        </Style>
-                    </ListBox.ItemContainerStyle>
                 </ListBox>
 
                 <Grid Grid.Row="2">

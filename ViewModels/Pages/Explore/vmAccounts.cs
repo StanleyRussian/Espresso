@@ -51,8 +51,6 @@ namespace ViewModels.Pages.Explore
 
         protected override void cmdReload_Execute()
         {
-            _active = null;
-            _inactive = null;
             ContextManager.ReloadContext();
             Load();
         }

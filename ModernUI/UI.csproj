@@ -90,6 +90,12 @@
     <Compile Include="Pages\Explorer.xaml.cs">
       <DependentUpon>Explorer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Explore\Mixes\IndividualMix.xaml.cs">
+      <DependentUpon>IndividualMix.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Mixes\ParentMixes.xaml.cs">
+      <DependentUpon>ParentMixes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Explore\Roastings\IndividualRoasting.xaml.cs">
       <DependentUpon>IndividualRoasting.xaml</DependentUpon>
     </Compile>
@@ -215,6 +221,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Explorer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Mixes\IndividualMix.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Mixes\ParentMixes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

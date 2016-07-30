@@ -6,26 +6,30 @@
              xmlns:coffeeSorts="clr-namespace:UI.Pages.Explore.CoffeeSorts"
              xmlns:suppliers="clr-namespace:UI.Pages.Explore.Suppliers"
              xmlns:coffeePurchases="clr-namespace:UI.Pages.Explore.CoffeePurchases"
-             xmlns:ExploreVM="clr-namespace:ViewModels.Pages.Explore;assembly=ViewModels"
-             xmlns:roastings="clr-namespace:UI.Pages.Explore.Roastings">
+             xmlns:vmExplore="clr-namespace:ViewModels.Pages.Explore;assembly=ViewModels"
+             xmlns:roastings="clr-namespace:UI.Pages.Explore.Roastings"
+             xmlns:mixes="clr-namespace:UI.Pages.Explore.Mixes">
     
     <Grid>
         <TabControl ItemsSource="{Binding Tabs, Mode=TwoWay}">
             <TabControl.Resources>
-                <DataTemplate DataType="{x:Type ExploreVM:vmAccounts}">
+                <DataTemplate DataType="{x:Type vmExplore:vmAccounts}">
                     <accounts:ParentAccounts/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type ExploreVM:vmCoffeeSorts}">
+                <DataTemplate DataType="{x:Type vmExplore:vmCoffeeSorts}">
                     <coffeeSorts:ParentCoffeeSorts/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type ExploreVM:vmSuppliers}">
+                <DataTemplate DataType="{x:Type vmExplore:vmSuppliers}">
                     <suppliers:ParentSuppliers/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type ExploreVM:vmCoffeePurchases}">
+                <DataTemplate DataType="{x:Type vmExplore:vmCoffeePurchases}">
                     <coffeePurchases:ParentCoffeePurchases/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type ExploreVM:vmRoastings}">
+                <DataTemplate DataType="{x:Type vmExplore:vmRoastings}">
                     <roastings:ParentRoastings/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmExplore:vmMixes}">
+                    <mixes:ParentMixes/>
                 </DataTemplate>
             </TabControl.Resources>
 

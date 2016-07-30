@@ -14,7 +14,18 @@
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Оплачено:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Paid}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Paid}">
+                <TextBlock.Style>
+                    <Style BasedOn="{StaticResource Header2Accent}" TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Paid}" Value="False">
+                                <Setter Property="Foreground" Value="#C91A1A"/>
+                                <Setter Property="FontWeight" Value="DemiBold"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">

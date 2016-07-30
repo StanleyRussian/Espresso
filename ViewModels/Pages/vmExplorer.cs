@@ -14,7 +14,8 @@ namespace ViewModels.Pages
                 new vmCoffeeSorts(),
                 new vmSuppliers(),
                 new vmCoffeePurchases(),
-                new vmRoastings()
+                new vmRoastings(),
+                new vmMixes()
             };
         }
 

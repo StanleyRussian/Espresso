@@ -65,7 +65,13 @@
                          Background="{StaticResource GrayBrush10}">
                     <ListBox.ItemContainerStyle>
                         <Style BasedOn="{StaticResource MetroListBoxItem}" TargetType="{x:Type ListBoxItem}">
-                            <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Paid}" Value="False">
+                                    <Setter Property="BorderBrush" Value="Red"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="Background" Value="{StaticResource ValidationSummaryFillColor2}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
                         </Style>
                     </ListBox.ItemContainerStyle>
                 </ListBox>

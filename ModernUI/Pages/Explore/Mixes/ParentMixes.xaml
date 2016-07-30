@@ -1,15 +1,13 @@
-﻿<UserControl x:Class="UI.Pages.Explore.CoffeeSorts.ParentCoffeeSorts"
+﻿<UserControl x:Class="UI.Pages.Explore.Mixes.ParentMixes"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
-             xmlns:coffeeSorts="clr-namespace:UI.Pages.Explore.CoffeeSorts"
-             dialog:DialogParticipation.Register="{Binding}">
+             xmlns:mixes="clr-namespace:UI.Pages.Explore.Mixes">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="3*"/>
@@ -67,7 +65,7 @@
                 </Grid>
             </Grid>
         </Border>
-        
+
         <!--<WrapPanel Grid.Column="1" HorizontalAlignment="Right">
             <StackPanel Orientation="Horizontal">
                 <TextBox Margin="{StaticResource ControlMargin}" MinWidth="200" Text="{Binding FilterName}"
@@ -76,7 +74,8 @@
                 <Button Command="{Binding cmdClearSearch}" Margin="{StaticResource ControlMargin}">Сбросить</Button>
             </StackPanel>
         </WrapPanel>-->
-        
-        <coffeeSorts:IndividualCoffeeSort Grid.Row="1" Grid.Column="1" DataContext="{Binding Selected}"/>
+
+        <mixes:IndividualMix Grid.Row="1" Grid.Column="1" DataContext="{Binding Selected}"/>
     </Grid>
+
 </UserControl>

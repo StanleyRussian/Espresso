@@ -30,7 +30,6 @@ namespace ViewModels.Pages.Explore
                     ContextManager.Context.Suppliers.Where(p => !p.Active));
                 Selected = _inactive;
             }
-
         }
 
         #region Binding Properties
@@ -50,8 +49,6 @@ namespace ViewModels.Pages.Explore
 
         protected override void cmdReload_Execute()
         {
-            _active = null;
-            _inactive = null;
             ContextManager.ReloadContext();
             Load();
         }
