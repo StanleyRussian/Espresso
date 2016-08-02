@@ -3,32 +3,32 @@ using System.Windows.Controls;
 using UI.Windows.EntityWindows;
 using ViewModels.Pages.Explore;
 
-namespace UI.Pages.Explore.Mixes
+namespace UI.Pages.Explore.PackedCategories
 {
     /// <summary>
-    /// Interaction logic for ParentMixes.xaml
+    /// Interaction logic for ParentPackedCategories.xaml
     /// </summary>
-    public partial class ParentMixes : UserControl
+    public partial class ParentPackedCategories : UserControl
     {
-        public ParentMixes()
+        public ParentPackedCategories()
         {
             InitializeComponent();
         }
 
         private void OnNewClick(object sender, RoutedEventArgs e)
         {
-            new Mix().ShowDialog();
-            var viewModel = (vmMixes)DataContext;
+            new PackedCategory().ShowDialog();
+            var viewModel = (vmPackedCategories) DataContext;
             viewModel.cmdReload.Execute(null);
         }
 
         private void OnEditClick(object sender, RoutedEventArgs e)
         {
-            var selected = tabs.SelectedItem as Model.Entity.Mix;
+            var selected = tabs.SelectedItem as Model.Entity.PackedCategory;
             if (selected != null)
             {
-                new Mix(selected).ShowDialog();
-                var viewModel = (vmMixes)DataContext;
+                new CoffeeSort(selected).ShowDialog();
+                var viewModel = (vmPackedCategories)DataContext;
                 viewModel.cmdReload.Execute(null);
             }
         }

@@ -11,11 +11,11 @@
         mc:Ignorable="d"
         Title="Espresso" 
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
-        Width="900" Height="750">
+        Width="950" Height="750">
 
     <Grid>
         <Grid.Resources>
-            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
         </Grid.Resources>
         
         <TabControl ItemsSource="{Binding Tabs}">

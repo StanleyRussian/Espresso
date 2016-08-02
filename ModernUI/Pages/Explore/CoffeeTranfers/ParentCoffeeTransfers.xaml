@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="UI.Pages.Explore.CoffeeTranfers.ParentCoffeeTransfers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:coffeeTranfers="clr-namespace:UI.Pages.Explore.CoffeeTranfers"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:model="clr-namespace:Model;assembly=Model">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <Border BorderBrush="{StaticResource AccentColorBrush3}"
+                BorderThickness="1" Margin="3"
+                Background="{StaticResource GrayBrush10}"
+                Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                        <Button Command="{Binding cmdFilter30Days}"
+                                Margin="{StaticResource ControlMargin}"
+                                Content="За 30 дней"/>
+                        <Button Command="{Binding cmdFilterAll}"
+                                Margin="{StaticResource ControlMargin}"
+                                Content="Все"/>
+                    </StackPanel>
+
+                    <Label Margin="{StaticResource ControlMargin}"
+                           Grid.Row="1" Content="С даты:"/>
+                    <DatePicker Margin="{StaticResource ControlMargin}" Grid.Row="1" Grid.Column="1"
+                                SelectedDate="{Binding FilterFrom, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Margin="{StaticResource ControlMargin}"
+                           Grid.Row="2" Content="По дату:"/>
+
+                    <DatePicker Margin="{StaticResource ControlMargin}" Grid.Row="2" Grid.Column="1"
+                                SelectedDate="{Binding FilterTo, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+
+                <ListBox x:Name="tabs" Grid.Row="1" ItemsSource="{Binding Tabs}"
+                         DisplayMemberPath="Date" IsSynchronizedWithCurrentItem="True"
+                         Background="{StaticResource GrayBrush10}">
+                    <ListBox.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource MetroListBoxItem}" TargetType="{x:Type ListBoxItem}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Paid}" Value="False">
+                                    <Setter Property="BorderBrush" Value="Red"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="Background" Value="{StaticResource ValidationSummaryFillColor2}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Command="{Binding cmdDelete}" Grid.ColumnSpan="2"
+                            Margin="{StaticResource ControlMargin}"
+                            CommandParameter="{Binding ElementName=tabs, Path=SelectedItem}"
+                            Content="Удалить"/>
+                    <Button Click="OnNewClick" Grid.Row="1"
+                            Margin="{StaticResource ControlMargin}"
+                            Content="Добавить"/>
+                    <Button Click="OnEditClick"  Grid.Row="1" Grid.Column="1"
+                            Margin="{StaticResource ControlMargin}"
+                            Content="Редактировать"/>
+
+
+
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Margin="3"
+                BorderBrush="{StaticResource AccentColorBrush3}"
+                BorderThickness="1" 
+                Background="{StaticResource GrayBrush10}">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Style="{StaticResource Header2}" Margin="{StaticResource ControlMargin}" Text="Фильтрация:" />
+
+                <TextBlock Style="{StaticResource Header3}" Margin="{StaticResource ControlMargin}"
+                           Text="По купажу:" Grid.Row="1" />
+                <ComboBox ItemsSource="{Binding Source={x:Static model:ContextManager.AllMixes}}"
+                          SelectedItem="{Binding FilterMix}"
+                          DisplayMemberPath="Name"
+                          controls:TextBoxHelper.ClearTextButton="True"
+                          Margin="{StaticResource ControlMargin}"
+                          MinWidth="150"
+                          Grid.Row="2" />
+            </Grid>
+        </Border>
+
+        <coffeeTranfers:IndividualCoffeeTransfer Grid.Row="1" Grid.Column="1" DataContext="{Binding Tabs}" />
+    </Grid>
+</UserControl>

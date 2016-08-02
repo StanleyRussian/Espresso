@@ -7,34 +7,34 @@ using ViewModels.Pages.Explore.Abstract;
 
 namespace ViewModels.Pages.Explore
 {
-    public class vmMixes:aSubjectsListViewModel
+    public class vmPackedCategories: aSubjectsListViewModel
     {
-        private ObservableCollection<Mix> _active;
-        private ObservableCollection<Mix> _inactive;
+        private ObservableCollection<PackedCategory> _active;
+        private ObservableCollection<PackedCategory> _inactive;
 
-        public vmMixes()
+        public vmPackedCategories()
         {
-            Header = "Купажи";
+            Header = "Категории фасовки";
         }
 
         protected override void Load()
         {
             if (IsActiveSelected)
             {
-                _active = new ObservableCollection<Mix>(
-                    ContextManager.Context.Mixes.Where(p => p.Active));
+                _active = new ObservableCollection<PackedCategory>(
+                    ContextManager.Context.PackedCategories.Where(p => p.Active));
                 Selected = _active;
             }
             else
             {
-                _inactive = new ObservableCollection<Mix>(
-                    ContextManager.Context.Mixes.Where(p => !p.Active));
+                _inactive = new ObservableCollection<PackedCategory>(
+                    ContextManager.Context.PackedCategories.Where(p => !p.Active));
                 Selected = _inactive;
             }
         }
 
-        private ObservableCollection<Mix> _selected;
-        public ObservableCollection<Mix> Selected
+        private ObservableCollection<PackedCategory> _selected;
+        public ObservableCollection<PackedCategory> Selected
         {
             get { return _selected; }
             set
@@ -56,7 +56,7 @@ namespace ViewModels.Pages.Explore
 
         protected override void cmdToggleActive_Execute(object argSelected)
         {
-            var selected = argSelected as Mix;
+            var selected = argSelected as PackedCategory;
             selected.Active = !selected.Active;
             SaveContext();
             cmdReload_Execute();

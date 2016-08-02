@@ -90,11 +90,71 @@
     <Compile Include="Pages\Explorer.xaml.cs">
       <DependentUpon>Explorer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Explore\CoffeeSales\IndividualCoffeeSale.xaml.cs">
+      <DependentUpon>IndividualCoffeeSale.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\CoffeeSales\ParentCoffeeSales.xaml.cs">
+      <DependentUpon>ParentCoffeeSales.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\CoffeeTranfers\IndividualCoffeeTransfer.xaml.cs">
+      <DependentUpon>IndividualCoffeeTransfer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\CoffeeTranfers\ParentCoffeeTransfers.xaml.cs">
+      <DependentUpon>ParentCoffeeTransfers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Explore\Mixes\IndividualMix.xaml.cs">
       <DependentUpon>IndividualMix.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Explore\Mixes\ParentMixes.xaml.cs">
       <DependentUpon>ParentMixes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\MoneyTransfers\IndividualMoneyTranfer.xaml.cs">
+      <DependentUpon>IndividualMoneyTranfer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\MoneyTransfers\ParentMoneyTranfers.xaml.cs">
+      <DependentUpon>ParentMoneyTranfers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\OtherProfits\IndividualOtherProfit.xaml.cs">
+      <DependentUpon>IndividualOtherProfit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\OtherProfits\ParentOtherProfits.xaml.cs">
+      <DependentUpon>ParentOtherProfits.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\PackagePurchases\IndividualPackagePurchase.xaml.cs">
+      <DependentUpon>IndividualPackagePurchase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\PackagePurchases\ParentPackagePurchases.xaml.cs">
+      <DependentUpon>ParentPackagePurchases.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Packages\IndividualPackage.xaml.cs">
+      <DependentUpon>IndividualPackage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Packages\ParentPackages.xaml.cs">
+      <DependentUpon>ParentPackages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\PackedCategories\IndividualPackedCategory.xaml.cs">
+      <DependentUpon>IndividualPackedCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\PackedCategories\ParentPackedCategories.xaml.cs">
+      <DependentUpon>ParentPackedCategories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Packings\IndividualPacking.xaml.cs">
+      <DependentUpon>IndividualPacking.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Packings\ParentPackings.xaml.cs">
+      <DependentUpon>ParentPackings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Payments\IndividualPayment.xaml.cs">
+      <DependentUpon>IndividualPayment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Payments\ParentPayments.xaml.cs">
+      <DependentUpon>ParentPayments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Recipients\IndividualRecipient.xaml.cs">
+      <DependentUpon>IndividualRecipient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Recipients\ParentRecipients.xaml.cs">
+      <DependentUpon>ParentRecipients.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Explore\Roastings\IndividualRoasting.xaml.cs">
       <DependentUpon>IndividualRoasting.xaml</DependentUpon>
@@ -155,6 +215,9 @@
     </Compile>
     <Compile Include="Windows\EntityWindows\Mix.xaml.cs">
       <DependentUpon>Mix.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EntityWindows\MoneyTransfer.xaml.cs">
+      <DependentUpon>MoneyTransfer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\EntityWindows\MonthlyExpense.xaml.cs">
       <DependentUpon>MonthlyExpense.xaml</DependentUpon>
@@ -224,11 +287,91 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Explore\CoffeeSales\IndividualCoffeeSale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\CoffeeSales\ParentCoffeeSales.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\CoffeeTranfers\IndividualCoffeeTransfer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\CoffeeTranfers\ParentCoffeeTransfers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Explore\Mixes\IndividualMix.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Explore\Mixes\ParentMixes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\MoneyTransfers\IndividualMoneyTranfer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\MoneyTransfers\ParentMoneyTranfers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\OtherProfits\IndividualOtherProfit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\OtherProfits\ParentOtherProfits.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\PackagePurchases\IndividualPackagePurchase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\PackagePurchases\ParentPackagePurchases.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Packages\IndividualPackage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Packages\ParentPackages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\PackedCategories\IndividualPackedCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\PackedCategories\ParentPackedCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Packings\IndividualPacking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Packings\ParentPackings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Payments\IndividualPayment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Payments\ParentPayments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Recipients\IndividualRecipient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Recipients\ParentRecipients.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -307,6 +450,10 @@
     <Page Include="Windows\EntityWindows\Mix.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\EntityWindows\MoneyTransfer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\EntityWindows\MonthlyExpense.xaml">
       <Generator>MSBuild:Compile</Generator>

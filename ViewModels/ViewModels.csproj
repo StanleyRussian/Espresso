@@ -50,7 +50,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auxiliary\SimpleCommand.cs" />
+    <Compile Include="Pages\Explore\vmCoffeeSales.cs" />
+    <Compile Include="Pages\Explore\vmCoffeeTranfers.cs" />
     <Compile Include="Pages\Explore\vmMixes.cs" />
+    <Compile Include="Pages\Explore\vmMoneyTranfers.cs" />
+    <Compile Include="Pages\Explore\vmOtherProfits.cs" />
+    <Compile Include="Pages\Explore\vmPackagePurchases.cs" />
+    <Compile Include="Pages\Explore\vmPackages.cs" />
+    <Compile Include="Pages\Explore\vmPackedCategories.cs" />
+    <Compile Include="Pages\Explore\vmPackings.cs" />
+    <Compile Include="Pages\Explore\vmPayments.cs" />
+    <Compile Include="Pages\Explore\vmRecipients.cs" />
     <Compile Include="Pages\vmExplorer.cs" />
     <Compile Include="Pages\Statistics\Accounts\vmStatsAccounts.cs" />
     <Compile Include="Pages\Statistics\CoffeeSorts\vmSoloCoffeeSort.cs" />
@@ -63,6 +73,7 @@
     <Compile Include="Windows\EntityWindows\vmWinCoffeeSort.cs" />
     <Compile Include="Windows\EntityWindows\vmWinCoffeeTranfer.cs" />
     <Compile Include="Windows\EntityWindows\vmWinMix.cs" />
+    <Compile Include="Windows\EntityWindows\vmWinMoneyTranfer.cs" />
     <Compile Include="Windows\EntityWindows\vmWinMonthlyExpense.cs" />
     <Compile Include="Windows\EntityWindows\vmWinOtherProfit.cs" />
     <Compile Include="Windows\EntityWindows\vmWinPackagePurchase.cs" />

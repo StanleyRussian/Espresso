@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Model;
 using Model.Entity;
@@ -6,36 +7,34 @@ using ViewModels.Pages.Explore.Abstract;
 
 namespace ViewModels.Pages.Explore
 {
-    public class vmCoffeeSorts: aSubjectsListViewModel
+    public class vmPackages:aSubjectsListViewModel
     {
-        private ObservableCollection<CoffeeSort> _active;
-        private ObservableCollection<CoffeeSort> _inactive;
+        private ObservableCollection<Package> _active;
+        private ObservableCollection<Package> _inactive;
 
-        public vmCoffeeSorts()
+        public vmPackages()
         {
-            Header = "Сорта кофе";
+            Header = "Упаковки";
         }
 
         protected override void Load()
         {
             if (IsActiveSelected)
             {
-                _active = new ObservableCollection<CoffeeSort>(
-                    ContextManager.Context.CoffeeSorts.Where(p => p.Active));
+                _active = new ObservableCollection<Package>(
+                    ContextManager.Context.Packages.Where(p => p.Active));
                 Selected = _active;
             }
             else
             {
-                _inactive = new ObservableCollection<CoffeeSort>(
-                    ContextManager.Context.CoffeeSorts.Where(p => !p.Active));
+                _inactive = new ObservableCollection<Package>(
+                    ContextManager.Context.Packages.Where(p => !p.Active));
                 Selected = _inactive;
             }
         }
 
-        #region Binding Properties
-
-        private ObservableCollection<CoffeeSort> _selected;
-        public ObservableCollection<CoffeeSort> Selected
+        private ObservableCollection<Package> _selected;
+        public ObservableCollection<Package> Selected
         {
             get { return _selected; }
             set
@@ -45,17 +44,19 @@ namespace ViewModels.Pages.Explore
             }
         }
 
-        #endregion
-
         protected override void cmdSearch_Execute()
-        { }
+        {
+            throw new NotImplementedException();
+        }
 
         protected override void cmdDelete_Execute(object argSelected)
-        { }
+        {
+            throw new NotImplementedException();
+        }
 
         protected override void cmdToggleActive_Execute(object argSelected)
         {
-            var selected = argSelected as CoffeeSort;
+            var selected = argSelected as Package;
             selected.Active = !selected.Active;
             SaveContext();
             cmdReload_Execute();

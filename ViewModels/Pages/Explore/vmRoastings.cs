@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Model;
 using Model.Entity;
@@ -12,13 +11,6 @@ namespace ViewModels.Pages.Explore
         public vmRoastings()
         {
             Header = "Обжарки";
-        }
-
-        protected override void Load()
-        {
-            _filterTo = DateTime.Now;
-            _filterFrom = DateTime.Now.AddDays(-30);
-            Refresh();
         }
 
         protected override void Refresh()
@@ -53,8 +45,6 @@ namespace ViewModels.Pages.Explore
         }
 
         protected override void cmdDelete_Execute(object argSelected)
-        {
-            throw new NotImplementedException();
-        }
+        { }
     }
 }

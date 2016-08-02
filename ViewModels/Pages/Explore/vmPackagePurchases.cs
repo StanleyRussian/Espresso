@@ -6,35 +6,45 @@ using ViewModels.Pages.Explore.Abstract;
 
 namespace ViewModels.Pages.Explore
 {
-    public class vmCoffeePurchases: aProcessListingViewModel
+    public class vmPackagePurchases: aProcessListingViewModel
     {
-        public vmCoffeePurchases()
+        public vmPackagePurchases()
         {
-            Header = "Закупки кофе";
+            Header = "Закупки упаковки";
         }
 
         protected override void Refresh()
         {
-            var query = ContextManager.Context.CoffeePurchases.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
+            var query = ContextManager.Context.PackagePurchases.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
             if (FilterSupplier != null)
                 query = query.Where(p => p.Supplier.Id == FilterSupplier.Id);
             if (FilterAccount != null)
                 query = query.Where(p => p.Account.Id == FilterAccount.Id);
-            if (FilterCoffeeSort != null)
-                query = query.Where(p => p.CoffeePurchase_Details
-                    .FirstOrDefault(x => x.CoffeeSort.Id == FilterCoffeeSort.Id) != null);
-
-            Tabs = new ObservableCollection<CoffeePurchase>(query);
+            if (FilterPackage != null)
+                query = query.Where(p => p.Package.Id == FilterPackage.Id);
+            Tabs = new ObservableCollection<PackagePurchase>(query);
         }
 
-        private ObservableCollection<CoffeePurchase> _tabs;
-        public ObservableCollection<CoffeePurchase> Tabs
+        private ObservableCollection<PackagePurchase> _tabs;
+        public ObservableCollection<PackagePurchase> Tabs
         {
             get { return _tabs; }
-            private set
+            set
             {
                 _tabs = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private Package _filterPackage;
+        public Package FilterPackage
+        {
+            get { return _filterPackage; }
+            set
+            {
+                _filterPackage = value;
+                OnPropertyChanged();
+                Refresh();
             }
         }
 
@@ -62,25 +72,8 @@ namespace ViewModels.Pages.Explore
             }
         }
 
-        private CoffeeSort _filterCoffeeSort;
-        public CoffeeSort FilterCoffeeSort
-        {
-            get { return _filterCoffeeSort; }
-            set
-            {
-                _filterCoffeeSort = value;
-                OnPropertyChanged();
-                Refresh();
-            }
-        }
 
         protected override void cmdDelete_Execute(object argSelected)
-        {
-            //if (IsEmpty(argSelected)) return;
-            //var selected = argSelected as IndividualCoffeePurchaseViewModel;
-            //ContextManager.Context.CoffeePurchases.Remove(selected.Purchase);
-            //SaveContext();
-            //Refresh();
-        }
+        { }
     }
 }

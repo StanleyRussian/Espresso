@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="UI.Pages.Explore.MoneyTransfers.IndividualMoneyTranfer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <WrapPanel Margin="0,5,0,0">
+            <TextBlock Style="{StaticResource Header3}">Дата перевода:</TextBlock>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Date}" Style="{StaticResource Header2Accent}"/>
+        </WrapPanel>
+
+        <WrapPanel Margin="0,5,0,0">
+            <TextBlock Style="{StaticResource Header3}">Сумма:</TextBlock>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Sum}" Style="{StaticResource Header2Accent}"/>
+        </WrapPanel>
+
+        <WrapPanel Margin="0,5,0,0">
+            <TextBlock Style="{StaticResource Header3}">Первоначальный счёт:</TextBlock>
+            <TextBlock Margin="5,0,0,0" Text="{Binding InitialAccount.Name}" Style="{StaticResource Header2Accent}"/>
+        </WrapPanel>
+
+        <WrapPanel Margin="0,5,0,0">
+            <TextBlock Style="{StaticResource Header3}">Конечный счёт:</TextBlock>
+            <TextBlock Margin="5,0,0,0" Text="{Binding TargetAccount.Name}" Style="{StaticResource Header2Accent}"/>
+        </WrapPanel>
+    </StackPanel>
+</UserControl>

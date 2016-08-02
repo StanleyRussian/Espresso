@@ -1,14 +1,14 @@
-﻿<UserControl x:Class="UI.Pages.Explore.CoffeePurchases.IndividualCoffeePurchase"
+﻿<UserControl x:Class="UI.Pages.Explore.CoffeeSales.IndividualCoffeeSale"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <StackPanel Margin="10,0,10,0">
+    <StackPanel>
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Номер накладной:</TextBlock>
             <TextBlock Margin="5,0,0,0" Text="{Binding InvoiceNumber}" Style="{StaticResource Header2Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
-            <TextBlock Style="{StaticResource Header3}">Дата закупки:</TextBlock>
+            <TextBlock Style="{StaticResource Header3}">Дата продажи:</TextBlock>
             <TextBlock Margin="5,0,0,0" Text="{Binding Date}" Style="{StaticResource Header2Accent}"/>
         </WrapPanel>
 
@@ -34,7 +34,7 @@
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
-            <TextBlock Style="{StaticResource Header3}">Поставщик:</TextBlock>
+            <TextBlock Style="{StaticResource Header3}">Клиент:</TextBlock>
             <TextBlock Margin="5,0,0,0" Text="{Binding Supplier.Name}" Style="{StaticResource Header2Accent}"/>
         </WrapPanel>
 
@@ -44,12 +44,13 @@
         </WrapPanel>
 
         <Separator Margin="0,5,0,0"/>
-        
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CoffeePurchase_Details}" 
+
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Sale_Details}" 
                   IsReadOnly="True" Margin="0,5,0,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding CoffeeSort.Name}" Header="Сорт"/>
-                <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} кг}" Header="Количество"/>
+                <DataGridTextColumn Binding="{Binding Mix.Name}" Header="Сорт"/>
+                <DataGridTextColumn Binding="{Binding Package.Name}" Header="Купаж"/>
+                <DataGridTextColumn Binding="{Binding PackQuantity, StringFormat={}{0} кг}" Header="Количество"/>
                 <DataGridTextColumn Binding="{Binding Price, StringFormat={}{0} грн/кг}" Header="Цена за кг"/>
             </DataGrid.Columns>
         </DataGrid>

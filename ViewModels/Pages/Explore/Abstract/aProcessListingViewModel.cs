@@ -42,6 +42,13 @@ namespace ViewModels.Pages.Explore.Abstract
             return false;
         }
 
+        protected override void Load()
+        {
+            _filterTo = DateTime.Now;
+            _filterFrom = DateTime.Now.AddDays(-30);
+            Refresh();
+        }
+
         protected abstract void Refresh();
 
         #region Binding Properties

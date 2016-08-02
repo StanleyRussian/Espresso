@@ -47,12 +47,6 @@ namespace ViewModels.Pages.Explore
 
         #endregion
 
-        protected override void cmdReload_Execute()
-        {
-            ContextManager.ReloadContext();
-            Load();
-        }
-
         protected override void cmdSearch_Execute()
         { }
 

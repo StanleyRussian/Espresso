@@ -45,7 +45,11 @@ namespace ViewModels.Pages.Explore.Abstract
 
         public ICommand cmdReload
         { get; private set; }
-        protected abstract void cmdReload_Execute();
+        protected virtual void cmdReload_Execute()
+        {
+            ContextManager.ReloadContext();
+            Load();
+        }
 
         public ICommand cmdSearch
         { get; private set; }
