@@ -5,7 +5,8 @@
         xmlns:combo="clr-namespace:UI.Controls.Combo"
         Title="Новый платёж" Height="300" Width="300"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                      ShowMaxRestoreButton="False">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
@@ -24,9 +25,9 @@
             </controls:Flyout>
             <controls:Flyout Header="Ошибка" IsModal="True" Position="Right" Width="200"
                              Background="LightCoral" Foreground="{StaticResource GrayBrush1}" IsOpen="{Binding IsFlyErrorOpened}">
-                <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                <Grid Margin="5,5,5,5">
                     <TextBlock Text="{Binding FlyErrorMsg}" TextWrapping="Wrap"/>
-                </StackPanel>
+                </Grid>
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
@@ -56,12 +57,15 @@
                         SelectedDate="{Binding Date}"/>
 
             <Label Grid.Row="1" Margin="{StaticResource ControlMargin}">Сумма</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="4,10,4,56"
-                     Text="{Binding Amount}"
-                     controls:TextBoxHelper.ClearTextButton="True" Grid.RowSpan="2"/>
+            <TextBox Grid.Row="1" Grid.Column="1"
+                     Style="{StaticResource Mandatory}"
+                     Text="{Binding Sum}"  
+                     Margin="{StaticResource ControlMargin}"
+                     controls:TextBoxHelper.ClearTextButton="True"/>
 
             <Label Grid.Row="2" Margin="{StaticResource ControlMargin}">Назначение</Label>
             <TextBox Grid.Row="2" Grid.Column="1" 
+                     Style="{StaticResource Mandatory}"
                      Height="50" TextWrapping="Wrap" AcceptsReturn="True"
                      Margin="{StaticResource ControlMargin}"
                      Text="{Binding Designation}"

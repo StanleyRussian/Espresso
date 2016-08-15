@@ -9,7 +9,7 @@ namespace ViewModels.Windows.EntityWindows
         public vmWinMoneyTranfer(object argTranfer)
         {
             if (argTranfer != null)
-                Tranfer = argTranfer as MoneyTransfer;
+                Transfer = argTranfer as MoneyTransfer;
             else
             {
                 CreatingNew = true;
@@ -19,16 +19,19 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void Refresh()
         {
-            throw new NotImplementedException();
+            Transfer = new MoneyTransfer
+            {
+                Date = DateTime.Now
+            };
         }
 
-        private MoneyTransfer _tranfer;
-        public MoneyTransfer Tranfer
+        private MoneyTransfer _transfer;
+        public MoneyTransfer Transfer
         {
-            get { return _tranfer; }
+            get { return _transfer; }
             set
             {
-                _tranfer = value;
+                _transfer = value;
                 OnPropertyChanged();
             }
         }
@@ -36,7 +39,7 @@ namespace ViewModels.Windows.EntityWindows
         protected override void cmdSave_Execute()
         {
             if (CreatingNew)
-                ContextManager.Context.MoneyTransfers.Add(Tranfer);
+                ContextManager.Context.MoneyTransfers.Add(Transfer);
             SaveContext();
         }
     }

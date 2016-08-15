@@ -46,6 +46,12 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void cmdSave_Execute()
         {
+            if (Profit.Sum <= 0)
+            {
+                FlyErrorMsg = "Введите cумму";
+                IsFlyErrorOpened = true;
+                return;
+            }
             if (CreatingNew)
                 ContextManager.Context.OtherProfits.Add(Profit);
             SaveContext();

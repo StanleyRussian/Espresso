@@ -26,7 +26,7 @@ namespace UI.Pages.Explore.Packings
             var selected = tabs.SelectedItem as Model.Entity.Packing;
             if (selected != null)
             {
-                new Packing().ShowDialog();
+                new Packing(selected).ShowDialog();
                 var viewModel = (vmPackings)DataContext;
                 viewModel.cmdReload.Execute(null);
             }

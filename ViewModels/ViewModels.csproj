@@ -57,7 +57,6 @@
     <Compile Include="Pages\Explore\vmOtherProfits.cs" />
     <Compile Include="Pages\Explore\vmPackagePurchases.cs" />
     <Compile Include="Pages\Explore\vmPackages.cs" />
-    <Compile Include="Pages\Explore\vmPackedCategories.cs" />
     <Compile Include="Pages\Explore\vmPackings.cs" />
     <Compile Include="Pages\Explore\vmPayments.cs" />
     <Compile Include="Pages\Explore\vmRecipients.cs" />
@@ -66,6 +65,11 @@
     <Compile Include="Pages\Statistics\CoffeeSorts\vmSoloCoffeeSort.cs" />
     <Compile Include="Pages\Statistics\CoffeeSorts\vmStatsCoffeeSorts.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EntityWindows\Abstract\aEntityWindowViewModel.cs" />
     <Compile Include="Windows\EntityWindows\vmWinAccount.cs" />
     <Compile Include="Windows\EntityWindows\vmWinCoffeePurchase.cs" />
@@ -78,15 +82,12 @@
     <Compile Include="Windows\EntityWindows\vmWinOtherProfit.cs" />
     <Compile Include="Windows\EntityWindows\vmWinPackagePurchase.cs" />
     <Compile Include="Windows\EntityWindows\vmWinPackage.cs" />
-    <Compile Include="Windows\EntityWindows\vmWinPackedCategory.cs" />
     <Compile Include="Windows\EntityWindows\vmWinPacking.cs" />
     <Compile Include="Windows\EntityWindows\vmWinPayment.cs" />
     <Compile Include="Windows\EntityWindows\vmWinRecipient.cs" />
     <Compile Include="Windows\EntityWindows\vmWinRoasting.cs" />
     <Compile Include="Windows\EntityWindows\vmWinSupplier.cs" />
     <Compile Include="Windows\vmWinMain.cs" />
-    <Compile Include="Windows\vmWinUnpaidPurchases.cs" />
-    <Compile Include="Windows\vmWinUnpaidSales.cs" />
     <Compile Include="Pages\vmHome.cs" />
     <Compile Include="Pages\vmStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,6 +109,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

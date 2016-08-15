@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using MahApps.Metro.Controls.Dialogs;
 using Model;
 using Model.Entity;
 using ViewModels.Pages.Explore.Abstract;
@@ -31,7 +32,21 @@ namespace ViewModels.Pages.Explore
         }
 
 
-        protected override void cmdDelete_Execute(object argSelected)
-        { }
+        protected override async void cmdDelete_Execute(object argSelected)
+        {
+            if (IsEmpty(argSelected)) return;
+            var selected = argSelected as MoneyTransfer;
+
+            var messageDialogResult = await DialogCoordinator.Instance.ShowMessageAsync(this, "Подтверждение",
+                    "Вы уверены, что хотите удалить денежный перевод со счёта " + selected.InitialAccount.Name + 
+                    " на счёт: " + selected.TargetAccount.Name + " за " + selected.Date.Date + " число?",
+                MessageDialogStyle.AffirmativeAndNegative);
+            if (messageDialogResult == MessageDialogResult.Negative) return;
+
+            ContextManager.Context.MoneyTransfers.Remove(selected);
+            SaveContext();
+            Refresh();
+
+        }
     }
 }

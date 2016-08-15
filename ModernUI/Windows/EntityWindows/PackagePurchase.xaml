@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:combo="clr-namespace:UI.Controls.Combo"
-        Title="Новая закупка упаковки" Height="400" Width="300"
+        Title="Новая закупка упаковки" Height="350" Width="400"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                      ShowMaxRestoreButton="False">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
@@ -24,9 +25,9 @@
             </controls:Flyout>
             <controls:Flyout Header="Ошибка" IsModal="True" Position="Right" Width="200"
                              Background="LightCoral" Foreground="{StaticResource GrayBrush1}" IsOpen="{Binding IsFlyErrorOpened}">
-                <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                <Grid Margin="5,5,5,5">
                     <TextBlock Text="{Binding FlyErrorMsg}" TextWrapping="Wrap"/>
-                </StackPanel>
+                </Grid>
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
@@ -61,19 +62,23 @@
             <combo:ComboActiveAccounts Grid.Row="1" Grid.Column="1"/>
 
             <Label Grid.Row="2" Margin="{StaticResource ControlMargin}">Поставщик</Label>
-            <combo:ComboActiveSuppliers Grid.Row="3" Grid.Column="1"/>
+            <combo:ComboActiveSuppliers Grid.Row="2" Grid.Column="1"/>
 
             <Label Grid.Row="3" Margin="{StaticResource ControlMargin}">Упаковка</Label>
-            <combo:ComboActivePackages Grid.Row="2" Grid.Column="1"/>
+            <combo:ComboActivePackages Grid.Row="3" Grid.Column="1"/>
 
             <Label Grid.Row="4" Margin="{StaticResource ControlMargin}">Стоимость</Label>
-            <TextBox Grid.Row="4" Grid.Column="1" Margin="{StaticResource ControlMargin}"
-                     Text="{Binding Price}"
+            <TextBox Grid.Row="4" Grid.Column="1" 
+                     Margin="{StaticResource ControlMargin}"
+                     Text="{Binding Price}" 
+                     Style="{StaticResource Mandatory}"
                      controls:TextBoxHelper.ClearTextButton="True"/>
 
             <Label Grid.Row="5" Margin="{StaticResource ControlMargin}">Количество пачек</Label>
-            <TextBox Grid.Row="5" Grid.Column="1" Margin="{StaticResource ControlMargin}"
-                     Text="{Binding PackQuantity}"
+            <TextBox Grid.Row="5" Grid.Column="1" 
+                     Margin="{StaticResource ControlMargin}"
+                     Text="{Binding PackQuantity}" 
+                     Style="{StaticResource Mandatory}"
                      controls:TextBoxHelper.ClearTextButton="True"/>
         </Grid>
 

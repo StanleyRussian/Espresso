@@ -18,7 +18,6 @@ namespace Model
         public static ObservableCollection<CoffeeSort> ActiveCoffeeSorts => new ObservableCollection<CoffeeSort>(Context.CoffeeSorts.Where(p => p.Active));
         public static ObservableCollection<Mix> ActiveMixes => new ObservableCollection<Mix>(Context.Mixes.Where(p => p.Active));
         public static ObservableCollection<Package> ActivePackages => new ObservableCollection<Package>(Context.Packages.Where(p => p.Active));
-        public static ObservableCollection<PackedCategory> ActivePackedCategories => new ObservableCollection<PackedCategory>(Context.PackedCategories.Where(p => p.Active));
         public static ObservableCollection<Recipient> ActiveRecipients => new ObservableCollection<Recipient>(Context.Recipients.Where(p => p.Active));
         public static ObservableCollection<Supplier> ActiveSuppliers => new ObservableCollection<Supplier>(Context.Suppliers.Where(p => p.Active));
 
@@ -26,7 +25,6 @@ namespace Model
         public static ObservableCollection<CoffeeSort> AllCoffeeSorts => new ObservableCollection<CoffeeSort>(Context.CoffeeSorts);
         public static ObservableCollection<Mix> AllMixes => new ObservableCollection<Mix>(Context.Mixes);
         public static ObservableCollection<Package> AllPackages => new ObservableCollection<Package>(Context.Packages);
-        public static ObservableCollection<PackedCategory> AllPackedCategories => new ObservableCollection<PackedCategory>(Context.PackedCategories);
         public static ObservableCollection<Recipient> AllRecipients => new ObservableCollection<Recipient>(Context.Recipients);
         public static ObservableCollection<Supplier> AllSuppliers => new ObservableCollection<Supplier>(Context.Suppliers);
     }

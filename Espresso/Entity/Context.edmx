@@ -24,7 +24,6 @@
     <EntitySet Name="Recipients" EntityType="Context.Store.Recipients" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CoffeeSale_Details" EntityType="Context.Store.CoffeeSale_Details" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Accounts" EntityType="Context.Store.Accounts" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PackedCategories" EntityType="Context.Store.PackedCategories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CoffeeTransfers" EntityType="Context.Store.CoffeeTransfers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="dAccountsBalances" EntityType="Context.Store.dAccountsBalances" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Payments" EntityType="Context.Store.Payments" store:Type="Tables" Schema="dbo" />
@@ -109,10 +108,6 @@
       <End Role="Package" EntitySet="Packages" />
       <End Role="Sale_Details" EntitySet="CoffeeSale_Details" />
     </AssociationSet>
-    <AssociationSet Name="PackedCategoryPacking" Association="Context.Store.PackedCategoryPacking">
-      <End Role="PackedCategory" EntitySet="PackedCategories" />
-      <End Role="Packing" EntitySet="Packings" />
-    </AssociationSet>
     <AssociationSet Name="AccountCoffeePurchase" Association="Context.Store.AccountCoffeePurchase">
       <End Role="Account" EntitySet="Accounts" />
       <End Role="CoffeePurchase" EntitySet="CoffeePurchases" />
@@ -152,10 +147,6 @@
     <AssociationSet Name="AccountdTransaction" Association="Context.Store.AccountdTransaction">
       <End Role="Account" EntitySet="Accounts" />
       <End Role="dTransaction" EntitySet="dTransactions" />
-    </AssociationSet>
-    <AssociationSet Name="PackedCategorydPackedStocks" Association="Context.Store.PackedCategorydPackedStocks">
-      <End Role="PackedCategory" EntitySet="PackedCategories" />
-      <End Role="dPackedStocks" EntitySet="dPackedStocks" />
     </AssociationSet>
     <AssociationSet Name="AccountMoneyTransfer" Association="Context.Store.AccountMoneyTransfer">
       <End Role="Account" EntitySet="Accounts" />
@@ -270,7 +261,6 @@
     <Property Name="PackQuantity" Type="int" Nullable="false" />
     <Property Name="Mix_Id" Type="int" Nullable="false" />
     <Property Name="Package_Id" Type="int" Nullable="false" />
-    <Property Name="PackedCategory_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Packages">
     <Key>
@@ -304,7 +294,6 @@
     <Property Name="PackQuantity" Type="int" Nullable="false" />
     <Property Name="Mix_Id" Type="int" Nullable="false" />
     <Property Name="Package_Id" Type="int" Nullable="false" />
-    <Property Name="PackedCategory_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="dPackageStocks">
     <Key>
@@ -334,9 +323,9 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Contact" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ContactPerson" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Adress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Contact" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ContactPerson" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Adress" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
   </EntityType>
@@ -358,15 +347,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="BankNumber" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
-  </EntityType>
-  <EntityType Name="PackedCategories">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
   </EntityType>
@@ -693,18 +673,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PackedCategoryPacking">
-    <End Role="PackedCategory" Type="Context.Store.PackedCategories" Multiplicity="1" />
-    <End Role="Packing" Type="Context.Store.Packings" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PackedCategory">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Packing">
-        <PropertyRef Name="PackedCategory_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="AccountCoffeePurchase">
     <End Role="Account" Type="Context.Store.Accounts" Multiplicity="1" />
     <End Role="CoffeePurchase" Type="Context.Store.CoffeePurchases" Multiplicity="*" />
@@ -824,18 +792,6 @@
       </Principal>
       <Dependent Role="dTransaction">
         <PropertyRef Name="Account_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PackedCategorydPackedStocks">
-    <End Role="PackedCategory" Type="Context.Store.PackedCategories" Multiplicity="1" />
-    <End Role="dPackedStocks" Type="Context.Store.dPackedStocks" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PackedCategory">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="dPackedStocks">
-        <PropertyRef Name="PackedCategory_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -962,11 +918,6 @@
             <End Role="Package" EntitySet="Packages" />
             <End Role="Sale_Details" EntitySet="CoffeeSale_Details" />
           </AssociationSet>
-          <EntitySet Name="PackedCategories" EntityType="Context.PackedCategory" />
-          <AssociationSet Name="PackedCategoryPacking" Association="Context.PackedCategoryPacking">
-            <End Role="PackedCategory" EntitySet="PackedCategories" />
-            <End Role="Packing" EntitySet="Packings" />
-          </AssociationSet>
           <AssociationSet Name="AccountCoffeePurchase" Association="Context.AccountCoffeePurchase">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="CoffeePurchase" EntitySet="CoffeePurchases" />
@@ -1013,10 +964,6 @@
           <AssociationSet Name="AccountdTransaction" Association="Context.AccountdTransaction">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="dTransaction" EntitySet="dTransactions" />
-          </AssociationSet>
-          <AssociationSet Name="PackedCategorydPackedStocks" Association="Context.PackedCategorydPackedStocks">
-            <End Role="PackedCategory" EntitySet="PackedCategories" />
-            <End Role="dPackedStocks" EntitySet="dPackedStocks" />
           </AssociationSet>
           <EntitySet Name="MoneyTransfers" EntityType="Context.MoneyTransfer" />
           <AssociationSet Name="AccountMoneyTransfer" Association="Context.AccountMoneyTransfer">
@@ -1187,7 +1134,6 @@
           <Property Name="PackQuantity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Mix" Relationship="Context.PackingMix" FromRole="Packing" ToRole="Mix" />
           <NavigationProperty Name="Package" Relationship="Context.PackingPackage" FromRole="Packing" ToRole="Package" />
-          <NavigationProperty Name="PackedCategory" Relationship="Context.PackedCategoryPacking" FromRole="Packing" ToRole="PackedCategory" />
         </EntityType>
         <EntityType Name="Package">
           <Key>
@@ -1238,7 +1184,6 @@
           <Property Name="PackQuantity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Mix" Relationship="Context.dPackedStocksMix" FromRole="dPackedStocks" ToRole="Mix" />
           <NavigationProperty Name="Package" Relationship="Context.PackagedPackedStocks" FromRole="dPackedStocks" ToRole="Package" />
-          <NavigationProperty Name="PackedCategory" Relationship="Context.PackedCategorydPackedStocks" FromRole="dPackedStocks" ToRole="PackedCategory" />
         </EntityType>
         <Association Name="dPackedStocksMix">
           <End Type="Context.dPackedStocks" Role="dPackedStocks" Multiplicity="*" />
@@ -1274,7 +1219,7 @@
           <Property Name="Sum" Type="Double" Nullable="false" />
           <Property Name="TransactionId" Type="Int32" Nullable="true" />
           <Property Name="InvoiceNumber" Type="String" Nullable="false" />
-          <NavigationProperty Name="Sale_Details" Relationship="Context.SaleSale_Details" FromRole="Sale" ToRole="Sale_Details" />
+          <NavigationProperty Name="CoffeeSale_Details" Relationship="Context.SaleSale_Details" FromRole="Sale" ToRole="Sale_Details" />
           <NavigationProperty Name="Recipient" Relationship="Context.RecipientSale" FromRole="Sale" ToRole="Recipient" />
           <NavigationProperty Name="Account" Relationship="Context.AccountSale" FromRole="Sale" ToRole="Account" />
         </EntityType>
@@ -1285,9 +1230,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="CoffeeSales" Relationship="Context.RecipientSale" FromRole="Recipient" ToRole="Sale" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Contact" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Adress" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Contact" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ContactPerson" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Adress" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
         </EntityType>
@@ -1343,21 +1288,6 @@
         <Association Name="PackageSale_Details">
           <End Type="Context.Package" Role="Package" Multiplicity="1" />
           <End Type="Context.CoffeeSale_Details" Role="Sale_Details" Multiplicity="*" />
-        </Association>
-        <EntityType Name="PackedCategory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
-          <NavigationProperty Name="Packings" Relationship="Context.PackedCategoryPacking" FromRole="PackedCategory" ToRole="Packing" />
-          <NavigationProperty Name="dPackedStocks" Relationship="Context.PackedCategorydPackedStocks" FromRole="PackedCategory" ToRole="dPackedStocks" />
-        </EntityType>
-        <Association Name="PackedCategoryPacking">
-          <End Type="Context.PackedCategory" Role="PackedCategory" Multiplicity="1" />
-          <End Type="Context.Packing" Role="Packing" Multiplicity="*" />
         </Association>
         <Association Name="AccountCoffeePurchase">
           <End Type="Context.Account" Role="Account" Multiplicity="1" />
@@ -1474,10 +1404,6 @@
         <Association Name="AccountdTransaction">
           <End Type="Context.Account" Role="Account" Multiplicity="1" />
           <End Type="Context.dTransaction" Role="dTransaction" Multiplicity="*" />
-        </Association>
-        <Association Name="PackedCategorydPackedStocks">
-          <End Type="Context.PackedCategory" Role="PackedCategory" Multiplicity="1" />
-          <End Type="Context.dPackedStocks" Role="dPackedStocks" Multiplicity="*" />
         </Association>
         <EntityType Name="MoneyTransfer">
           <Key>
@@ -1687,16 +1613,6 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="BankNumber" ColumnName="BankNumber" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PackedCategories">
-      <EntityTypeMapping TypeName="IsTypeOf(Context.PackedCategory)">
-        <MappingFragment StoreEntitySet="PackedCategories">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Active" ColumnName="Active" />
         </MappingFragment>
@@ -1936,14 +1852,6 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="PackedCategoryPacking" TypeName="Context.PackedCategoryPacking" StoreEntitySet="Packings">
-      <EndProperty Name="PackedCategory">
-        <ScalarProperty Name="Id" ColumnName="PackedCategory_Id" />
-      </EndProperty>
-      <EndProperty Name="Packing">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="AccountCoffeePurchase" TypeName="Context.AccountCoffeePurchase" StoreEntitySet="CoffeePurchases">
       <EndProperty Name="Account">
         <ScalarProperty Name="Id" ColumnName="Account_Id" />
@@ -2021,14 +1929,6 @@
         <ScalarProperty Name="Id" ColumnName="Account_Id" />
       </EndProperty>
       <EndProperty Name="dTransaction">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="PackedCategorydPackedStocks" TypeName="Context.PackedCategorydPackedStocks" StoreEntitySet="dPackedStocks">
-      <EndProperty Name="PackedCategory">
-        <ScalarProperty Name="Id" ColumnName="PackedCategory_Id" />
-      </EndProperty>
-      <EndProperty Name="dPackedStocks">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

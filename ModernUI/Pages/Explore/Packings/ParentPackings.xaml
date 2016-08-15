@@ -11,8 +11,8 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
 
         <Border BorderBrush="{StaticResource AccentColorBrush3}"
@@ -140,16 +140,6 @@
                           Margin="{StaticResource ControlMargin}"
                           MinWidth="150"
                           Grid.Row="2" Grid.Column="1" />
-
-                <TextBlock Style="{StaticResource Header3}" Margin="{StaticResource ControlMargin}"
-                           Text="По категории:" Grid.Row="1" Grid.Column="2" />
-                <ComboBox ItemsSource="{Binding Source={x:Static model:ContextManager.AllPackedCategories}}"
-                          SelectedItem="{Binding FilterPackedCategory}"
-                          DisplayMemberPath="Name"
-                          controls:TextBoxHelper.ClearTextButton="True"
-                          Margin="{StaticResource ControlMargin}"
-                          MinWidth="150"
-                          Grid.Row="2" Grid.Column="2"/>
             </Grid>
         </Border>
 

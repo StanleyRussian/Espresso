@@ -5,7 +5,8 @@
         xmlns:combo="clr-namespace:UI.Controls.Combo"
         Title="Новая обжарка" Height="300" Width="350"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                      ShowMaxRestoreButton="False">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
@@ -24,9 +25,9 @@
             </controls:Flyout>
             <controls:Flyout Header="Ошибка" IsModal="True" Position="Right" Width="200"
                              Background="LightCoral" Foreground="{StaticResource GrayBrush1}" IsOpen="{Binding IsFlyErrorOpened}">
-                <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
-                    <TextBlock Text="{Binding FlyErrorMsg}"/>
-                </StackPanel>
+                <Grid Margin="5,5,5,5">
+                    <TextBlock Text="{Binding FlyErrorMsg}" TextWrapping="Wrap"/>
+                </Grid>
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
@@ -57,9 +58,12 @@
             <Label Grid.Row="1" Margin="{StaticResource ControlMargin}">Сорт</Label>
             <combo:ComboActiveCoffeeSorts Grid.Row="1" Grid.Column="1"/>
 
-            <Label Grid.Row="2" Margin="{StaticResource ControlMargin}">Исходная масса</Label>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="{StaticResource ControlMargin}"
-                     Text="{Binding InitialAmount}"/>
+            <Label Grid.Row="2" Margin="{StaticResource ControlMargin}">Исходная масса (кг)</Label>
+            <TextBox Grid.Row="2" Grid.Column="1" 
+                     Margin="{StaticResource ControlMargin}"
+                     Text="{Binding InitialAmount}" 
+                     Style="{StaticResource Mandatory}"
+                     controls:TextBoxHelper.ClearTextButton="True"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -72,9 +76,12 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Margin="{StaticResource ControlMargin}">Процент ужарки</Label>
-            <TextBox Grid.Column="1" Margin="{StaticResource ControlMargin}"
-                     Text="{Binding ShrinkagePercent}"/>
+            <Label Margin="{StaticResource ControlMargin}">Процент ужарки (%)</Label>
+            <TextBox Grid.Column="1" 
+                     Margin="{StaticResource ControlMargin}"
+                     Text="{Binding ShrinkagePercent}" 
+                     Style="{StaticResource Mandatory}"
+                     controls:TextBoxHelper.ClearTextButton="True"/>
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">

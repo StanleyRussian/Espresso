@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
+using MahApps.Metro.Controls.Dialogs;
 using Model;
 using Model.Entity;
+using ViewModels.Auxiliary;
 using ViewModels.Pages.Explore.Abstract;
 
 namespace ViewModels.Pages.Explore
@@ -11,6 +15,7 @@ namespace ViewModels.Pages.Explore
         public vmCoffeeSales()
         {
             Header = "Продажи кофе";
+            cmdFilterUnpaid = new Command(cmdFilterUnpaid_Execute);
         }
 
         protected override void Refresh()
@@ -21,9 +26,21 @@ namespace ViewModels.Pages.Explore
             if (FilterRecipient != null)
                 query = query.Where(p => p.Recipient.Id == FilterRecipient.Id);
             if (FilterMix != null)
-                query = query.Where(p => p.Sale_Details
+                query = query.Where(p => p.CoffeeSale_Details
                     .FirstOrDefault(x => x.Mix.Id == FilterMix.Id) != null);
 
+            Tabs = new ObservableCollection<CoffeeSale>(query);
+        }
+
+        private ObservableCollection<CoffeeSale> _tabs;
+        public ObservableCollection<CoffeeSale> Tabs
+        {
+            get { return _tabs; }
+            private set
+            {
+                _tabs = value;
+                OnPropertyChanged();
+            }
         }
 
         private Account _filterAccount;
@@ -62,9 +79,26 @@ namespace ViewModels.Pages.Explore
             }
         }
 
-        protected override void cmdDelete_Execute(object argSelected)
+        public ICommand cmdFilterUnpaid { get; private set; }
+        public void cmdFilterUnpaid_Execute()
         {
-            throw new NotImplementedException();
+            Tabs = new ObservableCollection<CoffeeSale>(
+                ContextManager.Context.CoffeeSales.Where(p => !p.Paid));
+        }
+
+        protected override async void cmdDelete_Execute(object argSelected)
+        {
+            if (IsEmpty(argSelected)) return;
+            var selected = argSelected as CoffeeSale;
+
+            var messageDialogResult = await DialogCoordinator.Instance.ShowMessageAsync(this, "Подтверждение",
+                    "Вы уверены, что хотите удалить продажу кофе " + selected.Recipient.Name + " за " + selected.Date.Date + " число?",
+                MessageDialogStyle.AffirmativeAndNegative);
+            if (messageDialogResult == MessageDialogResult.Negative) return;
+
+            ContextManager.Context.CoffeeSales.Remove(selected);
+            SaveContext();
+            Refresh();
         }
     }
 }

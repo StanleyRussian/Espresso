@@ -6,7 +6,8 @@
         xmlns:core="clr-namespace:Model;assembly=Model"
         Title="Новая закупка зелёного кофе" Height="400" Width="450"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                      ShowMaxRestoreButton="False">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
@@ -25,9 +26,9 @@
             </controls:Flyout>
             <controls:Flyout Header="Ошибка" IsModal="True" Position="Right" Width="200"
                              Background="LightCoral" Foreground="{StaticResource GrayBrush1}" IsOpen="{Binding IsFlyErrorOpened}">
-                <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                <Grid Margin="5,5,5,5">
                     <TextBlock Text="{Binding FlyErrorMsg}" TextWrapping="Wrap"/>
-                </StackPanel>
+                </Grid>
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
@@ -50,8 +51,8 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
             <Label Margin="{StaticResource ControlMargin}">Дата закупки</Label>
@@ -95,7 +96,7 @@
             <Label Grid.Row="4" Margin="{StaticResource ControlMargin}">Счёт</Label>
             <combo:ComboActiveAccounts Grid.Row="4" Grid.Column="1" />
 
-            <Label Grid.Row="5">Номер накладной</Label>
+            <Label Grid.Row="5" Margin="{StaticResource ControlMargin}">Номер накладной</Label>
             <TextBox Text="{Binding InvoiceNumber}" Grid.Row="5" Grid.Column="1"
                      Style="{StaticResource Mandatory}"
                      Margin="{StaticResource ControlMargin}"
@@ -108,8 +109,8 @@
                 <DataGridComboBoxColumn x:Name="comboColumnSort" Header="Сорт"
                                         SelectedItemBinding="{Binding CoffeeSort}" DisplayMemberPath="Name" SelectedValuePath="Id"
                                         ItemsSource="{Binding Source={x:Static core:ContextManager.ActiveCoffeeSorts}}"/>
-                <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} кг}" Header="Количество"/>
-                <DataGridTextColumn Binding="{Binding Price, StringFormat={}{0} грн/кг}" Header="Цена за кг"/>
+                <DataGridTextColumn Binding="{Binding Quantity}" Header="Количество (кг)"/>
+                <DataGridTextColumn Binding="{Binding Price}" Header="Цена за кг (грн)"/>
             </DataGrid.Columns>
         </DataGrid>
 

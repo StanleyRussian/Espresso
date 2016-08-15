@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using MahApps.Metro.Controls.Dialogs;
 using Model;
 using Model.Entity;
 using ViewModels.Pages.Explore.Abstract;
@@ -18,8 +19,6 @@ namespace ViewModels.Pages.Explore
             var query = ContextManager.Context.Packings.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
             if (FilterMix != null)
                 query = query.Where(p => p.Mix.Id == FilterMix.Id);
-            if (FilterPackedCategory != null)
-                query = query.Where(p => p.PackedCategory.Id == FilterPackedCategory.Id);
             if (FilterPackage != null)
                 query = query.Where(p => p.Package.Id == FilterPackage.Id);
             Tabs = new ObservableCollection<Packing>(query);
@@ -60,19 +59,20 @@ namespace ViewModels.Pages.Explore
             }
         }
 
-        private PackedCategory _filterPackedCategory;
-        public PackedCategory FilterPackedCategory
+        protected override async void cmdDelete_Execute(object argSelected)
         {
-            get { return _filterPackedCategory; }
-            set
-            {
-                _filterPackedCategory = value;
-                OnPropertyChanged();
-                Refresh();
-            }
-        }
+            if (IsEmpty(argSelected)) return;
+            var selected = argSelected as Packing;
 
-        protected override void cmdDelete_Execute(object argSelected)
-        { }
+            var messageDialogResult = await DialogCoordinator.Instance.ShowMessageAsync(this, "Подтверждение",
+                    "Вы уверены, что хотите удалить фасовку купажа " + selected.Mix.Name + " за " + selected.Date.Date + " число?",
+                MessageDialogStyle.AffirmativeAndNegative);
+            if (messageDialogResult == MessageDialogResult.Negative) return;
+
+            ContextManager.Context.Packings.Remove(selected);
+            SaveContext();
+            Refresh();
+
+        }
     }
 }

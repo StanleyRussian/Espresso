@@ -13,7 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{990D1BB9
 	ProjectSection(SolutionItems) = preProject
 		Espresso\Notes\Guidelines.txt = Espresso\Notes\Guidelines.txt
 		Espresso\Notes\Notes.txt = Espresso\Notes\Notes.txt
-		Espresso\Notes\ToDo.txt = Espresso\Notes\ToDo.txt
 	EndProjectSection
 EndProject
 Global

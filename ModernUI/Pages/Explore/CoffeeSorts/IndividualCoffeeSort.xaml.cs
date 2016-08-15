@@ -11,10 +11,5 @@ namespace UI.Pages.Explore.CoffeeSorts
         {
             InitializeComponent();
         }
-
-        private void UnpaidPurchasesWindow(object sender, System.Windows.RoutedEventArgs e)
-        {
-            new Windows.UnpaidPurchasesWindow().ShowDialog();
-        }
     }
 }

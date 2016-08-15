@@ -47,6 +47,12 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void cmdSave_Execute()
         {
+            if (Payment.Sum <= 0) 
+            {
+                FlyErrorMsg = "Введите cумму платежа";
+                IsFlyErrorOpened = true;
+                return;
+            }
             if (CreatingNew)
                 ContextManager.Context.Payments.Add(Payment);
             SaveContext();
@@ -57,7 +63,13 @@ namespace ViewModels.Windows.EntityWindows
         { get; private set; }
 
         private void cmdMakeMonthly_Execute()
-        {
+        { 
+            if (Payment.Sum <= 0) 
+            {
+                FlyErrorMsg = "Введите cумму платежа";
+                IsFlyErrorOpened = true;
+                return;
+            }
             if (CreatingNew)
             {
                 MonthlyExpense NewMonthlyExpense = new MonthlyExpense

@@ -4,9 +4,10 @@
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:combo="clr-namespace:UI.Controls.Combo"
         xmlns:core="clr-namespace:Model;assembly=Model"
-        Title="Новая продажа упакованного кофе" Height="450" Width="450"
+        Title="Новая продажа упакованного кофе" Height="400" Width="450"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                      ShowMaxRestoreButton="False">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
@@ -25,9 +26,9 @@
             </controls:Flyout>
             <controls:Flyout Header="Ошибка" IsModal="True" Position="Right" Width="200"
                              Background="LightCoral" Foreground="{StaticResource GrayBrush1}" IsOpen="{Binding IsFlyErrorOpened}">
-                <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                <Grid Margin="5,5,5,5">
                     <TextBlock Text="{Binding FlyErrorMsg}" TextWrapping="Wrap"/>
-                </StackPanel>
+                </Grid>
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
@@ -49,16 +50,19 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
             <Label Margin="{StaticResource ControlMargin}">Дата продажи</Label>
-            <DatePicker Grid.Column="1" Margin="{StaticResource ControlMargin}"
+            <DatePicker Grid.Column="1" 
+                        Margin="{StaticResource ControlMargin}"
                         SelectedDate="{Binding Date}"/>
 
             <Label Grid.Row="1" Margin="{StaticResource ControlMargin}">Оплачено</Label>
-            <CheckBox x:Name="checkPaid" Grid.Row="1" Grid.Column="1" Margin="{StaticResource ControlMargin}"
+            <CheckBox x:Name="checkPaid" 
+                      Grid.Row="1" Grid.Column="1" 
+                      Margin="{StaticResource ControlMargin}"
                       IsChecked="{Binding Paid}"/>
 
             <Label Grid.Row="2" Margin="{StaticResource ControlMargin}" Content="Дата оплаты">
@@ -88,10 +92,10 @@
                 </DatePicker.Style>
             </DatePicker>
 
-            <Label Grid.Row="3">Покупатель</Label>
+            <Label Grid.Row="3" Margin="{StaticResource ControlMargin}">Покупатель</Label>
             <combo:ComboActiveRecipients Grid.Row="3" Grid.Column="1"/>
 
-            <Label Grid.Row="4">Счёт</Label>
+            <Label Grid.Row="4" Margin="{StaticResource ControlMargin}">Счёт</Label>
             <combo:ComboActiveAccounts Grid.Row="4" Grid.Column="1"/>
         </Grid>
 
@@ -104,8 +108,8 @@
                 <DataGridComboBoxColumn Header="Упаковка"
                                         SelectedItemBinding="{Binding Package}" DisplayMemberPath="Name" SelectedValuePath="Id"
                                         ItemsSource="{Binding Source={x:Static core:ContextManager.ActivePackages}}"/>
-                <DataGridTextColumn Binding="{Binding Price, StringFormat={}{0} грн}" Header="Цена за пачку"/>
-                <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} шт}" Header="Количество"/>
+                <DataGridTextColumn Binding="{Binding Price}" Header="Цена за пачку (грн)"/>
+                <DataGridTextColumn Binding="{Binding PackQuantity}" Header="Количество (шт)"/>
             </DataGrid.Columns>
         </DataGrid>
 

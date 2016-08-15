@@ -135,9 +135,6 @@
     <Compile Include="Entity\PackagePurchase.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\PackedCategory.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entity\Packing.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

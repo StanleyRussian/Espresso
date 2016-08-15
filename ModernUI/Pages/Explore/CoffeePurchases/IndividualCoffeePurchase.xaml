@@ -12,20 +12,42 @@
             <TextBlock Margin="5,0,0,0" Text="{Binding Date}" Style="{StaticResource Header2Accent}"/>
         </WrapPanel>
 
-        <WrapPanel Margin="0,5,0,0">
-            <TextBlock Style="{StaticResource Header3}">Дата оплаты:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding PaymentDate}" Style="{StaticResource Header2Accent}"/>
-        </WrapPanel>
+        <TextBlock x:Name="textPaid" Margin="0,5,0,0">
+            <TextBlock.Style>
+                <Style BasedOn="{StaticResource Header2Accent}" TargetType="TextBlock">
+                    <Setter Property="Text" Value="Оплачено"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Paid}" Value="False">
+                            <Setter Property="Text" Value="Не оплачено"/>
+                            <Setter Property="Foreground" Value="#C91A1A"/>
+                            <Setter Property="FontWeight" Value="DemiBold"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
         <WrapPanel Margin="0,5,0,0">
-            <TextBlock Style="{StaticResource Header3}">Оплачено:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Paid}">
+            <TextBlock Text="Дата оплаты:">
+                <TextBlock.Style>
+                    <Style BasedOn="{StaticResource Header3}" TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=textPaid}" Value="Оплачено">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            
+            <TextBlock Margin="5,0,0,0" Text="{Binding PaymentDate}">
                 <TextBlock.Style>
                     <Style BasedOn="{StaticResource Header2Accent}" TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Paid}" Value="False">
-                                <Setter Property="Foreground" Value="#C91A1A"/>
-                                <Setter Property="FontWeight" Value="DemiBold"/>
+                            <DataTrigger Binding="{Binding Text, ElementName=textPaid}" Value="Оплачено">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -54,7 +76,9 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <WrapPanel Margin="0,5,0,0">
+        <Separator Margin="0,5,0,0"/>
+
+        <WrapPanel Margin="0,5,0,0" HorizontalAlignment="Right">
             <TextBlock Style="{StaticResource Header3}">Сумма:</TextBlock>
             <TextBlock Margin="5,0,0,0" Text="{Binding Sum}" Style="{StaticResource Header2Accent}"/>
         </WrapPanel>

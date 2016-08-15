@@ -24,6 +24,16 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void Refresh()
         {
+            int iInvoiceNumber;
+            var firstOrDefault = ContextManager.Context.CoffeeSales.OrderByDescending(p => p.InvoiceNumber).FirstOrDefault();
+            if (firstOrDefault != null)
+            {
+                iInvoiceNumber = int.Parse(firstOrDefault.InvoiceNumber);
+                iInvoiceNumber++;
+            }
+            else
+                iInvoiceNumber = 1;
+
             Purchase = new CoffeePurchase
             {
                 Date = DateTime.Now,
@@ -31,7 +41,7 @@ namespace ViewModels.Windows.EntityWindows
                 Paid = true,
                 Account = ContextManager.ActiveAccounts.FirstOrDefault(),
                 Supplier = ContextManager.ActiveSuppliers.FirstOrDefault(),
-                Sum = 0
+                InvoiceNumber = iInvoiceNumber.ToString()
             };
 
             Details = new ObservableCollection<CoffeePurchase_Details>();
@@ -68,12 +78,46 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void cmdSave_Execute()
         {
+            if (Purchase.InvoiceNumber == "0" || Purchase.InvoiceNumber == "")
+            {
+                FlyErrorMsg = "Введите номер накладной";
+                IsFlyErrorOpened = true;
+                return;
+            }
+            if (Details.Count == 0)
+            {
+                FlyErrorMsg = "Введите хотя бы один сорт кофе";
+                IsFlyErrorOpened = true;
+                return;
+            }
+            if (Details.Any(detail => detail.Quantity == 0))
+            {
+                FlyErrorMsg = "Введите количество закупленного кофе";
+                IsFlyErrorOpened = true;
+                return;
+            }
+            if (Details.Any(detail => detail.Price == 0))
+            {
+                FlyErrorMsg = "Введите цену отличную от нуля";
+                IsFlyErrorOpened = true;
+                return;
+            }
+            //if (ContextManager.Context.dAccountsBalances.First(
+            //    p => p.Account.Id == Purchase.Account.Id).Balance < Purchase.Sum)
+            //{
+            //    FlyErrorMsg = "На выбранном счету недостаточно денег";
+            //    IsFlyErrorOpened = true;
+            //    return;
+            //}
+
             _purchase.Sum = 0;
             foreach (var detail in Details)
                 _purchase.Sum += (detail.Price*detail.Quantity);
+
             _purchase.CoffeePurchase_Details.Clear();
             foreach (var x in Details)
                 _purchase.CoffeePurchase_Details.Add(x);
+
             if (CreatingNew)
                 ContextManager.Context.CoffeePurchases.Add(_purchase);
             SaveContext();

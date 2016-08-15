@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:combo="clr-namespace:UI.Controls.Combo"
-        Title="Новая фасовка" Height="300" Width="300"
+        Title="Новая фасовка" Height="300" Width="350"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                      ShowMaxRestoreButton="False">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
@@ -44,12 +45,11 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
                 <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
             <Label Margin="{StaticResource ControlMargin}">Дата</Label>
@@ -62,12 +62,12 @@
             <Label Grid.Row="2" Margin="{StaticResource ControlMargin}">Упаковка</Label>
             <combo:ComboActivePackages Grid.Row="2" Grid.Column="1"/>
 
-            <Label Grid.Row="3" Margin="{StaticResource ControlMargin}">Категория</Label>
-            <combo:ComboActivePackedCategories Grid.Row="3" Grid.Column="1"/>
 
-            <Label Grid.Row="4" Margin="{StaticResource ControlMargin}">Количество пачек</Label>
-            <TextBox Grid.Row="4" Grid.Column="1" Margin="{StaticResource ControlMargin}"
-                     Text="{Binding PackQuantity}" Style="{StaticResource Mandatory}"
+            <Label Grid.Row="3" Margin="{StaticResource ControlMargin}">Количество пачек</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" 
+                     Margin="{StaticResource ControlMargin}"
+                     Text="{Binding PackQuantity}" 
+                     Style="{StaticResource Mandatory}"
                      controls:TextBoxHelper.ClearTextButton="True"/>
         </Grid>
 

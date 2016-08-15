@@ -78,9 +78,6 @@
     <Compile Include="Controls\Combo\ActivePackages.xaml.cs">
       <DependentUpon>ActivePackages.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Combo\ActivePackedCategories.xaml.cs">
-      <DependentUpon>ActivePackedCategories.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Combo\ActiveRecipients.xaml.cs">
       <DependentUpon>ActiveRecipients.xaml</DependentUpon>
     </Compile>
@@ -131,12 +128,6 @@
     </Compile>
     <Compile Include="Pages\Explore\Packages\ParentPackages.xaml.cs">
       <DependentUpon>ParentPackages.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Explore\PackedCategories\IndividualPackedCategory.xaml.cs">
-      <DependentUpon>IndividualPackedCategory.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Explore\PackedCategories\ParentPackedCategories.xaml.cs">
-      <DependentUpon>ParentPackedCategories.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Explore\Packings\IndividualPacking.xaml.cs">
       <DependentUpon>IndividualPacking.xaml</DependentUpon>
@@ -231,9 +222,6 @@
     <Compile Include="Windows\EntityWindows\PackagePurchase.xaml.cs">
       <DependentUpon>PackagePurchase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\EntityWindows\PackedCategory.xaml.cs">
-      <DependentUpon>PackedCategory.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\EntityWindows\Packing.xaml.cs">
       <DependentUpon>Packing.xaml</DependentUpon>
     </Compile>
@@ -249,12 +237,6 @@
     <Compile Include="Windows\EntityWindows\Supplier.xaml.cs">
       <DependentUpon>Supplier.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\UnpaidPurchasesWindow.xaml.cs">
-      <DependentUpon>UnpaidPurchasesWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\UnpaidSalesWindow.xaml.cs">
-      <DependentUpon>UnpaidSalesWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="Controls\Combo\ActiveAccounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -268,10 +250,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Combo\ActivePackages.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Combo\ActivePackedCategories.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -340,14 +318,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Explore\Packages\ParentPackages.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Explore\PackedCategories\IndividualPackedCategory.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Explore\PackedCategories\ParentPackedCategories.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -471,10 +441,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\EntityWindows\PackedCategory.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Windows\EntityWindows\Packing.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -516,14 +482,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Home.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\UnpaidPurchasesWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\UnpaidSalesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

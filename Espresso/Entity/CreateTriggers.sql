@@ -321,11 +321,10 @@ UPDATE dPackedStocks SET
 	FROM INSERTED i
 	WHERE dPackedStocks.Mix_Id = i.Mix_Id 
 		AND dPackedStocks.Package_Id = i.Package_Id
-		AND dPackedStocks.PackedCategory_Id = i.PackedCategory_Id
 IF @@ROWCOUNT = 0
 BEGIN
-	INSERT INTO dPackedStocks (Mix_Id, Package_Id, PackedCategory_Id, PackQuantity)
-	SELECT i.Mix_Id, i.Package_Id, i.PackedCategory_Id, i.PackQuantity
+	INSERT INTO dPackedStocks (Mix_Id, Package_Id, PackQuantity)
+	SELECT i.Mix_Id, i.Package_Id, i.PackQuantity
 	FROM INSERTED i
 END
 GO
@@ -354,7 +353,6 @@ SET PackQuantity -= D.PackQuantity
 FROM DELETED d
 WHERE dPackedStocks.Mix_Id = d.Mix_Id 
 	AND dPackedStocks.Package_Id = d.Package_Id
-	AND dPackedStocks.PackedCategory_Id = d.PackedCategory_Id
 GO
 
 
@@ -572,7 +570,7 @@ BEGIN
 	END
 	BEGIN
 		INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-		SELECT i.Account_Id, i.Date, i.Sum, rc.Name,'Продажа кофе'
+		SELECT i.Account_Id, i.Date, i.Sum, rc.Name, N'Продажа кофе'
 		FROM INSERTED i
 		INNER JOIN dbo.Recipients rc
 			ON rc.Id = i.Recipient_Id
@@ -647,7 +645,7 @@ BEGIN
 		END
 		BEGIN
 			INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-			SELECT i.Account_Id, i.Date, i.Sum, rc.Name,'Продажа кофе'
+			SELECT i.Account_Id, i.Date, i.Sum, rc.Name, N'Продажа кофе'
 			FROM INSERTED i
 			INNER JOIN dbo.Recipients rc
 				ON rc.Id = i.Recipient_Id
@@ -839,7 +837,7 @@ BEGIN
 END
 BEGIN
 	INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-	SELECT i.Account_Id, i.Date, i.Sum, rc.Name,'Закупка упаковки'
+	SELECT i.Account_Id, i.Date, i.Sum, rc.Name, N'Закупка упаковки'
 	FROM INSERTED i
 	INNER JOIN dbo.Suppliers rc
 		ON rc.Id = i.Supplier_Id
@@ -911,7 +909,7 @@ BEGIN
 END
 BEGIN
 	INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-	SELECT i.Account_Id, i.Date, i.Sum, i.Designation,'Платёж'
+	SELECT i.Account_Id, i.Date, i.Sum, i.Designation, N'Платёж'
 	FROM INSERTED i
 END
 BEGIN
@@ -981,7 +979,7 @@ BEGIN
 END
 BEGIN
 	INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-	SELECT i.Account_Id, i.Date, i.Sum, i.Designation,'Поступление'
+	SELECT i.Account_Id, i.Date, i.Sum, i.Designation, N'Доход'
 	FROM INSERTED i
 END
 BEGIN
@@ -1051,7 +1049,7 @@ BEGIN
 END
 BEGIN
 	INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-	SELECT i.Account_Id, i.Date, i.PaidAmount, me.Designation,'Ежемесячный платёж'
+	SELECT i.Account_Id, i.Date, i.PaidAmount, me.Designation, N'Ежемесячный платёж'
 	FROM INSERTED i
 	INNER JOIN dbo.MonthlyExpenses me
 		ON me.Id = i.MonthlyExpense_Id

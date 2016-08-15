@@ -67,7 +67,6 @@ namespace ViewModels.Windows.EntityWindows.Abstract
             {
                 ContextManager.Context.SaveChanges();
                 IsFlySuccessOpened = true;
-                //ContextManager.ReloadContext();
                 if (CreatingNew)
                     Refresh();
             }

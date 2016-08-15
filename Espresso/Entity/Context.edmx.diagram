@@ -42,8 +42,6 @@
         <AssociationConnector Association="Context.AccountSale" />
         <AssociationConnector Association="Context.MixSale_Details" />
         <AssociationConnector Association="Context.PackageSale_Details" />
-        <EntityTypeShape EntityType="Context.PackedCategory" Width="1.5" PointX="12" PointY="7.75" />
-        <AssociationConnector Association="Context.PackedCategoryPacking" />
         <AssociationConnector Association="Context.AccountCoffeePurchase" ManuallyRouted="false" >
         </AssociationConnector>
         <EntityTypeShape EntityType="Context.CoffeeTransfer" Width="1.5" PointX="5.375" PointY="8" FillColor="SlateBlue" />
@@ -64,7 +62,6 @@
         <AssociationConnector Association="Context.AccountMonthlyPayments" />
         <EntityTypeShape EntityType="Context.dTransaction" Width="1.5" PointX="5.125" PointY="16.5" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.AccountdTransaction" />
-        <AssociationConnector Association="Context.PackedCategorydPackedStocks" />
         <EntityTypeShape EntityType="Context.MoneyTransfer" Width="1.5" PointX="0.5" PointY="15.75" FillColor="Chocolate" />
         <AssociationConnector Association="Context.AccountMoneyTransfer" />
         <AssociationConnector Association="Context.AccountMoneyTransfer1" />

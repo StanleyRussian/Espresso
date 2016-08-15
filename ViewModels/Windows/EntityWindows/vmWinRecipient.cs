@@ -9,6 +9,11 @@ namespace ViewModels.Windows.EntityWindows
         {
             if (argRecipient != null) 
                 Recipient = argRecipient as Recipient;
+            else
+            {
+                CreatingNew = true;
+                Refresh();
+            }
         }
 
         protected override void Refresh()

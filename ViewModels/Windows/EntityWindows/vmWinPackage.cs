@@ -40,6 +40,12 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void cmdSave_Execute()
         {
+            if (Package.Capacity <= 0)
+            {
+                FlyErrorMsg = "Введите ёмкость пачки";
+                IsFlyErrorOpened = true;
+                return;
+            }
             if (CreatingNew)
                 ContextManager.Context.Packages.Add(Package);
             SaveContext();

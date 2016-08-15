@@ -26,14 +26,18 @@ namespace ViewModels.Pages
         protected override void Load()
         {
             ContextManager.ReloadContext();
-            GreenStocks = 
-                new ObservableCollection<dGreenStock>(ContextManager.Context.dGreenStocks.Include(p => p.CoffeeSort));
-            RoastedStocks = 
-                new ObservableCollection<dRoastedStock>(ContextManager.Context.dRoastedStocks.Include(p=>p.CoffeeSort));
-            PackedStocks = 
-                new ObservableCollection<dPackedStocks>(ContextManager.Context.EagerPackedStocks());
-            PackageStocks = 
-                new ObservableCollection<dPackageStocks>(ContextManager.Context.dPackageStocks.Include(p => p.Package));
+            GreenStocks =
+                new ObservableCollection<dGreenStock>(
+                    ContextManager.Context.dGreenStocks.Where(p => p.Quantity > 0).Include(p => p.CoffeeSort));
+            RoastedStocks =
+                new ObservableCollection<dRoastedStock>(
+                    ContextManager.Context.dRoastedStocks.Where(p => p.Quantity > 0).Include(p => p.CoffeeSort));
+            PackedStocks =
+                new ObservableCollection<dPackedStocks>(
+                    ContextManager.Context.EagerPackedStocks().Where(p => p.PackQuantity > 0));
+            PackageStocks =
+                new ObservableCollection<dPackageStocks>(
+                    ContextManager.Context.dPackageStocks.Where(p => p.Quantity > 0).Include(p => p.Package));
             AccountsBalances =
                 new ObservableCollection<dAccountsBalance>(
                     ContextManager.Context.dAccountsBalances.Where(p => p.Account.Active).Include(p => p.Account));

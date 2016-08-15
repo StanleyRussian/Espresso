@@ -11,7 +11,10 @@ namespace ViewModels.Windows.EntityWindows
         public vmWinCoffeeSale(object argSale = null)
         {
             if (argSale != null)
+            {
                 Sale = argSale as CoffeeSale;
+                Details = new ObservableCollection<CoffeeSale_Details>(Sale.CoffeeSale_Details);
+            }
             else
             {
                 CreatingNew = true;
@@ -21,16 +24,27 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void Refresh()
         {
-            Sale = new CoffeeSale
+            int iInvoiceNumber;
+            var firstOrDefault = ContextManager.Context.CoffeeSales.OrderByDescending(p => p.InvoiceNumber).FirstOrDefault();
+            if (firstOrDefault != null)
             {
-                Date = DateTime.Now,
-                PaymentDate = DateTime.Now,
-                Paid = true,
-                Account = ContextManager.ActiveAccounts.FirstOrDefault(),
-                Recipient = ContextManager.ActiveRecipients.FirstOrDefault()
-            };
-            Details = new ObservableCollection<CoffeeSale_Details>();
+                iInvoiceNumber = int.Parse(firstOrDefault.InvoiceNumber);
+                iInvoiceNumber++;
+            }
+            else
+                iInvoiceNumber = 1;
 
+            Sale = new CoffeeSale
+                {
+                    Date = DateTime.Now,
+                    PaymentDate = DateTime.Now,
+                    Paid = true,
+                    Account = ContextManager.ActiveAccounts.FirstOrDefault(),
+                    Recipient = ContextManager.ActiveRecipients.FirstOrDefault(),
+                    InvoiceNumber = iInvoiceNumber.ToString()
+                };
+
+            Details = new ObservableCollection<CoffeeSale_Details>();
         }
 
         #region Binding Properties
@@ -62,13 +76,57 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void cmdSave_Execute()
         {
-            if (CreatingNew)
+            if (Sale.InvoiceNumber == "0" || Sale.InvoiceNumber == "")
             {
-                _sale.Sale_Details.Clear();
-                foreach (var x in Details)
-                    _sale.Sale_Details.Add(x);
-                ContextManager.Context.CoffeeSales.Add(_sale);
+                FlyErrorMsg = "Введите номер накладной";
+                IsFlyErrorOpened = true;
+                return;
             }
+            if (Details.Count == 0)
+            {
+                FlyErrorMsg = "Введите хотя бы один купаж кофе";
+                IsFlyErrorOpened = true;
+                return;
+            }
+            if (Details.Any(detail => detail.PackQuantity == 0))
+            {
+                FlyErrorMsg = "Введите количество проданных пачек";
+                IsFlyErrorOpened = true;
+                return;
+            }
+            if (Details.Any(detail => detail.Package == null))
+            {
+                FlyErrorMsg = "Выберите подходящую упаковку из списка";
+                IsFlyErrorOpened = true;
+                return;
+            }
+            if (Details.Any(detail => detail.Mix == null))
+            {
+                FlyErrorMsg = "Выберите подходящий купаж из списка";
+                IsFlyErrorOpened = true;
+                return;
+            }
+
+            if (Details.Any(detail => ContextManager.Context.dPackedStocks.First(
+                p => p.Package.Id == detail.Package.Id
+                     && p.Mix.Id == detail.Mix.Id)
+                .PackQuantity < detail.PackQuantity))
+            {
+                FlyErrorMsg = "Недостаточно расфасованного кофе в наличии";
+                IsFlyErrorOpened = true;
+                return;
+            }
+
+            _sale.Sum = 0;
+            foreach (var detail in Details)
+                _sale.Sum += (detail.Price*detail.PackQuantity);
+
+            _sale.CoffeeSale_Details.Clear();
+            foreach (var x in Details)
+                _sale.CoffeeSale_Details.Add(x);
+
+            if (CreatingNew)
+                ContextManager.Context.CoffeeSales.Add(_sale);
             SaveContext();
         }
 

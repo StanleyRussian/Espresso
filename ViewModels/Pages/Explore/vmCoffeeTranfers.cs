@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using MahApps.Metro.Controls.Dialogs;
 using Model;
 using Model.Entity;
 using ViewModels.Pages.Explore.Abstract;
@@ -46,9 +47,19 @@ namespace ViewModels.Pages.Explore
         }
 
 
-        protected override void cmdDelete_Execute(object argSelected)
+        protected override async void cmdDelete_Execute(object argSelected)
         {
-            throw new NotImplementedException();
+            if (IsEmpty(argSelected)) return;
+            var selected = argSelected as CoffeeTransfer;
+
+            var messageDialogResult = await DialogCoordinator.Instance.ShowMessageAsync(this, "Подтверждение",
+                    "Вы уверены, что хотите удалить перевод кофе за " + selected.Date.Date + " число?",
+                MessageDialogStyle.AffirmativeAndNegative);
+            if (messageDialogResult == MessageDialogResult.Negative) return;
+
+            ContextManager.Context.CoffeeTransfers.Remove(selected);
+            SaveContext();
+            Refresh();
         }
     }
 }

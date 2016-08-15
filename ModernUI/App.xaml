@@ -78,6 +78,11 @@
                         <Setter Property="BorderThickness" Value="1"/>
                         <Setter Property="Background" Value="{StaticResource ValidationSummaryFillColor2}"/>
                     </Trigger>
+                    <Trigger Property="Text" Value="0">
+                        <Setter Property="BorderBrush" Value="Red"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="Background" Value="{StaticResource ValidationSummaryFillColor2}"/>
+                    </Trigger>
                 </Style.Triggers>
             </Style>
 

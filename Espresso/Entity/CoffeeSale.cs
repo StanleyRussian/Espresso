@@ -17,7 +17,7 @@ namespace Model.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CoffeeSale()
         {
-            this.Sale_Details = new HashSet<CoffeeSale_Details>();
+            this.CoffeeSale_Details = new HashSet<CoffeeSale_Details>();
         }
     
         public int Id { get; set; }
@@ -29,7 +29,7 @@ namespace Model.Entity
         public string InvoiceNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoffeeSale_Details> Sale_Details { get; set; }
+        public virtual ICollection<CoffeeSale_Details> CoffeeSale_Details { get; set; }
         public virtual Recipient Recipient { get; set; }
         public virtual Account Account { get; set; }
     }

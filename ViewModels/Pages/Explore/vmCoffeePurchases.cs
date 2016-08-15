@@ -1,7 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
+using MahApps.Metro.Controls.Dialogs;
 using Model;
 using Model.Entity;
+using ViewModels.Auxiliary;
 using ViewModels.Pages.Explore.Abstract;
 
 namespace ViewModels.Pages.Explore
@@ -11,6 +14,7 @@ namespace ViewModels.Pages.Explore
         public vmCoffeePurchases()
         {
             Header = "Закупки кофе";
+            cmdFilterUnpaid = new Command(cmdFilterUnpaid_Execute);
         }
 
         protected override void Refresh()
@@ -74,13 +78,26 @@ namespace ViewModels.Pages.Explore
             }
         }
 
-        protected override void cmdDelete_Execute(object argSelected)
+        public ICommand cmdFilterUnpaid { get; private set; }
+        public void cmdFilterUnpaid_Execute()
         {
-            //if (IsEmpty(argSelected)) return;
-            //var selected = argSelected as IndividualCoffeePurchaseViewModel;
-            //ContextManager.Context.CoffeePurchases.Remove(selected.Purchase);
-            //SaveContext();
-            //Refresh();
+            Tabs = new ObservableCollection<CoffeePurchase>(
+                ContextManager.Context.CoffeePurchases.Where(p => !p.Paid));
+        }
+
+        protected override async void cmdDelete_Execute(object argSelected)
+        {
+            if (IsEmpty(argSelected)) return;
+            var selected = argSelected as CoffeePurchase;
+
+            var messageDialogResult = await DialogCoordinator.Instance.ShowMessageAsync(this, "Подтверждение",
+                    "Вы уверены, что хотите удалить закупку кофе за " + selected.Date.Date + " число, от " + selected.Supplier.Name,
+                MessageDialogStyle.AffirmativeAndNegative);
+            if (messageDialogResult == MessageDialogResult.Negative) return;
+
+            ContextManager.Context.CoffeePurchases.Remove(selected);
+            SaveContext();
+            Refresh();
         }
     }
 }

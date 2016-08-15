@@ -27,7 +27,7 @@ namespace UI.Pages.Explore.PackagePurchases
             var selected = tabs.SelectedItem as Model.Entity.PackagePurchase;
             if (selected != null)
             {
-                new PackagePurchase().ShowDialog();
+                new PackagePurchase(selected).ShowDialog();
                 var viewModel = (vmPackagePurchases)DataContext;
                 viewModel.cmdReload.Execute(null);
             }

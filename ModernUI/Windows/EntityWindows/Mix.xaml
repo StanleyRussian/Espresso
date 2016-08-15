@@ -5,7 +5,8 @@
         xmlns:core="clr-namespace:Model;assembly=Model"
         Title="Новый купаж" Height="400" Width="450"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                      ShowMaxRestoreButton="False">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
@@ -24,9 +25,9 @@
             </controls:Flyout>
             <controls:Flyout Header="Ошибка" IsModal="True" Position="Right" Width="200"
                              Background="LightCoral" Foreground="{StaticResource GrayBrush1}" IsOpen="{Binding IsFlyErrorOpened}">
-                <StackPanel Margin="5,5,5,5" Orientation="Horizontal">
+                <Grid Margin="5,5,5,5">
                     <TextBlock Text="{Binding FlyErrorMsg}" TextWrapping="Wrap"/>
-                </StackPanel>
+                </Grid>
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
@@ -66,10 +67,10 @@
         <DataGrid Grid.Row="1" Grid.ColumnSpan="2" Margin="{StaticResource ControlMargin}"
                   AutoGenerateColumns="False" ItemsSource="{Binding Details}">
             <DataGrid.Columns>
-                <DataGridComboBoxColumn x:Name="ColumnCoffeeSort" Header="Моносорт" Width="SizeToHeader"
+                <DataGridComboBoxColumn Header="Моносорт" Width="SizeToHeader"
                                         SelectedItemBinding="{Binding CoffeeSort}" DisplayMemberPath="Name" SelectedValuePath="Id"
                                         ItemsSource="{Binding Source={x:Static core:ContextManager.ActiveCoffeeSorts}}"/>
-                <DataGridTextColumn Binding="{Binding Ratio, StringFormat={}{0} %}" Header="Процентное содержание" Width="SizeToHeader"/>
+                <DataGridTextColumn Binding="{Binding Ratio}" Header="Процентное содержание (%)" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using Model;
 using Model.Entity;
 
@@ -11,6 +12,7 @@ namespace ViewModels.Windows.EntityWindows
             if (argMix != null)
             {
                 Mix = argMix as Mix;
+                Details = new ObservableCollection<Mix_Details>(Mix.Mix_Details);
             }
             else
             {
@@ -55,9 +57,7 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void cmdSave_Execute()
         {
-            double total = 0;
-            foreach (var x in Details)
-                total += x.Ratio;
+            double total = Details.Sum(x => x.Ratio);
             if (total != 100)
             {
                 FlyErrorMsg = "Неправильные пропорции, общая сумма не равна 100%";

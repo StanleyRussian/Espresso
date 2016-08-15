@@ -26,7 +26,7 @@ namespace UI.Pages.Explore.CoffeeSales
             var selected = tabs.SelectedItem as Model.Entity.CoffeeSale;
             if (selected != null)
             {
-                new CoffeePurchase(selected).ShowDialog();
+                new CoffeeSale(selected).ShowDialog();
                 var viewModel = (vmCoffeeSales)DataContext;
                 viewModel.cmdReload.Execute(null);
             }

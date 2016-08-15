@@ -24,7 +24,8 @@ namespace ViewModels.Windows.EntityWindows
             {
                 Date = DateTime.Now,
                 Account = ContextManager.ActiveAccounts.FirstOrDefault(),
-                Supplier = ContextManager.ActiveSuppliers.FirstOrDefault()
+                Supplier = ContextManager.ActiveSuppliers.FirstOrDefault(),
+                Package = ContextManager.ActivePackages.FirstOrDefault()
             };
         }
 
@@ -41,6 +42,21 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void cmdSave_Execute()
         {
+            if (Purchase.PackQuantity <= 0)
+            {
+                FlyErrorMsg = "Введите количество пачек";
+                IsFlyErrorOpened = true;
+                return;
+            }
+
+            if (Purchase.PackQuantity <= 0)
+            {
+                FlyErrorMsg = "Введите цену";
+                IsFlyErrorOpened = true;
+                return;
+            }
+
+            Purchase.Sum = Purchase.PackQuantity*Purchase.Price;
             if (CreatingNew)
                 ContextManager.Context.PackagePurchases.Add(Purchase);
             SaveContext();

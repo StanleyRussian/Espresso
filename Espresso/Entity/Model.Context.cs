@@ -43,7 +43,6 @@ namespace Model.Entity
         public virtual DbSet<Recipient> Recipients { get; set; }
         public virtual DbSet<CoffeeSale_Details> CoffeeSale_Details { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<PackedCategory> PackedCategories { get; set; }
         public virtual DbSet<CoffeeTransfer> CoffeeTransfers { get; set; }
         public virtual DbSet<dAccountsBalance> dAccountsBalances { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }

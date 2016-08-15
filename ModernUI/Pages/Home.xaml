@@ -132,9 +132,10 @@
                       AutoGenerateColumns="False" ItemsSource="{Binding PackedStocks}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Mix.Name}" Header="Купаж"/>
-                    <DataGridTextColumn Binding="{Binding Package.Name, StringFormat={}{0} кг}" Header="Фасовка"/>
+                    <DataGridTextColumn Binding="{Binding Package.Name, StringFormat={}{0} кг}" Header="Упаковка"/>
+                    <DataGridTextColumn Binding="{Binding Package.Capacity, StringFormat={}{0} кг}" Header="Фасовка"/>
                     <DataGridTextColumn Binding="{Binding PackQuantity, StringFormat={}{0} шт}" Header="Количество пачек"/>
-                </DataGrid.Columns> 
+            </DataGrid.Columns> 
             </DataGrid>
 
         <TextBlock Grid.Row="6" VerticalAlignment="Top" Text="Расфасованного кофе совсем не осталось">
@@ -175,78 +176,83 @@
                 </TextBlock.Style>
             </TextBlock>
 
-        <Separator Grid.Row="7" Grid.ColumnSpan="2" Margin="0,10,0,10"/>
+        <!--<Separator Grid.Row="7" Grid.ColumnSpan="2" Margin="0,10,0,10"/>-->
 
-        <TextBlock Grid.Row="8" Grid.ColumnSpan="2" Style="{StaticResource Header1}" 
-                   Text="Быстрый доступ" HorizontalAlignment="Center"/>
+        <!--<TextBlock Grid.Row="8" Grid.ColumnSpan="2" Style="{StaticResource Header1}" 
+                   Text="Быстрый доступ" HorizontalAlignment="Center"/>-->
 
-        <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,10,0,0" HorizontalAlignment="Center">
-            <Button Click="NewPurchase" Margin="{StaticResource ControlMargin}">
-                <StackPanel Margin="10">
+        <StackPanel Orientation="Horizontal" Grid.Row="9" 
+                    Grid.ColumnSpan="2" Margin="0,10,0,0" 
+                    HorizontalAlignment="Center">
+            <Button Click="NewPurchase" Margin="{StaticResource ControlMargin}"
+                    Width="85" Height="85">
+                <StackPanel>
                     <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
                         <Rectangle.OpacityMask>
                             <VisualBrush Visual="{StaticResource appbar_cart}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Style="{StaticResource ButtonText}" Text="Покупать"/>
+                    <TextBlock Style="{StaticResource ButtonText}" 
+                               Text="Закупка кофе" TextWrapping="Wrap"
+                               TextAlignment="Center"/>
                 </StackPanel>
             </Button>
 
-            <Button Click="NewRoasting" Margin="{StaticResource ControlMargin}">
-                <StackPanel Margin="10">
+            <Button Click="NewRoasting" Margin="{StaticResource ControlMargin}"
+                    Width="85" Height="85">
+                <StackPanel>
                     <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
                         <Rectangle.OpacityMask>
                             <VisualBrush Visual="{StaticResource appbar_acorn}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Style="{StaticResource ButtonText}" Text="Жарить"/>
+                    <TextBlock Style="{StaticResource ButtonText}" 
+                               Text="Обжарка кофе" TextWrapping="Wrap"
+                               TextAlignment="Center"/>
                 </StackPanel>
             </Button>
-            
-            <Button Click="NewPacking" Margin="{StaticResource ControlMargin}">
-                <StackPanel Margin="10">
+
+            <Button Click="NewPackagePurchase" Margin="{StaticResource ControlMargin}"
+                    Width="85" Height="85">
+                <StackPanel>
+                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource appbar_gift}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Style="{StaticResource ButtonText}" 
+                               Text="Закупка упаковки" TextWrapping="Wrap"
+                               TextAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Click="NewPacking" Margin="{StaticResource ControlMargin}"
+                    Width="85" Height="85">
+                <StackPanel>
                     <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
                         <Rectangle.OpacityMask>
                             <VisualBrush Visual="{StaticResource appbar_filter}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Style="{StaticResource ButtonText}" Text="Фасовать"/>
+                    <TextBlock Style="{StaticResource ButtonText}" 
+                               Text="Фасовка кофе" TextWrapping="Wrap"
+                               TextAlignment="Center"/>
                 </StackPanel>
             </Button>
-            
-            <Button Click="NewSale" Margin="{StaticResource ControlMargin}">
-                <StackPanel Margin="10">
+
+            <Button Click="NewSale" Margin="{StaticResource ControlMargin}"
+                    Width="85" Height="85">
+                <StackPanel>
                     <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
                         <Rectangle.OpacityMask>
                             <VisualBrush Visual="{StaticResource appbar_money}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Style="{StaticResource ButtonText}" Text="Продавать"/>
-                </StackPanel>
-            </Button>
-
-            <!--<Button Command="{Binding cmdReload}" Margin="{StaticResource ControlMargin}">
-                <StackPanel Margin="10">
-                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_refresh}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Style="{StaticResource ButtonText}" Text="Обновить"/>
-                </StackPanel>
-            </Button>-->
-
-            <Button Click="UnpaidWindow" Margin="{StaticResource ControlMargin}">
-                <StackPanel Margin="10">
-                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_refresh}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Style="{StaticResource ButtonText}" Text="Неоплаченные"/>
+                    <TextBlock Style="{StaticResource ButtonText}" 
+                               Text="Продажа кофе" TextWrapping="Wrap"
+                               TextAlignment="Center"/>
                 </StackPanel>
             </Button>
         </StackPanel>
     </Grid>
-
 </UserControl>

@@ -10,8 +10,7 @@ namespace Model
         {
             return _context.dPackedStocks
                 .Include(p => p.Mix)
-                .Include(p => p.Package)
-                .Include(p => p.PackedCategory);
+                .Include(p => p.Package);
         }
 
         public static dPackedStocks EagerPackedStockById(this ContextContainer _context, int argId)
@@ -19,7 +18,6 @@ namespace Model
             return _context.dPackedStocks
                 .Include(p => p.Mix)
                 .Include(p => p.Package)
-                .Include(p => p.PackedCategory)
                 .FirstOrDefault(c => c.Id == argId);
         }
     }
