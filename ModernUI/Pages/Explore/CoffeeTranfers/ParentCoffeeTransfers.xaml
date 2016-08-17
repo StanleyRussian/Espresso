@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:coffeeTranfers="clr-namespace:UI.Pages.Explore.CoffeeTranfers"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:model="clr-namespace:Model;assembly=Model">
+             xmlns:model="clr-namespace:Model;assembly=Model"
+             xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             dialogs:DialogParticipation.Register="{Binding}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

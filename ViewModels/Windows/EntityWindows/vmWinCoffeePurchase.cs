@@ -102,13 +102,13 @@ namespace ViewModels.Windows.EntityWindows
                 IsFlyErrorOpened = true;
                 return;
             }
-            //if (ContextManager.Context.dAccountsBalances.First(
-            //    p => p.Account.Id == Purchase.Account.Id).Balance < Purchase.Sum)
-            //{
-            //    FlyErrorMsg = "На выбранном счету недостаточно денег";
-            //    IsFlyErrorOpened = true;
-            //    return;
-            //}
+            if (ContextManager.Context.dAccountsBalances.First(
+                p => p.Account.Id == Purchase.Account.Id).Balance < Purchase.Sum)
+            {
+                FlyErrorMsg = "На выбранном счету недостаточно денег";
+                IsFlyErrorOpened = true;
+                return;
+            }
 
             _purchase.Sum = 0;
             foreach (var detail in Details)

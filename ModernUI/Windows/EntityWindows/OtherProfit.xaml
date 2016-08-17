@@ -66,6 +66,7 @@
                      Height="50" TextWrapping="Wrap" AcceptsReturn="True"
                      Margin="{StaticResource ControlMargin}"
                      Text="{Binding Designation}"
+                     Style="{StaticResource Mandatory}"
                      controls:TextBoxHelper.ClearTextButton="True"/>
 
             <Label Grid.Row="3" Margin="{StaticResource ControlMargin}">Счёт</Label>
@@ -73,7 +74,7 @@
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
-            <Button Command="{Binding cmdSave}" Margin="{StaticResource ControlMargin}">Оплатить</Button>
+            <Button Command="{Binding cmdSave}" Margin="{StaticResource ControlMargin}">Сохранить</Button>
             <Button Click="btnCancel_Click" Margin="{StaticResource ControlMargin}">Отмена</Button>
         </StackPanel>
     </Grid>

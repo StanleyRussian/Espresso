@@ -67,7 +67,7 @@
             <Label Grid.Row="3" Margin="{StaticResource ControlMargin}">Упаковка</Label>
             <combo:ComboActivePackages Grid.Row="3" Grid.Column="1"/>
 
-            <Label Grid.Row="4" Margin="{StaticResource ControlMargin}">Стоимость</Label>
+            <Label Grid.Row="4" Margin="{StaticResource ControlMargin}">Цена за пачку</Label>
             <TextBox Grid.Row="4" Grid.Column="1" 
                      Margin="{StaticResource ControlMargin}"
                      Text="{Binding Price}" 

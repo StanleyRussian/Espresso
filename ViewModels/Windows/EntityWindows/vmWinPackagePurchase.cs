@@ -49,9 +49,23 @@ namespace ViewModels.Windows.EntityWindows
                 return;
             }
 
+            if (Purchase.Price <= 0)
+            {
+                FlyErrorMsg = "Введите цену";
+                IsFlyErrorOpened = true;
+                return;
+            }
+
             if (Purchase.PackQuantity <= 0)
             {
                 FlyErrorMsg = "Введите цену";
+                IsFlyErrorOpened = true;
+                return;
+            }
+            if (ContextManager.Context.dAccountsBalances.First(
+                p => p.Account.Id == Purchase.Account.Id).Balance < Purchase.Sum)
+            {
+                FlyErrorMsg = "На выбранном счету недостаточно денег";
                 IsFlyErrorOpened = true;
                 return;
             }

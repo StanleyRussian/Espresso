@@ -76,8 +76,8 @@
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
-            <Button Command="{Binding cmdSave}" Margin="{StaticResource ControlMargin}">Оплатить</Button>
             <Button Command="{Binding cmdMakeMonthly}" Margin="{StaticResource ControlMargin}">Cделать ежемесячным</Button>
+            <Button Command="{Binding cmdSave}" Margin="{StaticResource ControlMargin}">Сохранить</Button>
             <Button Click="btnCancel_Click" Margin="{StaticResource ControlMargin}">Отмена</Button>
         </StackPanel>
     </Grid>

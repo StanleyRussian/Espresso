@@ -1,6 +1,7 @@
 ------ dGreenStocks
 ---- Coffee Sorts
 -- on INSERT
+--// After adding new coffee sort, adds entity to store it's green stocks
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].GreenStocks_Insert_CoffeeSorts'))
 DROP TRIGGER [dbo].GreenStocks_Insert_CoffeeSorts
 GO
@@ -13,6 +14,7 @@ FROM INSERTED i
 GO
 
 -- on DELETE
+--// Currently cannot occur due to inability to delete coffee sort from program
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].GreenStocks_Delete_CoffeeSorts'))
 DROP TRIGGER [dbo].GreenStocks_Delete_CoffeeSorts
 GO
@@ -27,6 +29,7 @@ GO
 
 ---- CoffeePurchases
 -- on INSERT
+--// After purchasing green coffee, add purchased amount to corresponding green stocks entity
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].GreenStocks_Insert_CoffeePurchase'))
 DROP TRIGGER [dbo].GreenStocks_Insert_CoffeePurchase
 GO
@@ -40,6 +43,7 @@ WHERE dbo.dGreenStocks.CoffeeSort_Id = i.CoffeeSort_Id
 GO
 
 -- on UPDATE
+--// After editing purchase correct the stock amount
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].GreenStocks_Update_CoffeePurchase'))
 DROP TRIGGER [dbo].GreenStocks_Update_CoffeePurchase
 GO
@@ -53,6 +57,7 @@ WHERE dbo.dGreenStocks.CoffeeSort_Id = i.CoffeeSort_Id
 GO
 
 -- on DELETE
+--// After deletion of purchase correct the stock amount
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].GreenStocks_Delete_CoffeePurchase'))
 DROP TRIGGER [dbo].GreenStocks_Delete_CoffeePurchase
 GO
@@ -432,13 +437,13 @@ GO
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].PackageStocks_Delete_Package'))
 DROP TRIGGER [dbo].PackageStocks_Delete_Package
 GO
---CREATE TRIGGER PackageStocks_Delete_Package
---ON Packages
---AFTER DELETE AS
---DELETE FROM dPackageStocks
---WHERE Package_Id = (SELECT d.Id 
---					FROM DELETED d)
---GO
+CREATE TRIGGER PackageStocks_Delete_Package
+ON Packages
+AFTER DELETE AS
+DELETE FROM dPackageStocks
+WHERE Package_Id = (SELECT d.Id 
+					FROM DELETED d)
+GO
 
 
 ---- PackagePurchases
@@ -542,13 +547,13 @@ GO
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].AccountsBalances_Delete_Account'))
 DROP TRIGGER [dbo].AccountsBalances_Delete_Account
 GO
---CREATE TRIGGER AccountsBalances_Delete_Account
---ON Accounts
---AFTER DELETE AS
---DELETE FROM dAccountsBalances
---WHERE Account_Id = (SELECT d.Id 
---					   FROM DELETED d)
---GO
+CREATE TRIGGER AccountsBalances_Delete_Account
+ON Accounts
+AFTER DELETE AS
+DELETE FROM dAccountsBalances
+WHERE Account_Id = (SELECT d.Id 
+					   FROM DELETED d)
+GO
 
 
 ---- CoffeeSale
@@ -830,24 +835,26 @@ CREATE TRIGGER AccountsBalances_Insert_PackagePurchases
 ON PackagePurchases
 AFTER INSERT AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= i.Sum
-	FROM INSERTED i
-	WHERE dAccountsBalances.Id = i.Account_Id
-END
-BEGIN
-	INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-	SELECT i.Account_Id, i.Date, i.Sum, rc.Name, N'Закупка упаковки'
-	FROM INSERTED i
-	INNER JOIN dbo.Suppliers rc
-		ON rc.Id = i.Supplier_Id
-END
-BEGIN
-	UPDATE PackagePurchases
-	SET TransactionId = (SELECT MAX(Id)
-						 FROM dTransactions)
-	FROM INSERTED i
-	WHERE PackagePurchases.Id = i.Id
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance -= i.Sum
+		FROM INSERTED i
+		WHERE dAccountsBalances.Id = i.Account_Id
+	END
+	BEGIN
+		INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
+		SELECT i.Account_Id, i.Date, i.Sum, rc.Name, N'Закупка упаковки'
+		FROM INSERTED i
+		INNER JOIN dbo.Suppliers rc
+			ON rc.Id = i.Supplier_Id
+	END
+	BEGIN
+		UPDATE PackagePurchases
+		SET TransactionId = (SELECT MAX(Id)
+							 FROM dTransactions)
+		FROM INSERTED i
+		WHERE PackagePurchases.Id = i.Id
+	END
 END
 GO
 
@@ -859,16 +866,18 @@ CREATE TRIGGER AccountsBalances_Update_PackagePurchases
 ON PackagePurchases
 AFTER UPDATE AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= (i.Sum - d.Sum)
-	FROM INSERTED i, DELETED d
-	WHERE dAccountsBalances.Id = i.Account_Id
-END
-BEGIN
-	UPDATE dTransactions
-	SET Sum = i.Sum
-	FROM INSERTED i
-	WHERE dTransactions.Id = i.TransactionId
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance -= (i.Sum - d.Sum)
+		FROM INSERTED i, DELETED d
+		WHERE dAccountsBalances.Id = i.Account_Id
+	END
+	BEGIN
+		UPDATE dTransactions
+		SET Sum = i.Sum
+		FROM INSERTED i
+		WHERE dTransactions.Id = i.TransactionId
+	END
 END
 GO
 
@@ -880,15 +889,17 @@ CREATE TRIGGER AccountsBalances_Delete_PackagePurchases
 ON PackagePurchases
 AFTER DELETE AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance += d.Sum
-	FROM DELETED d
-	WHERE dAccountsBalances.Id = d.Account_Id
-END
-BEGIN
-	DELETE FROM dTransactions
-	WHERE Id = (SELECT d.TransactionId
-				FROM DELETED d)
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance += d.Sum
+		FROM DELETED d
+		WHERE dAccountsBalances.Id = d.Account_Id
+	END
+	BEGIN
+		DELETE FROM dTransactions
+		WHERE Id = (SELECT d.TransactionId
+					FROM DELETED d)
+	END
 END
 GO
 
@@ -902,22 +913,24 @@ CREATE TRIGGER AccountsBalances_Insert_Payments
 ON Payments
 AFTER INSERT AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= i.Sum
-	FROM INSERTED i
-	WHERE dAccountsBalances.Id = i.Account_Id
-END
-BEGIN
-	INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-	SELECT i.Account_Id, i.Date, i.Sum, i.Designation, N'Платёж'
-	FROM INSERTED i
-END
-BEGIN
-	UPDATE PackagePurchases
-	SET TransactionId = (SELECT MAX(Id)
-						 FROM dTransactions)
-	FROM INSERTED i
-	WHERE PackagePurchases.Id = i.Id
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance -= i.Sum
+		FROM INSERTED i
+		WHERE dAccountsBalances.Id = i.Account_Id
+	END
+	BEGIN
+		INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
+		SELECT i.Account_Id, i.Date, i.Sum, i.Designation, N'Платёж'
+		FROM INSERTED i
+	END
+	BEGIN
+		UPDATE PackagePurchases
+		SET TransactionId = (SELECT MAX(Id)
+							 FROM dTransactions)
+		FROM INSERTED i
+		WHERE PackagePurchases.Id = i.Id
+	END
 END
 GO
 
@@ -929,16 +942,18 @@ CREATE TRIGGER AccountsBalances_Update_Payments
 ON Payments
 AFTER UPDATE AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= (i.Sum - d.Sum)
-	FROM INSERTED i, DELETED d
-	WHERE dAccountsBalances.Id = i.Account_Id
-END
-BEGIN
-	UPDATE dTransactions
-	SET Sum = i.Sum
-	FROM INSERTED i
-	WHERE dTransactions.Id = i.TransactionId
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance -= (i.Sum - d.Sum)
+		FROM INSERTED i, DELETED d
+		WHERE dAccountsBalances.Id = i.Account_Id
+	END
+	BEGIN
+		UPDATE dTransactions
+		SET Sum = i.Sum
+		FROM INSERTED i
+		WHERE dTransactions.Id = i.TransactionId
+	END
 END
 GO
 
@@ -950,15 +965,17 @@ CREATE TRIGGER AccountsBalances_Delete_Payments
 ON Payments
 AFTER DELETE AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance += d.Sum
-	FROM DELETED d
-	WHERE dAccountsBalances.Id = d.Account_Id
-END
-BEGIN
-	DELETE FROM dTransactions
-	WHERE Id = (SELECT d.TransactionId
-				FROM DELETED d)
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance += d.Sum
+		FROM DELETED d
+		WHERE dAccountsBalances.Id = d.Account_Id
+	END
+	BEGIN
+		DELETE FROM dTransactions
+		WHERE Id = (SELECT d.TransactionId
+					FROM DELETED d)
+	END
 END
 GO
 
@@ -972,22 +989,24 @@ CREATE TRIGGER AccountsBalances_Insert_OtherProfits
 ON OtherProfits
 AFTER INSERT AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance += i.Sum
-	FROM INSERTED i
-	WHERE dAccountsBalances.Id = i.Account_Id
-END
-BEGIN
-	INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-	SELECT i.Account_Id, i.Date, i.Sum, i.Designation, N'Доход'
-	FROM INSERTED i
-END
-BEGIN
-	UPDATE PackagePurchases
-	SET TransactionId = (SELECT MAX(Id)
-						 FROM dTransactions)
-	FROM INSERTED i
-	WHERE PackagePurchases.Id = i.Id
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance += i.Sum
+		FROM INSERTED i
+		WHERE dAccountsBalances.Id = i.Account_Id
+	END
+	BEGIN
+		INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
+		SELECT i.Account_Id, i.Date, i.Sum, i.Designation, N'Доход'
+		FROM INSERTED i
+	END
+	BEGIN
+		UPDATE OtherProfits
+		SET TransactionId = (SELECT MAX(Id)
+							 FROM dTransactions)
+		FROM INSERTED i
+		WHERE OtherProfits.Id = i.Id
+	END
 END
 GO
 
@@ -999,16 +1018,18 @@ CREATE TRIGGER AccountsBalances_Update_OtherProfits
 ON OtherProfits
 AFTER UPDATE AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance += (i.Sum - d.Sum)
-	FROM INSERTED i, DELETED d
-	WHERE dAccountsBalances.Id = i.Account_Id
-END
-BEGIN
-	UPDATE dTransactions
-	SET Sum = i.Sum
-	FROM INSERTED i
-	WHERE dTransactions.Id = i.TransactionId
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance += (i.Sum - d.Sum)
+		FROM INSERTED i, DELETED d
+		WHERE dAccountsBalances.Id = i.Account_Id
+	END
+	BEGIN
+		UPDATE dTransactions
+		SET Sum = i.Sum
+		FROM INSERTED i
+		WHERE dTransactions.Id = i.TransactionId
+	END
 END
 GO
 
@@ -1020,15 +1041,17 @@ CREATE TRIGGER AccountsBalances_Delete_OtherProfits
 ON OtherProfits
 AFTER DELETE AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= d.Sum
-	FROM DELETED d
-	WHERE dAccountsBalances.Id = d.Account_Id
-END
-BEGIN
-	DELETE FROM dTransactions
-	WHERE Id = (SELECT d.TransactionId
-				FROM DELETED d)
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance -= d.Sum
+		FROM DELETED d
+		WHERE dAccountsBalances.Id = d.Account_Id
+	END
+	BEGIN
+		DELETE FROM dTransactions
+		WHERE Id = (SELECT d.TransactionId
+					FROM DELETED d)
+	END
 END
 GO
 
@@ -1042,24 +1065,26 @@ CREATE TRIGGER AccountsBalances_Insert_MonthlyPayments
 ON MonthlyPayments
 AFTER INSERT AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= i.PaidAmount
-	FROM INSERTED i
-	WHERE dAccountsBalances.Id = i.Account_Id
-END
-BEGIN
-	INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
-	SELECT i.Account_Id, i.Date, i.PaidAmount, me.Designation, N'Ежемесячный платёж'
-	FROM INSERTED i
-	INNER JOIN dbo.MonthlyExpenses me
-		ON me.Id = i.MonthlyExpense_Id
-END
-BEGIN
-	UPDATE PackagePurchases
-	SET TransactionId = (SELECT MAX(Id)
-						 FROM dTransactions)
-	FROM INSERTED i
-	WHERE PackagePurchases.Id = i.Id
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance -= i.PaidAmount
+		FROM INSERTED i
+		WHERE dAccountsBalances.Id = i.Account_Id
+	END
+	BEGIN
+		INSERT INTO dTransactions(Account_Id, Date, Sum, Participant, Description)
+		SELECT i.Account_Id, i.Date, i.PaidAmount, me.Designation, N'Ежемесячный платёж'
+		FROM INSERTED i
+		INNER JOIN dbo.MonthlyExpenses me
+			ON me.Id = i.MonthlyExpense_Id
+	END
+	BEGIN
+		UPDATE PackagePurchases
+		SET TransactionId = (SELECT MAX(Id)
+							 FROM dTransactions)
+		FROM INSERTED i
+		WHERE PackagePurchases.Id = i.Id
+	END
 END
 GO
 
@@ -1071,16 +1096,18 @@ CREATE TRIGGER AccountsBalances_Update_MonthlyPayments
 ON MonthlyPayments
 AFTER UPDATE AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= (i.PaidAmount - d.PaidAmount)
-	FROM INSERTED i, DELETED d
-	WHERE dAccountsBalances.Id = i.Account_Id
-END
-BEGIN
-	UPDATE dTransactions
-	SET Sum = i.PaidAmount
-	FROM INSERTED i
-	WHERE dTransactions.Id = i.TransactionId
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance -= (i.PaidAmount - d.PaidAmount)
+		FROM INSERTED i, DELETED d
+		WHERE dAccountsBalances.Id = i.Account_Id
+	END
+	BEGIN
+		UPDATE dTransactions
+		SET Sum = i.PaidAmount
+		FROM INSERTED i
+		WHERE dTransactions.Id = i.TransactionId
+	END
 END
 GO
 
@@ -1092,15 +1119,17 @@ CREATE TRIGGER AccountsBalances_Delete_MonthlyPayments
 ON MonthlyPayments
 AFTER DELETE AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance += d.PaidAmount
-	FROM DELETED d
-	WHERE dAccountsBalances.Id = d.Account_Id
-END
-BEGIN
-	DELETE FROM dTransactions
-	WHERE Id = (SELECT d.TransactionId
-				FROM DELETED d)
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance += d.PaidAmount
+		FROM DELETED d
+		WHERE dAccountsBalances.Id = d.Account_Id
+	END
+	BEGIN
+		DELETE FROM dTransactions
+		WHERE Id = (SELECT d.TransactionId
+					FROM DELETED d)
+	END
 END
 GO
 
@@ -1114,16 +1143,18 @@ CREATE TRIGGER AccountsBalances_Insert_MoneyTransfers
 ON MoneyTransfers
 AFTER INSERT AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= i.Sum
-	FROM INSERTED i
-	WHERE dAccountsBalances.Id = i.InitialAccount_Id
-END
-BEGIN
-	UPDATE dAccountsBalances
-	SET Balance += i.Sum
-	FROM INSERTED i
-	WHERE dAccountsBalances.Id = i.TargetAccount_Id
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance -= i.Sum
+		FROM INSERTED i
+		WHERE dAccountsBalances.Id = i.InitialAccount_Id
+	END
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance += i.Sum
+		FROM INSERTED i
+		WHERE dAccountsBalances.Id = i.TargetAccount_Id
+	END
 END
 GO
 
@@ -1135,16 +1166,18 @@ CREATE TRIGGER AccountsBalances_Update_MoneyTransfers
 ON MoneyTransfers
 AFTER UPDATE AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= (i.Sum - d.Sum)
-	FROM INSERTED i, DELETED d
-	WHERE dAccountsBalances.Id = i.InitialAccount_Id
-END
-BEGIN
-	UPDATE dAccountsBalances
-	SET Balance += (i.Sum - d.Sum)
-	FROM INSERTED i, DELETED d
-	WHERE dAccountsBalances.Id = i.TargetAccount_Id
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance -= (i.Sum - d.Sum)
+		FROM INSERTED i, DELETED d
+		WHERE dAccountsBalances.Id = i.InitialAccount_Id
+	END
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance += (i.Sum - d.Sum)
+		FROM INSERTED i, DELETED d
+		WHERE dAccountsBalances.Id = i.TargetAccount_Id
+	END
 END
 GO
 
@@ -1156,15 +1189,17 @@ CREATE TRIGGER AccountsBalances_Delete_MoneyTransfers
 ON MoneyTransfers
 AFTER DELETE AS
 BEGIN
-	UPDATE dAccountsBalances
-	SET Balance += d.Sum
-	FROM DELETED d
-	WHERE dAccountsBalances.Id = d.InitialAccount_Id
-END
-BEGIN
-	UPDATE dAccountsBalances
-	SET Balance -= d.Sum
-	FROM DELETED d
-	WHERE dAccountsBalances.Id = d.TargetAccount_Id
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance += d.Sum
+		FROM DELETED d
+		WHERE dAccountsBalances.Id = d.InitialAccount_Id
+	END
+	BEGIN
+		UPDATE dAccountsBalances
+		SET Balance -= d.Sum
+		FROM DELETED d
+		WHERE dAccountsBalances.Id = d.TargetAccount_Id
+	END
 END
 GO
