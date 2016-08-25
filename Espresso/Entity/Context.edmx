@@ -190,7 +190,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Quantity" Type="float" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
-    <Property Name="CoffeePurchases_Id" Type="int" Nullable="false" />
+    <Property Name="CoffeePurchase_Id" Type="int" Nullable="false" />
     <Property Name="CoffeeSort_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CoffeeSorts">
@@ -455,7 +455,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="CoffeePurchase_Details">
-        <PropertyRef Name="CoffeePurchases_Id" />
+        <PropertyRef Name="CoffeePurchase_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1017,7 +1017,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Quantity" Type="Double" Nullable="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
-          <NavigationProperty Name="CoffeePurchases" Relationship="Context.CoffeePurchase_DetailsCoffeePurchase" FromRole="CoffeePurchase_Details" ToRole="CoffeePurchase" />
+          <NavigationProperty Name="CoffeePurchase" Relationship="Context.CoffeePurchase_DetailsCoffeePurchase" FromRole="CoffeePurchase_Details" ToRole="CoffeePurchase" />
           <NavigationProperty Name="CoffeeSort" Relationship="Context.CoffeeSortCoffeePurchase_Details" FromRole="CoffeePurchase_Details" ToRole="CoffeeSort" />
         </EntityType>
         <EntityType Name="CoffeeSort">
@@ -1710,7 +1710,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="CoffeePurchase_DetailsCoffeePurchase" TypeName="Context.CoffeePurchase_DetailsCoffeePurchase" StoreEntitySet="CoffeePurchase_Details">
       <EndProperty Name="CoffeePurchase">
-        <ScalarProperty Name="Id" ColumnName="CoffeePurchases_Id" />
+        <ScalarProperty Name="Id" ColumnName="CoffeePurchase_Id" />
       </EndProperty>
       <EndProperty Name="CoffeePurchase_Details">
         <ScalarProperty Name="Id" ColumnName="Id" />

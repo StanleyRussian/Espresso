@@ -18,7 +18,7 @@ namespace Model.Entity
         public double Quantity { get; set; }
         public double Price { get; set; }
     
-        public virtual CoffeePurchase CoffeePurchases { get; set; }
+        public virtual CoffeePurchase CoffeePurchase { get; set; }
         public virtual CoffeeSort CoffeeSort { get; set; }
     }
 }

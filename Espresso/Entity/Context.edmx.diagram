@@ -33,9 +33,9 @@
         <AssociationConnector Association="Context.PackagedPackedStocks" />
         <EntityTypeShape EntityType="Context.dPackageStocks" Width="1.5" PointX="11.875" PointY="12.75" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.dPackageStocksPackage" />
-        <EntityTypeShape EntityType="Context.CoffeeSale" Width="1.5" PointX="6.875" PointY="14" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="Context.Recipient" Width="1.5" PointX="6.875" PointY="17.5" />
-        <EntityTypeShape EntityType="Context.CoffeeSale_Details" Width="1.625" PointX="9.125" PointY="14.25" FillColor="Sienna" />
+        <EntityTypeShape EntityType="Context.CoffeeSale" Width="1.625" PointX="7.125" PointY="14" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="Context.Recipient" Width="1.5" PointX="7.25" PointY="17.5" />
+        <EntityTypeShape EntityType="Context.CoffeeSale_Details" Width="1.625" PointX="9.5" PointY="14.375" FillColor="Sienna" />
         <AssociationConnector Association="Context.SaleSale_Details" />
         <AssociationConnector Association="Context.RecipientSale" />
         <EntityTypeShape EntityType="Context.Account" Width="1.75" PointX="3.625" PointY="10.75" />

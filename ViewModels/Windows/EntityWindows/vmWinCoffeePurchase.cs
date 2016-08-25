@@ -84,24 +84,32 @@ namespace ViewModels.Windows.EntityWindows
                 IsFlyErrorOpened = true;
                 return;
             }
+
             if (Details.Count == 0)
             {
                 FlyErrorMsg = "Введите хотя бы один сорт кофе";
                 IsFlyErrorOpened = true;
                 return;
             }
+
             if (Details.Any(detail => detail.Quantity == 0))
             {
                 FlyErrorMsg = "Введите количество закупленного кофе";
                 IsFlyErrorOpened = true;
                 return;
             }
+
             if (Details.Any(detail => detail.Price == 0))
             {
                 FlyErrorMsg = "Введите цену отличную от нуля";
                 IsFlyErrorOpened = true;
                 return;
             }
+
+            _purchase.Sum = 0;
+            foreach (var detail in Details)
+                _purchase.Sum += (detail.Price * detail.Quantity);
+
             if (ContextManager.Context.dAccountsBalances.First(
                 p => p.Account.Id == Purchase.Account.Id).Balance < Purchase.Sum)
             {
@@ -109,10 +117,6 @@ namespace ViewModels.Windows.EntityWindows
                 IsFlyErrorOpened = true;
                 return;
             }
-
-            _purchase.Sum = 0;
-            foreach (var detail in Details)
-                _purchase.Sum += (detail.Price*detail.Quantity);
 
             _purchase.CoffeePurchase_Details.Clear();
             foreach (var x in Details)

@@ -6,8 +6,8 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Model;
 using Model.Entity;
+using ViewModels.Annotations;
 using ViewModels.Auxiliary;
-using ViewModels.Properties;
 
 namespace ViewModels.Pages.Statistics.CoffeeSorts
 {
@@ -69,6 +69,7 @@ namespace ViewModels.Pages.Statistics.CoffeeSorts
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

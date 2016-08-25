@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using ViewModels.Pages.Statistics.Accounts;
 using ViewModels.Pages.Statistics.CoffeeSorts;
+using ViewModels.Pages.Statistics.Mixes;
 
 namespace ViewModels.Pages
 {
@@ -12,7 +13,8 @@ namespace ViewModels.Pages
             Tabs = new ObservableCollection<aTabViewModel>
             {
                 new vmStatsAccounts(),
-                new vmStatsCoffeeSorts()
+                new vmStatsCoffeeSorts(),
+                new vmStatsMixes()
             };
         }
 

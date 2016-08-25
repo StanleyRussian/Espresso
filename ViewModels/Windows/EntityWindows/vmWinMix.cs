@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Model;
 using Model.Entity;
@@ -57,20 +58,31 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void cmdSave_Execute()
         {
-            double total = Details.Sum(x => x.Ratio);
+            double total = 0;
+            try { total = Details.Sum(x => x.Ratio); }
+            catch(Exception ex){ }
+
             if (total != 100)
             {
                 FlyErrorMsg = "Неправильные пропорции, общая сумма не равна 100%";
                 IsFlyErrorOpened = true;
                 return;
             }
-            if (CreatingNew)
+
+            _mix.Mix_Details.Clear();
+            foreach (var x in Details)
+                _mix.Mix_Details.Add(x);
+
+            _mix.dCost = 0;
+            foreach (var detail in Details)
             {
-                _mix.Mix_Details.Clear();
-                foreach (var x in Details)
-                    _mix.Mix_Details.Add(x);
-                ContextManager.Context.Mixes.Add(_mix);
+                _mix.dCost += ContextManager.Context.CoffeePurchase_Details.OrderByDescending(p => p.Id)
+                    .First(p => p.CoffeeSort.Id == detail.CoffeeSort.Id)
+                    .Price * detail.Ratio / 100;
             }
+
+            if (CreatingNew)
+                ContextManager.Context.Mixes.Add(_mix);
             SaveContext();
         }
     }

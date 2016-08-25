@@ -189,6 +189,9 @@
     <Compile Include="Pages\Statistic\StatsCoffeeSorts.xaml.cs">
       <DependentUpon>StatsCoffeeSorts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Statistic\StatsMixes.xaml.cs">
+      <DependentUpon>StatsMixes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EntityWindows\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
@@ -318,8 +321,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Explore\Packages\ParentPackages.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Explore\Packings\IndividualPacking.xaml">
       <SubType>Designer</SubType>
@@ -394,6 +397,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Statistic\StatsCoffeeSorts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Statistic\StatsMixes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

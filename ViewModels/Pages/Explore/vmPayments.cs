@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using MahApps.Metro.Controls.Dialogs;
 using Model;
@@ -56,7 +57,16 @@ namespace ViewModels.Pages.Explore
                 MessageDialogStyle.AffirmativeAndNegative);
             if (messageDialogResult == MessageDialogResult.Negative) return;
 
-            ContextManager.Context.Payments.Remove(selected);
+            try
+            {
+                ContextManager.Context.Payments.Remove(selected);
+            }
+            catch (Exception ex)
+            {
+                await DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка", ex.Message,
+                    MessageDialogStyle.Affirmative,
+                    new MetroDialogSettings { ColorScheme = MetroDialogColorScheme.Accented });
+            }
             SaveContext();
             Refresh();
 

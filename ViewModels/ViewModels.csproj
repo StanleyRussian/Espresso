@@ -60,6 +60,7 @@
     <Compile Include="Pages\Explore\vmPackings.cs" />
     <Compile Include="Pages\Explore\vmPayments.cs" />
     <Compile Include="Pages\Explore\vmRecipients.cs" />
+    <Compile Include="Pages\Statistics\Mixes\vmStatsMixes.cs" />
     <Compile Include="Pages\vmExplorer.cs" />
     <Compile Include="Pages\Statistics\Accounts\vmStatsAccounts.cs" />
     <Compile Include="Pages\Statistics\CoffeeSorts\vmSoloCoffeeSort.cs" />

@@ -32,8 +32,6 @@ namespace ViewModels.Windows.EntityWindows
             ShrinkagePercent = Settings.Default.ShrinkagePercent;
         }
 
-        // Since DB doesn't store srinkage percentage rather then both quantities
-        // addtional property required in view model
         private int _shrinkagePercent;
         public int ShrinkagePercent
         {
@@ -43,7 +41,6 @@ namespace ViewModels.Windows.EntityWindows
                 _shrinkagePercent = value;
                 OnPropertyChanged();
             }
-
         }
 
         private Roasting _roasting;
@@ -65,12 +62,15 @@ namespace ViewModels.Windows.EntityWindows
                 IsFlyErrorOpened = true;
                 return;
             }
+
             if (ShrinkagePercent < 1|| ShrinkagePercent > 100)
             {
                 FlyErrorMsg = "Введите процент ужарки от одного до ста";
                 IsFlyErrorOpened = true;
                 return;
             }
+
+
             if (Roasting.InitialAmount >
                 ContextManager.Context.dGreenStocks.First(p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id).Quantity)
             {

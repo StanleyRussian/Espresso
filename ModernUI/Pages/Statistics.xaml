@@ -4,7 +4,8 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:accounts="clr-namespace:ViewModels.Pages.Statistics.Accounts;assembly=ViewModels"
              xmlns:statistic="clr-namespace:UI.Pages.Statistic"
-             xmlns:coffeeSorts="clr-namespace:ViewModels.Pages.Statistics.CoffeeSorts;assembly=ViewModels">
+             xmlns:coffeeSorts="clr-namespace:ViewModels.Pages.Statistics.CoffeeSorts;assembly=ViewModels"
+             xmlns:mixes="clr-namespace:ViewModels.Pages.Statistics.Mixes;assembly=ViewModels">
     <Grid>
         <TabControl ItemsSource="{Binding Tabs, Mode=TwoWay}">
             <TabControl.Resources>
@@ -13,6 +14,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type coffeeSorts:vmStatsCoffeeSorts}">
                     <statistic:StatsCoffeeSorts/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type mixes:vmStatsMixes}">
+                    <statistic:StatsMixes/>
                 </DataTemplate>
             </TabControl.Resources>
 

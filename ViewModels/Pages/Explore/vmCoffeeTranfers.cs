@@ -57,7 +57,16 @@ namespace ViewModels.Pages.Explore
                 MessageDialogStyle.AffirmativeAndNegative);
             if (messageDialogResult == MessageDialogResult.Negative) return;
 
-            ContextManager.Context.CoffeeTransfers.Remove(selected);
+            try
+            {
+                ContextManager.Context.CoffeeTransfers.Remove(selected);
+            }
+            catch (Exception ex)
+            {
+                await DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка", ex.Message,
+                    MessageDialogStyle.Affirmative,
+                    new MetroDialogSettings { ColorScheme = MetroDialogColorScheme.Accented });
+            }
             SaveContext();
             Refresh();
         }

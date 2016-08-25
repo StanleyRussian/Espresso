@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using MahApps.Metro.Controls.Dialogs;
 using Model;
@@ -79,12 +80,36 @@ namespace ViewModels.Pages.Explore
             if (IsEmpty(argSelected)) return;
             var selected = argSelected as PackagePurchase;
 
+            // Checking if there would be enought Package left if user deletes selected PackagePurchase
+            //if (ContextManager.Context.Packings.Any(p => p.Package.Id == selected.Package.Id))
+            {
+                if (ContextManager.Context.dPackageStocks.First(
+                    p => p.Package.Id == selected.Package.Id)
+                        .Quantity - selected.PackQuantity < 0)
+                {
+                    await DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка", 
+                        "Вы не можете удалить эту закупку, недостаточно остатков упаковки",
+                        MessageDialogStyle.Affirmative,
+                        new MetroDialogSettings {ColorScheme = MetroDialogColorScheme.Accented});
+                    return;
+                }
+            }
+
             var messageDialogResult = await DialogCoordinator.Instance.ShowMessageAsync(this, "Подтверждение",
                     "Вы уверены, что хотите удалить закупку уапковки " + selected.Package.Name + " за " + selected.Date.Date + " число?",
                 MessageDialogStyle.AffirmativeAndNegative);
             if (messageDialogResult == MessageDialogResult.Negative) return;
 
-            ContextManager.Context.PackagePurchases.Remove(selected);
+            try
+            {
+                ContextManager.Context.PackagePurchases.Remove(selected);
+            }
+            catch (Exception ex)
+            {
+                await DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка", ex.Message,
+                        MessageDialogStyle.Affirmative,
+                        new MetroDialogSettings { ColorScheme = MetroDialogColorScheme.Accented });
+            }
             SaveContext();
             Refresh();
 

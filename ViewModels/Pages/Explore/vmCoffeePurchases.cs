@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
@@ -9,7 +10,7 @@ using ViewModels.Pages.Explore.Abstract;
 
 namespace ViewModels.Pages.Explore
 {
-    public class vmCoffeePurchases: aProcessListingViewModel
+    public class vmCoffeePurchases : aProcessListingViewModel
     {
         public vmCoffeePurchases()
         {
@@ -32,6 +33,7 @@ namespace ViewModels.Pages.Explore
         }
 
         private ObservableCollection<CoffeePurchase> _tabs;
+
         public ObservableCollection<CoffeePurchase> Tabs
         {
             get { return _tabs; }
@@ -43,6 +45,7 @@ namespace ViewModels.Pages.Explore
         }
 
         private Supplier _filterSupplier;
+
         public Supplier FilterSupplier
         {
             get { return _filterSupplier; }
@@ -55,6 +58,7 @@ namespace ViewModels.Pages.Explore
         }
 
         private Account _filterAccount;
+
         public Account FilterAccount
         {
             get { return _filterAccount; }
@@ -67,6 +71,7 @@ namespace ViewModels.Pages.Explore
         }
 
         private CoffeeSort _filterCoffeeSort;
+
         public CoffeeSort FilterCoffeeSort
         {
             get { return _filterCoffeeSort; }
@@ -79,6 +84,7 @@ namespace ViewModels.Pages.Explore
         }
 
         public ICommand cmdFilterUnpaid { get; private set; }
+
         public void cmdFilterUnpaid_Execute()
         {
             Tabs = new ObservableCollection<CoffeePurchase>(
@@ -90,12 +96,35 @@ namespace ViewModels.Pages.Explore
             if (IsEmpty(argSelected)) return;
             var selected = argSelected as CoffeePurchase;
 
+            // Checking if there would be enought green coffee left if user deletes selected CoffeePurchase
+            if (selected.CoffeePurchase_Details.Any(detail => ContextManager.Context.dGreenStocks
+                .First(p => p.CoffeeSort.Id == detail.CoffeeSort.Id)
+                .Quantity - detail.Quantity < 0))
+            {
+                await DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка",
+                    "Вы не можете удалить эту закупку, недостаточно остатков зелёного кофе.",
+                    MessageDialogStyle.Affirmative,
+                    new MetroDialogSettings {ColorScheme = MetroDialogColorScheme.Accented});
+                return;
+            }
+
             var messageDialogResult = await DialogCoordinator.Instance.ShowMessageAsync(this, "Подтверждение",
-                    "Вы уверены, что хотите удалить закупку кофе за " + selected.Date.Date + " число, от " + selected.Supplier.Name,
+                "Вы уверены, что хотите удалить закупку кофе за " + selected.Date.Date + " число, от " +
+                selected.Supplier.Name,
                 MessageDialogStyle.AffirmativeAndNegative);
             if (messageDialogResult == MessageDialogResult.Negative) return;
 
-            ContextManager.Context.CoffeePurchases.Remove(selected);
+            try
+            {
+                ContextManager.Context.CoffeePurchases.Remove(selected);
+            }
+            catch (Exception ex)
+            {
+                await DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка", ex.Message,
+                    MessageDialogStyle.Affirmative,
+                    new MetroDialogSettings {ColorScheme = MetroDialogColorScheme.Accented});
+            }
+
             SaveContext();
             Refresh();
         }

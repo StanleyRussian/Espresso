@@ -62,6 +62,9 @@ namespace ViewModels.Windows.EntityWindows
                 IsFlyErrorOpened = true;
                 return;
             }
+
+            Purchase.Sum = Purchase.PackQuantity * Purchase.Price;
+
             if (ContextManager.Context.dAccountsBalances.First(
                 p => p.Account.Id == Purchase.Account.Id).Balance < Purchase.Sum)
             {
@@ -70,7 +73,6 @@ namespace ViewModels.Windows.EntityWindows
                 return;
             }
 
-            Purchase.Sum = Purchase.PackQuantity*Purchase.Price;
             if (CreatingNew)
                 ContextManager.Context.PackagePurchases.Add(Purchase);
             SaveContext();
