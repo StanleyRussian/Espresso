@@ -40,9 +40,6 @@
                 <DataTemplate DataType="{x:Type vmExplore:vmMixes}">
                     <mixes:ParentMixes/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vmExplore:vmPackages}">
-                    <packages:ParentPackages/>
-                </DataTemplate>
                 <DataTemplate DataType="{x:Type vmExplore:vmPackings}">
                     <packings:ParentPackings/>
                 </DataTemplate>

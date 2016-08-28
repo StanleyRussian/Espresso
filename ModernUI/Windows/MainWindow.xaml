@@ -9,13 +9,13 @@
         Title="Espresso" 
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         ShowMaxRestoreButton="False"
-        Width="950" Height="750">
-
+        Width="950" Height="750"
+        xml:lang="ru">
     <Grid>
         <Grid.Resources>
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
         </Grid.Resources>
-        
+
         <TabControl ItemsSource="{Binding Tabs}">
             <TabControl.Resources>
                 <DataTemplate DataType="{x:Type pagesVM:vmHome}">
