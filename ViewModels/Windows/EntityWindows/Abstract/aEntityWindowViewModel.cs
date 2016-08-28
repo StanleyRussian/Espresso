@@ -83,7 +83,7 @@ namespace ViewModels.Windows.EntityWindows.Abstract
             }
             catch (Exception ex)
             {
-                FlyErrorMsg = ex.Message;
+                FlyErrorMsg = ex.Message + '\n';
                 IsFlyErrorOpened = true;
             }
         }

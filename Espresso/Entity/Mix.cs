@@ -30,7 +30,6 @@ namespace Model.Entity
         public string Description { get; set; }
         public bool Active { get; set; }
         public Nullable<double> dPrice { get; set; }
-        public Nullable<double> dCost { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mix_Details> Mix_Details { get; set; }

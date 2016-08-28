@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using UI.Properties;
+using UI.Windows;
 
 namespace UI
 {
@@ -7,5 +9,16 @@ namespace UI
     /// </summary>
     public partial class App : Application
     {
+        private void App_OnStartup(object sender, StartupEventArgs e)
+        {
+            ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+            if (ViewModels.Properties.FirstLaunch)
+                new FirstLaunchWindow().ShowDialog();
+
+            if (!ViewModels.Properties.FirstLaunch)
+                new MainWindow().ShowDialog();
+            Shutdown();
+        }
     }
 }

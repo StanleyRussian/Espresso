@@ -18,20 +18,19 @@ namespace ViewModels.Pages.Statistics.Mixes
 
         protected override void Load()
         {
-            foreach (var mix in ContextManager.Context.Mixes)
-            {
-                mix.dCost = 0;
-                foreach (var detail in mix.Mix_Details)
-                {
-                    mix.dCost += ContextManager.Context.CoffeePurchase_Details.OrderByDescending(p => p.Id)
-                        .First(p => p.CoffeeSort.Id == detail.CoffeeSort.Id)
-                        .Price * detail.Ratio / 100;
-                }
-            }
-            ContextManager.Context.SaveChanges();
+            //foreach (var mix in ContextManager.Context.Mixes)
+            //{
+            //    mix.dCost = 0;
+            //    foreach (var detail in mix.Mix_Details)
+            //    {
+            //        mix.dCost += ContextManager.Context.CoffeePurchase_Details.OrderByDescending(p => p.Id)
+            //            .First(p => p.CoffeeSort.Id == detail.CoffeeSort.Id)
+            //            .Price * detail.Ratio / 100;
+            //    }
+            //}
+            //ContextManager.Context.SaveChanges();
 
-            Tabs = new ObservableCollection<Mix>(ContextManager.Context.Mixes);
-
+            //Tabs = new ObservableCollection<Mix>(ContextManager.Context.Mixes);
         }
 
         public ObservableCollection<Mix> Tabs { get; set; }

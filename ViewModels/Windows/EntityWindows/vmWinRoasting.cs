@@ -29,7 +29,7 @@ namespace ViewModels.Windows.EntityWindows
                 Date = DateTime.Now,
                 CoffeeSort = ContextManager.ActiveCoffeeSorts.FirstOrDefault()
             };
-            ShrinkagePercent = Settings.Default.ShrinkagePercent;
+            ShrinkagePercent = Properties.ShrinkagePercent;
         }
 
         private int _shrinkagePercent;
@@ -80,8 +80,8 @@ namespace ViewModels.Windows.EntityWindows
             }
 
             Roasting.RoastedAmount = Roasting.InitialAmount * (100-ShrinkagePercent) /100;
-            Settings.Default.ShrinkagePercent = ShrinkagePercent;
-            Settings.Default.Save();
+            Properties.ShrinkagePercent = ShrinkagePercent;
+
             if (CreatingNew)
                 ContextManager.Context.Roastings.Add(Roasting);
             SaveContext();

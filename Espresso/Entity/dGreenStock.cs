@@ -16,6 +16,7 @@ namespace Model.Entity
     {
         public int Id { get; set; }
         public double Quantity { get; set; }
+        public Nullable<double> dCost { get; set; }
     
         public virtual CoffeeSort CoffeeSort { get; set; }
     }

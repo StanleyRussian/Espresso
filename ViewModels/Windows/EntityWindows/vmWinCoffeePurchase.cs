@@ -119,8 +119,14 @@ namespace ViewModels.Windows.EntityWindows
             }
 
             _purchase.CoffeePurchase_Details.Clear();
-            foreach (var x in Details)
-                _purchase.CoffeePurchase_Details.Add(x);
+            foreach (var detail in Details)
+            {
+                _purchase.CoffeePurchase_Details.Add(detail);
+                var dGreenStock = ContextManager.Context.dGreenStocks.First(
+                    p => p.CoffeeSort.Id == detail.CoffeeSort.Id);
+                dGreenStock.dCost = dGreenStock.Quantity/(dGreenStock.Quantity + detail.Quantity)*dGreenStock.dCost +
+                                    detail.Quantity/(dGreenStock.Quantity + detail.Quantity)*detail.Price;
+            }
 
             if (CreatingNew)
                 ContextManager.Context.CoffeePurchases.Add(_purchase);

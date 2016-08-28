@@ -16,6 +16,7 @@ namespace Model.Entity
     {
         public int Id { get; set; }
         public int PackQuantity { get; set; }
+        public Nullable<double> dCost { get; set; }
     
         public virtual Mix Mix { get; set; }
         public virtual Package Package { get; set; }

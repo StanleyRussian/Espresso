@@ -65,6 +65,7 @@
     <Compile Include="Pages\Statistics\Accounts\vmStatsAccounts.cs" />
     <Compile Include="Pages\Statistics\CoffeeSorts\vmSoloCoffeeSort.cs" />
     <Compile Include="Pages\Statistics\CoffeeSorts\vmStatsCoffeeSorts.cs" />
+    <Compile Include="Properties.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -88,6 +89,7 @@
     <Compile Include="Windows\EntityWindows\vmWinRecipient.cs" />
     <Compile Include="Windows\EntityWindows\vmWinRoasting.cs" />
     <Compile Include="Windows\EntityWindows\vmWinSupplier.cs" />
+    <Compile Include="Windows\vmWinFirstLaunch.cs" />
     <Compile Include="Windows\vmWinMain.cs" />
     <Compile Include="Pages\vmHome.cs" />
     <Compile Include="Pages\vmStatistics.cs" />
