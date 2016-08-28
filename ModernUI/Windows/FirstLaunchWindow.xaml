@@ -9,7 +9,7 @@
         dialogs:DialogParticipation.Register="{Binding}"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         ShowTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ResizeMode="NoResize"
-        Width="700" Height="500"
+        Width="750" Height="500"
         xml:lang="ru">
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -18,6 +18,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -49,14 +51,23 @@
         <DataGrid Grid.Row="4" Margin="0,5,0,0" AutoGenerateColumns="False"
                   ItemsSource="{Binding CoffeeSorts}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название сорта" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Закупочная цена за 1 кг (грн)" Binding="{Binding Cost}"/>
-                <DataGridTextColumn Header="Остатки зелёного кофе (кг)" Binding="{Binding GreenStocks}"/>
-                <DataGridTextColumn Header="Остатки жаренного кофе (кг)" Binding="{Binding RoastedStocks}"/>
+                <DataGridTextColumn Header="Название сорта" Binding="{Binding Name}" Width="150"/>
+                <DataGridTextColumn Header="Закупочная цена за 1 кг зелёного кофе (грн)" Binding="{Binding Cost}" Width="150"/>
+                <DataGridTextColumn Header="Остатки зелёного кофе (кг)" Binding="{Binding GreenStocks}" Width="150"/>
+                <DataGridTextColumn Header="Остатки жаренного кофе (кг)" Binding="{Binding RoastedStocks}" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="5" HorizontalAlignment="Right">
+        <TextBlock Grid.Row="5" Margin="0,5,0,0"
+                   Style="{StaticResource Header3}" TextWrapping="Wrap"
+                   Text="Почти готово! Введите процент ужарки для введёных сортов кофе. (При каждой последующей обжарке вы сможете его менять)"/>
+
+        <TextBox Grid.Row="6" Margin="0,5,0,0" HorizontalAlignment="Center"
+                 Text="{Binding ShrinkagePercent}" Width="200"
+                 controls:TextBoxHelper.ClearTextButton="True"
+                 controls:TextBoxHelper.Watermark="Процент ужарки"/>
+
+        <StackPanel Grid.Row="7" HorizontalAlignment="Right">
             <Button Content="Готово" Command="{Binding cmdGo}" CommandParameter="{Binding ElementName=firstLaunchWindow}"/>
         </StackPanel>
     </Grid>

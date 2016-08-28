@@ -16,12 +16,15 @@ namespace ViewModels.Windows
         {
             cmdGo = new Command(cmdGo_Execute);
             AccountName = "Наличка";
+            ShrinkagePercent = 20;
             CoffeeSorts = new ObservableCollection<hCoffeeSort>();
         }
 
         public string AccountName { get; set; }
+        public int ShrinkagePercent { get; set; }
         public double AccountBalance { get; set; }
         public ObservableCollection<hCoffeeSort> CoffeeSorts { get; set; }
+
         public ICommand cmdGo { get; set; }
 
         private void cmdGo_Execute(object argWindow)
@@ -78,7 +81,7 @@ namespace ViewModels.Windows
 
                     var dRoastedStock = ContextManager.Context.dRoastedStocks.First(p => p.CoffeeSort.Name == coffeeSort.Name);
                     dRoastedStock.Quantity = coffeeSort.RoastedStocks;
-                    dRoastedStock.dCost = coffeeSort.Cost;
+                    dRoastedStock.dCost = coffeeSort.Cost * (100 - ShrinkagePercent )/ 100;
 
                     ContextManager.Context.SaveChanges();
                 }
