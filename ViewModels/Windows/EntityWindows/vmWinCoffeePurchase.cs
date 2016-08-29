@@ -124,13 +124,20 @@ namespace ViewModels.Windows.EntityWindows
                 _purchase.CoffeePurchase_Details.Add(detail);
                 var greenStock = ContextManager.Context.dGreenStocks.First(
                     p => p.CoffeeSort.Id == detail.CoffeeSort.Id);
-                greenStock.dCost = greenStock.Quantity/(greenStock.Quantity + detail.Quantity)*greenStock.dCost +
-                                    detail.Quantity/(greenStock.Quantity + detail.Quantity)*detail.Price;
+                if (greenStock.dCost == null)
+                    greenStock.dCost = detail.Price;
+                else
+                    //greenStock.dCost = greenStock.Quantity/(greenStock.Quantity + detail.Quantity)*greenStock.dCost +
+                    //                   detail.Quantity/(greenStock.Quantity + detail.Quantity)*detail.Price;
+                    greenStock.dCost = (greenStock.Quantity*greenStock.dCost + detail.Quantity*detail.Price)/
+                                       (greenStock.Quantity + detail.Quantity);
             }
 
             if (CreatingNew)
                 ContextManager.Context.CoffeePurchases.Add(_purchase);
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
 
         #endregion

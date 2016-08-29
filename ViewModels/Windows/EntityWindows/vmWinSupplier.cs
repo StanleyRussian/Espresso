@@ -37,6 +37,8 @@ namespace ViewModels.Windows.EntityWindows
             if (CreatingNew)
                 ContextManager.Context.Suppliers.Add(Supplier);
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
 
     }

@@ -21,7 +21,13 @@ namespace ViewModels.Windows
         }
 
         public string AccountName { get; set; }
-        public int ShrinkagePercent { get; set; }
+
+        public int ShrinkagePercent
+        {
+            get { return Properties.ShrinkagePercent; }
+            set { Properties.ShrinkagePercent = value; }
+        }
+
         public double AccountBalance { get; set; }
         public ObservableCollection<hCoffeeSort> CoffeeSorts { get; set; }
 
@@ -31,7 +37,7 @@ namespace ViewModels.Windows
         {
             try
             {
-                if (AccountName == "" || AccountName == null || AccountBalance < 0)
+                if (string.IsNullOrEmpty(AccountName) || AccountBalance < 0)
                 {
                     DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка", "Заполните все поля",
                         MessageDialogStyle.Affirmative,
@@ -55,14 +61,13 @@ namespace ViewModels.Windows
                 {
                     Properties.FirstLaunch = false;
                     var window1 = argWindow as Window;
-                    window1.Close();
+                    window1?.Close();
                     return;
                 }
 
                 foreach (var coffeeSort in CoffeeSorts)
                 {
-                    if (coffeeSort.Name == ""
-                        || coffeeSort.Name == null
+                    if (string.IsNullOrEmpty(coffeeSort.Name)
                         || coffeeSort.Cost < 0
                         || coffeeSort.GreenStocks < 0
                         || coffeeSort.RoastedStocks < 0)
@@ -81,7 +86,7 @@ namespace ViewModels.Windows
 
                     var dRoastedStock = ContextManager.Context.dRoastedStocks.First(p => p.CoffeeSort.Name == coffeeSort.Name);
                     dRoastedStock.Quantity = coffeeSort.RoastedStocks;
-                    dRoastedStock.dCost = coffeeSort.Cost * (100 - ShrinkagePercent )/ 100;
+                    dRoastedStock.dCost = coffeeSort.Cost * 100 /(100 - ShrinkagePercent );
 
                     ContextManager.Context.SaveChanges();
                 }

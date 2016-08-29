@@ -49,6 +49,8 @@ namespace ViewModels.Windows.EntityWindows
             if (CreatingNew)
                 ContextManager.Context.MonthlyExpenses.Add(Expense);
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
 
         #endregion

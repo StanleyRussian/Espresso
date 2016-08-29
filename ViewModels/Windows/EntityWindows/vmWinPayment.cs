@@ -91,6 +91,8 @@ namespace ViewModels.Windows.EntityWindows
                 ContextManager.Context.MonthlyPayments.Add(NewMonthlyPayment);
             }
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
 
         #endregion

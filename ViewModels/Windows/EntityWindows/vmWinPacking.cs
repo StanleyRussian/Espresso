@@ -57,7 +57,7 @@ namespace ViewModels.Windows.EntityWindows
             if (Packing.Mix.Mix_Details.Any(
                     detail => ContextManager.Context.dRoastedStocks.First(
                         p => p.CoffeeSort.Id == detail.CoffeeSort.Id)
-                    .Quantity < (Packing.PackQuantity*detail.Ratio/100)))
+                    .Quantity < (Packing.PackQuantity*detail.Ratio)))
             {
                 FlyErrorMsg = "Недостаточно обжаренного кофе в наличии";
                 IsFlyErrorOpened = true;
@@ -71,9 +71,21 @@ namespace ViewModels.Windows.EntityWindows
                 IsFlyErrorOpened = true;
                 return;
             }
+
+            double dCost = (from detail in Packing.Mix.Mix_Details
+                            select (double)ContextManager.Context.dRoastedStocks.First(
+                                p => p.CoffeeSort.Id == detail.CoffeeSort.Id).dCost*detail.Ratio).Sum();
+            dCost += (double)ContextManager.Context.dPackageStocks.First(p => p.Package.Id == Packing.Package.Id).dCost;
+
             if (CreatingNew)
                 ContextManager.Context.Packings.Add(Packing);
+            ContextManager.Context.SaveChanges();
+
+            ContextManager.Context.dPackedStocks.First(
+                p => p.Mix.Id == Packing.Mix.Id && p.Package.Id == Packing.Package.Id).dCost = dCost;
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
 
         #endregion

@@ -189,7 +189,7 @@ CREATE TRIGGER RoastedStocks_Insert_Packing
 ON Packings
 AFTER INSERT AS
 UPDATE rs SET
-  Quantity -= md.Ratio / 100 * i.PackQuantity * pk.Capacity
+  Quantity -= md.Ratio * i.PackQuantity * pk.Capacity
 FROM INSERTED i
 INNER JOIN dbo.Mix_Details md
    ON md.Mix_Id = i.Mix_Id
@@ -209,7 +209,7 @@ AFTER UPDATE AS
 BEGIN
 --// Add amount of roasted coffee from deleted packing
 UPDATE rs SET
-  Quantity += md.Ratio / 100 * d.PackQuantity * pk.Capacity
+  Quantity += md.Ratio * d.PackQuantity * pk.Capacity
 FROM DELETED d
 INNER JOIN dbo.Mix_Details md
    ON md.Mix_Id = d.Mix_Id
@@ -219,7 +219,7 @@ INNER JOIN dbo.dRoastedStocks rs
    ON rs.CoffeeSort_Id = md.CoffeeSort_Id
 --// Deduct amount of roasted coffee from inserted packing
 UPDATE rs SET
-  Quantity -= md.Ratio / 100 * i.PackQuantity * pk.Capacity
+  Quantity -= md.Ratio * i.PackQuantity * pk.Capacity
 FROM INSERTED i
 INNER JOIN dbo.Mix_Details md
    ON md.Mix_Id = i.Mix_Id
@@ -238,7 +238,7 @@ CREATE TRIGGER RoastedStocks_Delete_Packing
 ON Packings
 AFTER DELETE AS
 UPDATE rs SET
-  Quantity += md.Ratio / 100 * d.PackQuantity * pk.Capacity
+  Quantity += md.Ratio * d.PackQuantity * pk.Capacity
 FROM DELETED d
 INNER JOIN dbo.Mix_Details md
    ON md.Mix_Id = d.Mix_Id
@@ -258,7 +258,7 @@ CREATE TRIGGER RoastedStocks_Insert_CoffeeTransfer
 ON CoffeeTransfers
 AFTER INSERT AS
 UPDATE rs SET
-  Quantity -= md.Ratio / 100 * i.Quantity
+  Quantity -= md.Ratio * i.Quantity
 FROM INSERTED i
 INNER JOIN dbo.Mix_Details md
    ON md.Mix_Id = i.Mix_Id
@@ -276,7 +276,7 @@ AFTER UPDATE AS
 BEGIN
 	--// Add amount of roasted coffee from deleted packing
 	UPDATE rs SET
-	  Quantity += md.Ratio / 100 * d.Quantity
+	  Quantity += md.Ratio * d.Quantity
 	FROM DELETED d
 	INNER JOIN dbo.Mix_Details md
 	   ON md.Mix_Id = d.Mix_Id
@@ -284,7 +284,7 @@ BEGIN
 	   ON rs.CoffeeSort_Id = md.CoffeeSort_Id
 	--// Deduct amount of roasted coffee from inserted packing
 	UPDATE rs SET
-	  Quantity -= md.Ratio / 100 * i.Quantity
+	  Quantity -= md.Ratio * i.Quantity
 	FROM INSERTED i
 	INNER JOIN dbo.Mix_Details md
 	   ON md.Mix_Id = i.Mix_Id
@@ -301,7 +301,7 @@ CREATE TRIGGER RoastedStocks_Delete_CoffeeTransfers
 ON CoffeeTransfers
 AFTER DELETE AS
 UPDATE rs SET
-  Quantity += md.Ratio / 100 * d.Quantity
+  Quantity += md.Ratio * d.Quantity
 FROM DELETED d
 INNER JOIN dbo.Mix_Details md
    ON md.Mix_Id = d.Mix_Id

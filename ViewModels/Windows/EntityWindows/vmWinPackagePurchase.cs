@@ -75,7 +75,12 @@ namespace ViewModels.Windows.EntityWindows
 
             if (CreatingNew)
                 ContextManager.Context.PackagePurchases.Add(Purchase);
+            ContextManager.Context.SaveChanges();
+
+            ContextManager.Context.dPackageStocks.First(p => p.Package.Id == Purchase.Package.Id).dCost = Purchase.Price;
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
     }
 }

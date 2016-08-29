@@ -42,6 +42,8 @@ namespace ViewModels.Windows.EntityWindows
         {
             ContextManager.Context.CoffeeTransfers.Add(Transfer);
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
     }
 }

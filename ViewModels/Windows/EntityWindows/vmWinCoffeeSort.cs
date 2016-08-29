@@ -37,6 +37,8 @@ namespace ViewModels.Windows.EntityWindows
             if (CreatingNew)
                 ContextManager.Context.CoffeeSorts.Add(Sort);
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
     }
 }

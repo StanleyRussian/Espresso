@@ -71,19 +71,16 @@ namespace ViewModels.Windows.EntityWindows
 
             _mix.Mix_Details.Clear();
             foreach (var x in Details)
+            {
                 _mix.Mix_Details.Add(x);
-
-            //_mix.dCost = 0;
-            //foreach (var detail in Details)
-            //{
-            //    _mix.dCost += ContextManager.Context.CoffeePurchase_Details.OrderByDescending(p => p.Id)
-            //        .First(p => p.CoffeeSort.Id == detail.CoffeeSort.Id)
-            //        .Price * detail.Ratio / 100;
-            //}
+                x.Ratio /= 100;
+            }
 
             if (CreatingNew)
                 ContextManager.Context.Mixes.Add(_mix);
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
     }
 

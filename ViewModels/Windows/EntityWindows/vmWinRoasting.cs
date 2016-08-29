@@ -84,14 +84,24 @@ namespace ViewModels.Windows.EntityWindows
 
             var roastedStock = ContextManager.Context.dRoastedStocks.First(
                 p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id);
-            roastedStock.dCost = roastedStock.Quantity / (roastedStock.Quantity + Roasting.RoastedAmount) * roastedStock.dCost
-                                 + Roasting.RoastedAmount / (roastedStock.Quantity + Roasting.RoastedAmount)
-                                 * ContextManager.Context.dGreenStocks.First(p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id)
-                                    .dCost * (100 - ShrinkagePercent) / 100;
+            if (roastedStock.dCost == null)
+                roastedStock.dCost =
+                    ContextManager.Context.dGreenStocks.First(p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id).dCost*100/
+                    (100 - ShrinkagePercent);
+            else
+            {
+                roastedStock.dCost = (roastedStock.Quantity * roastedStock.dCost 
+                    + Roasting.RoastedAmount * ContextManager.Context.dGreenStocks.First(
+                    p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id)
+                        .dCost * 100 / (100 - ShrinkagePercent)) 
+                    / (roastedStock.Quantity + Roasting.RoastedAmount);
+            }
 
             if (CreatingNew)
                 ContextManager.Context.Roastings.Add(Roasting);
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
     }
 }

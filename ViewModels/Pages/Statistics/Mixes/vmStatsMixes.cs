@@ -25,7 +25,7 @@ namespace ViewModels.Pages.Statistics.Mixes
             //    {
             //        mix.dCost += ContextManager.Context.CoffeePurchase_Details.OrderByDescending(p => p.Id)
             //            .First(p => p.CoffeeSort.Id == detail.CoffeeSort.Id)
-            //            .Price * detail.Ratio / 100;
+            //            .Price * detail.Ratio;
             //    }
             //}
             //ContextManager.Context.SaveChanges();

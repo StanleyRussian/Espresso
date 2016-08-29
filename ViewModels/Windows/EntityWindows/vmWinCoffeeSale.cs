@@ -128,6 +128,8 @@ namespace ViewModels.Windows.EntityWindows
             if (CreatingNew)
                 ContextManager.Context.CoffeeSales.Add(_sale);
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
 
         #endregion

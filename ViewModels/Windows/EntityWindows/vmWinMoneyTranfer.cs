@@ -41,6 +41,8 @@ namespace ViewModels.Windows.EntityWindows
             if (CreatingNew)
                 ContextManager.Context.MoneyTransfers.Add(Transfer);
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
     }
 }

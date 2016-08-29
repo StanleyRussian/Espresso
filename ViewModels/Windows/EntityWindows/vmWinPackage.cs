@@ -49,6 +49,8 @@ namespace ViewModels.Windows.EntityWindows
             if (CreatingNew)
                 ContextManager.Context.Packages.Add(Package);
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
 
         #endregion

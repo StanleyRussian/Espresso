@@ -43,6 +43,9 @@ namespace ViewModels.Windows.EntityWindows
             if (CreatingNew)
                 ContextManager.Context.Accounts.Add(Account);
             SaveContext();
+
+            if (CreatingNew)
+                Refresh();
         }
 
         #endregion

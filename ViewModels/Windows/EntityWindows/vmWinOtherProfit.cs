@@ -55,6 +55,8 @@ namespace ViewModels.Windows.EntityWindows
             if (CreatingNew)
                 ContextManager.Context.OtherProfits.Add(Profit);
             SaveContext();
+            if (CreatingNew)
+                Refresh();
         }
         #endregion
     }
