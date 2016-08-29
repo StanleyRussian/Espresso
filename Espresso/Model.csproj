@@ -176,7 +176,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Context.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Entity\Context.edmx.diagram">
       <DependentUpon>Context.edmx</DependentUpon>
     </None>
@@ -186,7 +188,6 @@
   <ItemGroup>
     <Content Include="Entity\Context.edmx.sql" />
     <Content Include="Entity\CreateTriggers.sql" />
-    <Resource Include="Entity\Database Notes.txt" />
     <Content Include="Entity\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model.Context.cs</LastGenOutput>

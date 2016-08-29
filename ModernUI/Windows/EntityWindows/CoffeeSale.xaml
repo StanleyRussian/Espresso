@@ -7,7 +7,8 @@
         Title="Новая продажа упакованного кофе" Height="400" Width="450"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-                      ShowMaxRestoreButton="False">
+        ShowMaxRestoreButton="False"
+        xml:lang="ru">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">

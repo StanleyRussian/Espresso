@@ -11,6 +11,7 @@ namespace UI
     {
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
+            //ViewModels.Properties.FirstLaunch = false;
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
             if (ViewModels.Properties.FirstLaunch)

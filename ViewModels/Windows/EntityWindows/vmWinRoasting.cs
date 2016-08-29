@@ -82,6 +82,13 @@ namespace ViewModels.Windows.EntityWindows
             Roasting.RoastedAmount = Roasting.InitialAmount * (100-ShrinkagePercent) /100;
             Properties.ShrinkagePercent = ShrinkagePercent;
 
+            var roastedStock = ContextManager.Context.dRoastedStocks.First(
+                p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id);
+            roastedStock.dCost = roastedStock.Quantity / (roastedStock.Quantity + Roasting.RoastedAmount) * roastedStock.dCost
+                                 + Roasting.RoastedAmount / (roastedStock.Quantity + Roasting.RoastedAmount)
+                                 * ContextManager.Context.dGreenStocks.First(p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id)
+                                    .dCost * (100 - ShrinkagePercent) / 100;
+
             if (CreatingNew)
                 ContextManager.Context.Roastings.Add(Roasting);
             SaveContext();
