@@ -126,6 +126,9 @@
     <Compile Include="Pages\Explore\Packages\IndividualPackage.xaml.cs">
       <DependentUpon>IndividualPackage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Explore\Packages\ParentPackages.xaml.cs">
+      <DependentUpon>ParentPackages.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Explore\Packings\IndividualPacking.xaml.cs">
       <DependentUpon>IndividualPacking.xaml</DependentUpon>
     </Compile>
@@ -316,6 +319,10 @@
     <Page Include="Pages\Explore\Packages\IndividualPackage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Packages\ParentPackages.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Explore\Packings\IndividualPacking.xaml">
       <SubType>Designer</SubType>

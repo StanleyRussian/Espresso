@@ -46,6 +46,9 @@
                 <DataTemplate DataType="{x:Type vmExplore:vmPackagePurchases}">
                     <packagePurchases:ParentPackagePurchases/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type vmExplore:vmPackages}">
+                    <packages:ParentPackages/>
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type vmExplore:vmCoffeeSales}">
                     <coffeeSales:ParentCoffeeSales/>
                 </DataTemplate>

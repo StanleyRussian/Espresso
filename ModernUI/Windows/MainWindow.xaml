@@ -9,7 +9,7 @@
         Title="Espresso" 
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         ShowMaxRestoreButton="False"
-        Width="950" Height="750"
+        Width="950" Height="800"
         xml:lang="ru">
     <Grid>
         <Grid.Resources>

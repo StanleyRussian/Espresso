@@ -522,9 +522,9 @@ CREATE TRIGGER PackageStocks_Delete_Packing
 ON Packings
 AFTER DELETE AS
 UPDATE dPackageStocks
-SET Quantity += i.PackQuantity
-FROM INSERTED i
-WHERE dPackageStocks.Id = i.Package_Id
+SET Quantity += d.PackQuantity
+FROM DELETED d
+WHERE dPackageStocks.Id = d.Package_Id
 GO
 
 
