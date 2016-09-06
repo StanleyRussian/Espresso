@@ -18,6 +18,7 @@ namespace Model.Entity
         public System.DateTime Date { get; set; }
         public double InitialAmount { get; set; }
         public double RoastedAmount { get; set; }
+        public double ShrinkagePercent { get; set; }
     
         public virtual CoffeeSort CoffeeSort { get; set; }
     }

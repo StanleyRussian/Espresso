@@ -6,19 +6,19 @@ using UI.Windows.EntityWindows;
 namespace UI.Controls.Combo
 {
     /// <summary>
-    /// Interaction logic for comboAccount.xaml
+    /// Interaction logic for ActiveProducts.xaml
     /// </summary>
-    public partial class ComboActiveAccounts : UserControl
+    public partial class ActiveProducts : UserControl
     {
-        public ComboActiveAccounts()
+        public ActiveProducts()
         {
             InitializeComponent();
         }
 
         private void New(object sender, RoutedEventArgs e)
         {
-            new Account().ShowDialog();
-            ComboBox.ItemsSource = ContextManager.ActiveAccounts;
+            new Product().ShowDialog();
+            ComboBox.ItemsSource = ContextManager.ActiveProducts;
         }
     }
 }

@@ -47,7 +47,7 @@ namespace ViewModels.Pages.Statistics.CoffeeSorts
             DateTime yearAgo = DateTime.Today.AddDays(-365);
             var query = ContextManager.Context.CoffeePurchases.Where(p =>
                 p.Date >= yearAgo &&
-                p.CoffeePurchase_Details.FirstOrDefault(x => x.CoffeeSort.Id == Sort.Id) != null);
+                p.CoffeePurchaseDetails.FirstOrDefault(x => x.CoffeeSort.Id == Sort.Id) != null);
 
             if (!query.Any()) return;
 

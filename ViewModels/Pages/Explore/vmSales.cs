@@ -10,31 +10,31 @@ using ViewModels.Pages.Explore.Abstract;
 
 namespace ViewModels.Pages.Explore
 {
-    public class vmCoffeeSales : aProcessListingViewModel
+    public class vmSales : aProcessListingViewModel
     {
-        public vmCoffeeSales()
+        public vmSales()
         {
-            Header = "Продажи кофе";
+            Header = "Продажи";
             cmdFilterUnpaid = new Command(cmdFilterUnpaid_Execute);
         }
 
         protected override void Refresh()
         {
-            var query = ContextManager.Context.CoffeeSales.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
+            var query = ContextManager.Context.Sales.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
             if (FilterAccount != null)
                 query = query.Where(p => p.Account.Id == FilterAccount.Id);
             if (FilterRecipient != null)
                 query = query.Where(p => p.Recipient.Id == FilterRecipient.Id);
             if (FilterMix != null)
-                query = query.Where(p => p.CoffeeSale_Details
+                query = query.Where(p => p.SaleDetailsCoffee
                     .FirstOrDefault(x => x.Mix.Id == FilterMix.Id) != null);
 
-            Tabs = new ObservableCollection<CoffeeSale>(query);
+            Tabs = new ObservableCollection<Sale>(query);
         }
 
-        private ObservableCollection<CoffeeSale> _tabs;
+        private ObservableCollection<Sale> _tabs;
 
-        public ObservableCollection<CoffeeSale> Tabs
+        public ObservableCollection<Sale> Tabs
         {
             get { return _tabs; }
             private set
@@ -87,14 +87,14 @@ namespace ViewModels.Pages.Explore
 
         public void cmdFilterUnpaid_Execute()
         {
-            Tabs = new ObservableCollection<CoffeeSale>(
-                ContextManager.Context.CoffeeSales.Where(p => !p.Paid));
+            Tabs = new ObservableCollection<Sale>(
+                ContextManager.Context.Sales.Where(p => !p.Paid));
         }
 
         protected override async void cmdDelete_Execute(object argSelected)
         {
             if (IsEmpty(argSelected)) return;
-            var selected = argSelected as CoffeeSale;
+            var selected = argSelected as Sale;
 
             var messageDialogResult = await DialogCoordinator.Instance.ShowMessageAsync(this, "Подтверждение",
                 "Вы уверены, что хотите удалить продажу кофе " + selected.Recipient.Name + " за " + selected.Date.Date +
@@ -104,7 +104,7 @@ namespace ViewModels.Pages.Explore
 
             try
             {
-                ContextManager.Context.CoffeeSales.Remove(selected);
+                ContextManager.Context.Sales.Remove(selected);
             }
             catch (Exception ex)
             {

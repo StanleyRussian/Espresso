@@ -1,7 +1,7 @@
-﻿<UserControl x:Class="UI.Pages.Explore.CoffeeSales.ParentCoffeeSales"
+﻿<UserControl x:Class="UI.Pages.Explore.Sales.ParentSales"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:coffeeSales="clr-namespace:UI.Pages.Explore.CoffeeSales"
+             xmlns:coffeeSales="clr-namespace:UI.Pages.Explore.Sales"
              xmlns:model="clr-namespace:Model;assembly=Model"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
@@ -163,6 +163,6 @@
             </Grid>
         </Border>
 
-        <coffeeSales:IndividualCoffeeSale Grid.Row="1" Grid.Column="1" DataContext="{Binding Tabs}" />
+        <coffeeSales:IndividualSale Grid.Row="1" Grid.Column="1" DataContext="{Binding Tabs}" />
     </Grid>
 </UserControl>

@@ -1,16 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Model;
 using Model.Entity;
+using ViewModels.Windows.EntityWindows.Abstract;
 
 namespace ViewModels.Windows.EntityWindows
 {
-    public class vmWinPackagePurchase : Abstract.aEntityWindowViewModel
+    public class vmWinProductPurchase: aEntityWindowViewModel
     {
-        public vmWinPackagePurchase(object argPurchase = null)
+        public vmWinProductPurchase(object argPurchase = null)
         {
             if (argPurchase != null)
-                Purchase = argPurchase as PackagePurchase;
+                Purchase = argPurchase as ProductPurchase;
             else
             {
                 CreatingNew = true;
@@ -20,22 +24,21 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void Refresh()
         {
-            Purchase = new PackagePurchase
+            Purchase = new ProductPurchase
             {
                 Date = DateTime.Now,
                 Account = ContextManager.ActiveAccounts.FirstOrDefault(),
-                Supplier = ContextManager.ActiveSuppliers.FirstOrDefault(),
-                Package = ContextManager.ActivePackages.FirstOrDefault()
+                Supplier = ContextManager.ActiveSuppliers.FirstOrDefault()
             };
         }
 
-        private PackagePurchase _purchase;
-        public PackagePurchase Purchase
+        private ProductPurchase _purchase;
+        public ProductPurchase Purchase
         {
             get { return _purchase; }
             set
             {
-                _purchase = value;
+                _purchase = value; 
                 OnPropertyChanged();
             }
         }
@@ -50,27 +53,28 @@ namespace ViewModels.Windows.EntityWindows
                 if (Purchase.Price <= 0)
                     throw new Exception("Введите цену");
 
-                Purchase.dSum = Purchase.Quantity*Purchase.Price;
+                Purchase.dSum = Purchase.Quantity * Purchase.Price;
 
                 if (ContextManager.Context.dAccountsBalances.First(
                     p => p.Account.Id == Purchase.Account.Id).Balance < Purchase.dSum)
                     throw new Exception("На выбранном счету недостаточно денег");
 
                 if (CreatingNew)
-                    ContextManager.Context.PackagePurchases.Add(Purchase);
+                    ContextManager.Context.ProductPurchases.Add(Purchase);
                 ContextManager.Context.SaveChanges();
 
-                //// Find stocks of package for current package being purchased
-                //var packageStocks = ContextManager.Context.dPackageStocks.First(
-                //    p => p.Package.Id == Purchase.Package.Id);
-                //// Check if there anything in stock already
-                //if (packageStocks.Quantity == 0)
-                //    // Set cost from purchase
-                //    packageStocks.dCost = Purchase.Price;
-                //else
-                //    // Count cost based on stock and new purchase
-                //    packageStocks.dCost = (packageStocks.Quantity * packageStocks.dCost + Purchase.Quantity * Purchase.Price) 
-                //        / (packageStocks.Quantity + Purchase.Quantity);
+                // Find stocks of package for current product being purchase
+                var productStock = ContextManager.Context.dProductStocks.First(
+                    p => p.Product.Id == Purchase.Product.Id);
+                // Check if there anything in stock already
+                if (productStock.Quantity == 0)
+                    // Set cost from purchase
+                    productStock.dCost = Purchase.Price;
+                else
+                    // Count cost based on stock and new purchase
+                    productStock.dCost = (productStock.Quantity * productStock.dCost + Purchase.Quantity * Purchase.Price)
+                        / (productStock.Quantity + Purchase.Quantity);
+
 
                 SaveContext();
                 if (CreatingNew)

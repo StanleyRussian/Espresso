@@ -6,12 +6,12 @@ namespace UI.Windows.EntityWindows
     /// <summary>
     /// Interaction logic for NewCoffeeSale.xaml
     /// </summary>
-    public partial class CoffeeSale : MetroWindow
+    public partial class Sale : MetroWindow
     {
-        public CoffeeSale(object argSale = null)
+        public Sale(object argSale = null)
         {
             InitializeComponent();
-            DataContext = new vmWinCoffeeSale(argSale);
+            DataContext = new vmWinSale(argSale);
         }
 
         private void btnCancel_Click(object sender, System.Windows.RoutedEventArgs e)

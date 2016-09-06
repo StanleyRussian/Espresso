@@ -1,10 +1,10 @@
-﻿<controls:MetroWindow x:Class="UI.Windows.EntityWindows.CoffeeSale"
+﻿<controls:MetroWindow x:Class="UI.Windows.EntityWindows.Sale"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:combo="clr-namespace:UI.Controls.Combo"
         xmlns:core="clr-namespace:Model;assembly=Model"
-        Title="Новая продажа упакованного кофе" Height="400" Width="450"
+        Title="Продажа" Height="550" Width="500"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         ShowMaxRestoreButton="False"
@@ -94,25 +94,54 @@
             </DatePicker>
 
             <Label Grid.Row="3" Margin="{StaticResource ControlMargin}">Покупатель</Label>
-            <combo:ComboActiveRecipients Grid.Row="3" Grid.Column="1"/>
+            <combo:ComboActiveRecipients Grid.Row="3" Grid.Column="1" />
 
             <Label Grid.Row="4" Margin="{StaticResource ControlMargin}">Счёт</Label>
-            <combo:ComboActiveAccounts Grid.Row="4" Grid.Column="1"/>
+            <combo:ComboActiveAccounts Grid.Row="4" Grid.Column="1" />
         </Grid>
 
-        <DataGrid Grid.Row="1" Margin="{StaticResource ControlMargin}"
-                  AutoGenerateColumns="False" ItemsSource="{Binding Details}">
-            <DataGrid.Columns>
-                <DataGridComboBoxColumn Header="Купаж"
-                                        SelectedItemBinding="{Binding Mix}" DisplayMemberPath="Name" SelectedValuePath="Id"
-                                        ItemsSource="{Binding Source={x:Static core:ContextManager.ActiveMixes}}"/>
-                <DataGridComboBoxColumn Header="Упаковка"
-                                        SelectedItemBinding="{Binding Package}" DisplayMemberPath="Name" SelectedValuePath="Id"
-                                        ItemsSource="{Binding Source={x:Static core:ContextManager.ActivePackages}}"/>
-                <DataGridTextColumn Binding="{Binding Price}" Header="Цена за пачку (грн)"/>
-                <DataGridTextColumn Binding="{Binding PackQuantity}" Header="Количество (шт)"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="Кофе:" Style="{StaticResource Header2Accent}"/>
+            
+            <DataGrid Grid.Row="1" Margin="{StaticResource ControlMargin}"
+                      AutoGenerateColumns="False" ItemsSource="{Binding CoffeeDetails}">
+                <DataGrid.Columns>
+                    <DataGridComboBoxColumn Header="Купаж"
+                                            SelectedItemBinding="{Binding Mix}" DisplayMemberPath="Name"
+                                            SelectedValuePath="Id"
+                                            ItemsSource="{Binding Source={x:Static core:ContextManager.ActiveMixes}}" />
+                    <DataGridComboBoxColumn Header="Упаковка"
+                                            SelectedItemBinding="{Binding Package}" DisplayMemberPath="Name"
+                                            SelectedValuePath="Id"
+                                            ItemsSource="{Binding Source={x:Static core:ContextManager.ActivePackages}}" />
+                    <DataGridTextColumn Binding="{Binding Price}" Header="Цена за пачку (грн)" />
+                    <DataGridTextColumn Binding="{Binding Quantity}" Header="Количество (шт)" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="Сопутствующие товары:" Style="{StaticResource Header2Accent}" Grid.Row="2"/>
+
+            <DataGrid Grid.Row="3" Margin="{StaticResource ControlMargin}"
+                      AutoGenerateColumns="False" ItemsSource="{Binding ProductDetails}">
+                <DataGrid.Columns>
+                    <DataGridComboBoxColumn Header="Товар"
+                                            SelectedItemBinding="{Binding Product}" DisplayMemberPath="Name"
+                                            SelectedValuePath="Id"
+                                            ItemsSource="{Binding Source={x:Static core:ContextManager.ActiveProducts}}" />
+                    <DataGridTextColumn Binding="{Binding Price}" Header="Цена (грн)" />
+                    <DataGridTextColumn Binding="{Binding Quantity}" Header="Количество" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
             <Button Command="{Binding cmdSave}" 

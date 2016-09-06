@@ -36,7 +36,7 @@ namespace ViewModels.Pages
             PackedStocksCostsSum = 0;
             PackageStocksCostsSum = 0;
 
-            GreenStocks =
+                GreenStocks =
                 new ObservableCollection<dGreenStock>(
                     ContextManager.Context.dGreenStocks.Where(p => p.Quantity > 0).Include(p => p.CoffeeSort));
             foreach (var stock in GreenStocks)
@@ -50,9 +50,9 @@ namespace ViewModels.Pages
 
             PackedStocks =
                 new ObservableCollection<dPackedStocks>(
-                    ContextManager.Context.EagerPackedStocks().Where(p => p.PackQuantity > 0));
+                    ContextManager.Context.EagerPackedStocks().Where(p => p.Quantity > 0));
             foreach (var stock in PackedStocks)
-                PackedStocksCostsSum += (double) stock.dCost*stock.PackQuantity;
+                PackedStocksCostsSum += (double) stock.dCost*stock.Quantity;
 
             PackageStocks =
                 new ObservableCollection<dPackageStocks>(

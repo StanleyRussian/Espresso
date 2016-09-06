@@ -1,22 +1,22 @@
-﻿using ViewModels.Pages.Explore;
-using Account = UI.Windows.EntityWindows.Account;
+﻿using UI.Windows.EntityWindows;
+using ViewModels.Pages.Explore;
 
-namespace UI.Pages.Explore.Accounts
+namespace UI.Pages.Explore.Products
 {
     /// <summary>
-    /// Interaction logic for Parent.xaml
+    /// Interaction logic for ParentProducts.xaml
     /// </summary>
-    public partial class ParentAccounts
+    public partial class ParentProducts
     {
-        public ParentAccounts()
+        public ParentProducts()
         {
             InitializeComponent();
         }
 
         private void OnNewClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            new Account().ShowDialog();
-            var viewModel = (vmAccounts) DataContext;
+            new Product().ShowDialog();
+            var viewModel = (vmProducts)DataContext;
             viewModel.cmdReload.Execute(null);
         }
 
@@ -25,10 +25,11 @@ namespace UI.Pages.Explore.Accounts
             var selected = tabs.SelectedItem as Model.Entity.Account;
             if (selected != null)
             {
-                new Account(selected).ShowDialog();
-                var viewModel = (vmAccounts) DataContext;
+                new Product(selected).ShowDialog();
+                var viewModel = (vmProducts)DataContext;
                 viewModel.cmdReload.Execute(null);
             }
         }
+
     }
 }

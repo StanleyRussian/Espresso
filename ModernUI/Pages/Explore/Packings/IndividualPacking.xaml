@@ -19,7 +19,7 @@
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Количество пачек:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding PackQuantity}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Quantity}" Style="{StaticResource Header2Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">

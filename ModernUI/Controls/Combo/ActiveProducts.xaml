@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="UI.Controls.Combo.ComboActiveAccounts"
+﻿<UserControl x:Class="UI.Controls.Combo.ActiveProducts"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:model="clr-namespace:Model;assembly=Model">
@@ -8,8 +8,8 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <ComboBox x:Name="ComboBox" ItemsSource="{Binding Source={x:Static model:ContextManager.ActiveAccounts}}"
-                  SelectedItem="{Binding Account}" DisplayMemberPath="Name" SelectedValue="Id" Width="auto"/>
+        <ComboBox x:Name="ComboBox" ItemsSource="{Binding Source={x:Static model:ContextManager.ActiveProducts}}"
+                  SelectedItem="{Binding Product}" DisplayMemberPath="Name" SelectedValue="Id" Width="auto"/>
 
         <Button Grid.Column="1" Click="New" Content="Новый" Margin="5,0,0,0"/>
     </Grid>

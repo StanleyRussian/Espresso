@@ -12,16 +12,20 @@
              xmlns:packages="clr-namespace:UI.Pages.Explore.Packages"
              xmlns:packings="clr-namespace:UI.Pages.Explore.Packings"
              xmlns:packagePurchases="clr-namespace:UI.Pages.Explore.PackagePurchases"
-             xmlns:coffeeSales="clr-namespace:UI.Pages.Explore.CoffeeSales"
+             xmlns:coffeeSales="clr-namespace:UI.Pages.Explore.Sales"
              xmlns:recipients="clr-namespace:UI.Pages.Explore.Recipients"
              xmlns:moneyTransfers="clr-namespace:UI.Pages.Explore.MoneyTransfers"
              xmlns:payments="clr-namespace:UI.Pages.Explore.Payments"
              xmlns:otherProfits="clr-namespace:UI.Pages.Explore.OtherProfits"
-             xmlns:coffeeTranfers="clr-namespace:UI.Pages.Explore.CoffeeTranfers">
+             xmlns:coffeeTranfers="clr-namespace:UI.Pages.Explore.CoffeeTranfers"
+             xmlns:products="clr-namespace:UI.Pages.Explore.Products">
 
     <Grid>
         <TabControl ItemsSource="{Binding Tabs, Mode=TwoWay}" TabStripPlacement="Left">
             <TabControl.Resources>
+                <DataTemplate DataType="{x:Type vmExplore:vmProducts}">
+                    <products:ParentProducts/>
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type vmExplore:vmAccounts}">
                     <accounts:ParentAccounts/>
                 </DataTemplate>
@@ -49,8 +53,8 @@
                 <DataTemplate DataType="{x:Type vmExplore:vmPackages}">
                     <packages:ParentPackages/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vmExplore:vmCoffeeSales}">
-                    <coffeeSales:ParentCoffeeSales/>
+                <DataTemplate DataType="{x:Type vmExplore:vmSales}">
+                    <coffeeSales:ParentSales/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vmExplore:vmRecipients}">
                     <recipients:ParentRecipients/>

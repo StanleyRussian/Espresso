@@ -12,14 +12,12 @@ namespace Model.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class CoffeeSale_Details
+    public partial class dProductStock
     {
         public int Id { get; set; }
-        public double Price { get; set; }
-        public int PackQuantity { get; set; }
+        public double Quantity { get; set; }
+        public Nullable<double> dCost { get; set; }
     
-        public virtual CoffeeSale Sale { get; set; }
-        public virtual Mix Mix { get; set; }
-        public virtual Package Package { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

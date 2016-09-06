@@ -15,7 +15,7 @@ namespace Model.Entity
     public partial class dPackedStocks
     {
         public int Id { get; set; }
-        public int PackQuantity { get; set; }
+        public int Quantity { get; set; }
         public Nullable<double> dCost { get; set; }
     
         public virtual Mix Mix { get; set; }

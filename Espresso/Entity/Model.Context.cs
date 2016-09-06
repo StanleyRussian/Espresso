@@ -27,7 +27,7 @@ namespace Model.Entity
     
         public virtual DbSet<CoffeePurchase> CoffeePurchases { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<CoffeePurchase_Details> CoffeePurchase_Details { get; set; }
+        public virtual DbSet<CoffeePurchaseDetails> CoffeePurchaseDetails { get; set; }
         public virtual DbSet<CoffeeSort> CoffeeSorts { get; set; }
         public virtual DbSet<dGreenStock> dGreenStocks { get; set; }
         public virtual DbSet<Roasting> Roastings { get; set; }
@@ -39,9 +39,9 @@ namespace Model.Entity
         public virtual DbSet<PackagePurchase> PackagePurchases { get; set; }
         public virtual DbSet<dPackedStocks> dPackedStocks { get; set; }
         public virtual DbSet<dPackageStocks> dPackageStocks { get; set; }
-        public virtual DbSet<CoffeeSale> CoffeeSales { get; set; }
+        public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<Recipient> Recipients { get; set; }
-        public virtual DbSet<CoffeeSale_Details> CoffeeSale_Details { get; set; }
+        public virtual DbSet<SaleDetailCoffee> SaleDetailsCoffee { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<CoffeeTransfer> CoffeeTransfers { get; set; }
         public virtual DbSet<dAccountsBalance> dAccountsBalances { get; set; }
@@ -51,5 +51,9 @@ namespace Model.Entity
         public virtual DbSet<MonthlyPayment> MonthlyPayments { get; set; }
         public virtual DbSet<dTransaction> dTransactions { get; set; }
         public virtual DbSet<MoneyTransfer> MoneyTransfers { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductPurchase> ProductPurchases { get; set; }
+        public virtual DbSet<SaleDetailProduct> SaleDetailsProduct { get; set; }
+        public virtual DbSet<dProductStock> dProductStocks { get; set; }
     }
 }

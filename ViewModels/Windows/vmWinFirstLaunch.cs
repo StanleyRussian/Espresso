@@ -37,13 +37,10 @@ namespace ViewModels.Windows
         {
             try
             {
-                if (string.IsNullOrEmpty(AccountName) || AccountBalance < 0)
-                {
-                    DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка", "Заполните все поля",
-                        MessageDialogStyle.Affirmative,
-                        new MetroDialogSettings { ColorScheme = MetroDialogColorScheme.Accented });
-                    return;
-                }
+                if (string.IsNullOrEmpty(AccountName))
+                    throw new Exception("Заполните название основного расчётного счета");
+                if (AccountBalance < 0)
+                    throw new Exception("Баланс на счету не может быть меньше нуля");
 
                 ContextManager.Context.Accounts.Add(new Account { Name = AccountName });
                 ContextManager.Context.SaveChanges();
@@ -51,13 +48,13 @@ namespace ViewModels.Windows
                 ContextManager.Context.dAccountsBalances.First(p => p.Account.Name == AccountName).Balance = AccountBalance;
                 ContextManager.Context.SaveChanges();
 
-                if (CoffeeSorts.Count == 0
+                if (CoffeeSorts.Count == 0/*
                     || CoffeeSorts.Count == 1
                         && CoffeeSorts[0].Name == ""
                         && CoffeeSorts[0].Name == null
                         && CoffeeSorts[0].Cost == 0
                         && CoffeeSorts[0].GreenStocks == 0
-                        && CoffeeSorts[0].RoastedStocks == 0)
+                        && CoffeeSorts[0].RoastedStocks == 0*/)
                 {
                     Properties.FirstLaunch = false;
                     var window1 = argWindow as Window;
@@ -67,17 +64,19 @@ namespace ViewModels.Windows
 
                 foreach (var coffeeSort in CoffeeSorts)
                 {
-                    if (string.IsNullOrEmpty(coffeeSort.Name)
-                        || coffeeSort.Cost < 0
-                        || coffeeSort.GreenStocks < 0
-                        || coffeeSort.RoastedStocks < 0)
+                    if (string.IsNullOrEmpty(coffeeSort.Name))
+                        throw new Exception("Название сорта не может быть пустым");
+                    if (coffeeSort.Cost < 0 )
+                        throw new Exception("Как цена может быть меньше нуля???");
+                    if (coffeeSort.GreenStocks < 0 || coffeeSort.RoastedStocks < 0)
+                        throw new Exception("Серьёзно?");
+
+                    ContextManager.Context.CoffeeSorts.Add(new CoffeeSort
                     {
-                        DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка", "Заполните все поля таблицы",
-                            MessageDialogStyle.Affirmative,
-                            new MetroDialogSettings { ColorScheme = MetroDialogColorScheme.Accented });
-                        return;
-                    }
-                    ContextManager.Context.CoffeeSorts.Add(new CoffeeSort { Name = coffeeSort.Name });
+                        Name = coffeeSort.Name,
+                        MinGreenStocks = coffeeSort.MinGreenStocks,
+                        MinRoastedStocks = coffeeSort.MinRoastedStocks
+                    });
                     ContextManager.Context.SaveChanges();
 
                     var dGreenStock = ContextManager.Context.dGreenStocks.First(p => p.CoffeeSort.Name == coffeeSort.Name);
@@ -93,7 +92,7 @@ namespace ViewModels.Windows
 
                 Properties.FirstLaunch = false;
                 var window = argWindow as Window;
-                window.Close();
+                window?.Close();
             }
             catch (Exception ex)
             {
@@ -110,5 +109,7 @@ namespace ViewModels.Windows
         public double Cost { get; set; }
         public double GreenStocks { get; set; }
         public double RoastedStocks { get; set; }
+        public double MinGreenStocks { get; set; }
+        public double MinRoastedStocks { get; set; }
     }
 }

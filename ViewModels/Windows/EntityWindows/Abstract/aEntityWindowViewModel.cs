@@ -67,8 +67,6 @@ namespace ViewModels.Windows.EntityWindows.Abstract
             {
                 ContextManager.Context.SaveChanges();
                 IsFlySuccessOpened = true;
-                //if (CreatingNew)
-                //    Refresh();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
