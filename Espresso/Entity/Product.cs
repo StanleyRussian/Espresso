@@ -12,34 +12,27 @@ namespace Model.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Package
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Package()
+        public Product()
         {
             this.Active = true;
-            this.Packings = new HashSet<Packing>();
-            this.PackagePurchases = new HashSet<PackagePurchase>();
-            this.dPackedStocks = new HashSet<dPackedStocks>();
-            this.dPackageStocks = new HashSet<dPackageStocks>();
-            this.Sale_Details = new HashSet<SaleDetailCoffee>();
+            this.ProductPurchases = new HashSet<ProductPurchase>();
+            this.SaleDetailsProducts = new HashSet<SaleDetailProduct>();
+            this.dProductStocks = new HashSet<dProductStock>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public double Capacity { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Packing> Packings { get; set; }
+        public virtual ICollection<ProductPurchase> ProductPurchases { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PackagePurchase> PackagePurchases { get; set; }
+        public virtual ICollection<SaleDetailProduct> SaleDetailsProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<dPackedStocks> dPackedStocks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<dPackageStocks> dPackageStocks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SaleDetailCoffee> Sale_Details { get; set; }
+        public virtual ICollection<dProductStock> dProductStocks { get; set; }
     }
 }

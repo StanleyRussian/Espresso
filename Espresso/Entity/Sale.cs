@@ -12,25 +12,29 @@ namespace Model.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class CoffeeSale
+    public partial class Sale
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CoffeeSale()
+        public Sale()
         {
-            this.CoffeeSale_Details = new HashSet<CoffeeSale_Details>();
+            this.SaleDetailsCoffee = new HashSet<SaleDetailCoffee>();
+            this.SaleDetailsProducts = new HashSet<SaleDetailProduct>();
         }
     
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public bool Paid { get; set; }
-        public double Sum { get; set; }
         public Nullable<int> TransactionId { get; set; }
         public string InvoiceNumber { get; set; }
+        public double dCost { get; set; }
+        public double dSum { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoffeeSale_Details> CoffeeSale_Details { get; set; }
+        public virtual ICollection<SaleDetailCoffee> SaleDetailsCoffee { get; set; }
         public virtual Recipient Recipient { get; set; }
         public virtual Account Account { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SaleDetailProduct> SaleDetailsProducts { get; set; }
     }
 }

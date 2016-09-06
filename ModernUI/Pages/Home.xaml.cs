@@ -2,7 +2,7 @@
 using UI.Windows.EntityWindows;
 using ViewModels.Pages;
 using CoffeePurchase = UI.Windows.EntityWindows.CoffeePurchase;
-using CoffeeSale = UI.Windows.EntityWindows.CoffeeSale;
+using Sale = UI.Windows.EntityWindows.Sale;
 using Packing = UI.Windows.EntityWindows.Packing;
 using Roasting = UI.Windows.EntityWindows.Roasting;
 
@@ -41,7 +41,7 @@ namespace UI.Pages
 
         private void NewSale(object sender, RoutedEventArgs e)
         {
-            new CoffeeSale().ShowDialog();
+            new Sale().ShowDialog();
             var ViewModel = (vmHome)DataContext;
             ViewModel.cmdReload.Execute(null); ;
         }

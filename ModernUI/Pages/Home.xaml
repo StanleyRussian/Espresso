@@ -189,7 +189,7 @@
                     <DataGridTextColumn Binding="{Binding Mix.Name}" Header="Купаж"/>
                     <DataGridTextColumn Binding="{Binding Package.Name}" Header="Упаковка"/>
                     <DataGridTextColumn Binding="{Binding Package.Capacity, StringFormat={}{0} кг}" Header="Ёмкость"/>
-                    <DataGridTextColumn Binding="{Binding PackQuantity, StringFormat={}{0} шт}" Header="Количество"/>
+                    <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} шт}" Header="Количество"/>
                     <DataGridTextColumn Binding="{Binding dCost, StringFormat={}{0} грн/шт}" Header="Себестоимость"/>
                 </DataGrid.Columns>
             </DataGrid>

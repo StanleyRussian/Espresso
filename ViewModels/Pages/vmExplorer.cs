@@ -14,7 +14,7 @@ namespace ViewModels.Pages
                 new vmRoastings(),
                 new vmPackagePurchases(),
                 new vmPackings(),
-                new vmCoffeeSales(),
+                new vmSales(),
                 new vmAccounts(),
                 new vmCoffeeSorts(),
                 new vmSuppliers(),
@@ -24,6 +24,7 @@ namespace ViewModels.Pages
                 new vmMoneyTranfers(),
                 new vmPayments(),
                 new vmOtherProfits(),
+                new vmProducts(),
                 new vmCoffeeTranfers()
             };
         }

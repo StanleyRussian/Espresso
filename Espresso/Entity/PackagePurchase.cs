@@ -16,9 +16,9 @@ namespace Model.Entity
     {
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
-        public int PackQuantity { get; set; }
+        public int Quantity { get; set; }
         public double Price { get; set; }
-        public double Sum { get; set; }
+        public double dSum { get; set; }
         public int TransactionId { get; set; }
     
         public virtual Package Package { get; set; }

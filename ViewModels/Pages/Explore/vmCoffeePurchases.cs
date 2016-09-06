@@ -26,7 +26,7 @@ namespace ViewModels.Pages.Explore
             if (FilterAccount != null)
                 query = query.Where(p => p.Account.Id == FilterAccount.Id);
             if (FilterCoffeeSort != null)
-                query = query.Where(p => p.CoffeePurchase_Details
+                query = query.Where(p => p.CoffeePurchaseDetails
                     .FirstOrDefault(x => x.CoffeeSort.Id == FilterCoffeeSort.Id) != null);
 
             Tabs = new ObservableCollection<CoffeePurchase>(query);
@@ -97,7 +97,7 @@ namespace ViewModels.Pages.Explore
             var selected = argSelected as CoffeePurchase;
 
             // Checking if there would be enought green coffee left if user deletes selected CoffeePurchase
-            if (selected.CoffeePurchase_Details.Any(detail => ContextManager.Context.dGreenStocks
+            if (selected.CoffeePurchaseDetails.Any(detail => ContextManager.Context.dGreenStocks
                 .First(p => p.CoffeeSort.Id == detail.CoffeeSort.Id)
                 .Quantity - detail.Quantity < 0))
             {

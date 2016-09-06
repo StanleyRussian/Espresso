@@ -18,7 +18,7 @@ namespace Model.Entity
         public Recipient()
         {
             this.Active = true;
-            this.CoffeeSales = new HashSet<CoffeeSale>();
+            this.Sales = new HashSet<Sale>();
         }
     
         public int Id { get; set; }
@@ -30,6 +30,6 @@ namespace Model.Entity
         public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoffeeSale> CoffeeSales { get; set; }
+        public virtual ICollection<Sale> Sales { get; set; }
     }
 }

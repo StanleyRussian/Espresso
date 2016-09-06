@@ -54,7 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auxiliary\SimpleCommand.cs" />
-    <Compile Include="Pages\Explore\vmCoffeeSales.cs" />
+    <Compile Include="Pages\Explore\vmProducts.cs" />
+    <Compile Include="Pages\Explore\vmSales.cs" />
     <Compile Include="Pages\Explore\vmCoffeeTranfers.cs" />
     <Compile Include="Pages\Explore\vmMixes.cs" />
     <Compile Include="Pages\Explore\vmMoneyTranfers.cs" />
@@ -79,7 +80,9 @@
     <Compile Include="Windows\EntityWindows\Abstract\aEntityWindowViewModel.cs" />
     <Compile Include="Windows\EntityWindows\vmWinAccount.cs" />
     <Compile Include="Windows\EntityWindows\vmWinCoffeePurchase.cs" />
-    <Compile Include="Windows\EntityWindows\vmWinCoffeeSale.cs" />
+    <Compile Include="Windows\EntityWindows\vmWinProduct.cs" />
+    <Compile Include="Windows\EntityWindows\vmWinProductPurchase.cs" />
+    <Compile Include="Windows\EntityWindows\vmWinSale.cs" />
     <Compile Include="Windows\EntityWindows\vmWinCoffeeSort.cs" />
     <Compile Include="Windows\EntityWindows\vmWinCoffeeTranfer.cs" />
     <Compile Include="Windows\EntityWindows\vmWinMix.cs" />

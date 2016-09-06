@@ -47,7 +47,7 @@ namespace ViewModels.Windows.EntityWindows
 
         protected override void cmdSave_Execute()
         {
-            if (Packing.PackQuantity <= 0)
+            if (Packing.Quantity <= 0)
             {
                 FlyErrorMsg = "Введите количество пачек кофе";
                 IsFlyErrorOpened = true;
@@ -57,7 +57,7 @@ namespace ViewModels.Windows.EntityWindows
             if (Packing.Mix.Mix_Details.Any(
                     detail => ContextManager.Context.dRoastedStocks.First(
                         p => p.CoffeeSort.Id == detail.CoffeeSort.Id)
-                    .Quantity < (Packing.PackQuantity*detail.Ratio)))
+                    .Quantity < (Packing.Quantity*detail.Ratio)))
             {
                 FlyErrorMsg = "Недостаточно обжаренного кофе в наличии";
                 IsFlyErrorOpened = true;
@@ -65,24 +65,34 @@ namespace ViewModels.Windows.EntityWindows
             }
 
             if (ContextManager.Context.dPackageStocks.First(p=>p.Package.Id == Packing.Package.Id)
-                    .Quantity < Packing.PackQuantity)
+                    .Quantity < Packing.Quantity)
             {
                 FlyErrorMsg = "Недостаточно пачек в наличии";
                 IsFlyErrorOpened = true;
                 return;
             }
 
-            double dCost = (from detail in Packing.Mix.Mix_Details
-                            select (double)ContextManager.Context.dRoastedStocks.First(
-                                p => p.CoffeeSort.Id == detail.CoffeeSort.Id).dCost*detail.Ratio).Sum();
-            dCost += (double)ContextManager.Context.dPackageStocks.First(p => p.Package.Id == Packing.Package.Id).dCost;
-
             if (CreatingNew)
                 ContextManager.Context.Packings.Add(Packing);
             ContextManager.Context.SaveChanges();
 
-            ContextManager.Context.dPackedStocks.First(
-                p => p.Mix.Id == Packing.Mix.Id && p.Package.Id == Packing.Package.Id).dCost = dCost;
+            // Find stocks of packed coffee for current packing
+            var packedStocks = ContextManager.Context.dPackedStocks.First(
+                p => p.Mix.Id == Packing.Mix.Id && p.Package.Id == Packing.Package.Id);
+            // Calculate cost of coffee for current packing
+            double cost = (from detail in Packing.Mix.Mix_Details
+                           select (double)ContextManager.Context.dRoastedStocks.First(
+                               p => p.CoffeeSort.Id == detail.CoffeeSort.Id).dCost * detail.Ratio).Sum();
+            cost += (double)ContextManager.Context.dPackageStocks.First(p => p.Package.Id == Packing.Package.Id).dCost;
+            // Check if there anything in stock already
+            if (packedStocks.Quantity == 0)
+                // Set cost from roasting
+                packedStocks.dCost = cost;
+            else
+                // Count cost based on stock and new roasting
+                packedStocks.dCost = (packedStocks.Quantity * packedStocks.dCost + Packing.Quantity * cost)
+                    / (packedStocks.Quantity + Packing.Quantity);
+
             SaveContext();
             if (CreatingNew)
                 Refresh();

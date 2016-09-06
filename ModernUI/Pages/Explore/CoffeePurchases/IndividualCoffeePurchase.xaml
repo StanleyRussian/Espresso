@@ -67,7 +67,7 @@
 
         <Separator Margin="0,5,0,0"/>
         
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CoffeePurchase_Details}" 
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CoffeePurchaseDetails}" 
                   IsReadOnly="True" Margin="0,5,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding CoffeeSort.Name}" Header="Сорт"/>

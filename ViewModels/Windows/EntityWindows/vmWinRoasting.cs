@@ -79,27 +79,32 @@ namespace ViewModels.Windows.EntityWindows
                 return;
             }
 
-            Roasting.RoastedAmount = Roasting.InitialAmount * (100-ShrinkagePercent) /100;
+            Roasting.ShrinkagePercent = (100 - ShrinkagePercent)/100d;
+            Roasting.RoastedAmount = Roasting.InitialAmount * Roasting.ShrinkagePercent;
             Properties.ShrinkagePercent = ShrinkagePercent;
 
-            var roastedStock = ContextManager.Context.dRoastedStocks.First(
-                p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id);
-            if (roastedStock.dCost == null)
-                roastedStock.dCost =
-                    ContextManager.Context.dGreenStocks.First(p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id).dCost*100/
-                    (100 - ShrinkagePercent);
-            else
-            {
-                roastedStock.dCost = (roastedStock.Quantity * roastedStock.dCost 
-                    + Roasting.RoastedAmount * ContextManager.Context.dGreenStocks.First(
-                    p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id)
-                        .dCost * 100 / (100 - ShrinkagePercent)) 
-                    / (roastedStock.Quantity + Roasting.RoastedAmount);
-            }
+            //// Find stocks of roasted coffee for current roasting
+            //var roastedStock = ContextManager.Context.dRoastedStocks.First(
+            //    p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id);
+            //// Calculate cost of coffee for current roasting
+            //var cost = ContextManager.Context.dGreenStocks.First(
+            //    p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id)
+            //    .dCost * 100 /(100 - ShrinkagePercent);
+            //// Check if there anything in stock already
+            //if (roastedStock.Quantity == 0)
+            //    // Set cost from roasting
+            //    roastedStock.dCost = cost;
+            //else
+            //{
+            //    // Count cost based on stock and new roasting
+            //    roastedStock.dCost = (roastedStock.Quantity * roastedStock.dCost + Roasting.RoastedAmount * cost) 
+            //        / (roastedStock.Quantity + Roasting.RoastedAmount);
+            //}
 
             if (CreatingNew)
                 ContextManager.Context.Roastings.Add(Roasting);
             SaveContext();
+
             if (CreatingNew)
                 Refresh();
         }

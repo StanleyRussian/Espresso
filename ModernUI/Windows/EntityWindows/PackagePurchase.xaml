@@ -78,7 +78,7 @@
             <Label Grid.Row="5" Margin="{StaticResource ControlMargin}">Количество пачек</Label>
             <TextBox Grid.Row="5" Grid.Column="1" 
                      Margin="{StaticResource ControlMargin}"
-                     Text="{Binding PackQuantity}" 
+                     Text="{Binding Quantity}" 
                      Style="{StaticResource Mandatory}"
                      controls:TextBoxHelper.ClearTextButton="True"/>
         </Grid>

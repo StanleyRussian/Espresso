@@ -2,32 +2,32 @@
 using UI.Windows.EntityWindows;
 using ViewModels.Pages.Explore;
 
-namespace UI.Pages.Explore.CoffeeSales
+namespace UI.Pages.Explore.Sales
 {
     /// <summary>
     /// Interaction logic for ParentCoffeeSales.xaml
     /// </summary>
-    public partial class ParentCoffeeSales : UserControl
+    public partial class ParentSales : UserControl
     {
-        public ParentCoffeeSales()
+        public ParentSales()
         {
             InitializeComponent();
         }
 
         private void OnNewClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            new CoffeeSale().ShowDialog();
-            var viewModel = (vmCoffeeSales)DataContext;
+            new Sale().ShowDialog();
+            var viewModel = (vmSales)DataContext;
             viewModel.cmdReload.Execute(null);
         }
 
         private void OnEditClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            var selected = tabs.SelectedItem as Model.Entity.CoffeeSale;
+            var selected = tabs.SelectedItem as Model.Entity.Sale;
             if (selected != null)
             {
-                new CoffeeSale(selected).ShowDialog();
-                var viewModel = (vmCoffeeSales)DataContext;
+                new Sale(selected).ShowDialog();
+                var viewModel = (vmSales)DataContext;
                 viewModel.cmdReload.Execute(null);
             }
         }

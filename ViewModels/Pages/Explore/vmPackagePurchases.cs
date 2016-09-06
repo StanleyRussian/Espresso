@@ -85,7 +85,7 @@ namespace ViewModels.Pages.Explore
             {
                 if (ContextManager.Context.dPackageStocks.First(
                     p => p.Package.Id == selected.Package.Id)
-                        .Quantity - selected.PackQuantity < 0)
+                        .Quantity - selected.Quantity < 0)
                 {
                     await DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка", 
                         "Вы не можете удалить эту закупку, недостаточно остатков упаковки",

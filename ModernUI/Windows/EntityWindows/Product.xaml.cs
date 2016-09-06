@@ -4,14 +4,14 @@ using ViewModels.Windows.EntityWindows;
 namespace UI.Windows.EntityWindows
 {
     /// <summary>
-    /// Interaction logic for NewAccount.xaml
+    /// Interaction logic for Product.xaml
     /// </summary>
-    public partial class Account
+    public partial class Product
     {
-        public Account(object argAccount = null)
+        public Product(object argProduct = null)
         {
             InitializeComponent();
-            DataContext = new vmWinAccount(argAccount);
+            DataContext = new vmWinProduct(argProduct);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

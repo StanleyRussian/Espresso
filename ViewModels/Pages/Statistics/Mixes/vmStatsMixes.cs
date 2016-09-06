@@ -23,7 +23,7 @@ namespace ViewModels.Pages.Statistics.Mixes
             //    mix.dCost = 0;
             //    foreach (var detail in mix.Mix_Details)
             //    {
-            //        mix.dCost += ContextManager.Context.CoffeePurchase_Details.OrderByDescending(p => p.Id)
+            //        mix.dCost += ContextManager.Context.CoffeePurchaseDetails.OrderByDescending(p => p.Id)
             //            .First(p => p.CoffeeSort.Id == detail.CoffeeSort.Id)
             //            .Price * detail.Ratio;
             //    }

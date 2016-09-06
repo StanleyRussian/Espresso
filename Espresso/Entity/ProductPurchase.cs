@@ -12,13 +12,17 @@ namespace Model.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Packing
+    public partial class ProductPurchase
     {
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
         public int Quantity { get; set; }
+        public double Price { get; set; }
+        public double dSum { get; set; }
+        public int TransactionId { get; set; }
     
-        public virtual Mix Mix { get; set; }
-        public virtual Package Package { get; set; }
+        public virtual Account Account { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }

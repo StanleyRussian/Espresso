@@ -20,6 +20,7 @@ namespace Model.Entity
             this.Active = true;
             this.CoffeePurchases = new HashSet<CoffeePurchase>();
             this.PackagePurchases = new HashSet<PackagePurchase>();
+            this.ProductPurchases = new HashSet<ProductPurchase>();
         }
     
         public int Id { get; set; }
@@ -34,5 +35,7 @@ namespace Model.Entity
         public virtual ICollection<CoffeePurchase> CoffeePurchases { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PackagePurchase> PackagePurchases { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductPurchase> ProductPurchases { get; set; }
     }
 }
