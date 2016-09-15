@@ -38,12 +38,21 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        protected override void cmdSave_Execute()
+        protected override void OnSaveValidation()
+        { }
+
+        protected override void OnSaveCreate()
         {
+            // Add transfer to database
             ContextManager.Context.CoffeeTransfers.Add(Transfer);
-            SaveContext();
-            if (CreatingNew)
-                Refresh();
+            // Change stocks of roasted coffee
+            foreach (var detail in Transfer.Mix.Mix_Details)
+            {
+                ContextManager.Context.dCoffeeStocks.First(
+                    p => p.CoffeeSort.Id == detail.CoffeeSort.Id).RoastedQuantity -= detail.Ratio *
+                                                                                     Transfer.Quantity;
+            }
+
         }
     }
 }

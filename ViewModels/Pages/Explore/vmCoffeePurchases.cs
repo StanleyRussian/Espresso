@@ -97,9 +97,9 @@ namespace ViewModels.Pages.Explore
             var selected = argSelected as CoffeePurchase;
 
             // Checking if there would be enought green coffee left if user deletes selected CoffeePurchase
-            if (selected.CoffeePurchaseDetails.Any(detail => ContextManager.Context.dGreenStocks
+            if (selected.CoffeePurchaseDetails.Any(detail => ContextManager.Context.dCoffeeStocks
                 .First(p => p.CoffeeSort.Id == detail.CoffeeSort.Id)
-                .Quantity - detail.Quantity < 0))
+                .GreenQuantity - detail.Quantity < 0))
             {
                 await DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка",
                     "Вы не можете удалить эту закупку, недостаточно остатков зелёного кофе.",

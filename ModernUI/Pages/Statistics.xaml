@@ -2,21 +2,25 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:accounts="clr-namespace:ViewModels.Pages.Statistics.Accounts;assembly=ViewModels"
-             xmlns:statistic="clr-namespace:UI.Pages.Statistic"
-             xmlns:coffeeSorts="clr-namespace:ViewModels.Pages.Statistics.CoffeeSorts;assembly=ViewModels"
-             xmlns:mixes="clr-namespace:ViewModels.Pages.Statistics.Mixes;assembly=ViewModels">
+             xmlns:views="clr-namespace:UI.Pages.Statistic"
+             xmlns:vm="clr-namespace:ViewModels.Pages.Statistics;assembly=ViewModels">
     <Grid>
         <TabControl ItemsSource="{Binding Tabs, Mode=TwoWay}">
             <TabControl.Resources>
-                <DataTemplate DataType="{x:Type accounts:vmStatsAccounts}">
-                    <statistic:StatsAccounts/>
+                <DataTemplate DataType="{x:Type vm:vmStatsAccounts}">
+                    <views:StatsAccounts/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type coffeeSorts:vmStatsCoffeeSorts}">
-                    <statistic:StatsCoffeeSorts/>
+                <DataTemplate DataType="{x:Type vm:vmStatsMixes}">
+                    <views:StatsMixes/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type mixes:vmStatsMixes}">
-                    <statistic:StatsMixes/>
+                <DataTemplate DataType="{x:Type vm:vmStatsSorts}">
+                    <views:StatsSorts/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:vmStatsPacked}">
+                    <views:StatsPacked/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:vmStatsRecipients}">
+                    <views:StatsRecipients/>
                 </DataTemplate>
             </TabControl.Resources>
 

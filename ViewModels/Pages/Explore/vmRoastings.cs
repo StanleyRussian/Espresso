@@ -58,9 +58,9 @@ namespace ViewModels.Pages.Explore
             //        p => p.Mix.Mix_Details.Any(
             //            t => t.CoffeeSort.Id == selected.CoffeeSort.Id)))
             {
-                if (ContextManager.Context.dRoastedStocks.First(
+                if (ContextManager.Context.dCoffeeStocks.First(
                     p => p.CoffeeSort.Id == selected.CoffeeSort.Id)
-                    .Quantity - selected.RoastedAmount < 0)
+                    .RoastedQuantity - selected.RoastedAmount < 0)
                 {
                     await DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка",
                         "Вы не можете удалить эту обжарку, недостаточно остатков обжаренного кофе",

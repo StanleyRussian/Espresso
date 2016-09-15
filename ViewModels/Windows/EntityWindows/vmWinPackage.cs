@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using System;
+using Model;
 using Model.Entity;
 
 namespace ViewModels.Windows.EntityWindows
@@ -38,19 +39,16 @@ namespace ViewModels.Windows.EntityWindows
 
         #region Commands
 
-        protected override void cmdSave_Execute()
+        protected override void OnSaveValidation()
         {
             if (Package.Capacity <= 0)
-            {
-                FlyErrorMsg = "Введите ёмкость пачки";
-                IsFlyErrorOpened = true;
-                return;
-            }
-            if (CreatingNew)
-                ContextManager.Context.Packages.Add(Package);
-            SaveContext();
-            if (CreatingNew)
-                Refresh();
+                throw new Exception("Введите ёмкость пачки");
+        }
+
+        protected override void OnSaveCreate()
+        {
+            ContextManager.Context.Packages.Add(Package);
+            ContextManager.Context.dPackageStocks.Add(new dPackageStocks { Package = Package });
         }
 
         #endregion

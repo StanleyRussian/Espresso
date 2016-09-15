@@ -87,7 +87,9 @@
 
             <DataGrid Grid.Row="2" Margin="0,10,0,0"
                       IsReadOnly="True"
-                      ItemsSource="{Binding Transactions}" AutoGenerateColumns="False">
+                      ItemsSource="{Binding Transactions}" 
+                      AutoGenerateColumns="False"
+                      ColumnWidth="*">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Date}" Header="Дата"/>
                     <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма"/>

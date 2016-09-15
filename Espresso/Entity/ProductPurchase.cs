@@ -18,8 +18,6 @@ namespace Model.Entity
         public System.DateTime Date { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
-        public double dSum { get; set; }
-        public int TransactionId { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Product Product { get; set; }

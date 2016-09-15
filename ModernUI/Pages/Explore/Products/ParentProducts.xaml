@@ -46,9 +46,12 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Button Margin="{StaticResource ControlMargin}" Grid.ColumnSpan="2"
-                    Command="{Binding cmdToggleActive}" 
-                    CommandParameter="{Binding ElementName=tabs, Path=SelectedItem}">
+                    <Button Click="OnNewClick" Grid.ColumnSpan="2"
+                            Margin="{StaticResource ControlMargin}">Добавить</Button>
+
+                    <Button Margin="{StaticResource ControlMargin}" Grid.Row="1"
+                            Command="{Binding cmdToggleActive}" 
+                            CommandParameter="{Binding ElementName=tabs, Path=SelectedItem}">
                         <Button.Style>
                             <Style BasedOn="{StaticResource MetroButton}" TargetType="Button">
                                 <Setter Property="Content" Value="Восстановить"/>
@@ -60,10 +63,9 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Click="OnNewClick" Grid.Row="1"
-                    Margin="{StaticResource ControlMargin}">Добавить</Button>
+
                     <Button Click="OnEditClick" Grid.Row="1" Grid.Column="1"
-                    Margin="{StaticResource ControlMargin}">Редактировать</Button>
+                            Margin="{StaticResource ControlMargin}">Редактировать</Button>
                 </Grid>
             </Grid>
         </Border>

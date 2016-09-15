@@ -7,6 +7,7 @@
         Title="Продажа" Height="550" Width="500"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:myControls="clr-namespace:UI.Controls"
         ShowMaxRestoreButton="False"
         xml:lang="ru">
 
@@ -109,8 +110,8 @@
             </Grid.RowDefinitions>
             
             <TextBlock Text="Кофе:" Style="{StaticResource Header2Accent}"/>
-            
-            <DataGrid Grid.Row="1" Margin="{StaticResource ControlMargin}"
+
+            <DataGrid Grid.Row="1" Margin="{StaticResource ControlMargin}" ColumnWidth="*"
                       AutoGenerateColumns="False" ItemsSource="{Binding CoffeeDetails}">
                 <DataGrid.Columns>
                     <DataGridComboBoxColumn Header="Купаж"
@@ -128,7 +129,7 @@
 
             <TextBlock Text="Сопутствующие товары:" Style="{StaticResource Header2Accent}" Grid.Row="2"/>
 
-            <DataGrid Grid.Row="3" Margin="{StaticResource ControlMargin}"
+            <DataGrid Grid.Row="3" Margin="{StaticResource ControlMargin}" ColumnWidth="*"
                       AutoGenerateColumns="False" ItemsSource="{Binding ProductDetails}">
                 <DataGrid.Columns>
                     <DataGridComboBoxColumn Header="Товар"
@@ -144,8 +145,7 @@
 
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
-            <Button Command="{Binding cmdSave}" 
-                    Margin="{StaticResource ControlMargin}">Сохранить</Button>
+            <myControls:SafeSaveButton/>
             <Button Click="btnCancel_Click" 
                     Margin="{StaticResource ControlMargin}">Отмена</Button>
         </StackPanel>

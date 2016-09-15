@@ -4,15 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Context.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Context.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="ContextStoreContainer">
     <EntitySet Name="CoffeePurchases" EntityType="Context.Store.CoffeePurchases" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Suppliers" EntityType="Context.Store.Suppliers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CoffeePurchaseDetails" EntityType="Context.Store.CoffeePurchaseDetails" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CoffeeSorts" EntityType="Context.Store.CoffeeSorts" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="dGreenStocks" EntityType="Context.Store.dGreenStocks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="dCoffeeStocks" EntityType="Context.Store.dCoffeeStocks" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Roastings" EntityType="Context.Store.Roastings" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="dRoastedStocks" EntityType="Context.Store.dRoastedStocks" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Mixes" EntityType="Context.Store.Mixes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Mix_Details" EntityType="Context.Store.Mix_Details" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Packings" EntityType="Context.Store.Packings" store:Type="Tables" Schema="dbo" />
@@ -46,14 +45,10 @@
     </AssociationSet>
     <AssociationSet Name="CoffeeSortdGreenStocks" Association="Context.Store.CoffeeSortdGreenStocks">
       <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
-      <End Role="dGreenStocks" EntitySet="dGreenStocks" />
+      <End Role="dGreenStocks" EntitySet="dCoffeeStocks" />
     </AssociationSet>
     <AssociationSet Name="RoastingCoffeeSort" Association="Context.Store.RoastingCoffeeSort">
       <End Role="Roasting" EntitySet="Roastings" />
-      <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
-    </AssociationSet>
-    <AssociationSet Name="dRoastedStockCoffeeSort" Association="Context.Store.dRoastedStockCoffeeSort">
-      <End Role="dRoastedStock" EntitySet="dRoastedStocks" />
       <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
     </AssociationSet>
     <AssociationSet Name="Mix_DetailsMix" Association="Context.Store.Mix_DetailsMix">
@@ -193,9 +188,7 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="PaymentDate" Type="datetime" Nullable="true" />
     <Property Name="Paid" Type="bit" Nullable="false" />
-    <Property Name="dSum" Type="float" Nullable="false" />
-    <Property Name="TransactionId" Type="int" Nullable="true" />
-    <Property Name="InvoiceNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="nvarchar" Nullable="false" />
     <Property Name="Supplier_Id" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -204,11 +197,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Contact" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ContactPerson" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Adress" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Name" Type="ntext" Nullable="false" />
+    <Property Name="Contact" Type="ntext" Nullable="true" />
+    <Property Name="ContactPerson" Type="ntext" Nullable="true" />
+    <Property Name="Adress" Type="ntext" Nullable="true" />
+    <Property Name="Description" Type="ntext" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
   </EntityType>
   <EntityType Name="CoffeePurchaseDetails">
@@ -226,20 +219,22 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Name" Type="ntext" Nullable="false" />
+    <Property Name="Description" Type="ntext" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
     <Property Name="MinGreenStocks" Type="float" Nullable="true" />
     <Property Name="MinRoastedStocks" Type="float" Nullable="true" />
-    <Property Name="dLastPurchaseStep" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LastPurchaseStep" Type="nvarchar" Nullable="true" />
   </EntityType>
-  <EntityType Name="dGreenStocks">
+  <EntityType Name="dCoffeeStocks">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Quantity" Type="float" Nullable="false" />
-    <Property Name="dCost" Type="float" Nullable="true" />
+    <Property Name="GreenQuantity" Type="float" Nullable="false" DefaultValue="0" />
+    <Property Name="GreenCost" Type="float" Nullable="false" DefaultValue="0" />
+    <Property Name="RoastedQuantity" Type="float" Nullable="false" DefaultValue="0" />
+    <Property Name="RoastedCost" Type="float" Nullable="false" DefaultValue="0" />
     <Property Name="CoffeeSort_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Roastings">
@@ -253,24 +248,15 @@
     <Property Name="ShrinkagePercent" Type="float" Nullable="false" />
     <Property Name="CoffeeSort_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="dRoastedStocks">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Quantity" Type="float" Nullable="false" />
-    <Property Name="dCost" Type="float" Nullable="true" />
-    <Property Name="CoffeeSort_Id" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="Mixes">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Name" Type="ntext" Nullable="false" />
+    <Property Name="Description" Type="ntext" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
-    <Property Name="dPrice" Type="float" Nullable="true" />
+    <Property Name="Price" Type="float" Nullable="true" />
   </EntityType>
   <EntityType Name="Mix_Details">
     <Key>
@@ -296,9 +282,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="ntext" Nullable="false" />
     <Property Name="Capacity" Type="float" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="ntext" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
   </EntityType>
   <EntityType Name="PackagePurchases">
@@ -309,8 +295,6 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
-    <Property Name="dSum" Type="float" Nullable="false" />
-    <Property Name="TransactionId" Type="int" Nullable="false" />
     <Property Name="Package_Id" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
     <Property Name="Supplier_Id" Type="int" Nullable="false" />
@@ -320,8 +304,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Quantity" Type="int" Nullable="false" />
-    <Property Name="dCost" Type="float" Nullable="true" />
+    <Property Name="Quantity" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="Cost" Type="float" Nullable="false" DefaultValue="0" />
     <Property Name="Mix_Id" Type="int" Nullable="false" />
     <Property Name="Package_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -330,8 +314,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Quantity" Type="float" Nullable="false" />
-    <Property Name="dCost" Type="float" Nullable="true" />
+    <Property Name="Quantity" Type="float" Nullable="false" DefaultValue="0" />
+    <Property Name="Cost" Type="float" Nullable="false" DefaultValue="0" />
     <Property Name="Package_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Sales">
@@ -342,10 +326,7 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="PaymentDate" Type="datetime" Nullable="true" />
     <Property Name="Paid" Type="bit" Nullable="false" />
-    <Property Name="TransactionId" Type="int" Nullable="true" />
-    <Property Name="InvoiceNumber" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dCost" Type="float" Nullable="false" />
-    <Property Name="dSum" Type="float" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="nvarchar" Nullable="false" />
     <Property Name="Recipient_Id" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -354,11 +335,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Contact" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ContactPerson" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Adress" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Name" Type="ntext" Nullable="false" />
+    <Property Name="Contact" Type="ntext" Nullable="true" />
+    <Property Name="ContactPerson" Type="ntext" Nullable="true" />
+    <Property Name="Adress" Type="ntext" Nullable="true" />
+    <Property Name="Description" Type="ntext" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
   </EntityType>
   <EntityType Name="SaleDetailsCoffee">
@@ -368,6 +349,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Cost" Type="float" Nullable="false" />
     <Property Name="Sale_Id" Type="int" Nullable="false" />
     <Property Name="Mix_Id" Type="int" Nullable="false" />
     <Property Name="Package_Id" Type="int" Nullable="false" />
@@ -377,9 +359,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BankNumber" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Name" Type="ntext" Nullable="false" />
+    <Property Name="BankNumber" Type="ntext" Nullable="true" />
+    <Property Name="Description" Type="ntext" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
   </EntityType>
   <EntityType Name="CoffeeTransfers">
@@ -396,7 +378,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Balance" Type="float" Nullable="false" />
+    <Property Name="Balance" Type="float" Nullable="false" DefaultValue="0" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Payments">
@@ -405,9 +387,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
-    <Property Name="Designation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Designation" Type="nvarchar" Nullable="false" />
     <Property Name="Sum" Type="float" Nullable="false" />
-    <Property Name="TransactionId" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MonthlyExpenses">
@@ -416,7 +397,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Amount" Type="float" Nullable="false" />
-    <Property Name="Designation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Designation" Type="nvarchar" Nullable="false" />
     <Property Name="Day" Type="int" Nullable="false" />
     <Property Name="RemindingDay" Type="int" Nullable="false" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
@@ -429,8 +410,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Sum" Type="float" Nullable="false" />
-    <Property Name="Designation" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TransactionId" Type="int" Nullable="false" />
+    <Property Name="Designation" Type="nvarchar" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MonthlyPayments">
@@ -440,7 +420,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="PaidAmount" Type="float" Nullable="false" />
-    <Property Name="TransactionId" Type="int" Nullable="false" />
     <Property Name="MonthlyExpense_Id" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -451,8 +430,8 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Sum" Type="float" Nullable="false" />
-    <Property Name="Participant" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Participant" Type="nvarchar" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MoneyTransfers">
@@ -470,8 +449,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Name" Type="ntext" Nullable="false" />
+    <Property Name="Description" Type="ntext" Nullable="true" />
+    <Property Name="Units" Type="ntext" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="false" DefaultValue="true" />
   </EntityType>
   <EntityType Name="ProductPurchases">
@@ -482,8 +462,6 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
-    <Property Name="dSum" Type="float" Nullable="false" />
-    <Property Name="TransactionId" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
     <Property Name="Product_Id" Type="int" Nullable="false" />
     <Property Name="Supplier_Id" Type="int" Nullable="false" />
@@ -495,6 +473,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Cost" Type="float" Nullable="false" />
     <Property Name="Sale_Id" Type="int" Nullable="false" />
     <Property Name="Product_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -503,8 +482,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Quantity" Type="float" Nullable="false" />
-    <Property Name="dCost" Type="float" Nullable="true" />
+    <Property Name="Quantity" Type="float" Nullable="false" DefaultValue="0" />
+    <Property Name="Cost" Type="float" Nullable="false" DefaultValue="0" />
     <Property Name="Product_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="SupplierCoffeePurchase">
@@ -535,7 +514,7 @@
     <End Role="CoffeeSort" Type="Context.Store.CoffeeSorts" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="dGreenStocks" Type="Context.Store.dGreenStocks" Multiplicity="*" />
+    <End Role="dGreenStocks" Type="Context.Store.dCoffeeStocks" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CoffeeSort">
         <PropertyRef Name="Id" />
@@ -553,20 +532,6 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Roasting">
-        <PropertyRef Name="CoffeeSort_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="dRoastedStockCoffeeSort">
-    <End Role="dRoastedStock" Type="Context.Store.dRoastedStocks" Multiplicity="*" />
-    <End Role="CoffeeSort" Type="Context.Store.CoffeeSorts" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <ReferentialConstraint>
-      <Principal Role="CoffeeSort">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="dRoastedStock">
         <PropertyRef Name="CoffeeSort_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -980,19 +945,14 @@
             <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
             <End Role="CoffeePurchaseDetails" EntitySet="CoffeePurchaseDetails" />
           </AssociationSet>
-          <EntitySet Name="dGreenStocks" EntityType="Context.dGreenStock" />
+          <EntitySet Name="dCoffeeStocks" EntityType="Context.dCoffeeStock" />
           <AssociationSet Name="CoffeeSortdGreenStocks" Association="Context.CoffeeSortdGreenStocks">
             <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
-            <End Role="dGreenStocks" EntitySet="dGreenStocks" />
+            <End Role="dGreenStocks" EntitySet="dCoffeeStocks" />
           </AssociationSet>
           <EntitySet Name="Roastings" EntityType="Context.Roasting" />
-          <EntitySet Name="dRoastedStocks" EntityType="Context.dRoastedStock" />
           <AssociationSet Name="RoastingCoffeeSort" Association="Context.RoastingCoffeeSort">
             <End Role="Roasting" EntitySet="Roastings" />
-            <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
-          </AssociationSet>
-          <AssociationSet Name="dRoastedStockCoffeeSort" Association="Context.dRoastedStockCoffeeSort">
-            <End Role="dRoastedStock" EntitySet="dRoastedStocks" />
             <End Role="CoffeeSort" EntitySet="CoffeeSorts" />
           </AssociationSet>
           <EntitySet Name="Mixes" EntityType="Context.Mix" />
@@ -1157,8 +1117,6 @@
           <NavigationProperty Name="Supplier" Relationship="Context.SupplierCoffeePurchase" FromRole="CoffeePurchase" ToRole="Supplier" />
           <NavigationProperty Name="Account" Relationship="Context.AccountCoffeePurchase" FromRole="CoffeePurchase" ToRole="Account" />
           <Property Name="Paid" Type="Boolean" Nullable="false" />
-          <Property Name="dSum" Type="Double" Nullable="false" />
-          <Property Name="TransactionId" Type="Int32" Nullable="true" />
           <Property Name="InvoiceNumber" Type="String" Nullable="false" />
           <NavigationProperty Name="CoffeePurchaseDetails" Relationship="Context.CoffeePurchaseCoffeePurchase_Details" FromRole="CoffeePurchase" ToRole="CoffeePurchaseDetails" />
         </EntityType>
@@ -1203,31 +1161,32 @@
           <NavigationProperty Name="CoffeePurchaseDetails" Relationship="Context.CoffeeSortCoffeePurchase_Details" FromRole="CoffeeSort" ToRole="CoffeePurchaseDetails" />
           <NavigationProperty Name="dGreenStocks" Relationship="Context.CoffeeSortdGreenStocks" FromRole="CoffeeSort" ToRole="dGreenStocks" />
           <NavigationProperty Name="Roastings" Relationship="Context.RoastingCoffeeSort" FromRole="CoffeeSort" ToRole="Roasting" />
-          <NavigationProperty Name="dRoastedStocks" Relationship="Context.dRoastedStockCoffeeSort" FromRole="CoffeeSort" ToRole="dRoastedStock" />
           <NavigationProperty Name="Mix_Details" Relationship="Context.Mix_DetailsCoffeeSort" FromRole="CoffeeSort" ToRole="Mix_Details" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
           <Property Name="MinGreenStocks" Type="Double" Nullable="true" />
           <Property Name="MinRoastedStocks" Type="Double" Nullable="true" />
-          <Property Name="dLastPurchaseStep" Type="String" Nullable="true" />
+          <Property Name="LastPurchaseStep" Type="String" Nullable="true" />
         </EntityType>
         <Association Name="CoffeeSortCoffeePurchase_Details">
           <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" />
           <End Type="Context.CoffeePurchaseDetails" Role="CoffeePurchaseDetails" Multiplicity="*" />
         </Association>
-        <EntityType Name="dGreenStock">
+        <EntityType Name="dCoffeeStock">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="GreenQuantity" Type="Double" Nullable="false" DefaultValue="0" />
+          <Property Name="GreenCost" Type="Double" Nullable="false" DefaultValue="0" />
+          <Property Name="RoastedQuantity" Type="Double" Nullable="false" DefaultValue="0" />
           <NavigationProperty Name="CoffeeSort" Relationship="Context.CoffeeSortdGreenStocks" FromRole="dGreenStocks" ToRole="CoffeeSort" />
-          <Property Name="dCost" Type="Double" Nullable="true" />
+          <Property Name="RoastedCost" Type="Double" Nullable="false" DefaultValue="0" />
         </EntityType>
         <Association Name="CoffeeSortdGreenStocks">
           <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" >
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Context.dGreenStock" Role="dGreenStocks" Multiplicity="*" />
+          <End Type="Context.dCoffeeStock" Role="dGreenStocks" Multiplicity="*" />
         </Association>
         <EntityType Name="Roasting">
           <Key>
@@ -1240,24 +1199,9 @@
           <NavigationProperty Name="CoffeeSort" Relationship="Context.RoastingCoffeeSort" FromRole="Roasting" ToRole="CoffeeSort" />
           <Property Name="ShrinkagePercent" Type="Double" Nullable="false" />
         </EntityType>
-        <EntityType Name="dRoastedStock">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Quantity" Type="Double" Nullable="false" />
-          <NavigationProperty Name="CoffeeSort" Relationship="Context.dRoastedStockCoffeeSort" FromRole="dRoastedStock" ToRole="CoffeeSort" />
-          <Property Name="dCost" Type="Double" Nullable="true" />
-        </EntityType>
         <Association Name="RoastingCoffeeSort">
           <End Type="Context.Roasting" Role="Roasting" Multiplicity="*" />
           <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" />
-        </Association>
-        <Association Name="dRoastedStockCoffeeSort">
-          <End Type="Context.dRoastedStock" Role="dRoastedStock" Multiplicity="*" />
-          <End Type="Context.CoffeeSort" Role="CoffeeSort" Multiplicity="1" >
-            <OnDelete Action="Cascade" />
-          </End>
         </Association>
         <EntityType Name="Mix">
           <Key>
@@ -1267,7 +1211,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
-          <Property Name="dPrice" Type="Double" Nullable="true" />
+          <Property Name="Price" Type="Double" Nullable="true" />
           <NavigationProperty Name="Mix_Details" Relationship="Context.Mix_DetailsMix" FromRole="Mix" ToRole="Mix_Details" />
           <NavigationProperty Name="Packings" Relationship="Context.PackingMix" FromRole="Mix" ToRole="Packing" />
           <NavigationProperty Name="dPackedStocks" Relationship="Context.dPackedStocksMix" FromRole="Mix" ToRole="dPackedStocks" />
@@ -1334,8 +1278,6 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
-          <Property Name="dSum" Type="Double" Nullable="false" />
-          <Property Name="TransactionId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Package" Relationship="Context.PackagePackagePurchase" FromRole="PackagePurchase" ToRole="Package" />
           <NavigationProperty Name="Account" Relationship="Context.AccountPackagePurchase" FromRole="PackagePurchase" ToRole="Account" />
           <NavigationProperty Name="Supplier" Relationship="Context.SupplierPackagePurchase" FromRole="PackagePurchase" ToRole="Supplier" />
@@ -1349,10 +1291,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" DefaultValue="0" />
           <NavigationProperty Name="Mix" Relationship="Context.dPackedStocksMix" FromRole="dPackedStocks" ToRole="Mix" />
           <NavigationProperty Name="Package" Relationship="Context.PackagedPackedStocks" FromRole="dPackedStocks" ToRole="Package" />
-          <Property Name="dCost" Type="Double" Nullable="true" />
+          <Property Name="Cost" Type="Double" Nullable="false" DefaultValue="0" />
         </EntityType>
         <Association Name="dPackedStocksMix">
           <End Type="Context.dPackedStocks" Role="dPackedStocks" Multiplicity="*" />
@@ -1369,8 +1311,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Package" Relationship="Context.dPackageStocksPackage" FromRole="dPackageStocks" ToRole="Package" />
-          <Property Name="Quantity" Type="Double" Nullable="false" />
-          <Property Name="dCost" Type="Double" Nullable="true" />
+          <Property Name="Quantity" Type="Double" Nullable="false" DefaultValue="0" />
+          <Property Name="Cost" Type="Double" Nullable="false" DefaultValue="0" />
         </EntityType>
         <Association Name="dPackageStocksPackage">
           <End Type="Context.dPackageStocks" Role="dPackageStocks" Multiplicity="*" />
@@ -1386,13 +1328,10 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PaymentDate" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Paid" Type="Boolean" Nullable="false" />
-          <Property Name="TransactionId" Type="Int32" Nullable="true" />
           <Property Name="InvoiceNumber" Type="String" Nullable="false" />
           <NavigationProperty Name="SaleDetailsCoffee" Relationship="Context.SaleSale_Details" FromRole="Sale" ToRole="Sale_Details" />
           <NavigationProperty Name="Recipient" Relationship="Context.RecipientSale" FromRole="Sale" ToRole="Recipient" />
           <NavigationProperty Name="Account" Relationship="Context.AccountSale" FromRole="Sale" ToRole="Account" />
-          <Property Name="dCost" Type="Double" Nullable="false" />
-          <Property Name="dSum" Type="Double" Nullable="false" />
           <NavigationProperty Name="SaleDetailsProducts" Relationship="Context.SaleSaleDetailsProduct" FromRole="Sale" ToRole="SaleDetailsProduct" />
         </EntityType>
         <EntityType Name="Recipient">
@@ -1418,6 +1357,7 @@
           <NavigationProperty Name="Package" Relationship="Context.PackageSale_Details" FromRole="Sale_Details" ToRole="Package" />
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Double" Nullable="false" />
         </EntityType>
         <Association Name="SaleSale_Details">
           <End Type="Context.Sale" Role="Sale" Multiplicity="1" >
@@ -1492,7 +1432,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Balance" Type="Double" Nullable="false" />
+          <Property Name="Balance" Type="Double" Nullable="false" DefaultValue="0" />
           <NavigationProperty Name="Account" Relationship="Context.AccountdAccountsBalance" FromRole="dAccountsBalance" ToRole="Account" />
         </EntityType>
         <Association Name="AccountdAccountsBalance">
@@ -1509,7 +1449,6 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Designation" Type="String" Nullable="false" />
           <Property Name="Sum" Type="Double" Nullable="false" />
-          <Property Name="TransactionId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="Context.AccountExpense" FromRole="Expense" ToRole="Account" />
         </EntityType>
         <EntityType Name="MonthlyExpense">
@@ -1537,7 +1476,6 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Sum" Type="Double" Nullable="false" />
           <Property Name="Designation" Type="String" Nullable="false" />
-          <Property Name="TransactionId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="Context.AccountOtherProfit" FromRole="OtherProfit" ToRole="Account" />
         </EntityType>
         <Association Name="AccountOtherProfit">
@@ -1551,7 +1489,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PaidAmount" Type="Double" Nullable="false" />
-          <Property Name="TransactionId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MonthlyExpense" Relationship="Context.MonthlyExpenseMonthlyPayments" FromRole="MonthlyPayments" ToRole="MonthlyExpense" />
           <NavigationProperty Name="Account" Relationship="Context.AccountMonthlyPayments" FromRole="MonthlyPayments" ToRole="Account" />
         </EntityType>
@@ -1603,6 +1540,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Units" Type="String" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
           <NavigationProperty Name="ProductPurchases" Relationship="Context.ProductProductPurchase" FromRole="Product" ToRole="ProductPurchase" />
           <NavigationProperty Name="SaleDetailsProducts" Relationship="Context.ProductSaleDetailsProduct" FromRole="Product" ToRole="SaleDetailsProduct" />
@@ -1620,8 +1558,6 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
-          <Property Name="dSum" Type="Double" Nullable="false" />
-          <Property Name="TransactionId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="Context.AccountProductPurchase" FromRole="ProductPurchase" ToRole="Account" />
           <NavigationProperty Name="Product" Relationship="Context.ProductProductPurchase" FromRole="ProductPurchase" ToRole="Product" />
           <NavigationProperty Name="Supplier" Relationship="Context.SupplierProductPurchase" FromRole="ProductPurchase" ToRole="Supplier" />
@@ -1645,6 +1581,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Double" Nullable="false" />
           <NavigationProperty Name="Sale" Relationship="Context.SaleSaleDetailsProduct" FromRole="SaleDetailsProduct" ToRole="Sale" />
           <NavigationProperty Name="Product" Relationship="Context.ProductSaleDetailsProduct" FromRole="SaleDetailsProduct" ToRole="Product" />
         </EntityType>
@@ -1661,8 +1598,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Quantity" Type="Double" Nullable="false" />
-          <Property Name="dCost" Type="Double" Nullable="true" />
+          <Property Name="Quantity" Type="Double" Nullable="false" DefaultValue="0" />
+          <Property Name="Cost" Type="Double" Nullable="false" DefaultValue="0" />
           <NavigationProperty Name="Product" Relationship="Context.ProductdProductStock" FromRole="dProductStock" ToRole="Product" />
         </EntityType>
         <Association Name="ProductdProductStock">
@@ -1682,8 +1619,6 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
           <ScalarProperty Name="Paid" ColumnName="Paid" />
-          <ScalarProperty Name="dSum" ColumnName="dSum" />
-          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
           <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1719,16 +1654,18 @@
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="MinGreenStocks" ColumnName="MinGreenStocks" />
           <ScalarProperty Name="MinRoastedStocks" ColumnName="MinRoastedStocks" />
-          <ScalarProperty Name="dLastPurchaseStep" ColumnName="dLastPurchaseStep" />
+          <ScalarProperty Name="LastPurchaseStep" ColumnName="LastPurchaseStep" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="dGreenStocks">
-      <EntityTypeMapping TypeName="IsTypeOf(Context.dGreenStock)">
-        <MappingFragment StoreEntitySet="dGreenStocks">
+    <EntitySetMapping Name="dCoffeeStocks">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.dCoffeeStock)">
+        <MappingFragment StoreEntitySet="dCoffeeStocks">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="dCost" ColumnName="dCost" />
+          <ScalarProperty Name="GreenQuantity" ColumnName="GreenQuantity" />
+          <ScalarProperty Name="GreenCost" ColumnName="GreenCost" />
+          <ScalarProperty Name="RoastedQuantity" ColumnName="RoastedQuantity" />
+          <ScalarProperty Name="RoastedCost" ColumnName="RoastedCost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1743,15 +1680,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="dRoastedStocks">
-      <EntityTypeMapping TypeName="IsTypeOf(Context.dRoastedStock)">
-        <MappingFragment StoreEntitySet="dRoastedStocks">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="dCost" ColumnName="dCost" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Mixes">
       <EntityTypeMapping TypeName="IsTypeOf(Context.Mix)">
         <MappingFragment StoreEntitySet="Mixes">
@@ -1759,7 +1687,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="dPrice" ColumnName="dPrice" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1798,8 +1726,6 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="dSum" ColumnName="dSum" />
-          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1808,7 +1734,7 @@
         <MappingFragment StoreEntitySet="dPackedStocks">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="dCost" ColumnName="dCost" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1817,7 +1743,7 @@
         <MappingFragment StoreEntitySet="dPackageStocks">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="dCost" ColumnName="dCost" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1828,10 +1754,7 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
           <ScalarProperty Name="Paid" ColumnName="Paid" />
-          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
           <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
-          <ScalarProperty Name="dCost" ColumnName="dCost" />
-          <ScalarProperty Name="dSum" ColumnName="dSum" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1854,6 +1777,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1892,7 +1816,6 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Designation" ColumnName="Designation" />
           <ScalarProperty Name="Sum" ColumnName="Sum" />
-          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1916,7 +1839,6 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Sum" ColumnName="Sum" />
           <ScalarProperty Name="Designation" ColumnName="Designation" />
-          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1926,7 +1848,6 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
-          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1956,6 +1877,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Units" ColumnName="Units" />
           <ScalarProperty Name="Active" ColumnName="Active" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1967,8 +1889,6 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="dSum" ColumnName="dSum" />
-          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1978,6 +1898,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1986,7 +1907,7 @@
         <MappingFragment StoreEntitySet="dProductStocks">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="dCost" ColumnName="dCost" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2006,7 +1927,7 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CoffeeSortdGreenStocks" TypeName="Context.CoffeeSortdGreenStocks" StoreEntitySet="dGreenStocks">
+    <AssociationSetMapping Name="CoffeeSortdGreenStocks" TypeName="Context.CoffeeSortdGreenStocks" StoreEntitySet="dCoffeeStocks">
       <EndProperty Name="CoffeeSort">
         <ScalarProperty Name="Id" ColumnName="CoffeeSort_Id" />
       </EndProperty>
@@ -2019,14 +1940,6 @@
         <ScalarProperty Name="Id" ColumnName="CoffeeSort_Id" />
       </EndProperty>
       <EndProperty Name="Roasting">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="dRoastedStockCoffeeSort" TypeName="Context.dRoastedStockCoffeeSort" StoreEntitySet="dRoastedStocks">
-      <EndProperty Name="CoffeeSort">
-        <ScalarProperty Name="Id" ColumnName="CoffeeSort_Id" />
-      </EndProperty>
-      <EndProperty Name="dRoastedStock">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

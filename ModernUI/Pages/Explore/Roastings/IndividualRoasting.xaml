@@ -4,22 +4,22 @@
     <StackPanel Margin="10,0,10,0">
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Дата обжарки:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Date}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Date}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Сорт:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding CoffeeSort.Name}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding CoffeeSort.Name}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Масса до обжарки:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding InitialAmount, StringFormat={}{0} кг}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding InitialAmount, StringFormat={}{0} кг}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Масса после обжарки:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding RoastedAmount, StringFormat={}{0} кг}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding RoastedAmount, StringFormat={}{0} кг}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
     </StackPanel>
 </UserControl>

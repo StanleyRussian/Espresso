@@ -18,6 +18,8 @@ namespace ViewModels.Pages.Explore
         protected override void Refresh()
         {
             var query = ContextManager.Context.MoneyTransfers.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
+            if (FilterAccount != null)
+                query = query.Where(p => p.InitialAccount == FilterAccount || p.TargetAccount == FilterAccount);
             Tabs = new ObservableCollection<MoneyTransfer>(query);
         }
 
@@ -29,6 +31,18 @@ namespace ViewModels.Pages.Explore
             {
                 _tabs = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private Account _filterAccount;
+        public Account FilterAccount
+        {
+            get { return _filterAccount; }
+            set
+            {
+                _filterAccount = value;
+                OnPropertyChanged();
+                Refresh();
             }
         }
 

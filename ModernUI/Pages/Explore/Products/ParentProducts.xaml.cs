@@ -22,7 +22,7 @@ namespace UI.Pages.Explore.Products
 
         private void OnEditClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            var selected = tabs.SelectedItem as Model.Entity.Account;
+            var selected = tabs.SelectedItem as Model.Entity.Product;
             if (selected != null)
             {
                 new Product(selected).ShowDialog();

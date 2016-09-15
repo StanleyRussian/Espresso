@@ -12,11 +12,22 @@ namespace Model.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class dGreenStock
+    public partial class dCoffeeStock
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public dCoffeeStock()
+        {
+            this.GreenQuantity = 0D;
+            this.GreenCost = 0D;
+            this.RoastedQuantity = 0D;
+            this.RoastedCost = 0D;
+        }
+    
         public int Id { get; set; }
-        public double Quantity { get; set; }
-        public Nullable<double> dCost { get; set; }
+        public double GreenQuantity { get; set; }
+        public double GreenCost { get; set; }
+        public double RoastedQuantity { get; set; }
+        public double RoastedCost { get; set; }
     
         public virtual CoffeeSort CoffeeSort { get; set; }
     }

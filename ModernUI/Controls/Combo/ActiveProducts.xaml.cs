@@ -8,9 +8,9 @@ namespace UI.Controls.Combo
     /// <summary>
     /// Interaction logic for ActiveProducts.xaml
     /// </summary>
-    public partial class ActiveProducts : UserControl
+    public partial class ComboActiveProducts : UserControl
     {
-        public ActiveProducts()
+        public ComboActiveProducts()
         {
             InitializeComponent();
         }

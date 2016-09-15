@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="UI.Controls.SafeSaveButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <CheckBox x:Name="checkSafe" 
+                  Margin="{StaticResource ControlMargin}"
+                  Content="Ошибок и опечаток нет"/>
+        <Control Grid.Column="1" Margin="0">
+            <Control.Template>
+                <ControlTemplate>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=checkSafe}" Value="true">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="flyout"
+                                                         Storyboard.TargetProperty="(Grid.Width)"
+                                                         From="0" To="80" Duration="0:0:0.4" AutoReverse="False"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="flyout"
+                                                         Storyboard.TargetProperty="(Grid.Width)"
+                                                         From="80" To="0" Duration="0:0:0.4" AutoReverse="False"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                    
+                    <Grid x:Name="flyout" Width="0">
+                        <Button Command="{Binding cmdSave}" Click="Save_OnClick" Style="{StaticResource AccentedMetroButton}" 
+                                Margin="{StaticResource ControlMargin}">Сохранить</Button>
+                    </Grid>
+                </ControlTemplate>
+            </Control.Template>
+        </Control>
+    </Grid>
+</UserControl>

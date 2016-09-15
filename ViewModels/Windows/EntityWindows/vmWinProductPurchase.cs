@@ -43,48 +43,43 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        protected override void cmdSave_Execute()
+        private double _sum;
+
+        protected override void OnSaveValidation()
         {
-            try
-            {
-                if (Purchase.Quantity <= 0)
-                    throw new Exception("Введите количество");
+            if (Purchase.Quantity <= 0)
+                throw new Exception("Введите количество");
 
-                if (Purchase.Price <= 0)
-                    throw new Exception("Введите цену");
+            if (Purchase.Price <= 0)
+                throw new Exception("Введите цену");
 
-                Purchase.dSum = Purchase.Quantity * Purchase.Price;
+            _sum = Purchase.Quantity * Purchase.Price;
 
-                if (ContextManager.Context.dAccountsBalances.First(
-                    p => p.Account.Id == Purchase.Account.Id).Balance < Purchase.dSum)
-                    throw new Exception("На выбранном счету недостаточно денег");
+            if (ContextManager.Context.dAccountsBalances.First(
+                p => p.Account.Id == Purchase.Account.Id).Balance < _sum)
+                throw new Exception("На выбранном счету недостаточно денег");
+        }
 
-                if (CreatingNew)
-                    ContextManager.Context.ProductPurchases.Add(Purchase);
-                ContextManager.Context.SaveChanges();
+        protected override void OnSaveCreate()
+        {
+            // Add product purchase to database
+            ContextManager.Context.ProductPurchases.Add(Purchase);
 
-                // Find stocks of package for current product being purchase
-                var productStock = ContextManager.Context.dProductStocks.First(
-                    p => p.Product.Id == Purchase.Product.Id);
-                // Check if there anything in stock already
-                if (productStock.Quantity == 0)
-                    // Set cost from purchase
-                    productStock.dCost = Purchase.Price;
-                else
-                    // Count cost based on stock and new purchase
-                    productStock.dCost = (productStock.Quantity * productStock.dCost + Purchase.Quantity * Purchase.Price)
-                        / (productStock.Quantity + Purchase.Quantity);
+            // Find stocks of package for current product being purchase
+            var productStock = ContextManager.Context.dProductStocks.First(
+                p => p.Product.Id == Purchase.Product.Id);
+            // Check if there anything in stock already
+            if (productStock.Quantity == 0)
+                // Set cost from purchase
+                productStock.Cost = Purchase.Price;
+            else
+            // Count cost based on stock and new purchase
+                productStock.Cost =
+                    Math.Round((productStock.Quantity*productStock.Cost + Purchase.Quantity*Purchase.Price)
+                               /(productStock.Quantity + Purchase.Quantity), 2);
 
-
-                SaveContext();
-                if (CreatingNew)
-                    Refresh();
-            }
-            catch (Exception ex)
-            {
-                FlyErrorMsg = ex.Message;
-                IsFlyErrorOpened = true;
-            }
+            // Change product stock
+            productStock.Quantity += Purchase.Quantity;
         }
     }
 }

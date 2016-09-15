@@ -32,13 +32,13 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        protected override void cmdSave_Execute()
+        protected override void OnSaveValidation()
+        { }
+
+        protected override void OnSaveCreate()
         {
-            if (CreatingNew)
-                ContextManager.Context.CoffeeSorts.Add(Sort);
-            SaveContext();
-            if (CreatingNew)
-                Refresh();
+            ContextManager.Context.CoffeeSorts.Add(Sort);
+            ContextManager.Context.dCoffeeStocks.Add(new dCoffeeStock { CoffeeSort = Sort });
         }
     }
 }

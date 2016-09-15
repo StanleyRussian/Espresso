@@ -45,17 +45,28 @@ namespace ViewModels.Windows.EntityWindows
 
         #region Commands
 
-        protected override void cmdSave_Execute()
+        protected override void OnSaveValidation()
         {
-            if (Payment.Sum <= 0) 
+            if (Payment.Sum <= 0)
+                throw new Exception("Введите cумму платежа больше нуля");
+        }
+
+        protected override void OnSaveCreate()
+        {
+            // Add payment to database
+            ContextManager.Context.Payments.Add(Payment);
+            // Change account balance
+            ContextManager.Context.dAccountsBalances.First(
+                p => p.Account.Id == Payment.Account.Id).Balance -= Payment.Sum;
+            // Add new transaction
+            ContextManager.Context.dTransactions.Add(new dTransaction
             {
-                FlyErrorMsg = "Введите cумму платежа";
-                IsFlyErrorOpened = true;
-                return;
-            }
-            if (CreatingNew)
-                ContextManager.Context.Payments.Add(Payment);
-            SaveContext();
+                Account = Payment.Account,
+                Date = Payment.Date,
+                Description = "Платёж",
+                Participant = Payment.Designation,
+                Sum = Payment.Sum
+            });
         }
 
 
