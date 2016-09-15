@@ -17,6 +17,7 @@ namespace Model.Entity
         public int Id { get; set; }
         public double Price { get; set; }
         public int Quantity { get; set; }
+        public double Cost { get; set; }
     
         public virtual Sale Sale { get; set; }
         public virtual Product Product { get; set; }

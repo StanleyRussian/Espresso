@@ -6,6 +6,7 @@
         Title="Новая фасовка" Height="300" Width="350"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:myControls="clr-namespace:UI.Controls"
         ShowMaxRestoreButton="False"
         xml:lang="ru">
 
@@ -73,7 +74,7 @@
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
-            <Button Command="{Binding cmdSave}" Margin="{StaticResource ControlMargin}">Сохранить</Button>
+                        <myControls:SafeSaveButton/>
             <Button Click="btnCancel_Click" Margin="{StaticResource ControlMargin}">Отмена</Button>
         </StackPanel>
     </Grid>

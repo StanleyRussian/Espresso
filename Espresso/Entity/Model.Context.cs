@@ -29,9 +29,8 @@ namespace Model.Entity
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<CoffeePurchaseDetails> CoffeePurchaseDetails { get; set; }
         public virtual DbSet<CoffeeSort> CoffeeSorts { get; set; }
-        public virtual DbSet<dGreenStock> dGreenStocks { get; set; }
+        public virtual DbSet<dCoffeeStock> dCoffeeStocks { get; set; }
         public virtual DbSet<Roasting> Roastings { get; set; }
-        public virtual DbSet<dRoastedStock> dRoastedStocks { get; set; }
         public virtual DbSet<Mix> Mixes { get; set; }
         public virtual DbSet<Mix_Details> Mix_Details { get; set; }
         public virtual DbSet<Packing> Packings { get; set; }

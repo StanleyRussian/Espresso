@@ -5,7 +5,7 @@
         <TextBlock Style="{StaticResource Title}" Text="{Binding Name}"
                    TextWrapping="Wrap"/>
 
-        <TextBlock Style="{StaticResource Header2}" Margin="0,5,0,0">Описание:</TextBlock>
+        <TextBlock Style="{StaticResource Header3}" Margin="0,5,0,0">Описание:</TextBlock>
         <TextBlock Style="{StaticResource Header3}" Margin="0,5,0,0"
                    Text="{Binding Description}" TextWrapping="Wrap"/>
 

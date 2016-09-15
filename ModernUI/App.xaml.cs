@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using UI.Properties;
 using UI.Windows;
 
 namespace UI
@@ -14,11 +13,25 @@ namespace UI
             //ViewModels.Properties.FirstLaunch = true;
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
+            StartupSplash _splash = new StartupSplash();
+            _splash.Show();
+
             if (ViewModels.Properties.FirstLaunch)
-                new FirstLaunchWindow().ShowDialog();
+            {
+                FirstLaunchWindow _firstLaunch = new FirstLaunchWindow();
+                _splash.Hide();
+                _firstLaunch.ShowDialog();
+
+                _splash.Show();
+            }
 
             if (!ViewModels.Properties.FirstLaunch)
-                new MainWindow().ShowDialog();
+            {
+                MainWindow _mainWindow = new MainWindow();
+                _splash.Close();
+                _mainWindow.ShowDialog();
+            }
+
             Shutdown();
         }
     }

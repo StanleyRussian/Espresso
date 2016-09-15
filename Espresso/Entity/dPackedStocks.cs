@@ -14,9 +14,16 @@ namespace Model.Entity
     
     public partial class dPackedStocks
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public dPackedStocks()
+        {
+            this.Quantity = 0;
+            this.Cost = 0D;
+        }
+    
         public int Id { get; set; }
         public int Quantity { get; set; }
-        public Nullable<double> dCost { get; set; }
+        public double Cost { get; set; }
     
         public virtual Mix Mix { get; set; }
         public virtual Package Package { get; set; }

@@ -18,7 +18,6 @@ namespace Model.Entity
         public System.DateTime Date { get; set; }
         public double Sum { get; set; }
         public string Designation { get; set; }
-        public int TransactionId { get; set; }
     
         public virtual Account Account { get; set; }
     }

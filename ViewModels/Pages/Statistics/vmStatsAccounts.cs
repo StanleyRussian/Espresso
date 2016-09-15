@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.Linq;
 using System.Windows.Input;
 using Model;
 using Model.Entity;
 using ViewModels.Auxiliary;
-using System.Linq;
 
-namespace ViewModels.Pages.Statistics.Accounts
+namespace ViewModels.Pages.Statistics
 {
     public class vmStatsAccounts: aTabViewModel
     {
@@ -106,7 +106,7 @@ namespace ViewModels.Pages.Statistics.Accounts
         {
             _filterTo = DateTime.Now;
             OnPropertyChanged(nameof(FilterTo));
-            FilterFrom = DateTime.MinValue;
+            FilterFrom = DateTime.Now.AddDays(-365);
         }
 
 

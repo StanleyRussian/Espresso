@@ -24,7 +24,6 @@ namespace UI.Windows.EntityWindows
         private void btnNewSort_Click(object sender, RoutedEventArgs e)
         {
             new CoffeeSort().ShowDialog();
-            comboColumnSort.ItemsSource = ContextManager.ActiveCoffeeSorts;
         }
     }
 }

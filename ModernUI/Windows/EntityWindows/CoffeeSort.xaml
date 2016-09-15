@@ -5,6 +5,7 @@
         Title="Новый моносорт" Height="300" Width="400"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:myControls="clr-namespace:UI.Controls"
         ShowMaxRestoreButton="False"
         xml:lang="ru">
 
@@ -75,7 +76,7 @@
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
-            <Button Command="{Binding cmdSave}" 
+            <Button Command="{Binding cmdSave}" Style="{StaticResource AccentedMetroButton}" 
                     Margin="{StaticResource ControlMargin}">Сохранить</Button>
             <Button Click="btnCancel_Click" 
                     Margin="{StaticResource ControlMargin}">Отмена</Button>

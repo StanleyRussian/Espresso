@@ -8,8 +8,6 @@
         dialog:DialogParticipation.Register="{Binding}"      
         Title="Espresso" 
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
-        ShowMaxRestoreButton="False"
-        Width="950" Height="800"
         xml:lang="ru">
     <Grid>
         <Grid.Resources>
@@ -26,6 +24,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type pagesVM:vmExplorer}">
                     <pages:Explorer/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type pagesVM:vmExplorerOperations}">
+                    <pages:ExplorerOperations/>
                 </DataTemplate>
             </TabControl.Resources>
 

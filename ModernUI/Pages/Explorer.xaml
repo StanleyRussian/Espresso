@@ -5,19 +5,10 @@
              xmlns:accounts="clr-namespace:UI.Pages.Explore.Accounts"
              xmlns:coffeeSorts="clr-namespace:UI.Pages.Explore.CoffeeSorts"
              xmlns:suppliers="clr-namespace:UI.Pages.Explore.Suppliers"
-             xmlns:coffeePurchases="clr-namespace:UI.Pages.Explore.CoffeePurchases"
              xmlns:vmExplore="clr-namespace:ViewModels.Pages.Explore;assembly=ViewModels"
-             xmlns:roastings="clr-namespace:UI.Pages.Explore.Roastings"
              xmlns:mixes="clr-namespace:UI.Pages.Explore.Mixes"
              xmlns:packages="clr-namespace:UI.Pages.Explore.Packages"
-             xmlns:packings="clr-namespace:UI.Pages.Explore.Packings"
-             xmlns:packagePurchases="clr-namespace:UI.Pages.Explore.PackagePurchases"
-             xmlns:coffeeSales="clr-namespace:UI.Pages.Explore.Sales"
              xmlns:recipients="clr-namespace:UI.Pages.Explore.Recipients"
-             xmlns:moneyTransfers="clr-namespace:UI.Pages.Explore.MoneyTransfers"
-             xmlns:payments="clr-namespace:UI.Pages.Explore.Payments"
-             xmlns:otherProfits="clr-namespace:UI.Pages.Explore.OtherProfits"
-             xmlns:coffeeTranfers="clr-namespace:UI.Pages.Explore.CoffeeTranfers"
              xmlns:products="clr-namespace:UI.Pages.Explore.Products">
 
     <Grid>
@@ -35,41 +26,14 @@
                 <DataTemplate DataType="{x:Type vmExplore:vmSuppliers}">
                     <suppliers:ParentSuppliers/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vmExplore:vmCoffeePurchases}">
-                    <coffeePurchases:ParentCoffeePurchases/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vmExplore:vmRoastings}">
-                    <roastings:ParentRoastings/>
-                </DataTemplate>
                 <DataTemplate DataType="{x:Type vmExplore:vmMixes}">
                     <mixes:ParentMixes/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vmExplore:vmPackings}">
-                    <packings:ParentPackings/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vmExplore:vmPackagePurchases}">
-                    <packagePurchases:ParentPackagePurchases/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vmExplore:vmPackages}">
                     <packages:ParentPackages/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vmExplore:vmSales}">
-                    <coffeeSales:ParentSales/>
-                </DataTemplate>
                 <DataTemplate DataType="{x:Type vmExplore:vmRecipients}">
                     <recipients:ParentRecipients/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vmExplore:vmMoneyTranfers}">
-                    <moneyTransfers:ParentMoneyTransfers/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vmExplore:vmPayments}">
-                    <payments:ParentPayments/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vmExplore:vmOtherProfits}">
-                    <otherProfits:ParentOtherProfits/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vmExplore:vmCoffeeTranfers}">
-                    <coffeeTranfers:ParentCoffeeTransfers/>
                 </DataTemplate>
             </TabControl.Resources>
 
@@ -77,7 +41,7 @@
                 <Style BasedOn="{StaticResource MetroTabItem}" TargetType="TabItem">
                     <Setter Property="Header" Value="{Binding Header}"/>
                     <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
-                    <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="16"/>
+                    <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="18"/>
                 </Style>
             </TabControl.ItemContainerStyle>
         </TabControl>

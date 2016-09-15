@@ -28,7 +28,7 @@ namespace ViewModels.Pages.Explore.Abstract
             try
             {
                 ContextManager.Context.SaveChanges();
-                ContextManager.ReloadContext();
+                //ContextManager.ReloadContext();
             }
             catch (Exception ex)
             {
@@ -47,7 +47,7 @@ namespace ViewModels.Pages.Explore.Abstract
         { get; private set; }
         protected virtual void cmdReload_Execute()
         {
-            ContextManager.ReloadContext();
+            //ContextManager.ReloadContext();
             Load();
         }
 

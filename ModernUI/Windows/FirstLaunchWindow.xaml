@@ -9,7 +9,7 @@
         dialogs:DialogParticipation.Register="{Binding}"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         ShowTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ResizeMode="NoResize"
-        Width="900" Height="550"
+        MaxWidth="900" MaxHeight="550"
         xml:lang="ru">
     
     <Window.Resources>

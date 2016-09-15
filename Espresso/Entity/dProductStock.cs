@@ -14,9 +14,16 @@ namespace Model.Entity
     
     public partial class dProductStock
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public dProductStock()
+        {
+            this.Quantity = 0D;
+            this.Cost = 0D;
+        }
+    
         public int Id { get; set; }
         public double Quantity { get; set; }
-        public Nullable<double> dCost { get; set; }
+        public double Cost { get; set; }
     
         public virtual Product Product { get; set; }
     }

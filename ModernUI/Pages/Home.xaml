@@ -16,345 +16,375 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-
-        <TextBlock Text="Текущий баланс:" Style="{StaticResource Header1}" 
-                   Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
-
-        <ItemsControl x:Name="ItemsAccounts" ItemsSource="{Binding AccountsBalances}"
-                      Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,25,0">
-                        <TextBlock Text="{Binding Account.Name, StringFormat={}{0}:}" Style="{StaticResource Header2Accent}"/>
-                        <TextBlock Text="{Binding Balance, StringFormat={}{0} грн}" Style="{StaticResource Header2}" Margin="5,0,0,0"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.Style>
-                <Style>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Items.Count, RelativeSource={RelativeSource Self}}" Value="0">
-                            <Setter Property="ItemsControl.Visibility" Value="Hidden" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ItemsControl.Style>
-        </ItemsControl>
-
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="Казна пуста">
-            <TextBlock.Style>
-                <Style BasedOn="{StaticResource Header2}" TargetType="TextBlock">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Visibility, ElementName=ItemsAccounts}" Value="Hidden">
-                            <Setter Property="TextBlock.Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <Grid Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition />
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            
-            <TextBlock  Text="Остатки зелёного кофе:" 
-                   Style="{StaticResource Header1}" HorizontalAlignment="Center"/>
-
-            <DataGrid x:Name="GridGreen" Grid.Row="1" Margin="3,0" IsReadOnly="True"
-                        AutoGenerateColumns="False" ItemsSource="{Binding GreenStocks}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding CoffeeSort.Name}" Header="Моносорт"/>
-                    <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} кг}" Header="Количество"/>
-                    <DataGridTextColumn Binding="{Binding dCost, StringFormat={}{0} грн/кг}" Header="Себестоимость"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <TextBlock Grid.Row="1" VerticalAlignment="Top" Text="Жарить больше нечего">
-                <TextBlock.Style>
-                    <Style BasedOn="{StaticResource Header2}" TargetType="TextBlock">
-                        <Setter Property="HorizontalAlignment" Value="Center"/>
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Visibility, ElementName=GridGreen}" Value="Hidden">
-                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-
-            <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,5,0,0" Orientation="Horizontal">
-                <StackPanel.Style>
-                    <Style TargetType="StackPanel">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Visibility, ElementName=GridGreen}" Value="Hidden">
-                                <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
-                
-                <TextBlock Text="Cумма: " Style="{StaticResource Header3}"/>
-                <TextBlock Text="{Binding GreenStocksCostsSum, StringFormat={}{0} грн}"
-                           Style="{StaticResource Header3Accent}"/>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Row="2" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition />
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            
-            <TextBlock Text="Остатки обжаренного кофе:" Style="{StaticResource Header1}"
-                       HorizontalAlignment="Center"/>
-            <DataGrid x:Name="GridRoasted" Grid.Row="1" Margin="3,0" IsReadOnly="True"
-                      AutoGenerateColumns="False" ItemsSource="{Binding RoastedStocks}" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding CoffeeSort.Name}" Header="Моносорт"/>
-                    <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} кг}" Header="Количество"/>
-                    <DataGridTextColumn Binding="{Binding dCost, StringFormat={}{0} грн/кг}" Header="Себестоимость"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <TextBlock Grid.Row="1" VerticalAlignment="Top" Text="Амбары пусты">
-                <TextBlock.Style>
-                    <Style BasedOn="{StaticResource Header2}" TargetType="TextBlock">
-                        <Setter Property="HorizontalAlignment" Value="Center"/>
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Visibility, ElementName=GridRoasted}" Value="Hidden">
-                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-
-            <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,5,0,0" Orientation="Horizontal">
-                <StackPanel.Style>
-                    <Style TargetType="StackPanel">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Visibility, ElementName=GridRoasted}" Value="Hidden">
-                                <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
-                
-                <TextBlock Text="Cумма: " Style="{StaticResource Header3}"/>
-                <TextBlock Text="{Binding RoastedStocksCostsSum, StringFormat={}{0} грн}"
-                           Style="{StaticResource Header3Accent}"/>
-            </StackPanel>
-        </Grid>
-        
-        <Grid Grid.Row="3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition />
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            
-            <TextBlock Text="Остатки упакованного кофе:" Style="{StaticResource Header1}" 
-                       Margin="0,10,0,0" HorizontalAlignment="Center"/>
-
-            <DataGrid x:Name="GridPacked" Grid.Row="1" Margin="3,0" IsReadOnly="True"
-                      AutoGenerateColumns="False" ItemsSource="{Binding PackedStocks}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Mix.Name}" Header="Купаж"/>
-                    <DataGridTextColumn Binding="{Binding Package.Name}" Header="Упаковка"/>
-                    <DataGridTextColumn Binding="{Binding Package.Capacity, StringFormat={}{0} кг}" Header="Ёмкость"/>
-                    <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} шт}" Header="Количество"/>
-                    <DataGridTextColumn Binding="{Binding dCost, StringFormat={}{0} грн/шт}" Header="Себестоимость"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <TextBlock Grid.Row="1" VerticalAlignment="Top" Text="Расфасованного кофе совсем не осталось">
-                <TextBlock.Style>
-                    <Style BasedOn="{StaticResource Header2}" TargetType="TextBlock">
-                        <Setter Property="HorizontalAlignment" Value="Center"/>
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Visibility, ElementName=GridPacked}" Value="Hidden">
-                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-
-            <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,5,0,0" Orientation="Horizontal">
-                <StackPanel.Style>
-                    <Style TargetType="StackPanel">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Visibility, ElementName=GridPacked}" Value="Hidden">
-                                <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
-                
-                <TextBlock Text="Cумма: " Style="{StaticResource Header3}"/>
-                <TextBlock Text="{Binding PackedStocksCostsSum, StringFormat={}{0} грн}"
-                           Style="{StaticResource Header3Accent}"/>
-            </StackPanel>
-        </Grid>
-        
-        <Grid Grid.Row="3" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition />
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            
-            <TextBlock Text="Остатки упаковки:" Style="{StaticResource Header1}" 
-                       Margin="0,10,0,0" HorizontalAlignment="Center"/>
-
-            <DataGrid x:Name="GridPackage" Grid.Row="1" Margin="3,0" IsReadOnly="True"
-                      AutoGenerateColumns="False" ItemsSource="{Binding PackageStocks}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Package.Name}" Header="Название"/>
-                    <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} шт}" Header="Количество"/>
-                    <DataGridTextColumn Binding="{Binding dCost, StringFormat={}{0} грн/шт}" Header="Себестоимость"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <TextBlock Grid.Row="1" VerticalAlignment="Top" Text="Упаковки больше нет">
-                <TextBlock.Style>
-                    <Style BasedOn="{StaticResource Header2}" TargetType="TextBlock">
-                        <Setter Property="HorizontalAlignment" Value="Center"/>
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Visibility, ElementName=GridPackage}" Value="Hidden">
-                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-
-            <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,5,0,0" Orientation="Horizontal">
-                <StackPanel.Style>
-                    <Style TargetType="StackPanel">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Visibility, ElementName=GridPackage}" Value="Hidden">
-                                <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
-                
-                <TextBlock Text="Cумма: " Style="{StaticResource Header3}"/>
-                <TextBlock Text="{Binding PackageStocksCostsSum, StringFormat={}{0} грн}"
-                           Style="{StaticResource Header3Accent}"/>
-            </StackPanel>
-        </Grid>
-        
-        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
-                    Orientation="Horizontal" Margin="0,10,0,0">
-            <TextBlock Text="Общая сумма: " Style="{StaticResource Header2}"/>
-            <TextBlock Text="{Binding OverallSum, StringFormat={}{0} грн}" Style="{StaticResource Header2Accent}"/>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal" Grid.Row="5" 
-                    Grid.ColumnSpan="2" Margin="0,10,0,0" 
-                    HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Click="NewPurchase" Margin="{StaticResource ControlMargin}"
-                    Width="85" Height="85">
-                <StackPanel>
-                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
+                    Width="105" Height="50">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30">
                         <Rectangle.OpacityMask>
                             <VisualBrush Visual="{StaticResource appbar_cart}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Style="{StaticResource ButtonText}" 
+
+                    <TextBlock Style="{StaticResource ButtonText}"
+                               Grid.Column="1" Margin="10,0,0,0"
+                               VerticalAlignment="Center"
                                Text="Закупка кофе" TextWrapping="Wrap"
-                               TextAlignment="Center"/>
-                </StackPanel>
+                               TextAlignment="Center" />
+                </Grid>
             </Button>
 
             <Button Click="NewRoasting" Margin="{StaticResource ControlMargin}"
-                    Width="85" Height="85">
-                <StackPanel>
-                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
+                    Width="105" Height="50">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30">
                         <Rectangle.OpacityMask>
                             <VisualBrush Visual="{StaticResource appbar_acorn}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Style="{StaticResource ButtonText}" 
+
+                    <TextBlock Style="{StaticResource ButtonText}"
+                               Grid.Column="1" Margin="10,0,0,0"
+                               VerticalAlignment="Center"
                                Text="Обжарка кофе" TextWrapping="Wrap"
-                               TextAlignment="Center"/>
-                </StackPanel>
+                               TextAlignment="Center" />
+                </Grid>
             </Button>
 
             <Button Click="NewPackagePurchase" Margin="{StaticResource ControlMargin}"
-                    Width="85" Height="85">
-                <StackPanel>
-                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
+                    Width="105" Height="50">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30">
                         <Rectangle.OpacityMask>
                             <VisualBrush Visual="{StaticResource appbar_gift}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Style="{StaticResource ButtonText}" 
+
+                    <TextBlock Style="{StaticResource ButtonText}"
+                               Grid.Column="1" Margin="10,0,0,0"
+                               VerticalAlignment="Center"
                                Text="Закупка упаковки" TextWrapping="Wrap"
-                               TextAlignment="Center"/>
-                </StackPanel>
+                               TextAlignment="Center" />
+                </Grid>
             </Button>
 
             <Button Click="NewPacking" Margin="{StaticResource ControlMargin}"
-                    Width="85" Height="85">
-                <StackPanel>
-                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
+                    Width="105" Height="50">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30">
                         <Rectangle.OpacityMask>
                             <VisualBrush Visual="{StaticResource appbar_filter}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Style="{StaticResource ButtonText}" 
+
+                    <TextBlock Style="{StaticResource ButtonText}"
+                               Grid.Column="1" Margin="10,0,0,0"
+                               VerticalAlignment="Center"
                                Text="Фасовка кофе" TextWrapping="Wrap"
-                               TextAlignment="Center"/>
-                </StackPanel>
+                               TextAlignment="Center" />
+                </Grid>
+            </Button>
+
+            <Button Click="NewProductPurchase" Margin="{StaticResource ControlMargin}"
+                    Width="105" Height="50">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource appbar_cupcake}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+
+                    <TextBlock Style="{StaticResource ButtonText}"
+                               Grid.Column="1" Margin="10,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Закупка товаров" TextWrapping="Wrap"
+                               TextAlignment="Center" />
+                </Grid>
             </Button>
 
             <Button Click="NewSale" Margin="{StaticResource ControlMargin}"
-                    Width="85" Height="85">
-                <StackPanel>
-                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30" Margin="5">
+                    Width="105" Height="50">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Rectangle Fill="{StaticResource GrayBrush1}" Height="30" Width="30">
                         <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_money}" />
+                            <VisualBrush Visual="{StaticResource appbar_cup}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Style="{StaticResource ButtonText}" 
-                               Text="Продажа кофе" TextWrapping="Wrap"
-                               TextAlignment="Center"/>
-                </StackPanel>
+
+                    <TextBlock Style="{StaticResource ButtonText}"
+                               Grid.Column="1" Margin="10,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Продажа" TextWrapping="Wrap"
+                               TextAlignment="Center" />
+                </Grid>
             </Button>
         </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="15,0" HorizontalAlignment="Center">
+
+            <ItemsControl x:Name="ItemsAccounts"
+                          VerticalAlignment="Center"
+                          ItemsSource="{Binding AccountsBalances}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                            <TextBlock Text="{Binding Account.Name, StringFormat={}{0}:}"
+                                       Style="{StaticResource Header2Accent}" />
+                            <TextBlock Text="{Binding Balance, StringFormat={}{0} грн}"
+                                       Style="{StaticResource Header2}" Margin="5,0,0,0" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Items.Count, RelativeSource={RelativeSource Self}}"
+                                         Value="0">
+                                <Setter Property="ItemsControl.Visibility" Value="Hidden" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ItemsControl.Style>
+            </ItemsControl>
+
+            <TextBlock Text="Казна пуста">
+                <TextBlock.Style>
+                    <Style BasedOn="{StaticResource Header2}" TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Visibility, ElementName=ItemsAccounts}" Value="Hidden">
+                                <Setter Property="TextBlock.Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StackPanel>
+
+
+        <!--<TextBlock Style="{StaticResource Header1}" 
+                   Grid.Row="2" Margin="0,10,0,0"
+                   Text="Текущие остатки" 
+                   HorizontalAlignment="Center"/>-->
+
+        <Grid Grid.Row="3" Margin="0,15,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Margin="10,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="Зелёный и жареный кофе:" Margin="0,5,0,0"
+                           Style="{StaticResource Header2}" HorizontalAlignment="Center" />
+
+                <DataGrid x:Name="GridCoffee" Margin="0,5,0,0"
+                          Grid.Row="1"
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding CoffeeStocks}"
+                          ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding CoffeeSort.Name}" Header="Сорт" />
+                        <DataGridTextColumn Binding="{Binding GreenQuantity, StringFormat={}{0} кг}" Header="Зелёного" />
+                        <DataGridTextColumn Binding="{Binding RoastedQuantity, StringFormat={}{0} кг}" Header="Жареного" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <TextBlock VerticalAlignment="Top"
+                           Grid.Row="1"
+                           Margin="0,5,0,0"
+                           Text="Кофе нет. Совсем нет. Ни зёрнышка">
+                    <TextBlock.Style>
+                        <Style BasedOn="{StaticResource Header2}" TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visibility, ElementName=GridCoffee}" Value="Hidden">
+                                    <Setter Property="TextBlock.Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="10,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="Упаковка:" Style="{StaticResource Header2}"
+                           Margin="0,5,0,0" HorizontalAlignment="Center" />
+
+                <DataGrid x:Name="GridPackage" 
+                          Margin="0,5,0,0" 
+                          Grid.Row="1"
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False" 
+                          ItemsSource="{Binding PackageStocks}"
+                          ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Package.Name}" Header="Название" />
+                        <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} шт}" Header="Количество" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <TextBlock VerticalAlignment="Top" 
+                           Grid.Row="1"
+                           Text="Упаковки больше нет" 
+                           Margin="0,5,0,0">
+                    <TextBlock.Style>
+                        <Style BasedOn="{StaticResource Header2}" TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visibility, ElementName=GridPackage}" Value="Hidden">
+                                    <Setter Property="TextBlock.Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="10,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="Расфасованный кофе:" 
+                           Style="{StaticResource Header2}"
+                           Margin="0,5,0,0" HorizontalAlignment="Center" />
+
+                <DataGrid x:Name="GridPacked" 
+                          Grid.Row="1"
+                          Margin="0,5,0,0" 
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False" 
+                          ItemsSource="{Binding PackedStocks}"
+                          ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Mix.Name}" Header="Купаж" />
+                        <DataGridTextColumn Binding="{Binding Package.Name}" Header="Упаковка" />
+                        <DataGridTextColumn Binding="{Binding Package.Capacity, StringFormat={}{0} кг}"
+                                            Header="Ёмкость" />
+                        <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} шт}" Header="Количество" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <TextBlock VerticalAlignment="Top" 
+                           Grid.Row="1"
+                           Margin="0,5,0,0"
+                           Text="Расфасованного кофе совсем не осталось"
+                           TextWrapping="Wrap">
+                    <TextBlock.Style>
+                        <Style BasedOn="{StaticResource Header2}" TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visibility, ElementName=GridPacked}" Value="Hidden">
+                                    <Setter Property="TextBlock.Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1" Margin="10,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="Сопутствующие товары:" 
+                           Style="{StaticResource Header2}"
+                           Margin="0,5,0,0" 
+                           HorizontalAlignment="Center" />
+
+                <DataGrid x:Name="GridProduct" 
+                          Grid.Row="1"
+                          Margin="0,5,0,0" 
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False" 
+                          ItemsSource="{Binding ProductStocks}"
+                          ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Product.Name}" Header="Название" />
+                        <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} шт}" Header="Количество" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <TextBlock VerticalAlignment="Top" 
+                           Grid.Row="1"
+                           Text="На складе пусто и пыльно"
+                           Margin="0,5,0,0" TextWrapping="Wrap">
+                    <TextBlock.Style>
+                        <Style BasedOn="{StaticResource Header2}" TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visibility, ElementName=GridProduct}" Value="Hidden">
+                                    <Setter Property="TextBlock.Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

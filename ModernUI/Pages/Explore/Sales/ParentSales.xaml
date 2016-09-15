@@ -38,12 +38,12 @@
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <Button Command="{Binding cmdFilterAll}"
                             Margin="{StaticResource ControlMargin}"
-                            Content="Все" />
+                            Content="За год" />
 
                     <Button Command="{Binding cmdFilter30Days}"
                             Grid.Column="1"
@@ -57,14 +57,12 @@
 
                     <Label Margin="{StaticResource ControlMargin}"
                            Grid.Row="2" Content="С даты:"/>
-                    <DatePicker Margin="{StaticResource ControlMargin}" 
-                                Grid.Row="2" Grid.Column="1"
+                    <DatePicker Margin="{StaticResource ControlMargin}" Grid.Row="2" Grid.Column="1"
                                 SelectedDate="{Binding FilterFrom, UpdateSourceTrigger=PropertyChanged}" />
 
                     <Label Margin="{StaticResource ControlMargin}"
                            Grid.Row="3" Content="По дату:"/>
-                    <DatePicker Margin="{StaticResource ControlMargin}" 
-                                Grid.Row="3" Grid.Column="1"
+                    <DatePicker Margin="{StaticResource ControlMargin}" Grid.Row="3" Grid.Column="1"
                                 SelectedDate="{Binding FilterTo, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
 
@@ -95,19 +93,16 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Command="{Binding cmdDelete}" Grid.ColumnSpan="2"
-                            Margin="{StaticResource ControlMargin}"
-                            CommandParameter="{Binding ElementName=tabs, Path=SelectedItem}"
-                            Content="Удалить"/>
-                    <Button Click="OnNewClick" Grid.Row="1"
+                    <Button Click="OnNewClick" Grid.ColumnSpan="2"
                             Margin="{StaticResource ControlMargin}"
                             Content="Добавить"/>
+                    <Button Command="{Binding cmdDelete}" Grid.Row="1"
+                            Margin="{StaticResource ControlMargin}"
+                            CommandParameter="{Binding ElementName=tabs, Path=SelectedItem}"
+                            Content="Удалить" IsEnabled="False"/>
                     <Button Click="OnEditClick"  Grid.Row="1" Grid.Column="1"
                             Margin="{StaticResource ControlMargin}"
-                            Content="Редактировать"/>
-
-
-
+                            Content="Редактировать" IsEnabled="False"/>
                 </Grid>
             </Grid>
         </Border>
@@ -152,9 +147,9 @@
                           Grid.Row="2" Grid.Column="1" />
 
                 <TextBlock Style="{StaticResource Header3}" Margin="{StaticResource ControlMargin}"
-                           Text="По сорту:" Grid.Row="1" Grid.Column="2" />
-                <ComboBox ItemsSource="{Binding Source={x:Static model:ContextManager.AllCoffeeSorts}}"
-                          SelectedItem="{Binding FilterCoffeeSort}"
+                           Text="По купажу:" Grid.Row="1" Grid.Column="2" />
+                <ComboBox ItemsSource="{Binding Source={x:Static model:ContextManager.AllMixes}}"
+                          SelectedItem="{Binding FilterMix}"
                           DisplayMemberPath="Name"
                           controls:TextBoxHelper.ClearTextButton="True"
                           Margin="{StaticResource ControlMargin}"

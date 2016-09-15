@@ -34,14 +34,13 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        protected override void cmdSave_Execute()
-        {
-            if (CreatingNew)
-                ContextManager.Context.Products.Add(Product);
-            SaveContext();
+        protected override void OnSaveValidation()
+        { }
 
-            if (CreatingNew)
-                Refresh();
+        protected override void OnSaveCreate()
+        {
+            ContextManager.Context.Products.Add(Product);
+            ContextManager.Context.dProductStocks.Add(new dProductStock {Product = Product});
         }
     }
 }

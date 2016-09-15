@@ -13,7 +13,7 @@ namespace ViewModels.Windows.EntityWindows
             if (argMix != null)
             {
                 Mix = argMix as Mix;
-                Details = new ObservableCollection<Mix_Details>(Mix.Mix_Details);
+                //Details = new ObservableCollection<Mix_Details>(Mix.Mix_Details);
             }
             else
             {
@@ -31,6 +31,7 @@ namespace ViewModels.Windows.EntityWindows
         #region Binding Properties and INotifyPropertyChanged implementation
 
         private Mix _mix;
+
         public Mix Mix
         {
             get { return _mix; }
@@ -42,6 +43,7 @@ namespace ViewModels.Windows.EntityWindows
         }
 
         private ObservableCollection<Mix_Details> _details;
+
         public ObservableCollection<Mix_Details> Details
         {
             get { return _details; }
@@ -56,33 +58,24 @@ namespace ViewModels.Windows.EntityWindows
 
         #region Commands
 
-        protected override void cmdSave_Execute()
+        protected override void OnSaveValidation()
         {
-            double total = 0;
-            try { total = Details.Sum(x => x.Ratio); }
-            catch(Exception ex){ }
-
+            double total = Details.Sum(x => x.Ratio);
             if (total != 100)
-            {
-                FlyErrorMsg = "Неправильные пропорции, общая сумма не равна 100%";
-                IsFlyErrorOpened = true;
-                return;
-            }
+                throw new Exception("Неправильные пропорции, общая сумма не равна 100%");
+        }
 
+        protected override void OnSaveCreate()
+        {
             _mix.Mix_Details.Clear();
             foreach (var x in Details)
             {
                 _mix.Mix_Details.Add(x);
                 x.Ratio /= 100;
             }
-
-            if (CreatingNew)
-                ContextManager.Context.Mixes.Add(_mix);
-            SaveContext();
-            if (CreatingNew)
-                Refresh();
+            ContextManager.Context.Mixes.Add(_mix);
         }
-    }
 
-    #endregion
+        #endregion
+    }
 }

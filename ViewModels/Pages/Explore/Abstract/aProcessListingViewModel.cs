@@ -22,7 +22,6 @@ namespace ViewModels.Pages.Explore.Abstract
             try
             {
                 ContextManager.Context.SaveChanges();
-                ContextManager.ReloadContext();
             }
             catch (Exception ex)
             {
@@ -85,7 +84,7 @@ namespace ViewModels.Pages.Explore.Abstract
         { get; private set; }
         private void cmdReload_Execute()
         {
-            ContextManager.ReloadContext();
+            //ContextManager.ReloadContext();
             Load();
         }
 
@@ -114,9 +113,8 @@ namespace ViewModels.Pages.Explore.Abstract
         { get; private set; }
         protected void cmdFilterAll_Execute()
         {
-            _filterTo = DateTime.Now;
-            OnPropertyChanged(nameof(FilterTo));
-            FilterFrom = DateTime.MinValue;
+            FilterTo = DateTime.Now;
+            FilterFrom = FilterTo.AddDays(-365);
         }
 
         #endregion

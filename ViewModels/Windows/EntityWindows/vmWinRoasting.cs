@@ -54,59 +54,43 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        protected override void cmdSave_Execute()
+        protected override void OnSaveValidation()
         {
             if (Roasting.InitialAmount <= 0)
-            {
-                FlyErrorMsg = "Введите количество кофе";
-                IsFlyErrorOpened = true;
-                return;
-            }
-
-            if (ShrinkagePercent < 1|| ShrinkagePercent > 100)
-            {
-                FlyErrorMsg = "Введите процент ужарки от одного до ста";
-                IsFlyErrorOpened = true;
-                return;
-            }
-
+                throw new Exception("Введите количество кофе");
+            if (ShrinkagePercent < 1 || ShrinkagePercent > 100)
+                throw new Exception("Введите процент ужарки от одного до ста");
 
             if (Roasting.InitialAmount >
-                ContextManager.Context.dGreenStocks.First(p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id).Quantity)
-            {
-                FlyErrorMsg = "Недостаточно зелёного кофе в наличии, чтобы пожарить введённое количество";
-                IsFlyErrorOpened = true;
-                return;
-            }
+                ContextManager.Context.dCoffeeStocks.First(
+                    p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id).GreenQuantity)
+                throw new Exception("Недостаточно зелёного кофе в наличии, чтобы пожарить введённое количество");
+        }
 
-            Roasting.ShrinkagePercent = (100 - ShrinkagePercent)/100d;
+        protected override void OnSaveCreate()
+        {
+            Roasting.ShrinkagePercent = (100 - ShrinkagePercent) / 100d;
             Roasting.RoastedAmount = Roasting.InitialAmount * Roasting.ShrinkagePercent;
             Properties.ShrinkagePercent = ShrinkagePercent;
-
-            //// Find stocks of roasted coffee for current roasting
-            //var roastedStock = ContextManager.Context.dRoastedStocks.First(
-            //    p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id);
-            //// Calculate cost of coffee for current roasting
-            //var cost = ContextManager.Context.dGreenStocks.First(
-            //    p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id)
-            //    .dCost * 100 /(100 - ShrinkagePercent);
-            //// Check if there anything in stock already
-            //if (roastedStock.Quantity == 0)
-            //    // Set cost from roasting
-            //    roastedStock.dCost = cost;
-            //else
-            //{
-            //    // Count cost based on stock and new roasting
-            //    roastedStock.dCost = (roastedStock.Quantity * roastedStock.dCost + Roasting.RoastedAmount * cost) 
-            //        / (roastedStock.Quantity + Roasting.RoastedAmount);
-            //}
-
-            if (CreatingNew)
-                ContextManager.Context.Roastings.Add(Roasting);
-            SaveContext();
-
-            if (CreatingNew)
-                Refresh();
+            // Add roasting to database
+            ContextManager.Context.Roastings.Add(Roasting);
+            // Change roasted stocks cost
+            var coffeeStock = ContextManager.Context.dCoffeeStocks.First(
+                p => p.CoffeeSort.Id == Roasting.CoffeeSort.Id);
+            // Calculate cost of coffee for current roasting
+            var cost = Math.Round(coffeeStock.GreenCost*100/(100 - ShrinkagePercent),2);
+            // Check if there anything in stock already
+            if (coffeeStock.RoastedQuantity == 0)
+                // Set cost from roasting
+                coffeeStock.RoastedCost = Math.Round(cost, 2);
+            else
+            // Or count cost based on stock and new roasting
+                coffeeStock.RoastedCost = Math.Round((coffeeStock.RoastedQuantity*coffeeStock.RoastedCost +
+                                                      Roasting.RoastedAmount*cost)
+                                                     /(coffeeStock.RoastedQuantity + Roasting.RoastedAmount), 2);
+            // Change coffee stocks
+            coffeeStock.GreenQuantity -= Roasting.InitialAmount;
+            coffeeStock.RoastedQuantity += Roasting.RoastedAmount;
         }
     }
 }

@@ -9,10 +9,10 @@ namespace Model
         private static ContextContainer _context;
         public static ContextContainer Context => _context ?? (_context = new ContextContainer());
 
-        public static void ReloadContext()
-        {
-            _context = new ContextContainer();
-        }
+        //public static void ReloadContext()
+        //{
+        //    _context = new ContextContainer();
+        //}
 
         public static ObservableCollection<Account> ActiveAccounts => new ObservableCollection<Account>(Context.Accounts.Where(p => p.Active));
         public static ObservableCollection<CoffeeSort> ActiveCoffeeSorts => new ObservableCollection<CoffeeSort>(Context.CoffeeSorts.Where(p => p.Active));

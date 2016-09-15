@@ -7,19 +7,19 @@
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Минимальные зелёные остатки:</TextBlock>
-            <TextBlock Style="{StaticResource Header2Accent}" Margin="5,0,0,0"
+            <TextBlock Style="{StaticResource Header3Accent}" Margin="5,0,0,0"
                            Text="{Binding MinGreenStocks}"/>
         </WrapPanel>
 
         <WrapPanel>
             <TextBlock Style="{StaticResource Header3}">Минимальные жареные остатки:</TextBlock>
-            <TextBlock Style="{StaticResource Header2Accent}" Margin="5,0,0,0"
+            <TextBlock Style="{StaticResource Header3Accent}" Margin="5,0,0,0"
                            Text="{Binding MinRoastedStocks}"/>
         </WrapPanel>
 
         <Separator Margin="0,5,0,0"/>
 
-        <TextBlock Style="{StaticResource Header2}" Margin="0,5,0,0">Описание:</TextBlock>
+        <TextBlock Style="{StaticResource Header3}" Margin="0,5,0,0">Описание:</TextBlock>
         <TextBlock Style="{StaticResource Header3}" Margin="0,5,0,0"
                    Text="{Binding Description}" TextWrapping="Wrap"/>
     </StackPanel>

@@ -4,17 +4,17 @@
     <StackPanel Margin="10,0,10,0">
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Номер накладной:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding InvoiceNumber}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding InvoiceNumber}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Дата закупки:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Date}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Date}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <TextBlock x:Name="textPaid" Margin="0,5,0,0">
             <TextBlock.Style>
-                <Style BasedOn="{StaticResource Header2Accent}" TargetType="TextBlock">
+                <Style BasedOn="{StaticResource Header3Accent}" TargetType="TextBlock">
                     <Setter Property="Text" Value="Оплачено"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Paid}" Value="False">
@@ -43,7 +43,7 @@
             
             <TextBlock Margin="5,0,0,0" Text="{Binding PaymentDate}">
                 <TextBlock.Style>
-                    <Style BasedOn="{StaticResource Header2Accent}" TargetType="TextBlock">
+                    <Style BasedOn="{StaticResource Header3Accent}" TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Collapsed"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Text, ElementName=textPaid}" Value="Оплачено">
@@ -57,16 +57,16 @@
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Поставщик:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Supplier.Name}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Supplier.Name}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Счёт:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Account.Name}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Account.Name}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <Separator Margin="0,5,0,0"/>
-        
+
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CoffeePurchaseDetails}" 
                   IsReadOnly="True" Margin="0,5,0,0">
             <DataGrid.Columns>
@@ -75,12 +75,5 @@
                 <DataGridTextColumn Binding="{Binding Price, StringFormat={}{0} грн/кг}" Header="Цена за кг"/>
             </DataGrid.Columns>
         </DataGrid>
-
-        <Separator Margin="0,5,0,0"/>
-
-        <WrapPanel Margin="0,5,0,0" HorizontalAlignment="Right">
-            <TextBlock Style="{StaticResource Header3}">Сумма:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Sum}" Style="{StaticResource Header2Accent}"/>
-        </WrapPanel>
     </StackPanel>
 </UserControl>

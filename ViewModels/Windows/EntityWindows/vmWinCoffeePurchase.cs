@@ -6,7 +6,7 @@ using Model.Entity;
 
 namespace ViewModels.Windows.EntityWindows
 {
-    public class vmWinCoffeePurchase: Abstract.aEntityWindowViewModel
+    public class vmWinCoffeePurchase : Abstract.aEntityWindowViewModel
     {
         public vmWinCoffeePurchase(object argPurchase)
         {
@@ -45,12 +45,12 @@ namespace ViewModels.Windows.EntityWindows
             };
 
             Details = new ObservableCollection<CoffeePurchaseDetails>();
-
         }
 
         #region Binding Properties
 
         private CoffeePurchase _purchase;
+
         public CoffeePurchase Purchase
         {
             get { return _purchase; }
@@ -62,6 +62,7 @@ namespace ViewModels.Windows.EntityWindows
         }
 
         private ObservableCollection<CoffeePurchaseDetails> _details;
+
         public ObservableCollection<CoffeePurchaseDetails> Details
         {
             get { return _details; }
@@ -75,73 +76,85 @@ namespace ViewModels.Windows.EntityWindows
         #endregion
 
         #region Commands
+        private double _sum;
 
-        protected override void cmdSave_Execute()
+        protected override void OnSaveValidation()
         {
             if (Purchase.InvoiceNumber == "0" || Purchase.InvoiceNumber == "")
-            {
-                FlyErrorMsg = "Введите номер накладной";
-                IsFlyErrorOpened = true;
-                return;
-            }
+                throw new Exception("Введите номер накладной");
 
             if (Details.Count == 0)
-            {
-                FlyErrorMsg = "Введите хотя бы один сорт кофе";
-                IsFlyErrorOpened = true;
-                return;
-            }
+                throw new Exception("Введите хотя бы один сорт кофе");
 
             if (Details.Any(detail => detail.Quantity == 0))
-            {
-                FlyErrorMsg = "Введите количество закупленного кофе";
-                IsFlyErrorOpened = true;
-                return;
-            }
+                throw new Exception("Введите количество закупленного кофе");
 
             if (Details.Any(detail => detail.Price == 0))
-            {
-                FlyErrorMsg = "Введите цену отличную от нуля";
-                IsFlyErrorOpened = true;
-                return;
-            }
+                throw new Exception("Введите цену отличную от нуля");
 
-            _purchase.dSum = 0;
-            foreach (var detail in Details)
-                _purchase.dSum += (detail.Price * detail.Quantity);
+            _sum = Details.Sum(detail => (detail.Price * detail.Quantity));
 
             if (ContextManager.Context.dAccountsBalances.First(
-                p => p.Account.Id == Purchase.Account.Id).Balance < Purchase.dSum)
-            {
-                FlyErrorMsg = "На выбранном счету недостаточно денег";
-                IsFlyErrorOpened = true;
-                return;
-            }
+                p => p.Account.Id == Purchase.Account.Id).Balance < _sum)
+                throw new Exception("На выбранном счету недостаточно денег");
+        }
 
+        protected override void OnSaveCreate()
+        {
+            // Just for common sense
+            if (!_purchase.Paid)
+                _purchase.PaymentDate = null;
+
+            // Add details to actual purchase from temp collection
             _purchase.CoffeePurchaseDetails.Clear();
             foreach (var detail in Details)
-            {
                 _purchase.CoffeePurchaseDetails.Add(detail);
-                //// Find stocks of green coffee for current coffee sort
-                //var greenStock = ContextManager.Context.dGreenStocks.First( 
-                //    p => p.CoffeeSort.Id == detail.CoffeeSort.Id);
-                //// Check if there anything in stock already
-                //if (greenStock.Quantity == 0)
-                //    // Set cost from purchase
-                //    greenStock.dCost = detail.Price;
-                //else
-                //    // Count cost based on stock and new purchase
-                //    greenStock.dCost = (greenStock.Quantity*greenStock.dCost 
-                //                            + detail.Quantity*detail.Price)/
-                //                       (greenStock.Quantity + detail.Quantity);
+
+            // Add purchase to databse
+            ContextManager.Context.CoffeePurchases.Add(_purchase);
+
+            // All financial operations will be done only if it was actually paid
+            if (_purchase.Paid)
+            {
+                // Change account balance
+                ContextManager.Context.dAccountsBalances.First(
+                    p => p.Account.Id == Purchase.Account.Id).Balance -= _sum;
+                // Add new transaction
+                ContextManager.Context.dTransactions.Add(new dTransaction
+                {
+                    Account = Purchase.Account,
+                    Date = Purchase.Date,
+                    Description = "Закупка кофе",
+                    Participant = Purchase.Supplier.Name,
+                    Sum = _sum
+                });
+
+                // Correct cost of green coffee stocks
+                foreach (var detail in Details)
+                {
+                    // Find stocks of green coffee for current coffee sort
+                    var coffeeStock = ContextManager.Context.dCoffeeStocks.First(
+                        p => p.CoffeeSort.Id == detail.CoffeeSort.Id);
+                    // Check if there anything in stock already
+                    if (coffeeStock.GreenQuantity == 0)
+                        // Set cost from purchase
+                        coffeeStock.GreenCost = detail.Price;
+                    else
+                    // Count cost based on stock and new purchase
+                        coffeeStock.GreenCost = Math.Round((coffeeStock.GreenQuantity*coffeeStock.GreenCost
+                                                            + detail.Quantity*detail.Price)/
+                                                           (coffeeStock.GreenQuantity + detail.Quantity), 2);
+                }
             }
 
-            if (CreatingNew)
-                ContextManager.Context.CoffeePurchases.Add(_purchase);
-            SaveContext();
-
-            if (CreatingNew)
-                Refresh();
+            foreach (var detail in Details)
+            {
+                // Find stocks of green coffee for current coffee sort
+                var coffeeStock = ContextManager.Context.dCoffeeStocks.First(
+                    p => p.CoffeeSort.Id == detail.CoffeeSort.Id);
+                // Change green coffee stocks
+                coffeeStock.GreenQuantity += detail.Quantity;
+            }
         }
 
         #endregion

@@ -24,8 +24,6 @@ namespace Model.Entity
         public System.DateTime Date { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public bool Paid { get; set; }
-        public double dSum { get; set; }
-        public Nullable<int> TransactionId { get; set; }
         public string InvoiceNumber { get; set; }
     
         public virtual Supplier Supplier { get; set; }
