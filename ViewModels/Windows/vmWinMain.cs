@@ -12,7 +12,8 @@ namespace ViewModels.Windows
                 new vmHome(),
                 new vmStatistics(),
                 new vmExplorer(),
-                new vmExplorerOperations()
+                new vmExplorerOperations(),
+                new vmUnpaid()
             };
         }
 

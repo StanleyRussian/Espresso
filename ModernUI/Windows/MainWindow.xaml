@@ -28,6 +28,9 @@
                 <DataTemplate DataType="{x:Type pagesVM:vmExplorerOperations}">
                     <pages:ExplorerOperations/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type pagesVM:vmUnpaid}">
+                    <pages:Unpaid/>
+                </DataTemplate>
             </TabControl.Resources>
 
             <TabControl.ItemContainerStyle>
@@ -35,6 +38,7 @@
                     <Setter Property="Header" Value="{Binding Header}" />
                     <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
                     <Setter Property="controls:ControlsHelper.HeaderFontWeight" Value="Light"/>
+                    <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="22"/>
                 </Style>
             </TabControl.ItemContainerStyle>
         </TabControl>

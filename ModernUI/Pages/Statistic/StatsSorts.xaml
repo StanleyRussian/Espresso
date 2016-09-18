@@ -49,6 +49,7 @@
                                                         <Setter.Value>
                                                             <ControlTemplate>
                                                                 <Button Command="{Binding cmdPurchaseStep}"
+                                                                        DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext}"
                                                                         Content="Вычислить" 
                                                                         Style="{StaticResource _AccentedSquareButtonStyle}"/>
                                                             </ControlTemplate>
@@ -90,7 +91,7 @@
         </Grid>
         
         <TextBlock Text="График изменения закупочной цены выбранного кофе"
-                   Style="{StaticResource Header2}"
+                   Style="{StaticResource Header3}"
                    Grid.Row="1" 
                    HorizontalAlignment="Center"
                    Margin="0,10,0,0"/>

@@ -269,6 +269,9 @@
     <Compile Include="Pages\Statistic\StatsSorts.xaml.cs">
       <DependentUpon>StatsSorts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Unpaid.xaml.cs">
+      <DependentUpon>Unpaid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EntityWindows\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
@@ -523,6 +526,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Statistic\StatsSorts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Unpaid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

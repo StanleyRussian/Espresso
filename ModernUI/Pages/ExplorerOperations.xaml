@@ -53,7 +53,7 @@
                 <Style BasedOn="{StaticResource MetroTabItem}" TargetType="TabItem">
                     <Setter Property="Header" Value="{Binding Header}"/>
                     <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
-                    <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="18"/>
+                    <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="16"/>
                 </Style>
             </TabControl.ItemContainerStyle>
         </TabControl>
