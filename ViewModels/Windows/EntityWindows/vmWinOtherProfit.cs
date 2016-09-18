@@ -62,7 +62,7 @@ namespace ViewModels.Windows.EntityWindows
             {
                 Account = Profit.Account,
                 Date = Profit.Date,
-                Description = "Закупка кофе",
+                Description = "Доход",
                 Participant = Profit.Designation,
                 Sum = Profit.Sum
             });

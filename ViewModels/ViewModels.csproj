@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auxiliary\SimpleCommand.cs" />
+    <Compile Include="Pages\vmUnpaid.cs" />
     <Compile Include="Pages\Explore\vmProductPurchases.cs" />
     <Compile Include="Pages\Explore\vmProducts.cs" />
     <Compile Include="Pages\Explore\vmSales.cs" />

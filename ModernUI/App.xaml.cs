@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
+using Model;
 using UI.Windows;
 
 namespace UI
@@ -16,7 +18,7 @@ namespace UI
             StartupSplash _splash = new StartupSplash();
             _splash.Show();
 
-            if (ViewModels.Properties.FirstLaunch)
+            if (!ContextManager.Context.Accounts.Any())
             {
                 FirstLaunchWindow _firstLaunch = new FirstLaunchWindow();
                 _splash.Hide();
@@ -25,7 +27,7 @@ namespace UI
                 _splash.Show();
             }
 
-            if (!ViewModels.Properties.FirstLaunch)
+            if (ContextManager.Context.Accounts.Any())
             {
                 MainWindow _mainWindow = new MainWindow();
                 _splash.Close();

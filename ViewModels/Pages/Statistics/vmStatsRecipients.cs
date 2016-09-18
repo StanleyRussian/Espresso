@@ -10,7 +10,7 @@ namespace ViewModels.Pages.Statistics
     {
         public vmStatsRecipients()
         {
-            Header = "Клиенты";
+            Header = "Клиенты и продажи";
         }
 
         protected override void Load()

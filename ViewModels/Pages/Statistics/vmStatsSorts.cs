@@ -30,8 +30,7 @@ namespace ViewModels.Pages.Statistics
 
             var stocks = new ObservableCollection<dCoffeeStock>(
                 ContextManager.Context.dCoffeeStocks.Where(
-                    p => p.GreenQuantity > 0 ||
-                         p.RoastedQuantity > 0).Include(p => p.CoffeeSort));
+                    p => p.CoffeeSort.Active).Include(p => p.CoffeeSort));
 
             foreach (var coffeeStock in stocks)
                 CoffeeStocks.Add(new wrapCoffeeStock(coffeeStock));
