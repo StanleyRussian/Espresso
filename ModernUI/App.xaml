@@ -11,9 +11,11 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
                 <!-- accent resource -->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Emerald.xaml" />
                 <!-- change "BaseLight" to the theme you want -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+
+                <ResourceDictionary Source="Graphs.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="Title" TargetType="TextBlock">
@@ -104,6 +106,9 @@
             </Style>
 
             <Thickness x:Key="ControlMargin">4</Thickness>
+
+            <!--<SolidColorBrush x:Key="_LightFill" Color="#EBEBFF"/>-->
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -58,7 +58,6 @@ namespace ViewModels.Pages.Explore
         }
 
         private Recipient _filterRecipient;
-
         public Recipient FilterRecipient
         {
             get { return _filterRecipient; }

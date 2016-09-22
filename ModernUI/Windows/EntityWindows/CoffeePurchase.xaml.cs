@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using MahApps.Metro.Controls;
-using Model;
 using ViewModels.Windows.EntityWindows;
 
 namespace UI.Windows.EntityWindows

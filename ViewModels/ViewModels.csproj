@@ -42,6 +42,9 @@
       <HintPath>..\packages\EntityFramework.SqlServerCompact.6.1.3\lib\net45\EntityFramework.SqlServerCompact.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GravityApps.Mandelkow.MetroCharts">
+      <HintPath>..\packages\Mandlekow.MetroUI\GravityApps.Mandelkow.MetroCharts.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.7.13.0, Culture=neutral, PublicKeyToken=c5935629d38af058, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.7.13\lib\portable-net40+sl5+win8+wp8+wpa81\LiveCharts.dll</HintPath>
       <Private>True</Private>
@@ -86,12 +89,10 @@
     <Compile Include="Pages\Explore\vmPackings.cs" />
     <Compile Include="Pages\Explore\vmPayments.cs" />
     <Compile Include="Pages\Explore\vmRecipients.cs" />
-    <Compile Include="Pages\Statistics\vmStatsMixes.cs" />
-    <Compile Include="Pages\Statistics\vmStatsPacked.cs" />
-    <Compile Include="Pages\Statistics\vmStatsRecipients.cs" />
-    <Compile Include="Pages\Statistics\vmStatsSorts.cs" />
+    <Compile Include="Pages\Statistics\vmStatsSales.cs" />
+    <Compile Include="Pages\Statistics\vmStatsCoffeePurchases.cs" />
     <Compile Include="Pages\vmExplorer.cs" />
-    <Compile Include="Pages\Statistics\vmStatsAccounts.cs" />
+    <Compile Include="Pages\Statistics\vmStatsTransactions.cs" />
     <Compile Include="Pages\vmExplorerOperations.cs" />
     <Compile Include="Properties.cs" />
     <Compile Include="Properties\Annotations.cs" />

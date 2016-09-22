@@ -5,7 +5,6 @@ using System.Data.Entity.Infrastructure;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Model;
-using Model.Entity;
 using Model.Properties;
 using ViewModels.Auxiliary;
 

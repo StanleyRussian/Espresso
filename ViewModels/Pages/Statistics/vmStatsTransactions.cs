@@ -9,11 +9,11 @@ using ViewModels.Auxiliary;
 
 namespace ViewModels.Pages.Statistics
 {
-    public class vmStatsAccounts: aTabViewModel
+    public class vmStatsTransactions: aTabViewModel
     {
-        public vmStatsAccounts()
+        public vmStatsTransactions()
         {
-            Header = "Cчета";
+            Header = "Счета и транзакции";
         }
 
         protected override void Load()

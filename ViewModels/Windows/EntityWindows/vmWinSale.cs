@@ -131,7 +131,7 @@ namespace ViewModels.Windows.EntityWindows
                 // Calculate sale cost
                 detail.Cost = ContextManager.Context.dPackedStocks.First(
                     p => p.Mix.Id == detail.Mix.Id
-                         && p.Package.Id == detail.Package.Id).Cost*detail.Quantity;
+                         && p.Package.Id == detail.Package.Id).Cost;
                 // Change packed stocks
                 ContextManager.Context.dPackedStocks.First(
                     p => p.Mix.Id == detail.Mix.Id
