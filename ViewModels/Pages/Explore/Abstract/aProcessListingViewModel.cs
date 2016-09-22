@@ -84,7 +84,6 @@ namespace ViewModels.Pages.Explore.Abstract
         { get; private set; }
         private void cmdReload_Execute()
         {
-            //ContextManager.ReloadContext();
             Load();
         }
 
@@ -105,16 +104,21 @@ namespace ViewModels.Pages.Explore.Abstract
         protected void cmdFilter30Days_Execute()
         {
             _filterTo = DateTime.Now;
-            OnPropertyChanged(nameof(FilterTo));
-            FilterFrom = DateTime.Now.AddDays(-30);
+            OnPropertyChanged("FilterTo");
+            _filterFrom = DateTime.Now.AddDays(-30);
+            OnPropertyChanged("FilterFrom");
+            Refresh();
         }
 
         public ICommand cmdFilterAll
         { get; private set; }
         protected void cmdFilterAll_Execute()
         {
-            FilterTo = DateTime.Now;
-            FilterFrom = FilterTo.AddDays(-365);
+            _filterTo = DateTime.Now;
+            OnPropertyChanged("FilterTo");
+            _filterFrom = FilterTo.AddDays(-365);
+            OnPropertyChanged("FilterFrom");
+            Refresh();
         }
 
         #endregion

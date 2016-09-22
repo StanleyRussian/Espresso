@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="UI.Pages.Statistic.StatsAccounts"
+﻿<UserControl x:Class="UI.Pages.Statistic.StatsTransactions"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"

@@ -1,5 +1,4 @@
-﻿using System.Data.SqlClient;
-using Model;
+﻿using Model;
 using Model.Entity;
 
 namespace ViewModels.Windows.EntityWindows

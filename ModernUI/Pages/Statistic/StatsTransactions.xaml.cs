@@ -3,14 +3,13 @@
 namespace UI.Pages.Statistic
 {
     /// <summary>
-    /// Interaction logic for StatsSorts.xaml
+    /// Interaction logic for Accounts.xaml
     /// </summary>
-    public partial class StatsSorts : UserControl
+    public partial class StatsTransactions : UserControl
     {
-        public StatsSorts()
+        public StatsTransactions()
         {
             InitializeComponent();
-            GridCoffee.SelectedIndex = 0;
         }
     }
 }

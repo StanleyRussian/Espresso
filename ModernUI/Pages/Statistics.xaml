@@ -7,20 +7,14 @@
     <Grid>
         <TabControl ItemsSource="{Binding Tabs, Mode=TwoWay}">
             <TabControl.Resources>
-                <DataTemplate DataType="{x:Type vm:vmStatsAccounts}">
-                    <views:StatsAccounts/>
+                <DataTemplate DataType="{x:Type vm:vmStatsTransactions}">
+                    <views:StatsTransactions/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:vmStatsMixes}">
-                    <views:StatsMixes/>
+                <DataTemplate DataType="{x:Type vm:vmStatsCoffeePurchases}">
+                    <views:StatsCoffeePurchases/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:vmStatsSorts}">
-                    <views:StatsSorts/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:vmStatsPacked}">
-                    <views:StatsPacked/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:vmStatsRecipients}">
-                    <views:StatsRecipients/>
+                <DataTemplate DataType="{x:Type vm:vmStatsSales}">
+                    <views:StatsSales/>
                 </DataTemplate>
             </TabControl.Resources>
 

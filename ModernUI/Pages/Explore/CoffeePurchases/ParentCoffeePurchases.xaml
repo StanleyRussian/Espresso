@@ -13,10 +13,10 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*" MaxWidth="250"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-
+        
         <Border BorderBrush="{StaticResource AccentColorBrush3}"
                 BorderThickness="1" Margin="3"
                 Background="{StaticResource GrayBrush10}"

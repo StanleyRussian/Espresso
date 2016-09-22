@@ -16,11 +16,11 @@ using ViewModels.Auxiliary;
 
 namespace ViewModels.Pages.Statistics
 {
-    public class vmStatsSorts:aTabViewModel
+    public class vmStatsCoffeePurchases:aTabViewModel
     {
-        public vmStatsSorts()
+        public vmStatsCoffeePurchases()
         {
-            Header = "Сорта";
+            Header = "Сорта кофе и закупки";
             cmdRowSelected = new Command(cmdRowSelected_Execute);
         }
 
@@ -56,7 +56,7 @@ namespace ViewModels.Pages.Statistics
             get { return _chartData; }
             set
             {
-                _chartData = value; 
+                _chartData = value;
                 OnPropertyChanged();
             }
         }
