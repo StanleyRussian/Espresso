@@ -275,9 +275,9 @@ namespace ViewModels.Pages.Statistics
     {
         public Sale Sale { get; set; }
 
-        public double Sum => Sale.SaleDetailsCoffee.Sum(p => p.Price) + Sale.SaleDetailsProducts.Sum(p => p.Price);
-        public double Cost => Sale.SaleDetailsCoffee.Sum(p => p.Cost) + Sale.SaleDetailsProducts.Sum(p => p.Cost);
-        public double Profit => Sale.SaleDetailsCoffee.Sum(p => (p.Price - p.Cost)) + Sale.SaleDetailsProducts.Sum(p => (p.Price - p.Cost));
+        public double Sum => Sale.SaleDetailsCoffee.Sum(p => p.Price * p.Quantity) + Sale.SaleDetailsProducts.Sum(p => p.Price * p.Quantity);
+        public double Cost => Sale.SaleDetailsCoffee.Sum(p => p.Cost * p.Quantity) + Sale.SaleDetailsProducts.Sum(p => p.Cost * p.Quantity);
+        public double Profit => Sum - Cost;
 
         public DateTime Date => Sale.Date;
     }
