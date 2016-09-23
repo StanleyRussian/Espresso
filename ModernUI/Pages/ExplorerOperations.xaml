@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="UI.Pages.ExplorerOperations"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:coffeePurchases="clr-namespace:UI.Pages.Explore.CoffeePurchases"
+             xmlns:vmExplore="clr-namespace:ViewModels.Pages.Explore;assembly=ViewModels"
+             xmlns:roastings="clr-namespace:UI.Pages.Explore.Roastings"
+             xmlns:packings="clr-namespace:UI.Pages.Explore.Packings"
+             xmlns:packagePurchases="clr-namespace:UI.Pages.Explore.PackagePurchases"
+             xmlns:coffeeSales="clr-namespace:UI.Pages.Explore.Sales"
+             xmlns:moneyTransfers="clr-namespace:UI.Pages.Explore.MoneyTransfers"
+             xmlns:payments="clr-namespace:UI.Pages.Explore.Payments"
+             xmlns:otherProfits="clr-namespace:UI.Pages.Explore.OtherProfits"
+             xmlns:coffeeTranfers="clr-namespace:UI.Pages.Explore.CoffeeTranfers"
+             xmlns:productPurchases="clr-namespace:UI.Pages.Explore.ProductPurchases">
+
+    <Grid>
+        <TabControl ItemsSource="{Binding Tabs, Mode=TwoWay}" TabStripPlacement="Left">
+            <TabControl.Resources>
+                <DataTemplate DataType="{x:Type vmExplore:vmCoffeePurchases}">
+                    <coffeePurchases:ParentCoffeePurchases/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmExplore:vmRoastings}">
+                    <roastings:ParentRoastings/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmExplore:vmPackings}">
+                    <packings:ParentPackings/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmExplore:vmPackagePurchases}">
+                    <packagePurchases:ParentPackagePurchases/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmExplore:vmProductPurchases}">
+                    <productPurchases:ParentProductPurchases/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmExplore:vmSales}">
+                    <coffeeSales:ParentSales/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmExplore:vmMoneyTranfers}">
+                    <moneyTransfers:ParentMoneyTransfers/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmExplore:vmPayments}">
+                    <payments:ParentPayments/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmExplore:vmOtherProfits}">
+                    <otherProfits:ParentOtherProfits/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vmExplore:vmCoffeeTranfers}">
+                    <coffeeTranfers:ParentCoffeeTransfers/>
+                </DataTemplate>
+            </TabControl.Resources>
+
+            <TabControl.ItemContainerStyle>
+                <Style BasedOn="{StaticResource MetroTabItem}" TargetType="TabItem">
+                    <Setter Property="Header" Value="{Binding Header}"/>
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                    <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="16"/>
+                </Style>
+            </TabControl.ItemContainerStyle>
+        </TabControl>
+    </Grid>
+
+</UserControl>

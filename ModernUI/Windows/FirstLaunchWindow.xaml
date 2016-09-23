@@ -9,8 +9,21 @@
         dialogs:DialogParticipation.Register="{Binding}"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         ShowTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ResizeMode="NoResize"
-        Width="750" Height="500"
+        MaxWidth="900" MaxHeight="550"
         xml:lang="ru">
+    
+    <Window.Resources>
+        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MetroDataGridColumnHeader}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -51,10 +64,12 @@
         <DataGrid Grid.Row="4" Margin="0,5,0,0" AutoGenerateColumns="False"
                   ItemsSource="{Binding CoffeeSorts}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название сорта" Binding="{Binding Name}" Width="150"/>
+                <DataGridTextColumn Header="Название сорта" Binding="{Binding Name}" Width="130"/>
                 <DataGridTextColumn Header="Закупочная цена за 1 кг зелёного кофе (грн)" Binding="{Binding Cost}" Width="150"/>
                 <DataGridTextColumn Header="Остатки зелёного кофе (кг)" Binding="{Binding GreenStocks}" Width="150"/>
+                <DataGridTextColumn Header="Минимальные остатки зелёного кофе (кг)" Binding="{Binding MinGreenStocks}" Width="150"/>
                 <DataGridTextColumn Header="Остатки жаренного кофе (кг)" Binding="{Binding RoastedStocks}" Width="150"/>
+                <DataGridTextColumn Header="Минимальные остатки жаренного кофе (кг)" Binding="{Binding MinRoastedStocks}" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
 

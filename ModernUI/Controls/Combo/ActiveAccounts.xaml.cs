@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using Model;
-using Account = UI.Windows.EntityWindows.Account;
+using UI.Windows.EntityWindows;
 
 namespace UI.Controls.Combo
 {

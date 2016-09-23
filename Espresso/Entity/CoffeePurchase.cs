@@ -17,20 +17,18 @@ namespace Model.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CoffeePurchase()
         {
-            this.CoffeePurchase_Details = new HashSet<CoffeePurchase_Details>();
+            this.CoffeePurchaseDetails = new HashSet<CoffeePurchaseDetails>();
         }
     
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public bool Paid { get; set; }
-        public double Sum { get; set; }
-        public Nullable<int> TransactionId { get; set; }
         public string InvoiceNumber { get; set; }
     
         public virtual Supplier Supplier { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoffeePurchase_Details> CoffeePurchase_Details { get; set; }
         public virtual Account Account { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoffeePurchaseDetails> CoffeePurchaseDetails { get; set; }
     }
 }

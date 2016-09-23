@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="UI.Pages.Explore.Sales.IndividualSale"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <WrapPanel Margin="0,5,0,0">
+            <TextBlock Style="{StaticResource Header3}">Номер накладной:</TextBlock>
+            <TextBlock Margin="5,0,0,0" Text="{Binding InvoiceNumber}" Style="{StaticResource Header3Accent}"/>
+        </WrapPanel>
+
+        <WrapPanel Margin="0,5,0,0">
+            <TextBlock Style="{StaticResource Header3}">Дата продажи:</TextBlock>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Date}" Style="{StaticResource Header3Accent}"/>
+        </WrapPanel>
+
+        <TextBlock x:Name="textPaid" Margin="0,5,0,0">
+            <TextBlock.Style>
+                <Style BasedOn="{StaticResource Header3Accent}" TargetType="TextBlock">
+                    <Setter Property="Text" Value="Оплачено"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Paid}" Value="False">
+                            <Setter Property="Text" Value="Не оплачено"/>
+                            <Setter Property="Foreground" Value="#C91A1A"/>
+                            <Setter Property="FontWeight" Value="DemiBold"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <WrapPanel Margin="0,5,0,0">
+            <TextBlock Text="Дата оплаты:">
+                <TextBlock.Style>
+                    <Style BasedOn="{StaticResource Header3}" TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=textPaid}" Value="Оплачено">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+            <TextBlock Margin="5,0,0,0" Text="{Binding PaymentDate}">
+                <TextBlock.Style>
+                    <Style BasedOn="{StaticResource Header3Accent}" TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=textPaid}" Value="Оплачено">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </WrapPanel>
+
+        <WrapPanel Margin="0,5,0,0">
+            <TextBlock Style="{StaticResource Header3}">Клиент:</TextBlock>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Recipient.Name}" Style="{StaticResource Header3Accent}"/>
+        </WrapPanel>
+
+        <WrapPanel Margin="0,5,0,0">
+            <TextBlock Style="{StaticResource Header3}">Счёт:</TextBlock>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Account.Name}" Style="{StaticResource Header3Accent}"/>
+        </WrapPanel>
+
+        <Separator Margin="0,5,0,0"/>
+
+        <TextBlock Text="Кофе:" Style="{StaticResource Header2}" Margin="0,5,0,0"/>
+
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding SaleDetailsCoffee}" 
+                  IsReadOnly="True" Margin="0,5,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Mix.Name}" Header="Купаж"/>
+                <DataGridTextColumn Binding="{Binding Package.Name}" Header="Упаковка"/>
+                <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} шт}" Header="Количество"/>
+                <DataGridTextColumn Binding="{Binding Price, StringFormat={}{0} грн/шт}" Header="Цена за пачку"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock Text="Сопутствующие товары:" Style="{StaticResource Header2}" Margin="0,5,0,0"/>
+
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding SaleDetailsProducts}" 
+                  IsReadOnly="True" Margin="0,5,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Product.Name}" Header="Наименование"/>
+                <DataGridTextColumn Binding="{Binding Product.Units}" Header="Единица измерения"/>
+                <DataGridTextColumn Binding="{Binding Quantity, StringFormat={}{0} шт}" Header="Количество"/>
+                <DataGridTextColumn Binding="{Binding Price, StringFormat={}{0} грн/шт}" Header="Цена за единицу"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>

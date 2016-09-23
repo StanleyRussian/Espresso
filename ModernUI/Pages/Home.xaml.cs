@@ -2,7 +2,7 @@
 using UI.Windows.EntityWindows;
 using ViewModels.Pages;
 using CoffeePurchase = UI.Windows.EntityWindows.CoffeePurchase;
-using CoffeeSale = UI.Windows.EntityWindows.CoffeeSale;
+using Sale = UI.Windows.EntityWindows.Sale;
 using Packing = UI.Windows.EntityWindows.Packing;
 using Roasting = UI.Windows.EntityWindows.Roasting;
 
@@ -22,35 +22,42 @@ namespace UI.Pages
         {
             new CoffeePurchase().ShowDialog();
             var ViewModel = (vmHome) DataContext;
-            ViewModel.cmdReload.Execute(null);;
+            ViewModel.cmdReload.Execute(null);
         }
 
         private void NewRoasting(object sender, RoutedEventArgs e)
         {
             new Roasting().ShowDialog();
             var ViewModel = (vmHome)DataContext;
-            ViewModel.cmdReload.Execute(null); ;
+            ViewModel.cmdReload.Execute(null);
         }
 
         private void NewPacking(object sender, RoutedEventArgs e)
         {
             new Packing().ShowDialog();
             var ViewModel = (vmHome)DataContext;
-            ViewModel.cmdReload.Execute(null); ;
+            ViewModel.cmdReload.Execute(null);
         }
 
         private void NewSale(object sender, RoutedEventArgs e)
         {
-            new CoffeeSale().ShowDialog();
+            new Sale().ShowDialog();
             var ViewModel = (vmHome)DataContext;
-            ViewModel.cmdReload.Execute(null); ;
+            ViewModel.cmdReload.Execute(null);
         }
 
         private void NewPackagePurchase(object sender, RoutedEventArgs e)
         {
             new PackagePurchase().ShowDialog();
             var ViewModel = (vmHome)DataContext;
-            ViewModel.cmdReload.Execute(null); ;
+            ViewModel.cmdReload.Execute(null);
+        }
+
+        private void NewProductPurchase(object sender, RoutedEventArgs e)
+        {
+            new ProductPurchase().ShowDialog();
+            var ViewModel = (vmHome)DataContext;
+            ViewModel.cmdReload.Execute(null);
         }
     }
 }

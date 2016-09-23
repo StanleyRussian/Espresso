@@ -44,13 +44,12 @@ namespace ViewModels.Windows.EntityWindows
 
         #region Commands
 
-        protected override void cmdSave_Execute()
+        protected override void OnSaveValidation()
+        { }
+
+        protected override void OnSaveCreate()
         {
-            if (CreatingNew)
-                ContextManager.Context.MonthlyExpenses.Add(Expense);
-            SaveContext();
-            if (CreatingNew)
-                Refresh();
+            ContextManager.Context.MonthlyExpenses.Add(Expense);
         }
 
         #endregion

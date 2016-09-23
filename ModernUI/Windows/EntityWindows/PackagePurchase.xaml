@@ -6,6 +6,7 @@
         Title="Новая закупка упаковки" Height="350" Width="400"
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:myControls="clr-namespace:UI.Controls"
         ShowMaxRestoreButton="False"
         xml:lang="ru">
 
@@ -78,13 +79,13 @@
             <Label Grid.Row="5" Margin="{StaticResource ControlMargin}">Количество пачек</Label>
             <TextBox Grid.Row="5" Grid.Column="1" 
                      Margin="{StaticResource ControlMargin}"
-                     Text="{Binding PackQuantity}" 
+                     Text="{Binding Quantity}" 
                      Style="{StaticResource Mandatory}"
                      controls:TextBoxHelper.ClearTextButton="True"/>
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
-            <Button Command="{Binding cmdSave}" Margin="{StaticResource ControlMargin}">Сохранить</Button>
+                        <myControls:SafeSaveButton/>
             <Button Click="btnCancel_Click" Margin="{StaticResource ControlMargin}">Отмена</Button>
         </StackPanel>
     </Grid>

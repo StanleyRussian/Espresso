@@ -11,9 +11,11 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
                 <!-- accent resource -->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Emerald.xaml" />
                 <!-- change "BaseLight" to the theme you want -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+
+                <ResourceDictionary Source="Graphs.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="Title" TargetType="TextBlock">
@@ -86,12 +88,6 @@
                 </Style.Triggers>
             </Style>
 
-            <Style x:Key="_AccentedSquareButtonStyle" TargetType="Button"
-                   BasedOn="{StaticResource AccentedSquareButtonStyle}" >
-                <Setter Property="Border.BorderThickness" Value="1"/>
-                <Setter Property="FontSize" Value="16"/>
-                <Setter Property="FontWeight" Value="Normal"/>
-            </Style>
 
             <Style x:Key="AccentedMetroButton" TargetType="Button"
                    BasedOn="{StaticResource MetroButton}" >
@@ -99,7 +95,20 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush1}"/>
             </Style>
 
+            <Style x:Key="_SquareButtonStyle" TargetType="Button" 
+                   BasedOn="{StaticResource SquareButtonStyle}">
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+
+            <Style x:Key="_AccentedSquareButtonStyle" TargetType="Button"
+                   BasedOn="{StaticResource AccentedSquareButtonStyle}" >
+                <Setter Property="Border.BorderThickness" Value="1"/>
+            </Style>
+
             <Thickness x:Key="ControlMargin">4</Thickness>
+
+            <!--<SolidColorBrush x:Key="_LightFill" Color="#EBEBFF"/>-->
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

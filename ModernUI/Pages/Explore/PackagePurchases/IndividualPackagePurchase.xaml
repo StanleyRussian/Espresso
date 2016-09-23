@@ -4,38 +4,32 @@
     <StackPanel Margin="10,0,10,0">
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Дата фасовки:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Date}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Date}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Поставщик:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Supplier.Name}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Supplier.Name}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Счёт:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Account.Name}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Account.Name}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Упаковка:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Package.Name}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Package.Name}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Количество:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding PackQuantity}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Quantity}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Цена:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Price}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Price}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
-
-        <WrapPanel Margin="0,5,0,0">
-            <TextBlock Style="{StaticResource Header3}">Сумма:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Sum}" Style="{StaticResource Header2Accent}"/>
-        </WrapPanel>
-
     </StackPanel>
 </UserControl>

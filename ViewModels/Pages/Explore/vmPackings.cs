@@ -69,12 +69,12 @@ namespace ViewModels.Pages.Explore
             var selected = argSelected as Packing;
 
             // Checking if there would be enought packed coffee left if user deletes selected Packing
-            //if (ContextManager.Context.CoffeeSale_Details.Any(p => p.Mix.Id == selected.Mix.Id))
+            //if (ContextManager.Context.SaleDetailsCoffee.Any(p => p.Mix.Id == selected.Mix.Id))
             {
                 if (ContextManager.Context.dPackedStocks.First(
                     p => p.Mix.Id == selected.Mix.Id &&
                          p.Package.Id == selected.Package.Id)
-                    .PackQuantity - selected.PackQuantity < 0)
+                    .Quantity - selected.Quantity < 0)
                 {
                     await DialogCoordinator.Instance.ShowMessageAsync(this, "Ошибка",
                         "Вы не можете удалить эту фасовку, недостаточно остатков фасованного кофе",

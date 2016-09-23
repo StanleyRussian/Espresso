@@ -9,8 +9,12 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <ComboBox x:Name="ComboBox" ItemsSource="{Binding Source={x:Static model:ContextManager.ActiveRecipients}}"
-                  SelectedItem="{Binding Recipient}" DisplayMemberPath="Name" SelectedValue="Id" Width="auto"/>
+        <ComboBox x:Name="ComboBox"
+                  ItemsSource="{Binding Source={x:Static model:ContextManager.ActiveRecipients}}"
+                  SelectedItem="{Binding Recipient}"
+                  DisplayMemberPath="Name" SelectedValue="Id"
+                  Width="auto"
+                  IsEditable="True"/>
 
         <Button Grid.Column="1" Click="New" Content="Новый" Margin="5,0,0,0"/>
     </Grid>

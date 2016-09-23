@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using MahApps.Metro.Controls;
-using Model;
 using ViewModels.Windows.EntityWindows;
 
 namespace UI.Windows.EntityWindows
@@ -24,7 +23,6 @@ namespace UI.Windows.EntityWindows
         private void btnNewSort_Click(object sender, RoutedEventArgs e)
         {
             new CoffeeSort().ShowDialog();
-            comboColumnSort.ItemsSource = ContextManager.ActiveCoffeeSorts;
         }
     }
 }

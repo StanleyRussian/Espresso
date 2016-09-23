@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using ViewModels.Pages.Explore;
+﻿using ViewModels.Pages.Explore;
 using Account = UI.Windows.EntityWindows.Account;
 
 namespace UI.Pages.Explore.Accounts
@@ -7,7 +6,7 @@ namespace UI.Pages.Explore.Accounts
     /// <summary>
     /// Interaction logic for Parent.xaml
     /// </summary>
-    public partial class ParentAccounts : UserControl
+    public partial class ParentAccounts
     {
         public ParentAccounts()
         {

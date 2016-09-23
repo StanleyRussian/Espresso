@@ -10,16 +10,11 @@ namespace ViewModels.Pages
 {
     public class vmHome : aTabViewModel
     {
-        private ObservableCollection<dGreenStock> _greenStocks;
-        private ObservableCollection<dRoastedStock> _roastedStocks;
+        private ObservableCollection<dCoffeeStock> _coffeeStocks;
         private ObservableCollection<dPackedStocks> _packedStocks;
         private ObservableCollection<dPackageStocks> _packageStocks;
         private ObservableCollection<dAccountsBalance> _accountsBalances;
-        private double _greenStocksCostsSum;
-        private double _roastedStocksCostsSum;
-        private double _packedStocksCostsSum;
-        private double _packageStocksCostsSum;
-        private double _overallSum;
+        private ObservableCollection<dProductStock> _productStocks;
 
         public vmHome()
         {
@@ -30,82 +25,37 @@ namespace ViewModels.Pages
 
         protected override void Load()
         {
-            ContextManager.ReloadContext();
-            GreenStocksCostsSum = 0;
-            RoastedStocksCostsSum = 0;
-            PackedStocksCostsSum = 0;
-            PackageStocksCostsSum = 0;
-
-            GreenStocks =
-                new ObservableCollection<dGreenStock>(
-                    ContextManager.Context.dGreenStocks.Where(p => p.Quantity > 0).Include(p => p.CoffeeSort));
-            foreach (var stock in GreenStocks)
-                GreenStocksCostsSum += (double) stock.dCost*stock.Quantity;
-
-            RoastedStocks =
-                new ObservableCollection<dRoastedStock>(
-                    ContextManager.Context.dRoastedStocks.Where(p => p.Quantity > 0).Include(p => p.CoffeeSort));
-            foreach (var stock in RoastedStocks)
-                RoastedStocksCostsSum += (double) stock.dCost*stock.Quantity;
+            CoffeeStocks = new ObservableCollection<dCoffeeStock>(
+                ContextManager.Context.dCoffeeStocks.Where(
+                    p => p.GreenQuantity > 0 ||
+                         p.RoastedQuantity > 0).Include(p => p.CoffeeSort));
 
             PackedStocks =
                 new ObservableCollection<dPackedStocks>(
-                    ContextManager.Context.EagerPackedStocks().Where(p => p.PackQuantity > 0));
-            foreach (var stock in PackedStocks)
-                PackedStocksCostsSum += (double) stock.dCost*stock.PackQuantity;
+                    ContextManager.Context.EagerPackedStocks().Where(p => p.Quantity > 0));
 
             PackageStocks =
                 new ObservableCollection<dPackageStocks>(
                     ContextManager.Context.dPackageStocks.Where(p => p.Quantity > 0).Include(p => p.Package));
-            foreach (var stock in PackageStocks)
-                PackageStocksCostsSum += (double) stock.dCost*stock.Quantity;
 
             AccountsBalances =
                 new ObservableCollection<dAccountsBalance>(
                     ContextManager.Context.dAccountsBalances.Where(p => p.Account.Active).Include(p => p.Account));
 
-            OverallSum = GreenStocksCostsSum + RoastedStocksCostsSum + PackageStocksCostsSum + PackedStocksCostsSum;
+            ProductStocks =
+                new ObservableCollection<dProductStock>(
+                    ContextManager.Context.dProductStocks.Where(p => p.Quantity > 0).Include(p => p.Product));
         }
 
         #region Binding Properties
 
-        public ObservableCollection<dGreenStock> GreenStocks
+        public ObservableCollection<dCoffeeStock> CoffeeStocks
         {
-            get { return _greenStocks; }
+            get { return _coffeeStocks; }
             private set
             {
-                _greenStocks = value;
+                _coffeeStocks = value;
                 OnPropertyChanged(); 
-            }
-        }
-
-        public double GreenStocksCostsSum
-        {
-            get { return _greenStocksCostsSum; }
-            private set
-            {
-                _greenStocksCostsSum = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ObservableCollection<dRoastedStock> RoastedStocks
-        {
-            get { return _roastedStocks; }
-            private set
-            {
-                _roastedStocks = value; 
-                OnPropertyChanged();
-            }
-        }
-
-        public double RoastedStocksCostsSum
-        {
-            get { return _roastedStocksCostsSum; }
-            private set
-            {
-                _roastedStocksCostsSum = value;
-                OnPropertyChanged();
             }
         }
 
@@ -115,16 +65,6 @@ namespace ViewModels.Pages
             private set
             {
                 _packedStocks = value; 
-                OnPropertyChanged();
-            }
-        }
-
-        public double PackedStocksCostsSum
-        {
-            get { return _packedStocksCostsSum; }
-            private set
-            {
-                _packedStocksCostsSum = value; 
                 OnPropertyChanged();
             }
         }
@@ -139,16 +79,6 @@ namespace ViewModels.Pages
             }
         }
 
-        public double PackageStocksCostsSum
-        {
-            get { return _packageStocksCostsSum; }
-            private set
-            {
-                _packageStocksCostsSum = value; 
-                OnPropertyChanged();
-            }
-        }
-
         public ObservableCollection<dAccountsBalance> AccountsBalances
         {
             get { return _accountsBalances; }
@@ -159,12 +89,12 @@ namespace ViewModels.Pages
             }
         }
 
-        public double OverallSum
+        public ObservableCollection<dProductStock> ProductStocks
         {
-            get { return _overallSum; }
+            get { return _productStocks; }
             private set
             {
-                _overallSum = value; 
+                _productStocks = value;
                 OnPropertyChanged();
             }
         }
@@ -178,7 +108,7 @@ namespace ViewModels.Pages
 
         private void cmdReload_Execute()
         {
-            ContextManager.ReloadContext();
+            //ContextManager.ReloadContext();
             Load();
         }
         #endregion

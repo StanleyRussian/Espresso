@@ -22,7 +22,7 @@ namespace Model.Entity
             this.PackagePurchases = new HashSet<PackagePurchase>();
             this.dPackedStocks = new HashSet<dPackedStocks>();
             this.dPackageStocks = new HashSet<dPackageStocks>();
-            this.Sale_Details = new HashSet<CoffeeSale_Details>();
+            this.Sale_Details = new HashSet<SaleDetailCoffee>();
         }
     
         public int Id { get; set; }
@@ -40,6 +40,6 @@ namespace Model.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dPackageStocks> dPackageStocks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoffeeSale_Details> Sale_Details { get; set; }
+        public virtual ICollection<SaleDetailCoffee> Sale_Details { get; set; }
     }
 }

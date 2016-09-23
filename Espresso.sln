@@ -9,12 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "ModernUI\UI.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{430C0604-5933-4A90-93BD-1F167D565065}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{990D1BB9-7D37-4CA6-9923-F1A8976068AD}"
-	ProjectSection(SolutionItems) = preProject
-		Espresso\Notes\Guidelines.txt = Espresso\Notes\Guidelines.txt
-		Espresso\Notes\Notes.txt = Espresso\Notes\Notes.txt
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,15 +19,16 @@ Global
 		{AB9F20D7-7C05-474B-A73A-24847DF38211}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB9F20D7-7C05-474B-A73A-24847DF38211}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB9F20D7-7C05-474B-A73A-24847DF38211}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB9F20D7-7C05-474B-A73A-24847DF38211}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{83B9EF37-2612-4B7C-92CD-AD5E489897B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83B9EF37-2612-4B7C-92CD-AD5E489897B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83B9EF37-2612-4B7C-92CD-AD5E489897B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83B9EF37-2612-4B7C-92CD-AD5E489897B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83B9EF37-2612-4B7C-92CD-AD5E489897B0}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{430C0604-5933-4A90-93BD-1F167D565065}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{430C0604-5933-4A90-93BD-1F167D565065}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{430C0604-5933-4A90-93BD-1F167D565065}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{430C0604-5933-4A90-93BD-1F167D565065}.Release|Any CPU.Build.0 = Release|Any CPU
+		{430C0604-5933-4A90-93BD-1F167D565065}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

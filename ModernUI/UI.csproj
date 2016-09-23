@@ -8,11 +8,27 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UI</RootNamespace>
-    <AssemblyName>UI</AssemblyName>
+    <AssemblyName>EspressoBook</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\Stanley\Desktop\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -25,13 +41,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>BC6E5D78745D8D28FAB713C8BA0A3C40CEB0760C</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>UI_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -42,12 +76,31 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework.SqlServerCompact, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.SqlServerCompact.6.1.3\lib\net45\EntityFramework.SqlServerCompact.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GravityApps.Mandelkow.MetroCharts">
+      <HintPath>..\packages\Mandlekow.MetroUI\GravityApps.Mandelkow.MetroCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.7.13.0, Culture=neutral, PublicKeyToken=c5935629d38af058, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.7.13\lib\portable-net40+sl5+win8+wp8+wpa81\LiveCharts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.7.13.0, Culture=neutral, PublicKeyToken=3b585c2a5f1a92c1, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.7.13\lib\net45\LiveCharts.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.2.4.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -78,20 +131,41 @@
     <Compile Include="Controls\Combo\ActivePackages.xaml.cs">
       <DependentUpon>ActivePackages.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Combo\ActiveProducts.xaml.cs">
+      <DependentUpon>ActiveProducts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Combo\ActiveRecipients.xaml.cs">
       <DependentUpon>ActiveRecipients.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Combo\ActiveSuppliers.xaml.cs">
       <DependentUpon>ActiveSuppliers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SafeSaveButton.xaml.cs">
+      <DependentUpon>SafeSaveButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Explorer.xaml.cs">
       <DependentUpon>Explorer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Explore\CoffeeSales\IndividualCoffeeSale.xaml.cs">
-      <DependentUpon>IndividualCoffeeSale.xaml</DependentUpon>
+    <Compile Include="Pages\ExplorerOperations.xaml.cs">
+      <DependentUpon>ExplorerOperations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Explore\CoffeeSales\ParentCoffeeSales.xaml.cs">
-      <DependentUpon>ParentCoffeeSales.xaml</DependentUpon>
+    <Compile Include="Pages\Explore\ProductPurchases\IndividualProductPurchase.xaml.cs">
+      <DependentUpon>IndividualProductPurchase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\ProductPurchases\ParentProductPurchases.xaml.cs">
+      <DependentUpon>ParentProductPurchases.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Products\IndividualProduct.xaml.cs">
+      <DependentUpon>IndividualProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Products\ParentProducts.xaml.cs">
+      <DependentUpon>ParentProducts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Sales\IndividualSale.xaml.cs">
+      <DependentUpon>IndividualSale.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Explore\Sales\ParentSales.xaml.cs">
+      <DependentUpon>ParentSales.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Explore\CoffeeTranfers\IndividualCoffeeTransfer.xaml.cs">
       <DependentUpon>IndividualCoffeeTransfer.xaml</DependentUpon>
@@ -183,14 +257,17 @@
     <Compile Include="Pages\Explore\Suppliers\ParentSuppliers.xaml.cs">
       <DependentUpon>ParentSuppliers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\StatsAccounts.xaml.cs">
-      <DependentUpon>StatsAccounts.xaml</DependentUpon>
+    <Compile Include="Pages\Statistic\StatsTransactions.xaml.cs">
+      <DependentUpon>StatsTransactions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\StatsCoffeeSorts.xaml.cs">
-      <DependentUpon>StatsCoffeeSorts.xaml</DependentUpon>
+    <Compile Include="Pages\Statistic\StatsSales.xaml.cs">
+      <DependentUpon>StatsSales.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\StatsMixes.xaml.cs">
-      <DependentUpon>StatsMixes.xaml</DependentUpon>
+    <Compile Include="Pages\Statistic\StatsCoffeePurchases.xaml.cs">
+      <DependentUpon>StatsCoffeePurchases.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Unpaid.xaml.cs">
+      <DependentUpon>Unpaid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\EntityWindows\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
@@ -198,8 +275,14 @@
     <Compile Include="Windows\EntityWindows\CoffeePurchase.xaml.cs">
       <DependentUpon>CoffeePurchase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\EntityWindows\CoffeeSale.xaml.cs">
-      <DependentUpon>CoffeeSale.xaml</DependentUpon>
+    <Compile Include="Windows\EntityWindows\Product.xaml.cs">
+      <DependentUpon>Product.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EntityWindows\ProductPurchase.xaml.cs">
+      <DependentUpon>ProductPurchase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EntityWindows\Sale.xaml.cs">
+      <DependentUpon>Sale.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\EntityWindows\CoffeeSort.xaml.cs">
       <DependentUpon>CoffeeSort.xaml</DependentUpon>
@@ -240,6 +323,9 @@
     <Compile Include="Windows\EntityWindows\Supplier.xaml.cs">
       <DependentUpon>Supplier.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\StartupSplash.xaml.cs">
+      <DependentUpon>StartupSplash.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\Combo\ActiveAccounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -256,6 +342,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Combo\ActiveProducts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Combo\ActiveRecipients.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -264,15 +354,43 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\SafeSaveButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Graphs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\Explorer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Explore\CoffeeSales\IndividualCoffeeSale.xaml">
+    <Page Include="Pages\ExplorerOperations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Explore\CoffeeSales\ParentCoffeeSales.xaml">
+    <Page Include="Pages\Explore\ProductPurchases\IndividualProductPurchase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\ProductPurchases\ParentProductPurchases.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Products\IndividualProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Products\ParentProducts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Sales\IndividualSale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Explore\Sales\ParentSales.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -392,15 +510,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\StatsAccounts.xaml">
+    <Page Include="Pages\Statistic\StatsTransactions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\StatsCoffeeSorts.xaml">
+    <Page Include="Pages\Statistic\StatsSales.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\StatsMixes.xaml">
+    <Page Include="Pages\Statistic\StatsCoffeePurchases.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Unpaid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -412,7 +534,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\EntityWindows\CoffeeSale.xaml">
+    <Page Include="Windows\EntityWindows\Product.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EntityWindows\ProductPurchase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EntityWindows\Sale.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -499,6 +629,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\StartupSplash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -519,15 +653,19 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="UI_TemporaryKey.pfx" />
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Espresso\Model.csproj">
@@ -545,8 +683,27 @@
   <ItemGroup>
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    if not exist "$(TargetDir)x86" md "$(TargetDir)x86"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
+    if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

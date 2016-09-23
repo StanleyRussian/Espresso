@@ -13,6 +13,7 @@ namespace ViewModels.Windows.EntityWindows.Abstract
     public abstract class aEntityWindowViewModel: INotifyPropertyChanged
     {
         protected bool CreatingNew = false;
+        //protected readonly ContextContainer _context = new ContextContainer();
 
         protected aEntityWindowViewModel()
         {
@@ -67,8 +68,6 @@ namespace ViewModels.Windows.EntityWindows.Abstract
             {
                 ContextManager.Context.SaveChanges();
                 IsFlySuccessOpened = true;
-                //if (CreatingNew)
-                //    Refresh();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
@@ -92,12 +91,35 @@ namespace ViewModels.Windows.EntityWindows.Abstract
 
         public ICommand cmdSave { get; private set; }
 
-        protected abstract void cmdSave_Execute();
+        protected virtual void cmdSave_Execute()
+        {
+            try
+            {
+                OnSaveValidation();
+            }
+            catch (Exception ex)
+            {
+                FlyErrorMsg = ex.Message;
+                IsFlyErrorOpened = true;
+                return;
+            }
+
+            if (CreatingNew)
+                OnSaveCreate();
+            else OnSaveEdit();
+
+            SaveContext();
+            if (CreatingNew)
+                Refresh();
+        }
+
+        protected abstract void OnSaveValidation();
+        protected abstract void OnSaveCreate();
+        protected virtual void OnSaveEdit() { }
 
         public ICommand cmdOnClosing { get; private set; }
         protected void cmdOnClosing_Execute()
         {
-            //ContextManager.ReloadContext();
             foreach (DbEntityEntry entry in ContextManager.Context.ChangeTracker.Entries())
                 if (entry.State == EntityState.Deleted || entry.State == EntityState.Modified)
                     entry.State = EntityState.Unchanged;

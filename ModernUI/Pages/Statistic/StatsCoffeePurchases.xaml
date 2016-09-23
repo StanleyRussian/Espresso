@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="UI.Pages.Statistic.StatsCoffeePurchases"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MetroDataGridColumnHeader}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="10,0,10,0">
+            <DataGrid x:Name="GridCoffee" Margin="0,5,0,0"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False"
+                      ItemsSource="{Binding CoffeeStocks}"
+                      ColumnWidth="*">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding CoffeeStock.CoffeeSort.Name}" Header="Сорт" />
+                    <DataGridTextColumn Binding="{Binding CoffeeStock.GreenQuantity, StringFormat=\{0\} кг}" Header="Зелёные остатки" />
+                    <DataGridTextColumn Binding="{Binding CoffeeStock.GreenCost, StringFormat={}{0} грн}" Header="Себесоимость зелёных остатков" />
+                    <DataGridTextColumn Binding="{Binding CoffeeStock.RoastedQuantity, StringFormat={}{0} кг}" Header="Жареные остатки" />
+                    <DataGridTextColumn Binding="{Binding CoffeeStock.RoastedCost, StringFormat={}{0} грн}" Header="Себесоимость жареных остатков" />
+                    <DataGridTemplateColumn Header="Шаг закупки">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding cmdPurchaseStep}" 
+                                        Content="{Binding LastPurchaseStep}">
+                                    <Button.Style>
+                                        <Style BasedOn="{StaticResource _SquareButtonStyle}" TargetType="Button">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Content}" Value="{x:Null}">
+                                                    <Setter Property="ContentControl.Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate>
+                                                                <Button Command="{Binding cmdPurchaseStep}"
+                                                                        DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext}"
+                                                                        Content="Вычислить" 
+                                                                        Style="{StaticResource _AccentedSquareButtonStyle}"/>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding cmdRowSelected}" 
+                                               CommandParameter="{Binding ElementName=GridCoffee, Path=SelectedItem.CoffeeStock.CoffeeSort}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+
+            <TextBlock VerticalAlignment="Top"
+                           Margin="0,10,0,0"
+                           Text="Кофе нет. Совсем нет. Ни зёрнышка">
+                <TextBlock.Style>
+                    <Style BasedOn="{StaticResource Header2}" TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Visibility, ElementName=GridCoffee}" Value="Hidden">
+                                <Setter Property="TextBlock.Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+        
+        <TextBlock Text="График изменения закупочной цены выбранного кофе"
+                   Style="{StaticResource Header3}"
+                   Grid.Row="1" 
+                   HorizontalAlignment="Center"
+                   Margin="0,10,0,0"/>
+
+        <wpf:CartesianChart Grid.Row="2" 
+                            Margin="10"
+                            Series="{Binding ChartData}">
+            <wpf:CartesianChart.AxisY>
+                <wpf:Axis LabelFormatter="{Binding YFormatter}" 
+                          FontSize="14" 
+                          Foreground="{StaticResource GrayBrush1}"/>
+            </wpf:CartesianChart.AxisY>
+            <wpf:CartesianChart.AxisX>
+                <wpf:Axis Labels="{Binding Labels}" 
+                          FontSize="14" 
+                          Foreground="{StaticResource GrayBrush1}"/>
+            </wpf:CartesianChart.AxisX>
+        </wpf:CartesianChart>
+
+    </Grid>
+</UserControl>

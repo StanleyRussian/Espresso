@@ -18,7 +18,7 @@ namespace Model.Entity
         public Account()
         {
             this.Active = true;
-            this.CoffeeSales = new HashSet<CoffeeSale>();
+            this.Sales = new HashSet<Sale>();
             this.CoffeePurchases = new HashSet<CoffeePurchase>();
             this.PackagePurchases = new HashSet<PackagePurchase>();
             this.dAccountsBalances = new HashSet<dAccountsBalance>();
@@ -28,6 +28,7 @@ namespace Model.Entity
             this.dTransactions = new HashSet<dTransaction>();
             this.MoneyTransfers = new HashSet<MoneyTransfer>();
             this.MoneyTransfers1 = new HashSet<MoneyTransfer>();
+            this.ProductPurchases = new HashSet<ProductPurchase>();
         }
     
         public int Id { get; set; }
@@ -37,7 +38,7 @@ namespace Model.Entity
         public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoffeeSale> CoffeeSales { get; set; }
+        public virtual ICollection<Sale> Sales { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoffeePurchase> CoffeePurchases { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -56,5 +57,7 @@ namespace Model.Entity
         public virtual ICollection<MoneyTransfer> MoneyTransfers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MoneyTransfer> MoneyTransfers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductPurchase> ProductPurchases { get; set; }
     }
 }

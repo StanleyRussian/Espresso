@@ -38,14 +38,17 @@ namespace ViewModels.Windows.EntityWindows
 
         #region Commands
 
-        protected override void cmdSave_Execute()
-        {
-            if (CreatingNew)
-                ContextManager.Context.Accounts.Add(Account);
-            SaveContext();
+        protected override void OnSaveValidation()
+        { }
 
-            if (CreatingNew)
-                Refresh();
+        protected override void OnSaveCreate()
+        {
+            ContextManager.Context.Accounts.Add(Account);
+            ContextManager.Context.dAccountsBalances.Add(new dAccountsBalance
+            {
+                Account = Account,
+                Balance = 0
+            });
         }
 
         #endregion

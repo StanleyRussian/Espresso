@@ -32,14 +32,12 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        protected override void cmdSave_Execute()
-        {
-            if (CreatingNew)
-                ContextManager.Context.Recipients.Add(Recipient);
-            SaveContext();
-            if (CreatingNew)
-                Refresh();
-        }
+        protected override void OnSaveValidation()
+        { }
 
+        protected override void OnSaveCreate()
+        {
+            ContextManager.Context.Recipients.Add(Recipient);
+        }
     }
 }

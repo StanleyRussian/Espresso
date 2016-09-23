@@ -13,10 +13,10 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*" MaxWidth="250"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-
+        
         <Border BorderBrush="{StaticResource AccentColorBrush3}"
                 BorderThickness="1" Margin="3"
                 Background="{StaticResource GrayBrush10}"
@@ -38,12 +38,12 @@
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <Button Command="{Binding cmdFilterAll}"
                             Margin="{StaticResource ControlMargin}"
-                            Content="Все" />
+                            Content="За год" />
 
                     <Button Command="{Binding cmdFilter30Days}"
                             Grid.Column="1"
@@ -93,19 +93,16 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Command="{Binding cmdDelete}" Grid.ColumnSpan="2"
-                            Margin="{StaticResource ControlMargin}"
-                            CommandParameter="{Binding ElementName=tabs, Path=SelectedItem}"
-                            Content="Удалить"/>
-                    <Button Click="OnNewClick" Grid.Row="1"
+                    <Button Click="OnNewClick" Grid.ColumnSpan="2"
                             Margin="{StaticResource ControlMargin}"
                             Content="Добавить"/>
+                    <Button Command="{Binding cmdDelete}" Grid.Row="1"
+                            Margin="{StaticResource ControlMargin}"
+                            CommandParameter="{Binding ElementName=tabs, Path=SelectedItem}"
+                            Content="Удалить" IsEnabled="False"/>
                     <Button Click="OnEditClick"  Grid.Row="1" Grid.Column="1"
                             Margin="{StaticResource ControlMargin}"
-                            Content="Редактировать"/>
-
-
-
+                            Content="Редактировать" IsEnabled="False"/>
                 </Grid>
             </Grid>
         </Border>

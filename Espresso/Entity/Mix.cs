@@ -21,7 +21,7 @@ namespace Model.Entity
             this.Mix_Details = new HashSet<Mix_Details>();
             this.Packings = new HashSet<Packing>();
             this.dPackedStocks = new HashSet<dPackedStocks>();
-            this.Sale_Details = new HashSet<CoffeeSale_Details>();
+            this.Sale_Details = new HashSet<SaleDetailCoffee>();
             this.CoffeeTransfers = new HashSet<CoffeeTransfer>();
         }
     
@@ -29,7 +29,7 @@ namespace Model.Entity
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
-        public Nullable<double> dPrice { get; set; }
+        public Nullable<double> Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mix_Details> Mix_Details { get; set; }
@@ -38,7 +38,7 @@ namespace Model.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dPackedStocks> dPackedStocks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoffeeSale_Details> Sale_Details { get; set; }
+        public virtual ICollection<SaleDetailCoffee> Sale_Details { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoffeeTransfer> CoffeeTransfers { get; set; }
     }

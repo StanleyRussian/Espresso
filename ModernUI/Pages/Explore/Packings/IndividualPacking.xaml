@@ -4,27 +4,22 @@
     <StackPanel Margin="10,0,10,0">
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Дата фасовки:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Date}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Date}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Купаж:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Mix.Name}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Mix.Name}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Упаковка:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Package.Name}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Package.Name}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
 
         <WrapPanel Margin="0,5,0,0">
             <TextBlock Style="{StaticResource Header3}">Количество пачек:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding PackQuantity}" Style="{StaticResource Header2Accent}"/>
-        </WrapPanel>
-
-        <WrapPanel Margin="0,5,0,0">
-            <TextBlock Style="{StaticResource Header3}">Категория:</TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding PackedCategory.Name}" Style="{StaticResource Header2Accent}"/>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Quantity}" Style="{StaticResource Header3Accent}"/>
         </WrapPanel>
     </StackPanel>
 </UserControl>
