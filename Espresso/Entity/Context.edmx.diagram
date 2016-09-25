@@ -73,7 +73,6 @@
         <AssociationConnector Association="Context.ProductSaleDetailsProduct" />
         <EntityTypeShape EntityType="Context.dProductStock" Width="1.5" PointX="2.875" PointY="19.5" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.ProductdProductStock" />
-        <EntityTypeShape EntityType="Context.Loss" Width="1.75" PointX="0.5" PointY="15.125" FillColor="SlateBlue" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

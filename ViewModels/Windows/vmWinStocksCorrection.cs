@@ -109,10 +109,10 @@ namespace ViewModels.Windows
                 // we add money loss, equal to the cost of difference
                 else if (stock.diffGreenStock < 0)
                 {
-                    ContextManager.Context.Losses.Add(new Loss
+                    ContextManager.Context.dTransactions.Add(new dTransaction
                     {
                         Date = DateTime.Now,
-                        Sum = stock.diffGreenStock * stock.Stock.GreenCost,
+                        Sum = - stock.diffGreenStock * stock.Stock.GreenCost,
                         Description = "Списание" + stock.diffGreenStock + " кг зелёного кофе, сорта: " + stock.Name
                     });
                 }
@@ -134,10 +134,10 @@ namespace ViewModels.Windows
                 }
                 else if (stock.diffRoastedStock < 0)
                 {
-                    ContextManager.Context.Losses.Add(new Loss
+                    ContextManager.Context.dTransactions.Add(new dTransaction
                     {
                         Date = DateTime.Now,
-                        Sum = stock.diffRoastedStock * stock.Stock.RoastedCost,
+                        Sum = - stock.diffRoastedStock * stock.Stock.RoastedCost,
                         Description = "Списание" + stock.diffGreenStock + " кг жареного кофе, сорта: " + stock.Name
                     });
                 }
@@ -159,10 +159,10 @@ namespace ViewModels.Windows
                 }
                 else if (stock.diffQuantity < 0)
                 {
-                    ContextManager.Context.Losses.Add(new Loss
+                    ContextManager.Context.dTransactions.Add(new dTransaction
                     {
                         Date = DateTime.Now,
-                        Sum = stock.diffQuantity * stock.Stock.Cost,
+                        Sum = - stock.diffQuantity * stock.Stock.Cost,
                         Description = "Списание" + stock.diffQuantity + " ед. упаковки: " + stock.Name
                     });
                 }
@@ -184,10 +184,10 @@ namespace ViewModels.Windows
                 }
                 else if (stock.diffQuantity < 0)
                 {
-                    ContextManager.Context.Losses.Add(new Loss
+                    ContextManager.Context.dTransactions.Add(new dTransaction
                     {
                         Date = DateTime.Now,
-                        Sum = stock.diffQuantity * stock.Stock.Cost,
+                        Sum = - stock.diffQuantity * stock.Stock.Cost,
                         Description = "Списание" + stock.diffQuantity + " пачек упакованного кофе: " + stock.Name
                     });
                 }
@@ -209,10 +209,10 @@ namespace ViewModels.Windows
                 }
                 else if (stock.diffQuantity < 0)
                 {
-                    ContextManager.Context.Losses.Add(new Loss
+                    ContextManager.Context.dTransactions.Add(new dTransaction
                     {
                         Date = DateTime.Now,
-                        Sum = stock.diffQuantity * stock.Stock.Cost,
+                        Sum = - stock.diffQuantity * stock.Stock.Cost,
                         Description = "Списание" + stock.diffQuantity + " ед. сопутствующих товаров: " + stock.Name
                     });
                 }

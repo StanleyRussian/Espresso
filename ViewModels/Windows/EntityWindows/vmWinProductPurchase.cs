@@ -72,7 +72,7 @@ namespace ViewModels.Windows.EntityWindows
                 Date = Purchase.Date,
                 Description = "Закупка: " + Purchase.Product.Name,
                 Participant = Purchase.Supplier.Name,
-                Sum = _sum
+                Sum = - _sum
             });
 
 

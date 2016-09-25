@@ -118,9 +118,6 @@
     <Compile Include="Entity\dTransaction.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\Loss.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entity\Mix.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

@@ -70,7 +70,7 @@ namespace ViewModels.Windows.EntityWindows
                 Date = Purchase.Date,
                 Description = "Закупка упаковки",
                 Participant = Purchase.Supplier.Name,
-                Sum = _sum
+                Sum = -_sum
             });
 
             // Correct cost of package stocks
