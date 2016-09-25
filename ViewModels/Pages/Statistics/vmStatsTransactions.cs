@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Data.Entity;
 using System.Linq;
 using System.Windows.Input;
 using Model;
@@ -23,21 +22,70 @@ namespace ViewModels.Pages.Statistics
 
         protected override void Load()
         {
+            Income = new ObservableCollection<dTransaction>();
+            Outcome = new ObservableCollection<dTransaction>();
+            UnpaidIncome = new ObservableCollection<unpaidOperation>();
+            UnpaidOutcome = new ObservableCollection<unpaidOperation>();
+
             cmdFilterCurrentMonth.Execute(null);
-            Refresh();
         }
 
         private void Refresh()
         {
-            
+            Income.Clear();
+            Outcome.Clear();
+            UnpaidIncome.Clear();
+            UnpaidOutcome.Clear();
+
+            var queryTransactions = ContextManager.Context.dTransactions.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
+            foreach (var transaction in queryTransactions)
+            {
+                if (transaction.Sum>0)
+                    Income.Add(transaction);
+                else
+                    Outcome.Add(transaction);
+            }
+
+            var querySales = ContextManager.Context.Sales.Where(
+                p => p.Date >= _filterFrom && p.Date <= _filterTo && p.Paid == false);
+            foreach (var sale in querySales)
+            {
+                double sum = sale.SaleDetailsCoffee.Sum(detailCoffee => detailCoffee.Price*detailCoffee.Quantity) + 
+                    sale.SaleDetailsProducts.Sum(detailProduct => detailProduct.Price*detailProduct.Quantity);
+
+                UnpaidIncome.Add(new unpaidOperation
+                {
+                    Date = sale.Date,
+                    Sum = sum,
+                    Description = "Неоплаченная продажа " + sale.Recipient.Name + " от " + sale.Date + " числа"
+                });
+            }
+
+            var queryPurchases = ContextManager.Context.CoffeePurchases.Where(
+                p => p.Date >= _filterFrom && p.Date <= _filterTo && p.Paid == false);
+            foreach (var purchase in queryPurchases)
+            {
+                double sum = purchase.CoffeePurchaseDetails.Sum(detailCoffee => detailCoffee.Price*detailCoffee.Quantity);
+                UnpaidOutcome.Add(new unpaidOperation
+                {
+                    Date = purchase.Date,
+                    Sum = sum,
+                    Description = "Неоплаченная закупка кофе от " + purchase.Date + " числа"
+                });
+            }
         }
 
-        public ObservableCollection<iMoneyMovement> Income { get; private set; }
-        public ObservableCollection<iMoneyMovement> Outcome { get; private set; }
-        public ObservableCollection<iMoneyMovement> UnpaidIncome { get; private set; }
-        public ObservableCollection<iMoneyMovement> UnpaidOutcome { get; private set; }
+        public ObservableCollection<dTransaction> Income { get; private set; }
+        public ObservableCollection<dTransaction> Outcome { get; private set; }
+        public ObservableCollection<unpaidOperation> UnpaidIncome { get; private set; }
+        public ObservableCollection<unpaidOperation> UnpaidOutcome { get; private set; }
 
-
+        public double TotalIncome => Income.Sum(p => p.Sum);
+        public double TotalOutcome => Outcome.Sum(p => p.Sum);
+        public double TotalUnpaidIncome => UnpaidIncome.Sum(p => p.Sum);
+        public double TotalUnpaidOutcome => UnpaidOutcome.Sum(p => p.Sum);
+        public double TotalPaid => TotalIncome - TotalOutcome;
+        public double Total => TotalPaid + TotalUnpaidIncome - TotalUnpaidOutcome;
 
         private DateTime _filterFrom;
         public DateTime FilterFrom
@@ -167,33 +215,10 @@ namespace ViewModels.Pages.Statistics
     }
 
 
-    public interface iMoneyMovement
+    public class unpaidOperation
     {
-        DateTime Date { get; }
-        double Sum { get; }
-        string Description { get; }
-        Account Account { get; }
-    }
-
-
-    public class wrapTransaction:iMoneyMovement
-    {
-        public DateTime Date => Transaction.Date;
-        public double Sum => Transaction.Sum;
-        public string Description => Transaction.Description;
-        public Account Account => Transaction.Account;
-
-        public dTransaction Transaction { get; set; }
-    }
-
-
-    public class wrapLoss:iMoneyMovement
-    {
-        public DateTime Date => Loss.Date;
-        public double Sum => Loss.Sum;
-        public string Description => Loss.Description;
-        public Account Account => null;
-
-        public Loss Loss { get; set; }
+        public DateTime Date { get; set; }
+        public double Sum { get; set; }
+        public string Description { get; set; }
     }
 }

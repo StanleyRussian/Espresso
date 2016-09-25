@@ -59,7 +59,7 @@ namespace ViewModels.Windows.EntityWindows
                 Date = Transfer.Date,
                 Description = "Внутренний перевод",
                 Participant = Transfer.TargetAccount.Name,
-                Sum = Transfer.Sum
+                Sum = - Transfer.Sum
             });
 
             ContextManager.Context.dTransactions.Add(new dTransaction

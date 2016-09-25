@@ -23,7 +23,6 @@ namespace ViewModels.Pages.Statistics
         protected override void Load()
         {
             cmdFilterCurrentMonth.Execute(null);
-            Refresh();
         }
 
         private void Refresh()
