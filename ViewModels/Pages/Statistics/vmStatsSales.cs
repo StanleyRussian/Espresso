@@ -1,41 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using LiveCharts;
-using LiveCharts.Defaults;
-using LiveCharts.Wpf;
 using Model;
 using Model.Entity;
-using ViewModels.Annotations;
 using ViewModels.Auxiliary;
 
 namespace ViewModels.Pages.Statistics
 {
-    public enum Month
-    {
-        Январь = 1,
-        Февраль,
-        Март,
-        Апрель,
-        Май,
-        Июнь,
-        Июль,
-        Август,
-        Сентябрь,
-        Октябрь,
-        Ноябрь,
-        Декабрь
-    }
-
     public class vmStatsSales:aTabViewModel
     {
         public vmStatsSales()
         {
-            Header = "Клиенты и продажи";
+            Header = "По продажам";
             cmdFilter30Days = new Command(cmdFilter30Days_Execute);
             cmdFilterAll = new Command(cmdFilterAll_Execute);
             cmdFilterCurrentMonth = new Command(cmdFilterCurrentMonth_Execute);

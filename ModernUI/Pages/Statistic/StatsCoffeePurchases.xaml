@@ -49,7 +49,6 @@
                                                         <Setter.Value>
                                                             <ControlTemplate>
                                                                 <Button Command="{Binding cmdPurchaseStep}"
-                                                                        DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext}"
                                                                         Content="Вычислить" 
                                                                         Style="{StaticResource _AccentedSquareButtonStyle}"/>
                                                             </ControlTemplate>

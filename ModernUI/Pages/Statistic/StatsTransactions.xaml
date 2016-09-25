@@ -1,103 +1,142 @@
 ﻿<UserControl x:Class="UI.Pages.Statistic.StatsTransactions"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:model="clr-namespace:Model;assembly=Model">
+             xmlns:auxiliary="clr-namespace:ViewModels.Auxiliary;assembly=ViewModels"
+             xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <UserControl.Resources>
+        <ObjectDataProvider MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}"
+                            x:Key="EnumMonth">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="auxiliary:Month" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+
+    <!--Main grid-->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Текущий баланс:" Style="{StaticResource Header1}" 
-                   Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" MaxWidth="300" />
+            <ColumnDefinition Width="6*" />
+        </Grid.ColumnDefinitions>
 
-        <ItemsControl x:Name="ItemsAccounts" Grid.Row="1" HorizontalAlignment="Center"
-                      ItemsSource="{Binding Balances}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,25,0">
-                        <TextBlock Text="{Binding Account.Name, StringFormat={}{0}:}" Style="{StaticResource Header2Accent}"/>
-                        <TextBlock Text="{Binding Balance, StringFormat={}{0} грн}" Style="{StaticResource Header2}" Margin="5,0,0,0"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.Style>
-                <Style>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Items.Count, RelativeSource={RelativeSource Self}}" Value="0">
-                            <Setter Property="ItemsControl.Visibility" Value="Hidden" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ItemsControl.Style>
-        </ItemsControl>
+        <!--Border with filters-->
+        <Border Background="{StaticResource GrayBrush10}">
 
-        <TextBlock Grid.Row="1" Text="В базе данных нет ни одного открытого счёта">
-            <TextBlock.Style>
-                <Style BasedOn="{StaticResource Header2}" TargetType="TextBlock">
-                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Visibility, ElementName=ItemsAccounts}" Value="Hidden">
-                            <Setter Property="TextBlock.Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-        <!--Transactions-->
-        <Grid Grid.Row="2" >
+                <!--First row-->
+                <TextBlock Text="Быстрый доступ"
+                           Style="{StaticResource Header3}"
+                           HorizontalAlignment="Center" />
+
+                <!--Second row-->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Command="{Binding cmdFilterAll}"
+                            Content="За год"
+                            Margin="3" />
+                    <Button Command="{Binding cmdFilter30Days}"
+                            Content="За 30 дней"
+                            Margin="3"
+                            Grid.Column="1" />
+                    <Button Command="{Binding cmdFilterCurrentMonth}"
+                            Content="Этот месяц"
+                            Margin="3"
+                            Grid.Column="2" />
+                </Grid>
+
+                <!--Third row-->
+                <TextBlock Text="Продажи за определённый месяц"
+                           Style="{StaticResource Header3}"
+                           HorizontalAlignment="Center"
+                           Grid.Row="2" Margin="3" />
+
+                <!--Fourth row-->
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <ComboBox ItemsSource="{Binding Source={StaticResource EnumMonth}}"
+                              SelectedItem="{Binding FilterMonth}"
+                              controls:TextBoxHelper.ClearTextButton="True"
+                              Margin="3" />
+
+                    <controls:NumericUpDown Maximum="9999" Minimum="0"
+                                            Grid.Column="1"
+                                            TextAlignment="Left"
+                                            Value="{Binding FilterYear, UpdateSourceTrigger=PropertyChanged}"
+                                            Margin="3" />
+
+                </Grid>
+
+                <!--Fifth row-->
+                <TextBlock Text="Продажи между числами"
+                           Style="{StaticResource Header3}"
+                           HorizontalAlignment="Center"
+                           Grid.Row="4" Margin="3" />
+
+                <!--Sixth row-->
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <DatePicker SelectedDate="{Binding FilterFrom, UpdateSourceTrigger=PropertyChanged}"
+                                Margin="3" />
+                    <DatePicker SelectedDate="{Binding FilterTo, UpdateSourceTrigger=PropertyChanged}"
+                                Margin="3" Grid.Column="1" />
+                    <Button Grid.Column="2"
+                            Command="{Binding cmdFilter}">
+                        <Rectangle Fill="{StaticResource GrayBrush1}" Height="15" Width="15">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_magnify}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Style="{StaticResource Header2}" HorizontalAlignment="Center" Margin="0,25,0,0">
-                    Транзакции</TextBlock>
-            
-            <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
-                <Button Command="{Binding cmdFilter30Days}"
-                        Margin="{StaticResource ControlMargin}">За 30 дней</Button>
-                <Button Command="{Binding cmdFilterAll}"
-                        Margin="{StaticResource ControlMargin}">За год</Button>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-                <Label Margin="{StaticResource ControlMargin}">С даты:</Label>
-                <DatePicker Margin="{StaticResource ControlMargin}"
-                            SelectedDate="{Binding FilterFrom, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Margin="{StaticResource ControlMargin}">По дату:</Label>
-                <DatePicker Margin="{StaticResource ControlMargin}"
-                            SelectedDate="{Binding FilterTo, UpdateSourceTrigger=PropertyChanged}"/>
-
-                <Label Margin="{StaticResource ControlMargin}">Фильтрация по счёту:</Label>
-                <ComboBox ItemsSource="{Binding Source={x:Static model:ContextManager.AllAccounts}}"
-                          SelectedItem="{Binding FilterAccount}" 
-                          DisplayMemberPath="Name"
-                          controls:TextBoxHelper.ClearTextButton="True"
-                          Margin="{StaticResource ControlMargin}" MinWidth="150"/>
-            </WrapPanel>
-
-            <DataGrid Grid.Row="2" Margin="0,10,0,0"
-                      IsReadOnly="True"
-                      ItemsSource="{Binding Transactions}" 
-                      AutoGenerateColumns="False"
-                      ColumnWidth="*">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Date}" Header="Дата"/>
-                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма"/>
-                    <DataGridTextColumn Binding="{Binding Account.Name}" Header="Счёт"/>
-                    <DataGridTextColumn Binding="{Binding Description}" Header="Описание"/>
-                    <DataGridTextColumn Binding="{Binding Participant}" Header="Кому (от кого)"/>
-                </DataGrid.Columns>
+            <DataGrid ItemsSource="">
+                
             </DataGrid>
         </Grid>
     </Grid>
+
 </UserControl>

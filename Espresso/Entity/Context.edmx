@@ -35,6 +35,7 @@
     <EntitySet Name="ProductPurchases" EntityType="Context.Store.ProductPurchases" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SaleDetailsProduct" EntityType="Context.Store.SaleDetailsProduct" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="dProductStocks" EntityType="Context.Store.dProductStocks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Losses" EntityType="Context.Store.Losses" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="SupplierCoffeePurchase" Association="Context.Store.SupplierCoffeePurchase">
       <End Role="Supplier" EntitySet="Suppliers" />
       <End Role="CoffeePurchase" EntitySet="CoffeePurchases" />
@@ -485,6 +486,15 @@
     <Property Name="Quantity" Type="float" Nullable="false" DefaultValue="0" />
     <Property Name="Cost" Type="float" Nullable="false" DefaultValue="0" />
     <Property Name="Product_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Losses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Sum" Type="float" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
   </EntityType>
   <Association Name="SupplierCoffeePurchase">
     <End Role="Supplier" Type="Context.Store.Suppliers" Multiplicity="1" />
@@ -1106,6 +1116,7 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="dProductStock" EntitySet="dProductStocks" />
           </AssociationSet>
+          <EntitySet Name="Losses" EntityType="Context.Loss" />
           </EntityContainer>
         <EntityType Name="CoffeePurchase">
           <Key>
@@ -1606,6 +1617,15 @@
           <End Type="Context.Product" Role="Product" Multiplicity="1" />
           <End Type="Context.dProductStock" Role="dProductStock" Multiplicity="*" />
         </Association>
+        <EntityType Name="Loss">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sum" Type="Double" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1908,6 +1928,16 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Cost" ColumnName="Cost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Losses">
+      <EntityTypeMapping TypeName="IsTypeOf(Context.Loss)">
+        <MappingFragment StoreEntitySet="Losses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Sum" ColumnName="Sum" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -54,5 +54,6 @@ namespace Model.Entity
         public virtual DbSet<ProductPurchase> ProductPurchases { get; set; }
         public virtual DbSet<SaleDetailProduct> SaleDetailsProduct { get; set; }
         public virtual DbSet<dProductStock> dProductStocks { get; set; }
+        public virtual DbSet<Loss> Losses { get; set; }
     }
 }

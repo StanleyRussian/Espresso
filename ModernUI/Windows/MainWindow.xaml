@@ -9,6 +9,13 @@
         Title="Espresso" 
         GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
         xml:lang="ru">
+
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Content="Коррекция остатков" Click="ClickCorrection"/>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+
     <Grid>
         <Grid.Resources>
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />

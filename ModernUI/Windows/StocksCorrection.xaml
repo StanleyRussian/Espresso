@@ -1,0 +1,166 @@
+﻿<controls:MetroWindow x:Class="UI.Windows.StocksCorrection"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                      Title="Коррекция остатков"
+                      Width="500" Height="700" WindowStartupLocation="CenterScreen"
+                      ShowMaxRestoreButton="False"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      xml:lang="ru">
+
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Expander Header="Остатки зелёного кофе"
+                      Margin="0,10,0,0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Expanded">
+                            <i:InvokeCommandAction Command="{Binding cmdGreenExpanded}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <DataGrid ItemsSource="{Binding CoffeeStocks}"
+                          ColumnWidth="2*"
+                          AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name}" 
+                                            IsReadOnly="True" Header="Сорт"/>
+                            <DataGridTextColumn Binding="{Binding Stock.GreenQuantity}" 
+                                            IsReadOnly="True" Header="Текущие остатки"
+                                            Width="3*"/>
+                            <DataGridTextColumn Binding="{Binding newGreenStock}"
+                                            Header="Коррекция"/>
+                            <DataGridTextColumn Binding="{Binding diffGreenStock}"
+                                            IsReadOnly="True" Header="Разница"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Expander>
+
+                <Expander Header="Остатки жареного кофе"
+                      Margin="0,10,0,0"
+                      Grid.Row="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Expanded">
+                            <i:InvokeCommandAction Command="{Binding cmdRoastedExpanded}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <DataGrid ItemsSource="{Binding CoffeeStocks}"
+                          ColumnWidth="2*"
+                          AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name}" 
+                                            IsReadOnly="True" Header="Сорт"/>
+                            <DataGridTextColumn Binding="{Binding Stock.RoastedQuantity}" 
+                                            IsReadOnly="True" Header="Текущие остатки"
+                                            Width="3*"/>
+                            <DataGridTextColumn Binding="{Binding newRoastedStock}"
+                                            Header="Коррекция"/>
+                            <DataGridTextColumn Binding="{Binding diffRoastedStock}"
+                                            IsReadOnly="True" Header="Разница"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Expander>
+
+                <Expander Header="Остатки упаковки"
+                      Margin="0,10,0,0"
+                      Grid.Row="2">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Expanded">
+                            <i:InvokeCommandAction Command="{Binding cmdPackageExpanded}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <DataGrid ItemsSource="{Binding PackageStocks}"
+                          ColumnWidth="2*"
+                          AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name}" 
+                                            IsReadOnly="True" Header="Сорт"/>
+                            <DataGridTextColumn Binding="{Binding Stock.Quantity}" 
+                                            IsReadOnly="True" Header="Текущие остатки"
+                                            Width="3*"/>
+                            <DataGridTextColumn Binding="{Binding newPackageStock}"
+                                            Header="Коррекция"/>
+                            <DataGridTextColumn Binding="{Binding diffPackageStock}"
+                                            IsReadOnly="True" Header="Разница"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Expander>
+
+                <Expander Header="Остатки фасованого кофе"
+                      Margin="0,10,0,0"
+                      Grid.Row="3">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Expanded">
+                            <i:InvokeCommandAction Command="{Binding cmdPackedExpanded}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <DataGrid ItemsSource="{Binding PackedStocks}"
+                          ColumnWidth="2*"
+                          AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name}" 
+                                            IsReadOnly="True" Header="Сорт"/>
+                            <DataGridTextColumn Binding="{Binding Stock.Quantity}" 
+                                            IsReadOnly="True" Header="Текущие остатки"
+                                            Width="3*"/>
+                            <DataGridTextColumn Binding="{Binding newPackedStock}"
+                                            Header="Коррекция"/>
+                            <DataGridTextColumn Binding="{Binding diffPackedStock}"
+                                            IsReadOnly="True" Header="Разница"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Expander>
+
+                <Expander Header="Остатки сопутствующих товаров"
+                      Margin="0,10,0,0"
+                      Grid.Row="4">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Expanded">
+                            <i:InvokeCommandAction Command="{Binding cmdProductExpanded}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <DataGrid ItemsSource="{Binding ProductStocks}"
+                          ColumnWidth="2*"
+                          AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name}" 
+                                            IsReadOnly="True" Header="Сорт"/>
+                            <DataGridTextColumn Binding="{Binding Stock.Quantity}" 
+                                            IsReadOnly="True" Header="Текущие остатки"
+                                            Width="3*"/>
+                            <DataGridTextColumn Binding="{Binding newProductStock}"
+                                            Header="Коррекция"/>
+                            <DataGridTextColumn Binding="{Binding diffProductStock}"
+                                            IsReadOnly="True" Header="Разница"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Expander>
+            </Grid>
+
+            <WrapPanel Grid.Row="1">
+                <Button Command="{Binding cmdSave}" Style="{StaticResource AccentedMetroButton}" 
+                        Margin="{StaticResource ControlMargin}">Сохранить</Button>
+                <Button Click="btnCancel_Click" 
+                        Margin="{StaticResource ControlMargin}">Отмена</Button>
+            </WrapPanel>
+        </Grid>
+    </ScrollViewer>
+</controls:MetroWindow>
