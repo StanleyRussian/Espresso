@@ -2,16 +2,16 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:statistics="clr-namespace:ViewModels.Pages.Statistics;assembly=ViewModels"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:metroCharts="clr-namespace:GravityApps.Mandelkow.MetroCharts;assembly=GravityApps.Mandelkow.MetroCharts">
+             xmlns:metroCharts="clr-namespace:GravityApps.Mandelkow.MetroCharts;assembly=GravityApps.Mandelkow.MetroCharts"
+             xmlns:auxiliary="clr-namespace:ViewModels.Auxiliary;assembly=ViewModels">
 
     <UserControl.Resources>
         <ObjectDataProvider MethodName="GetValues"
                             ObjectType="{x:Type system:Enum}"
                             x:Key="EnumMonth">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="statistics:Month" />
+                <x:Type TypeName="auxiliary:Month" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </UserControl.Resources>

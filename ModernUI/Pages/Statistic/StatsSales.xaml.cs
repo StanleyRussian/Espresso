@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace UI.Pages.Statistic
 {
@@ -11,11 +10,6 @@ namespace UI.Pages.Statistic
         public StatsSales()
         {
             InitializeComponent();
-        }
-
-        private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var t = 2;
         }
     }
 }

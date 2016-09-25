@@ -1,4 +1,5 @@
-﻿using ViewModels.Windows;
+﻿using System.Windows;
+using ViewModels.Windows;
 
 namespace UI.Windows
 {
@@ -11,6 +12,11 @@ namespace UI.Windows
         {
             InitializeComponent();
             DataContext = new vmWinMain();
+        }
+
+        private void ClickCorrection(object sender, RoutedEventArgs e)
+        {
+            new StocksCorrection().ShowDialog();
         }
     }
 }
