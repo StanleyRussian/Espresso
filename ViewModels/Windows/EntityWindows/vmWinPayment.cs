@@ -65,7 +65,7 @@ namespace ViewModels.Windows.EntityWindows
                 Date = Payment.Date,
                 Description = "Платёж",
                 Participant = Payment.Designation,
-                Sum = Payment.Sum
+                Sum = - Payment.Sum
             });
         }
 

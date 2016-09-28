@@ -7,7 +7,7 @@ namespace ViewModels.Pages
     {
         public vmStatistics()
         {
-            Header = "Статистика";
+            Header = "Отчёты";
             Tabs = new ObservableCollection<aTabViewModel>
             {
                 new vmStatsTransactions(),

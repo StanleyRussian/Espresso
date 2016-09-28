@@ -126,25 +126,25 @@ namespace ViewModels.Windows.EntityWindows
                     Date = Purchase.Date,
                     Description = "Закупка кофе",
                     Participant = Purchase.Supplier.Name,
-                    Sum = _sum
+                    Sum = -_sum
                 });
+            }
 
-                // Correct cost of green coffee stocks
-                foreach (var detail in Details)
-                {
-                    // Find stocks of green coffee for current coffee sort
-                    var coffeeStock = ContextManager.Context.dCoffeeStocks.First(
-                        p => p.CoffeeSort.Id == detail.CoffeeSort.Id);
-                    // Check if there anything in stock already
-                    if (coffeeStock.GreenQuantity == 0)
-                        // Set cost from purchase
-                        coffeeStock.GreenCost = detail.Price;
-                    else
-                    // Count cost based on stock and new purchase
-                        coffeeStock.GreenCost = Math.Round((coffeeStock.GreenQuantity*coffeeStock.GreenCost
-                                                            + detail.Quantity*detail.Price)/
-                                                           (coffeeStock.GreenQuantity + detail.Quantity), 2);
-                }
+            // Correct cost of green coffee stocks
+            foreach (var detail in Details)
+            {
+                // Find stocks of green coffee for current coffee sort
+                var coffeeStock = ContextManager.Context.dCoffeeStocks.First(
+                    p => p.CoffeeSort.Id == detail.CoffeeSort.Id);
+                // Check if there anything in stock already
+                if (coffeeStock.GreenQuantity == 0)
+                    // Set cost from purchase
+                    coffeeStock.GreenCost = detail.Price;
+                else
+                // Count cost based on stock and new purchase
+                    coffeeStock.GreenCost = Math.Round((coffeeStock.GreenQuantity*coffeeStock.GreenCost
+                                                        + detail.Quantity*detail.Price)/
+                                                       (coffeeStock.GreenQuantity + detail.Quantity), 2);
             }
 
             foreach (var detail in Details)

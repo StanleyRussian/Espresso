@@ -75,6 +75,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auxiliary\enumMonth.cs" />
     <Compile Include="Auxiliary\SimpleCommand.cs" />
     <Compile Include="Pages\vmUnpaid.cs" />
     <Compile Include="Pages\Explore\vmProductPurchases.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Pages\Explore\vmCoffeeSorts.cs" />
     <Compile Include="Pages\Explore\vmRoastings.cs" />
     <Compile Include="Pages\Explore\vmSuppliers.cs" />
+    <Compile Include="Windows\vmWinStocksCorrection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Espresso\Model.csproj">

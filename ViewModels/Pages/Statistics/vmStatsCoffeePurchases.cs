@@ -20,7 +20,7 @@ namespace ViewModels.Pages.Statistics
     {
         public vmStatsCoffeePurchases()
         {
-            Header = "Сорта кофе и закупки";
+            Header = "По закупкам кофе";
             cmdRowSelected = new Command(cmdRowSelected_Execute);
         }
 

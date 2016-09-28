@@ -7,9 +7,9 @@
         xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         Title="Первый запуск"
         dialogs:DialogParticipation.Register="{Binding}"
-        GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
+        GlowBrush="{DynamicResource AccentColorBrush}" 
         ShowTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ResizeMode="NoResize"
-        MaxWidth="900" MaxHeight="550"
+        MaxWidth="900" MaxHeight="550" WindowStartupLocation="CenterScreen"
         xml:lang="ru">
     
     <Window.Resources>

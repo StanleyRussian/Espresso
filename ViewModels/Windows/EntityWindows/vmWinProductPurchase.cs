@@ -62,6 +62,20 @@ namespace ViewModels.Windows.EntityWindows
             // Add product purchase to database
             ContextManager.Context.ProductPurchases.Add(Purchase);
 
+            // Correct balance on account
+            ContextManager.Context.dAccountsBalances.First(
+                p => p.Account.Id == Purchase.Account.Id).Balance -= _sum;
+            // Add new transaction
+            ContextManager.Context.dTransactions.Add(new dTransaction
+            {
+                Account = Purchase.Account,
+                Date = Purchase.Date,
+                Description = "Закупка: " + Purchase.Product.Name,
+                Participant = Purchase.Supplier.Name,
+                Sum = - _sum
+            });
+
+
             // Find stocks of package for current product being purchase
             var productStock = ContextManager.Context.dProductStocks.First(
                 p => p.Product.Id == Purchase.Product.Id);

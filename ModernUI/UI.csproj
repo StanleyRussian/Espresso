@@ -326,6 +326,9 @@
     <Compile Include="Windows\StartupSplash.xaml.cs">
       <DependentUpon>StartupSplash.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\StocksCorrection.xaml.cs">
+      <DependentUpon>StocksCorrection.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\Combo\ActiveAccounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -630,6 +633,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\StartupSplash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StocksCorrection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
