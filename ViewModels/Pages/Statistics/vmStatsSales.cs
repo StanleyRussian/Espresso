@@ -13,7 +13,7 @@ namespace ViewModels.Pages.Statistics
     {
         public vmStatsSales()
         {
-            Header = "По продажам";
+            Header = "По клиентам";
             cmdFilter30Days = new Command(cmdFilter30Days_Execute);
             cmdFilterAll = new Command(cmdFilterAll_Execute);
             cmdFilterCurrentMonth = new Command(cmdFilterCurrentMonth_Execute);
@@ -22,12 +22,13 @@ namespace ViewModels.Pages.Statistics
 
         protected override void Load()
         {
+            Recipients = new ObservableCollection<wrapRecipient>();
             cmdFilterCurrentMonth.Execute(null);
         }
 
         private void Refresh()
         {
-            Recipients = new ObservableCollection<wrapRecipient>();
+            Recipients.Clear();
 
             var query = ContextManager.Context.Sales.Where(p => p.Date >= _filterFrom && p.Date <= _filterTo);
             foreach (var sale in query)
@@ -36,11 +37,16 @@ namespace ViewModels.Pages.Statistics
                 var profit = 0d;
                 var turnover = 0d;
 
-                foreach (var detailCoffee in sale.SaleDetailsCoffee)
+                foreach (var detail in sale.SaleDetailsCoffee)
                 {
-                    quantity += detailCoffee.Quantity * detailCoffee.Package.Capacity;
-                    profit += detailCoffee.Price - detailCoffee.Cost;
-                    turnover += detailCoffee.Price;
+                    quantity += detail.Quantity * detail.Package.Capacity;
+                    profit += (detail.Price - detail.Cost)*detail.Quantity;
+                    turnover += detail.Price*detail.Quantity;
+                }
+                foreach (var detail in sale.SaleDetailsProducts)
+                {
+                    profit += (detail.Price - detail.Cost) * detail.Quantity;
+                    turnover += detail.Price * detail.Quantity;
                 }
 
                 var recipient = Recipients.FirstOrDefault(p => p.Recipient.Id == sale.Recipient.Id);

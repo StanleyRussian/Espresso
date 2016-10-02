@@ -7,29 +7,7 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinRoasting: Abstract.aEntityWindowViewModel
     {
-        public vmWinRoasting(object argRoasting = null)
-        {
-            if (argRoasting != null)
-            {
-                Roasting = argRoasting as Roasting;
-                ShrinkagePercent = (int) (100 - (Roasting.RoastedAmount*100/Roasting.InitialAmount));
-            }
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
-
-        protected override void Refresh()
-        {
-            Roasting = new Roasting
-            {
-                Date = DateTime.Now,
-                CoffeeSort = ContextManager.ActiveCoffeeSorts.FirstOrDefault()
-            };
-            ShrinkagePercent = Properties.ShrinkagePercent;
-        }
+        public vmWinRoasting(object argEntity) : base(argEntity) { }
 
         private int _shrinkagePercent;
         public int ShrinkagePercent
@@ -53,6 +31,22 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Roasting = argEntity as Roasting;
+            ShrinkagePercent = (int)(100 - (Roasting.RoastedAmount * 100 / Roasting.InitialAmount));
+        }
+
+        protected override void OnOpenNew()
+        {
+            Roasting = new Roasting
+            {
+                Date = DateTime.Now,
+                CoffeeSort = ContextManager.ActiveCoffeeSorts.FirstOrDefault()
+            };
+            ShrinkagePercent = Properties.ShrinkagePercent;
+        }
+
         protected override void OnSaveValidation()
         {
             if (Roasting.InitialAmount <= 0)
@@ -66,7 +60,12 @@ namespace ViewModels.Windows.EntityWindows
                 throw new Exception("Недостаточно зелёного кофе в наличии, чтобы пожарить введённое количество");
         }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveEdit()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnSaveNew()
         {
             Roasting.ShrinkagePercent = (100 - ShrinkagePercent) / 100d;
             Roasting.RoastedAmount = Roasting.InitialAmount * Roasting.ShrinkagePercent;

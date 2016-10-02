@@ -5,18 +5,9 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinSupplier: Abstract.aEntityWindowViewModel
     {
-        public vmWinSupplier(object argSupplier = null)
-        {
-            if (argSupplier!=null)
-                Supplier = argSupplier as Supplier;
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
+        public vmWinSupplier(object argEntity) : base(argEntity) { }
 
-        protected override void Refresh()
+        protected override void OnOpenNew()
         {
             Supplier = new Supplier();
         }
@@ -32,12 +23,18 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        protected override void OnSaveValidation()
-        { }
+        protected override void OnSaveValidation() { }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveEdit() { }
+
+        protected override void OnSaveNew()
         {
             ContextManager.Context.Suppliers.Add(Supplier);
+        }
+
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Supplier = argEntity as Supplier;
         }
     }
 }

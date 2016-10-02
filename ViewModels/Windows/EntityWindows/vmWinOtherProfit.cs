@@ -7,27 +7,7 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinOtherProfit : Abstract.aEntityWindowViewModel
     {
-        public vmWinOtherProfit(object argProfit = null)
-        {
-            if (argProfit != null)
-                Profit = argProfit as OtherProfit;
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
-
-        protected override void Refresh()
-        {
-            Profit = new OtherProfit
-            {
-                Date = DateTime.Now,
-                Account = ContextManager.ActiveAccounts.FirstOrDefault()
-            };
-        }
-
-        #region Binding Properties 
+        public vmWinOtherProfit(object argEntity) : base(argEntity) { }
 
         private OtherProfit _profit;
         public OtherProfit Profit
@@ -40,9 +20,20 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        #endregion
 
-        #region Commands
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Profit = argEntity as OtherProfit;
+        }
+
+        protected override void OnOpenNew()
+        {
+            Profit = new OtherProfit
+            {
+                Date = DateTime.Now,
+                Account = ContextManager.ActiveAccounts.FirstOrDefault()
+            };
+        }
 
         protected override void OnSaveValidation()
         {
@@ -50,7 +41,12 @@ namespace ViewModels.Windows.EntityWindows
                 throw new Exception("Введите сумму больше нуля");
         }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveEdit()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnSaveNew()
         {
             // Add profit to database
             ContextManager.Context.OtherProfits.Add(Profit);
@@ -66,9 +62,6 @@ namespace ViewModels.Windows.EntityWindows
                 Participant = Profit.Designation,
                 Sum = Profit.Sum
             });
-
         }
-
-        #endregion
     }
 }

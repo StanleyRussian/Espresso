@@ -18,6 +18,7 @@ namespace Model.Entity
         public System.DateTime Date { get; set; }
         public double Sum { get; set; }
         public string Designation { get; set; }
+        public Nullable<int> TransactionID { get; set; }
     
         public virtual Account Account { get; set; }
     }

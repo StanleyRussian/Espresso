@@ -10,8 +10,9 @@ namespace ViewModels.Pages
             Header = "Отчёты";
             Tabs = new ObservableCollection<aTabViewModel>
             {
+                /*new vmStatsPackedStocks(),*/
+                new vmStatsCoffeeStocks(),
                 new vmStatsTransactions(),
-                new vmStatsCoffeePurchases(),
                 new vmStatsSales()
             };
         }

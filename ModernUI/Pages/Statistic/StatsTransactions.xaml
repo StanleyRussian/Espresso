@@ -77,7 +77,6 @@
 
                     <ComboBox ItemsSource="{Binding Source={StaticResource EnumMonth}}"
                               SelectedItem="{Binding FilterMonth}"
-                              controls:TextBoxHelper.ClearTextButton="True"
                               Margin="3" />
 
                     <controls:NumericUpDown Maximum="9999" Minimum="0"

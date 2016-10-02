@@ -5,21 +5,7 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinCoffeeSort: Abstract.aEntityWindowViewModel
     {
-        public vmWinCoffeeSort(object argSort = null)
-        {
-            if (argSort != null)
-                Sort = argSort as CoffeeSort;
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
-
-        protected override void Refresh()
-        {
-            Sort = new CoffeeSort();
-        }
+        public vmWinCoffeeSort(object argEntity) : base(argEntity) { }
 
         private CoffeeSort _sort;
         public CoffeeSort Sort
@@ -32,10 +18,21 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        protected override void OnSaveValidation()
-        { }
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Sort = argEntity as CoffeeSort;
+        }
 
-        protected override void OnSaveCreate()
+        protected override void OnOpenNew()
+        {
+            Sort = new CoffeeSort();
+        }
+
+        protected override void OnSaveValidation() { }
+
+        protected override void OnSaveEdit() { }
+
+        protected override void OnSaveNew()
         {
             ContextManager.Context.CoffeeSorts.Add(Sort);
             ContextManager.Context.dCoffeeStocks.Add(new dCoffeeStock { CoffeeSort = Sort });

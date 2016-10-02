@@ -7,27 +7,7 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinPackagePurchase : Abstract.aEntityWindowViewModel
     {
-        public vmWinPackagePurchase(object argPurchase = null)
-        {
-            if (argPurchase != null)
-                Purchase = argPurchase as PackagePurchase;
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
-
-        protected override void Refresh()
-        {
-            Purchase = new PackagePurchase
-            {
-                Date = DateTime.Now,
-                Account = ContextManager.ActiveAccounts.FirstOrDefault(),
-                Supplier = ContextManager.ActiveSuppliers.FirstOrDefault(),
-                Package = ContextManager.ActivePackages.FirstOrDefault()
-            };
-        }
+        public vmWinPackagePurchase(object argEntity) : base(argEntity) { }
 
         private PackagePurchase _purchase;
         public PackagePurchase Purchase
@@ -42,6 +22,22 @@ namespace ViewModels.Windows.EntityWindows
 
         private double _sum;
 
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Purchase = argEntity as PackagePurchase;
+        }
+
+        protected override void OnOpenNew()
+        {
+            Purchase = new PackagePurchase
+            {
+                Date = DateTime.Now,
+                Account = ContextManager.ActiveAccounts.FirstOrDefault(),
+                Supplier = ContextManager.ActiveSuppliers.FirstOrDefault(),
+                Package = ContextManager.ActivePackages.FirstOrDefault()
+            };
+        }
+
         protected override void OnSaveValidation()
         {
             if (Purchase.Quantity <= 0)
@@ -53,10 +49,14 @@ namespace ViewModels.Windows.EntityWindows
             if (ContextManager.Context.dAccountsBalances.First(
                 p => p.Account.Id == Purchase.Account.Id).Balance < _sum)
                 throw new Exception("На выбранном счету недостаточно денег");
-
         }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveEdit()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnSaveNew()
         {
             // Add purchase to database
             ContextManager.Context.PackagePurchases.Add(Purchase);

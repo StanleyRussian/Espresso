@@ -6,28 +6,7 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinMonthlyExpense : Abstract.aEntityWindowViewModel
     {
-        public vmWinMonthlyExpense(object argExpense = null)
-        {
-            if (argExpense != null)
-            {
-                Expense = argExpense as MonthlyExpense;
-            }
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
-        protected override void Refresh()
-        {
-            Expense = new MonthlyExpense
-            {
-                Day = DateTime.Now.Day,
-                RemindingDay = DateTime.Now.AddDays(-5).Day
-            };
-        }
-
-        #region Binding Properties
+        public vmWinMonthlyExpense(object argEntity) : base(argEntity) { }
 
         private MonthlyExpense _expense;
         public MonthlyExpense Expense
@@ -40,18 +19,31 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        #endregion
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Expense = argEntity as MonthlyExpense;
+        }
 
-        #region Commands
+        protected override void OnOpenNew()
+        {
+            Expense = new MonthlyExpense
+            {
+                Day = DateTime.Now.Day,
+                RemindingDay = DateTime.Now.AddDays(-5).Day
+            };
+        }
 
-        protected override void OnSaveValidation()
-        { }
+        protected override void OnSaveValidation() { }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveEdit()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        protected override void OnSaveNew()
         {
             ContextManager.Context.MonthlyExpenses.Add(Expense);
         }
-
-        #endregion
     }
 }

@@ -10,11 +10,14 @@
                 <DataTemplate DataType="{x:Type vm:vmStatsTransactions}">
                     <views:StatsTransactions/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:vmStatsCoffeePurchases}">
-                    <views:StatsCoffeePurchases/>
+                <DataTemplate DataType="{x:Type vm:vmStatsCoffeeStocks}">
+                    <views:StatsCoffeeStocks/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:vmStatsSales}">
                     <views:StatsSales/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:vmStatsPackedStocks}">
+                    <views:StatsPackedStocks/>
                 </DataTemplate>
             </TabControl.Resources>
 

@@ -76,7 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auxiliary\enumMonth.cs" />
+    <Compile Include="Auxiliary\ObjectCopier.cs" />
     <Compile Include="Auxiliary\SimpleCommand.cs" />
+    <Compile Include="Pages\Statistics\vmStatsPackedStocks.cs" />
     <Compile Include="Pages\vmUnpaid.cs" />
     <Compile Include="Pages\Explore\vmProductPurchases.cs" />
     <Compile Include="Pages\Explore\vmProducts.cs" />
@@ -91,7 +93,7 @@
     <Compile Include="Pages\Explore\vmPayments.cs" />
     <Compile Include="Pages\Explore\vmRecipients.cs" />
     <Compile Include="Pages\Statistics\vmStatsSales.cs" />
-    <Compile Include="Pages\Statistics\vmStatsCoffeePurchases.cs" />
+    <Compile Include="Pages\Statistics\vmStatsCoffeeStocks.cs" />
     <Compile Include="Pages\vmExplorer.cs" />
     <Compile Include="Pages\Statistics\vmStatsTransactions.cs" />
     <Compile Include="Pages\vmExplorerOperations.cs" />
