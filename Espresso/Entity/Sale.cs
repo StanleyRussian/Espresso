@@ -26,6 +26,7 @@ namespace Model.Entity
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public bool Paid { get; set; }
         public string InvoiceNumber { get; set; }
+        public Nullable<int> TransactionID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SaleDetailCoffee> SaleDetailsCoffee { get; set; }

@@ -13,10 +13,17 @@ namespace ViewModels.Windows.EntityWindows.Abstract
     public abstract class aEntityWindowViewModel: INotifyPropertyChanged
     {
         protected bool CreatingNew = false;
-        //protected readonly ContextContainer _context = new ContextContainer();
 
-        protected aEntityWindowViewModel()
+        protected aEntityWindowViewModel(object argEntity)
         {
+            if (argEntity != null)
+                OnOpenEdit(argEntity);
+            else
+            {
+                CreatingNew = true;
+                OnOpenNew();
+            }
+
             cmdSave = new Command(cmdSave_Execute);
             cmdOnClosing = new Command(cmdOnClosing_Execute);
         }
@@ -61,7 +68,6 @@ namespace ViewModels.Windows.EntityWindows.Abstract
             }
         }
 
-        protected abstract void Refresh();
         protected void SaveContext()
         {
             try
@@ -105,17 +111,19 @@ namespace ViewModels.Windows.EntityWindows.Abstract
             }
 
             if (CreatingNew)
-                OnSaveCreate();
+                OnSaveNew();
             else OnSaveEdit();
 
             SaveContext();
             if (CreatingNew)
-                Refresh();
+                OnOpenNew();
         }
 
+        protected abstract void OnOpenNew();
+        protected abstract void OnSaveNew();
+        protected abstract void OnOpenEdit(object argEntity);
+        protected abstract void OnSaveEdit();
         protected abstract void OnSaveValidation();
-        protected abstract void OnSaveCreate();
-        protected virtual void OnSaveEdit() { }
 
         public ICommand cmdOnClosing { get; private set; }
         protected void cmdOnClosing_Execute()

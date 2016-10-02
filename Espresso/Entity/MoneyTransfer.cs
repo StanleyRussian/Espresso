@@ -17,6 +17,8 @@ namespace Model.Entity
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
         public double Sum { get; set; }
+        public Nullable<int> TransactionIDInitial { get; set; }
+        public Nullable<int> TransactionIDTarget { get; set; }
     
         public virtual Account InitialAccount { get; set; }
         public virtual Account TargetAccount { get; set; }

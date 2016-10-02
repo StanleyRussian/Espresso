@@ -59,7 +59,7 @@
         <AssociationConnector Association="Context.AccountMonthlyPayments" />
         <EntityTypeShape EntityType="Context.dTransaction" Width="1.625" PointX="2.75" PointY="16.375" FillColor="YellowGreen" />
         <AssociationConnector Association="Context.AccountdTransaction" />
-        <EntityTypeShape EntityType="Context.MoneyTransfer" Width="1.75" PointX="0.5" PointY="12.625" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="Context.MoneyTransfer" Width="1.875" PointX="0.5" PointY="12.625" FillColor="Chocolate" />
         <AssociationConnector Association="Context.AccountMoneyTransfer" />
         <AssociationConnector Association="Context.AccountMoneyTransfer1" />
         <EntityTypeShape EntityType="Context.Product" Width="1.625" PointX="5" PointY="19.5" IsExpanded="true" />

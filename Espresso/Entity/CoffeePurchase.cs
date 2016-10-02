@@ -25,6 +25,7 @@ namespace Model.Entity
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public bool Paid { get; set; }
         public string InvoiceNumber { get; set; }
+        public Nullable<int> TransactionID { get; set; }
     
         public virtual Supplier Supplier { get; set; }
         public virtual Account Account { get; set; }

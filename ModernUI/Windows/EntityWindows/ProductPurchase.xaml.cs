@@ -8,10 +8,10 @@ namespace UI.Windows.EntityWindows
     /// </summary>
     public partial class ProductPurchase
     {
-        public ProductPurchase()
+        public ProductPurchase(object argPurchase = null)
         {
             InitializeComponent();
-            DataContext = new vmWinProductPurchase();
+            DataContext = new vmWinProductPurchase(argPurchase);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

@@ -8,27 +8,7 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinPayment :Abstract.aEntityWindowViewModel
     {
-        public vmWinPayment(object argPayment = null)
-        {
-            if (argPayment != null)
-                Payment = argPayment as Payment;
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
-
-        protected override void Refresh()
-        {
-            Payment = new Payment
-            {
-                Date = DateTime.Now,
-                Account = ContextManager.ActiveAccounts.FirstOrDefault()
-            };
-        }
-
-        #region Binding Properties 
+        public vmWinPayment(object argEntity) : base(argEntity) { }
 
         private Payment _payment;
         public Payment Payment
@@ -41,9 +21,19 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        #endregion
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Payment = argEntity as Payment;
+        }
 
-        #region Commands
+        protected override void OnOpenNew()
+        {
+            Payment = new Payment
+            {
+                Date = DateTime.Now,
+                Account = ContextManager.ActiveAccounts.FirstOrDefault()
+            };
+        }
 
         protected override void OnSaveValidation()
         {
@@ -51,7 +41,12 @@ namespace ViewModels.Windows.EntityWindows
                 throw new Exception("Введите cумму платежа больше нуля");
         }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveEdit()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnSaveNew()
         {
             // Add payment to database
             ContextManager.Context.Payments.Add(Payment);
@@ -68,7 +63,6 @@ namespace ViewModels.Windows.EntityWindows
                 Sum = - Payment.Sum
             });
         }
-
 
         public ICommand cmdMakeMonthly
         { get; private set; }
@@ -103,9 +97,7 @@ namespace ViewModels.Windows.EntityWindows
             }
             SaveContext();
             if (CreatingNew)
-                Refresh();
+                OnOpenNew();
         }
-
-        #endregion
     }
 }
