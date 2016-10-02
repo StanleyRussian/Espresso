@@ -8,30 +8,9 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinMix : Abstract.aEntityWindowViewModel
     {
-        public vmWinMix(object argMix = null)
-        {
-            if (argMix != null)
-            {
-                Mix = argMix as Mix;
-                //Details = new ObservableCollection<Mix_Details>(Mix.Mix_Details);
-            }
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
-
-        protected override void Refresh()
-        {
-            Mix = new Mix();
-            Details = new ObservableCollection<Mix_Details>();
-        }
-
-        #region Binding Properties and INotifyPropertyChanged implementation
+        public vmWinMix(object argEntity) : base(argEntity) { }
 
         private Mix _mix;
-
         public Mix Mix
         {
             get { return _mix; }
@@ -43,7 +22,6 @@ namespace ViewModels.Windows.EntityWindows
         }
 
         private ObservableCollection<Mix_Details> _details;
-
         public ObservableCollection<Mix_Details> Details
         {
             get { return _details; }
@@ -54,18 +32,28 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        #endregion
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Mix = argEntity as Mix;
+        }
 
-        #region Commands
+        protected override void OnOpenNew()
+        {
+            Mix = new Mix();
+            Details = new ObservableCollection<Mix_Details>();
+        }
 
         protected override void OnSaveValidation()
         {
+            if (!CreatingNew) return;
             double total = Details.Sum(x => x.Ratio);
             if (total != 100)
                 throw new Exception("Неправильные пропорции, общая сумма не равна 100%");
         }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveEdit() { }
+
+        protected override void OnSaveNew()
         {
             _mix.Mix_Details.Clear();
             foreach (var x in Details)
@@ -75,7 +63,5 @@ namespace ViewModels.Windows.EntityWindows
             }
             ContextManager.Context.Mixes.Add(_mix);
         }
-
-        #endregion
     }
 }

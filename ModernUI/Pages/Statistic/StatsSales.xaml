@@ -19,8 +19,8 @@
     <!--Main grid-->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -33,12 +33,12 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
@@ -130,7 +130,7 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
@@ -164,7 +164,7 @@
                            Style="{StaticResource Header3}"
                            HorizontalAlignment="Center" />
 
-                <metroCharts:PieChart Grid.Row="1" Grid.Column="1" 
+                <metroCharts:PieChart Grid.Row="1" Grid.Column="1"
                                       DataContext="{Binding}"
                                       ChartTitleVisibility="Collapsed"
                                       ChartLegendVisibility="Collapsed"
@@ -206,24 +206,24 @@
         <Grid Grid.Row="1"
               DataContext="{Binding FilterRecipient}"
               Margin="0,10,0,0">
-            
+
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Name}" Value="{x:Null}">
-                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Setter Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
-            
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition />
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -231,42 +231,42 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="{Binding Name}" 
-                       Style="{StaticResource Title}" 
-                       Grid.ColumnSpan="2"/>
-            
-            <TextBlock Text="Шаг закупки:" 
-                       Style="{StaticResource Header3Accent}" 
-                       Grid.Row="1"/>
+            <TextBlock Text="{Binding Name}"
+                       Style="{StaticResource Title}"
+                       Grid.ColumnSpan="2" />
 
-            <TextBlock Text="{Binding PurchaseStep}" 
+            <TextBlock Text="Шаг закупки:"
+                       Style="{StaticResource Header3Accent}"
+                       Grid.Row="1" />
+
+            <TextBlock Text="{Binding PurchaseStep}"
                        Style="{StaticResource Header3}"
-                       Grid.Row="1" Grid.Column="1"/>
+                       Grid.Row="1" Grid.Column="1" />
 
             <TextBlock Text="Предпочитаемый купаж:"
                        TextWrapping="Wrap"
-                       Style="{StaticResource Header3Accent}" 
-                       Grid.Row="2"/>
+                       Style="{StaticResource Header3Accent}"
+                       Grid.Row="2" />
 
-            <TextBlock Text="{Binding UsualPurchase}" 
+            <TextBlock Text="{Binding UsualPurchase}"
                        Style="{StaticResource Header3}"
-                       Grid.Row="2" Grid.Column="1"/>
+                       Grid.Row="2" Grid.Column="1" />
 
-            <TextBlock Text="Контактный номер:" 
-                       Style="{StaticResource Header3Accent}" 
-                       Grid.Row="4"/>
+            <TextBlock Text="Контактный номер:"
+                       Style="{StaticResource Header3Accent}"
+                       Grid.Row="4" />
 
             <TextBlock Text="{Binding Recipient.Contact}"
-                       Grid.Row="4" Grid.Column="1"/>
+                       Grid.Row="4" Grid.Column="1" />
 
-            <TextBlock Text="Контактное лицо:" 
-                       Style="{StaticResource Header3Accent}" 
-                       Grid.Row="5"/>
+            <TextBlock Text="Контактное лицо:"
+                       Style="{StaticResource Header3Accent}"
+                       Grid.Row="5" />
 
             <TextBlock Text="{Binding Recipient.ContactPerson}"
-                       Grid.Row="5" Grid.Column="1"/>
+                       Grid.Row="5" Grid.Column="1" />
         </Grid>
-        
+
         <!--Data grid with sales-->
         <Grid Grid.Row="1" Grid.Column="1"
               Margin="0,10,0,0">
@@ -275,10 +275,10 @@
                       AutoGenerateColumns="False"
                       ColumnWidth="*">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Date}" Header="Дата продажи"/>
-                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма"/>
-                    <DataGridTextColumn Binding="{Binding Cost}" Header="Общая себестоимость"/>
-                    <DataGridTextColumn Binding="{Binding Profit}" Header="Прибыль"/>
+                    <DataGridTextColumn Binding="{Binding Date}" Header="Дата продажи" />
+                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" />
+                    <DataGridTextColumn Binding="{Binding Cost}" Header="Общая себестоимость" />
+                    <DataGridTextColumn Binding="{Binding Profit}" Header="Прибыль" />
                 </DataGrid.Columns>
 
                 <DataGrid.RowDetailsTemplate>
@@ -290,11 +290,11 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            
+
                             <TextBlock Text="Проданный кофе"
                                        FontSize="14"
-                                       Margin="0,5,0,0"/>
-                            
+                                       Margin="0,5,0,0" />
+
                             <Border BorderBrush="{StaticResource AccentColorBrush}"
                                     BorderThickness="1"
                                     Margin="20,10,20,5"
@@ -320,7 +320,7 @@
 
                             <TextBlock Text="Проданные товары"
                                        FontSize="14"
-                                       Margin="0,5,0,0" Grid.Row="2"/>
+                                       Margin="0,5,0,0" Grid.Row="2" />
 
                             <Border BorderBrush="{StaticResource AccentColorBrush}"
                                     BorderThickness="1"

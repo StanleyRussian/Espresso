@@ -189,6 +189,7 @@
     <Property Name="PaymentDate" Type="datetime" Nullable="true" />
     <Property Name="Paid" Type="bit" Nullable="false" />
     <Property Name="InvoiceNumber" Type="nvarchar" Nullable="false" />
+    <Property Name="TransactionID" Type="int" Nullable="true" />
     <Property Name="Supplier_Id" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -295,6 +296,7 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="TransactionID" Type="int" Nullable="true" />
     <Property Name="Package_Id" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
     <Property Name="Supplier_Id" Type="int" Nullable="false" />
@@ -327,6 +329,7 @@
     <Property Name="PaymentDate" Type="datetime" Nullable="true" />
     <Property Name="Paid" Type="bit" Nullable="false" />
     <Property Name="InvoiceNumber" Type="nvarchar" Nullable="false" />
+    <Property Name="TransactionID" Type="int" Nullable="true" />
     <Property Name="Recipient_Id" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -389,6 +392,7 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Designation" Type="nvarchar" Nullable="false" />
     <Property Name="Sum" Type="float" Nullable="false" />
+    <Property Name="TransactionID" Type="int" Nullable="true" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MonthlyExpenses">
@@ -411,6 +415,7 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Sum" Type="float" Nullable="false" />
     <Property Name="Designation" Type="nvarchar" Nullable="false" />
+    <Property Name="TransactionID" Type="int" Nullable="true" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MonthlyPayments">
@@ -420,6 +425,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="PaidAmount" Type="float" Nullable="false" />
+    <Property Name="TransactionID" Type="int" Nullable="true" />
     <Property Name="MonthlyExpense_Id" Type="int" Nullable="false" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -441,6 +447,8 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Sum" Type="float" Nullable="false" />
+    <Property Name="TransactionIDInitial" Type="int" Nullable="true" />
+    <Property Name="TransactionIDTarget" Type="int" Nullable="true" />
     <Property Name="InitialAccount_Id" Type="int" Nullable="false" />
     <Property Name="TargetAccount_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -462,6 +470,7 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="TransactionID" Type="int" Nullable="true" />
     <Property Name="Account_Id" Type="int" Nullable="false" />
     <Property Name="Product_Id" Type="int" Nullable="false" />
     <Property Name="Supplier_Id" Type="int" Nullable="false" />
@@ -1119,6 +1128,7 @@
           <Property Name="Paid" Type="Boolean" Nullable="false" />
           <Property Name="InvoiceNumber" Type="String" Nullable="false" />
           <NavigationProperty Name="CoffeePurchaseDetails" Relationship="Context.CoffeePurchaseCoffeePurchase_Details" FromRole="CoffeePurchase" ToRole="CoffeePurchaseDetails" />
+          <Property Name="TransactionID" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -1278,6 +1288,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="TransactionID" Type="Int32" Nullable="true" />
           <NavigationProperty Name="Package" Relationship="Context.PackagePackagePurchase" FromRole="PackagePurchase" ToRole="Package" />
           <NavigationProperty Name="Account" Relationship="Context.AccountPackagePurchase" FromRole="PackagePurchase" ToRole="Account" />
           <NavigationProperty Name="Supplier" Relationship="Context.SupplierPackagePurchase" FromRole="PackagePurchase" ToRole="Supplier" />
@@ -1329,6 +1340,7 @@
           <Property Name="PaymentDate" Type="DateTime" Nullable="true" Precision="3" />
           <Property Name="Paid" Type="Boolean" Nullable="false" />
           <Property Name="InvoiceNumber" Type="String" Nullable="false" />
+          <Property Name="TransactionID" Type="Int32" Nullable="true" />
           <NavigationProperty Name="SaleDetailsCoffee" Relationship="Context.SaleSale_Details" FromRole="Sale" ToRole="Sale_Details" />
           <NavigationProperty Name="Recipient" Relationship="Context.RecipientSale" FromRole="Sale" ToRole="Recipient" />
           <NavigationProperty Name="Account" Relationship="Context.AccountSale" FromRole="Sale" ToRole="Account" />
@@ -1449,6 +1461,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Designation" Type="String" Nullable="false" />
           <Property Name="Sum" Type="Double" Nullable="false" />
+          <Property Name="TransactionID" Type="Int32" Nullable="true" />
           <NavigationProperty Name="Account" Relationship="Context.AccountExpense" FromRole="Expense" ToRole="Account" />
         </EntityType>
         <EntityType Name="MonthlyExpense">
@@ -1476,6 +1489,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Sum" Type="Double" Nullable="false" />
           <Property Name="Designation" Type="String" Nullable="false" />
+          <Property Name="TransactionID" Type="Int32" Nullable="true" />
           <NavigationProperty Name="Account" Relationship="Context.AccountOtherProfit" FromRole="OtherProfit" ToRole="Account" />
         </EntityType>
         <Association Name="AccountOtherProfit">
@@ -1489,6 +1503,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PaidAmount" Type="Double" Nullable="false" />
+          <Property Name="TransactionID" Type="Int32" Nullable="true" />
           <NavigationProperty Name="MonthlyExpense" Relationship="Context.MonthlyExpenseMonthlyPayments" FromRole="MonthlyPayments" ToRole="MonthlyExpense" />
           <NavigationProperty Name="Account" Relationship="Context.AccountMonthlyPayments" FromRole="MonthlyPayments" ToRole="Account" />
         </EntityType>
@@ -1522,6 +1537,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Sum" Type="Double" Nullable="false" />
+          <Property Name="TransactionIDInitial" Type="Int32" Nullable="true" />
+          <Property Name="TransactionIDTarget" Type="Int32" Nullable="true" />
           <NavigationProperty Name="InitialAccount" Relationship="Context.AccountMoneyTransfer" FromRole="MoneyTransfer" ToRole="Account" />
           <NavigationProperty Name="TargetAccount" Relationship="Context.AccountMoneyTransfer1" FromRole="MoneyTransfer" ToRole="Account" />
         </EntityType>
@@ -1558,6 +1575,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="TransactionID" Type="Int32" Nullable="true" />
           <NavigationProperty Name="Account" Relationship="Context.AccountProductPurchase" FromRole="ProductPurchase" ToRole="Account" />
           <NavigationProperty Name="Product" Relationship="Context.ProductProductPurchase" FromRole="ProductPurchase" ToRole="Product" />
           <NavigationProperty Name="Supplier" Relationship="Context.SupplierProductPurchase" FromRole="ProductPurchase" ToRole="Supplier" />
@@ -1620,6 +1638,7 @@
           <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
           <ScalarProperty Name="Paid" ColumnName="Paid" />
           <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1726,6 +1745,7 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1755,6 +1775,7 @@
           <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
           <ScalarProperty Name="Paid" ColumnName="Paid" />
           <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1816,6 +1837,7 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Designation" ColumnName="Designation" />
           <ScalarProperty Name="Sum" ColumnName="Sum" />
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1839,6 +1861,7 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Sum" ColumnName="Sum" />
           <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1848,6 +1871,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1868,6 +1892,8 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Sum" ColumnName="Sum" />
+          <ScalarProperty Name="TransactionIDInitial" ColumnName="TransactionIDInitial" />
+          <ScalarProperty Name="TransactionIDTarget" ColumnName="TransactionIDTarget" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1889,6 +1915,7 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

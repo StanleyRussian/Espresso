@@ -3,26 +3,49 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Model;
 using Model.Entity;
+using ViewModels.Auxiliary;
 
 namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinCoffeePurchase : Abstract.aEntityWindowViewModel
     {
-        public vmWinCoffeePurchase(object argPurchase)
+
+        public vmWinCoffeePurchase(object argEntity) : base(argEntity) { }
+
+        private CoffeePurchase _purchase;
+        public CoffeePurchase Purchase
         {
-            if (argPurchase != null)
+            get { return _purchase; }
+            set
             {
-                Purchase = argPurchase as CoffeePurchase;
-                Details = new ObservableCollection<CoffeePurchaseDetails>(Purchase.CoffeePurchaseDetails);
-            }
-            else
-            {
-                CreatingNew = true;
-                Refresh();
+                _purchase = value;
+                OnPropertyChanged();
             }
         }
 
-        protected override void Refresh()
+        private ObservableCollection<CoffeePurchaseDetails> _details;
+        public ObservableCollection<CoffeePurchaseDetails> Details
+        {
+            get { return _details; }
+            set
+            {
+                _details = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private double _sum;
+        private double _oldSum;
+        private CoffeePurchase _oldPurchase;
+
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Purchase = argEntity as CoffeePurchase;
+            _oldPurchase = Purchase.Clone();
+            Details = new ObservableCollection<CoffeePurchaseDetails>(Purchase.CoffeePurchaseDetails);
+        }
+
+        protected override void OnOpenNew()
         {
             int iInvoiceNumber;
             var firstOrDefault = ContextManager.Context.Sales.OrderByDescending(p => p.InvoiceNumber).FirstOrDefault();
@@ -47,37 +70,6 @@ namespace ViewModels.Windows.EntityWindows
             Details = new ObservableCollection<CoffeePurchaseDetails>();
         }
 
-        #region Binding Properties
-
-        private CoffeePurchase _purchase;
-
-        public CoffeePurchase Purchase
-        {
-            get { return _purchase; }
-            set
-            {
-                _purchase = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private ObservableCollection<CoffeePurchaseDetails> _details;
-
-        public ObservableCollection<CoffeePurchaseDetails> Details
-        {
-            get { return _details; }
-            set
-            {
-                _details = value;
-                OnPropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region Commands
-        private double _sum;
-
         protected override void OnSaveValidation()
         {
             if (Purchase.InvoiceNumber == "0" || Purchase.InvoiceNumber == "")
@@ -92,14 +84,52 @@ namespace ViewModels.Windows.EntityWindows
             if (Details.Any(detail => detail.Price == 0))
                 throw new Exception("Введите цену отличную от нуля");
 
-            _sum = Details.Sum(detail => (detail.Price * detail.Quantity));
-
-            if (ContextManager.Context.dAccountsBalances.First(
-                p => p.Account.Id == Purchase.Account.Id).Balance < _sum)
-                throw new Exception("На выбранном счету недостаточно денег");
+            if (_purchase.Paid)
+            {
+                _sum = Details.Sum(detail => (detail.Price*detail.Quantity));
+                if (ContextManager.Context.dAccountsBalances.First(
+                    p => p.Account.Id == Purchase.Account.Id).Balance < _sum)
+                    throw new Exception("На выбранном счету недостаточно денег");
+            }
         }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveEdit()
+        {
+            // Remove old purchase
+            ContextManager.Context.CoffeePurchases.Remove(_oldPurchase);
+            // Remove all of it's details
+            foreach (var detail in _oldPurchase.CoffeePurchaseDetails)
+                ContextManager.Context.CoffeePurchaseDetails.Remove(detail);
+
+            if (_oldPurchase.Paid)
+            {
+                // Restore account balance
+                _oldSum = _oldPurchase.CoffeePurchaseDetails.Sum(detail => (detail.Price*detail.Quantity));
+                ContextManager.Context.dAccountsBalances.First(
+                    p => p.Account.Id == _oldPurchase.Account.Id).Balance += _oldSum;
+                // Delete transaction
+                ContextManager.Context.dTransactions.Remove(
+                    ContextManager.Context.dTransactions.Find(_oldPurchase.TransactionID));
+            }
+
+            foreach (var detail in _oldPurchase.CoffeePurchaseDetails)
+            {
+                // Find stocks of green coffee for current coffee sort
+                var coffeeStock = ContextManager.Context.dCoffeeStocks.First(
+                    p => p.CoffeeSort.Id == detail.CoffeeSort.Id);
+
+                // Calculate old cost
+                coffeeStock.GreenCost = Math.Round((
+                    coffeeStock.GreenCost*coffeeStock.GreenQuantity - detail.Price*detail.Quantity)/
+                                                   (coffeeStock.GreenQuantity - detail.Quantity), 2);
+                // Calculate old stock
+                coffeeStock.GreenQuantity -= detail.Quantity;
+            }
+
+            OnSaveNew();
+        }
+
+        protected override void OnSaveNew()
         {
             // Just for common sense
             if (!_purchase.Paid)
@@ -110,9 +140,6 @@ namespace ViewModels.Windows.EntityWindows
             foreach (var detail in Details)
                 _purchase.CoffeePurchaseDetails.Add(detail);
 
-            // Add purchase to databse
-            ContextManager.Context.CoffeePurchases.Add(_purchase);
-
             // All financial operations will be done only if it was actually paid
             if (_purchase.Paid)
             {
@@ -120,7 +147,7 @@ namespace ViewModels.Windows.EntityWindows
                 ContextManager.Context.dAccountsBalances.First(
                     p => p.Account.Id == Purchase.Account.Id).Balance -= _sum;
                 // Add new transaction
-                ContextManager.Context.dTransactions.Add(new dTransaction
+                var transaction = ContextManager.Context.dTransactions.Add(new dTransaction
                 {
                     Account = Purchase.Account,
                     Date = Purchase.Date,
@@ -128,7 +155,13 @@ namespace ViewModels.Windows.EntityWindows
                     Participant = Purchase.Supplier.Name,
                     Sum = -_sum
                 });
+                // Tie it to purchase
+                //DOES NOT WORK
+                _purchase.TransactionID = transaction.Id;
             }
+
+            // Add purchase to databse
+            ContextManager.Context.CoffeePurchases.Add(_purchase);
 
             // Correct cost of green coffee stocks
             foreach (var detail in Details)
@@ -145,18 +178,9 @@ namespace ViewModels.Windows.EntityWindows
                     coffeeStock.GreenCost = Math.Round((coffeeStock.GreenQuantity*coffeeStock.GreenCost
                                                         + detail.Quantity*detail.Price)/
                                                        (coffeeStock.GreenQuantity + detail.Quantity), 2);
-            }
-
-            foreach (var detail in Details)
-            {
-                // Find stocks of green coffee for current coffee sort
-                var coffeeStock = ContextManager.Context.dCoffeeStocks.First(
-                    p => p.CoffeeSort.Id == detail.CoffeeSort.Id);
                 // Change green coffee stocks
                 coffeeStock.GreenQuantity += detail.Quantity;
             }
         }
-
-        #endregion
     }
 }

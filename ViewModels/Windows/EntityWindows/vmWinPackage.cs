@@ -6,23 +6,7 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinPackage :Abstract.aEntityWindowViewModel
     {
-        public vmWinPackage(object argPackage = null)
-        {
-            if (argPackage != null)
-                Package = argPackage as Package;
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
-
-        protected override void Refresh()
-        {
-            Package = new Package();
-        }
-
-        #region Binding Properties
+        public vmWinPackage(object argEntity) : base(argEntity) { }
 
         private Package _package;
         public Package Package
@@ -35,9 +19,15 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        #endregion
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Package = argEntity as Package;
+        }
 
-        #region Commands
+        protected override void OnOpenNew()
+        {
+            Package = new Package();
+        }
 
         protected override void OnSaveValidation()
         {
@@ -45,12 +35,12 @@ namespace ViewModels.Windows.EntityWindows
                 throw new Exception("Введите ёмкость пачки");
         }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveEdit() { }
+
+        protected override void OnSaveNew()
         {
             ContextManager.Context.Packages.Add(Package);
             ContextManager.Context.dPackageStocks.Add(new dPackageStocks { Package = Package });
         }
-
-        #endregion
     }
 }

@@ -1,17 +1,18 @@
-﻿<controls:MetroWindow 
-        x:Class="UI.Windows.FirstLaunchWindow"
-        x:Name="firstLaunchWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
-        Title="Первый запуск"
-        dialogs:DialogParticipation.Register="{Binding}"
-        GlowBrush="{DynamicResource AccentColorBrush}" 
-        ShowTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ResizeMode="NoResize"
-        MaxWidth="900" MaxHeight="550" WindowStartupLocation="CenterScreen"
-        xml:lang="ru">
-    
+﻿<controls:MetroWindow
+    x:Class="UI.Windows.FirstLaunchWindow"
+    x:Name="firstLaunchWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+    xmlns:auxiliary="clr-namespace:UI.Auxiliary"
+    Title="Первый запуск"
+    dialogs:DialogParticipation.Register="{Binding}"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    ShowTitleBar="False"
+    Width="900" Height="550" WindowStartupLocation="CenterScreen"
+    xml:lang="ru">
+
     <Window.Resources>
         <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MetroDataGridColumnHeader}">
             <Setter Property="ContentTemplate">
@@ -22,68 +23,187 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MetroDataGrid}">
+            <EventSetter Event="Unloaded" Handler="EventSetter_OnHandler" />
+            <!--<Setter Property="auxiliary:DataGridRollbackOnUnfocusedBehaviour.DataGridRollbackOnUnfocused" Value="True"/>-->
+        </Style>
     </Window.Resources>
-    
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Style="{StaticResource Header2Accent}"
-                   Text="Приветствуем вас в окне первого запуска"/>
+                   Text="Приветствуем вас в окне первого запуска" />
 
         <TextBlock Grid.Row="1" Margin="0,5,0,0"
                    Style="{StaticResource Header3}" TextWrapping="Wrap"
-                   Text="Для начала работы с программой, введите название основного расчётного счета вашей организации и текущий баланс. Этот счёт будет испольоваться по-умолчанию во всех финансовых операциях"/>
+                   Text="Воспользуйтесь таблицами, чтобы ввести в базу начальные данные" />
 
-        <Grid Margin="0,5,0,0" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <TextBox Text="{Binding AccountName}" Width="200" 
-                     controls:TextBoxHelper.ClearTextButton="True" 
-                     controls:TextBoxHelper.Watermark="Название"/>
-            <TextBox Grid.Column="1"
-                     Text="{Binding AccountBalance}" Width="200"
-                     controls:TextBoxHelper.ClearTextButton="True" 
-                     controls:TextBoxHelper.Watermark="Баланс (грн)"/>
-        </Grid>
+        <TabControl Grid.Row="2"
+                    controls:TabControlHelper.IsUnderlined="True">
 
-        <TextBlock Grid.Row="3" Margin="0,5,0,0"
-                   Style="{StaticResource Header3}" TextWrapping="Wrap"
-                   Text="Ниже введите в таблицу все имеющиеся в наличии сорта кофе, вместе с необходимыми данными. (Если кофе в наличии отсутствует, оставьте её пустой)"/>
+            <TabItem Header="Cчета"
+                     controls:ControlsHelper.HeaderFontSize="18">
+                <DataGrid AutoGenerateColumns="False"
+                          ItemsSource="{Binding Accounts}"
+                          ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название счёта"
+                                            Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Текущий баланс"
+                                            Binding="{Binding Balance}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
 
-        <DataGrid Grid.Row="4" Margin="0,5,0,0" AutoGenerateColumns="False"
-                  ItemsSource="{Binding CoffeeSorts}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Название сорта" Binding="{Binding Name}" Width="130"/>
-                <DataGridTextColumn Header="Закупочная цена за 1 кг зелёного кофе (грн)" Binding="{Binding Cost}" Width="150"/>
-                <DataGridTextColumn Header="Остатки зелёного кофе (кг)" Binding="{Binding GreenStocks}" Width="150"/>
-                <DataGridTextColumn Header="Минимальные остатки зелёного кофе (кг)" Binding="{Binding MinGreenStocks}" Width="150"/>
-                <DataGridTextColumn Header="Остатки жаренного кофе (кг)" Binding="{Binding RoastedStocks}" Width="150"/>
-                <DataGridTextColumn Header="Минимальные остатки жаренного кофе (кг)" Binding="{Binding MinRoastedStocks}" Width="150"/>
-            </DataGrid.Columns>
-        </DataGrid>
+            <TabItem Header="Моносорта"
+                     controls:ControlsHelper.HeaderFontSize="18">
+                <DataGrid AutoGenerateColumns="False"
+                          ItemsSource="{Binding CoffeeSorts}"
+                          ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название сорта"
+                                            Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Закупочная цена за 1 кг зелёного кофе (грн)"
+                                            Binding="{Binding Cost}" />
+                        <DataGridTextColumn Header="Остатки зелёного кофе (кг)"
+                                            Binding="{Binding GreenStocks}" />
+                        <DataGridTextColumn Header="Остатки жаренного кофе (кг)"
+                                            Binding="{Binding RoastedStocks}" />
+                        <DataGridTextColumn Header="Процент ужарки"
+                                            Binding="{Binding ShrinkagePercent}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
 
-        <TextBlock Grid.Row="5" Margin="0,5,0,0"
-                   Style="{StaticResource Header3}" TextWrapping="Wrap"
-                   Text="Почти готово! Введите процент ужарки для введёных сортов кофе. (При каждой последующей обжарке вы сможете его менять)"/>
+            <TabItem Header="Упаковка"
+                     controls:ControlsHelper.HeaderFontSize="18">
+                <DataGrid AutoGenerateColumns="False"
+                          ItemsSource="{Binding Packages}"
+                          ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название упаковки"
+                                            Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Ёмкость"
+                                            Binding="{Binding Capacity}" />
+                        <DataGridTextColumn Header="Себестоимость"
+                                            Binding="{Binding Cost}" />
+                        <DataGridTextColumn Header="Остатки"
+                                            Binding="{Binding Stocks}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
 
-        <TextBox Grid.Row="6" Margin="0,5,0,0" HorizontalAlignment="Center"
-                 Text="{Binding ShrinkagePercent}" Width="200"
-                 controls:TextBoxHelper.ClearTextButton="True"
-                 controls:TextBoxHelper.Watermark="Процент ужарки"/>
+            <TabItem Header="Купажи"
+                     controls:ControlsHelper.HeaderFontSize="18">
+                <DataGrid AutoGenerateColumns="False"
+                          ItemsSource="{Binding Mixes}"
+                          ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название купажа"
+                                            Binding="{Binding Name}" />
+                    </DataGrid.Columns>
 
-        <StackPanel Grid.Row="7" HorizontalAlignment="Right">
-            <Button Content="Готово" Command="{Binding cmdGo}" CommandParameter="{Binding ElementName=firstLaunchWindow}"/>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <DataGrid AutoGenerateColumns="False"
+                                      ItemsSource="{Binding Details}"
+                                      Margin="25,0,0,0">
+                                <DataGrid.Columns>
+                                    <DataGridComboBoxColumn Header="Сорт" Width="150"
+                                                            SelectedItemBinding="{Binding CoffeeSort}"
+                                                            DisplayMemberPath="Name">
+                                        <DataGridComboBoxColumn.ElementStyle>
+                                            <Style TargetType="{x:Type ComboBox}">
+                                                <Setter Property="ItemsSource" Value="{Binding Path=DataContext.CoffeeSorts, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                            </Style>
+                                        </DataGridComboBoxColumn.ElementStyle>
+                                        <DataGridComboBoxColumn.EditingElementStyle>
+                                            <Style TargetType="{x:Type ComboBox}">
+                                                <Setter Property="ItemsSource" Value="{Binding Path=DataContext.CoffeeSorts, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                            </Style>
+                                        </DataGridComboBoxColumn.EditingElementStyle>
+                                    </DataGridComboBoxColumn>
+                                    <DataGridTextColumn Binding="{Binding Ratio}" 
+                                                        Header="Процентное содержание (%)"
+                                                        Width="SizeToHeader" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="Фасованый кофе"
+                     controls:ControlsHelper.HeaderFontSize="18">
+                <DataGrid AutoGenerateColumns="False"
+                          ItemsSource="{Binding Packed}"
+                          ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridComboBoxColumn Header="Купаж" Width="150"
+                                                SelectedItemBinding="{Binding Mix}"
+                                                DisplayMemberPath="Name">
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Mixes, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
+                            <DataGridComboBoxColumn.EditingElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Mixes, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                </Style>
+                            </DataGridComboBoxColumn.EditingElementStyle>
+                        </DataGridComboBoxColumn>
+
+                        <DataGridComboBoxColumn Header="Упаковка"
+                                                SelectedItemBinding="{Binding Package}"
+                                                DisplayMemberPath="Name">
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Packages, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
+                            <DataGridComboBoxColumn.EditingElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Packages, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                </Style>
+                            </DataGridComboBoxColumn.EditingElementStyle>
+                        </DataGridComboBoxColumn>
+                        
+                        <DataGridTextColumn Header="Себестоимость"
+                                            Binding="{Binding Cost}" />
+                        <DataGridTextColumn Header="Остатки"
+                                            Binding="{Binding Stocks}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="Прочие товары"
+                     controls:ControlsHelper.HeaderFontSize="18">
+                <DataGrid AutoGenerateColumns="False"
+                          ItemsSource="{Binding Products}"
+                          ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название товара"
+                                            Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Себестоимость"
+                                            Binding="{Binding Cost}" />
+                        <DataGridTextColumn Header="Остатки"
+                                            Binding="{Binding Stocks}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Row="3" HorizontalAlignment="Right">
+            <Button Content="Готово" Command="{Binding cmdGo}"
+                    CommandParameter="{Binding ElementName=firstLaunchWindow}" />
         </StackPanel>
     </Grid>
 </controls:MetroWindow>

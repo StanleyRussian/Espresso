@@ -6,24 +6,14 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinProduct : aEntityWindowViewModel
     {
-        private Product _product;
+        public vmWinProduct(object argEntity) : base(argEntity) { }
 
-        public vmWinProduct(object argProduct = null)
-        {
-            if (argProduct != null)
-                Product = argProduct as Product;
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
-
-        protected override void Refresh()
+        protected override void OnOpenNew()
         {
             Product = new Product();
         }
 
+        private Product _product;
         public Product Product
         {
             get { return _product; }
@@ -34,13 +24,19 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        protected override void OnSaveValidation()
-        { }
+        protected override void OnSaveEdit() { }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveValidation() { }
+
+        protected override void OnSaveNew()
         {
             ContextManager.Context.Products.Add(Product);
             ContextManager.Context.dProductStocks.Add(new dProductStock {Product = Product});
+        }
+
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Product = argEntity as Product;
         }
     }
 }

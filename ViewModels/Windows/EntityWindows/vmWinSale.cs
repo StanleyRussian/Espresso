@@ -8,48 +8,7 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinSale: Abstract.aEntityWindowViewModel
     {
-        public vmWinSale(object argSale = null)
-        {
-            if (argSale != null)
-            {
-                Sale = argSale as Sale;
-                CoffeeDetails = new ObservableCollection<SaleDetailCoffee>(Sale.SaleDetailsCoffee);
-                ProductDetails = new ObservableCollection<SaleDetailProduct>(Sale.SaleDetailsProducts);
-            }
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
-
-        protected override void Refresh()
-        {
-            int iInvoiceNumber;
-            var firstOrDefault = ContextManager.Context.Sales.OrderByDescending(p => p.InvoiceNumber).FirstOrDefault();
-            if (firstOrDefault != null)
-            {
-                iInvoiceNumber = int.Parse(firstOrDefault.InvoiceNumber);
-                iInvoiceNumber++;
-            }
-            else
-                iInvoiceNumber = 1;
-
-            Sale = new Sale
-                {
-                    Date = DateTime.Now,
-                    PaymentDate = DateTime.Now,
-                    Paid = true,
-                    Account = ContextManager.ActiveAccounts.FirstOrDefault(),
-                    Recipient = ContextManager.ActiveRecipients.FirstOrDefault(),
-                    InvoiceNumber = iInvoiceNumber.ToString()
-                };
-
-            CoffeeDetails = new ObservableCollection<SaleDetailCoffee>();
-            ProductDetails = new ObservableCollection<SaleDetailProduct>();
-        }
-
-        #region Binding Properties
+        public vmWinSale(object argEntity) : base(argEntity) { }
 
         private Sale _sale;
         public Sale Sale
@@ -84,11 +43,40 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        #endregion
-
-        #region Commands
-
         private double _sum;
+
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Sale = argEntity as Sale;
+            CoffeeDetails = new ObservableCollection<SaleDetailCoffee>(Sale.SaleDetailsCoffee);
+            ProductDetails = new ObservableCollection<SaleDetailProduct>(Sale.SaleDetailsProducts);
+        }
+
+        protected override void OnOpenNew()
+        {
+            int iInvoiceNumber;
+            var firstOrDefault = ContextManager.Context.Sales.OrderByDescending(p => p.InvoiceNumber).FirstOrDefault();
+            if (firstOrDefault != null)
+            {
+                iInvoiceNumber = int.Parse(firstOrDefault.InvoiceNumber);
+                iInvoiceNumber++;
+            }
+            else
+                iInvoiceNumber = 1;
+
+            Sale = new Sale
+            {
+                Date = DateTime.Now,
+                PaymentDate = DateTime.Now,
+                Paid = true,
+                Account = ContextManager.ActiveAccounts.FirstOrDefault(),
+                Recipient = ContextManager.ActiveRecipients.FirstOrDefault(),
+                InvoiceNumber = iInvoiceNumber.ToString()
+            };
+
+            CoffeeDetails = new ObservableCollection<SaleDetailCoffee>();
+            ProductDetails = new ObservableCollection<SaleDetailProduct>();
+        }
 
         protected override void OnSaveValidation()
         {
@@ -96,8 +84,6 @@ namespace ViewModels.Windows.EntityWindows
             if (Sale.InvoiceNumber == "0" || Sale.InvoiceNumber == "")
                 throw new Exception();
             // Coffee related checks
-            //if (CoffeeDetails.Count == 0)
-            //    throw new Exception("Введите хотя бы один купаж кофе");
             if (CoffeeDetails.Any(detail => detail.Quantity == 0))
                 throw new Exception("Введите количество проданных пачек кофе");
             if (CoffeeDetails.Any(detail => detail.Package == null))
@@ -120,8 +106,17 @@ namespace ViewModels.Windows.EntityWindows
                 throw new Exception("Недостаточно расфасованного кофе в наличии");
         }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveEdit()
         {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnSaveNew()
+        {
+            //Just for common sense
+            if (!_sale.Paid)
+                _sale.PaymentDate = null;
+
             _sale.SaleDetailsCoffee.Clear();
             foreach (var detail in CoffeeDetails)
             {
@@ -146,7 +141,7 @@ namespace ViewModels.Windows.EntityWindows
                 _sum += detail.Price*detail.Quantity;
                 // Calculate sale cost
                 detail.Cost = ContextManager.Context.dProductStocks.First(
-                    p => p.Product.Id == detail.Product.Id).Cost*detail.Quantity;
+                    p => p.Product.Id == detail.Product.Id).Cost;
                 // Change product stocks
                 ContextManager.Context.dProductStocks.First(
                     p => p.Product.Id == detail.Product.Id).Quantity -= detail.Quantity;
@@ -170,7 +165,5 @@ namespace ViewModels.Windows.EntityWindows
                 });
             }
         }
-
-        #endregion
     }
 }

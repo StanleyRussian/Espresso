@@ -16,11 +16,11 @@ using ViewModels.Auxiliary;
 
 namespace ViewModels.Pages.Statistics
 {
-    public class vmStatsCoffeePurchases:aTabViewModel
+    public class vmStatsCoffeeStocks:aTabViewModel
     {
-        public vmStatsCoffeePurchases()
+        public vmStatsCoffeeStocks()
         {
-            Header = "По закупкам кофе";
+            Header = "По остаткам кофе";
             cmdRowSelected = new Command(cmdRowSelected_Execute);
         }
 

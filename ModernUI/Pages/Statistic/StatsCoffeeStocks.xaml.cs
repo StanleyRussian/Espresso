@@ -5,9 +5,9 @@ namespace UI.Pages.Statistic
     /// <summary>
     /// Interaction logic for StatsSorts.xaml
     /// </summary>
-    public partial class StatsCoffeePurchases : UserControl
+    public partial class StatsCoffeeStocks : UserControl
     {
-        public StatsCoffeePurchases()
+        public StatsCoffeeStocks()
         {
             InitializeComponent();
             GridCoffee.SelectedIndex = 0;

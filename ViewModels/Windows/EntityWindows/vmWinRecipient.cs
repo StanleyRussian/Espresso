@@ -5,22 +5,6 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinRecipient :Abstract.aEntityWindowViewModel
     {
-        public vmWinRecipient(object argRecipient = null)
-        {
-            if (argRecipient != null) 
-                Recipient = argRecipient as Recipient;
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
-
-        protected override void Refresh()
-        {
-            Recipient = new Recipient();
-        }
-
         private Recipient _recipient;
         public Recipient Recipient
         {
@@ -32,12 +16,28 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        protected override void OnSaveValidation()
-        { }
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Recipient = argEntity as Recipient;
+        }
 
-        protected override void OnSaveCreate()
+        protected override void OnOpenNew()
+        {
+            Recipient = new Recipient();
+        }
+
+        protected override void OnSaveValidation() { }
+
+        protected override void OnSaveEdit() { }
+
+        protected override void OnSaveNew()
         {
             ContextManager.Context.Recipients.Add(Recipient);
+        }
+
+
+        public vmWinRecipient(object argEntity) : base(argEntity)
+        {
         }
     }
 }

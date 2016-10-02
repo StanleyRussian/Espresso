@@ -1,0 +1,5 @@
+ALTER TABLE dTransactions ALTER COLUMN Account_Id INT NULL
+GO
+
+ALTER TABLE dTransactions ALTER COLUMN Participant nvarchar(4000) NULL
+GO

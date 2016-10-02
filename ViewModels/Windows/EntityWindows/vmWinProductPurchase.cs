@@ -8,26 +8,8 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinProductPurchase: aEntityWindowViewModel
     {
-        public vmWinProductPurchase(object argPurchase = null)
-        {
-            if (argPurchase != null)
-                Purchase = argPurchase as ProductPurchase;
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
+        public vmWinProductPurchase(object argEntity) : base(argEntity) { }
 
-        protected override void Refresh()
-        {
-            Purchase = new ProductPurchase
-            {
-                Date = DateTime.Now,
-                Account = ContextManager.ActiveAccounts.FirstOrDefault(),
-                Supplier = ContextManager.ActiveSuppliers.FirstOrDefault()
-            };
-        }
 
         private ProductPurchase _purchase;
         public ProductPurchase Purchase
@@ -41,6 +23,26 @@ namespace ViewModels.Windows.EntityWindows
         }
 
         private double _sum;
+
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Purchase = argEntity as ProductPurchase;
+        }
+
+        protected override void OnOpenNew()
+        {
+            Purchase = new ProductPurchase
+            {
+                Date = DateTime.Now,
+                Account = ContextManager.ActiveAccounts.FirstOrDefault(),
+                Supplier = ContextManager.ActiveSuppliers.FirstOrDefault()
+            };
+        }
+
+        protected override void OnSaveEdit()
+        {
+            throw new NotImplementedException();
+        }
 
         protected override void OnSaveValidation()
         {
@@ -57,7 +59,7 @@ namespace ViewModels.Windows.EntityWindows
                 throw new Exception("На выбранном счету недостаточно денег");
         }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveNew()
         {
             // Add product purchase to database
             ContextManager.Context.ProductPurchases.Add(Purchase);

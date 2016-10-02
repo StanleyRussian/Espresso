@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Model;
@@ -15,64 +16,54 @@ namespace ViewModels.Windows
         public vmWinStocksCorrection()
         {
             CoffeeStocks = new ObservableCollection<wrapCoffeeStock>();
+            PackedStocks = new ObservableCollection<wrapPackedStock>();
+            PackageStocks = new ObservableCollection<wrapPackageStock>();
+            ProductStocks = new ObservableCollection<wrapProductStock>();
 
-            cmdGreenExpanded = new Command(cmdGreenExpanded_Execute);
-            cmdRoastedExpanded = new Command(cmdRoastedExpanded_Execute);
+            cmdGreenExpanded = new Command(cmdCoffeeExpanded_Execute);
+            cmdRoastedExpanded = new Command(cmdCoffeeExpanded_Execute);
             cmdPackageExpanded = new Command(cmdPackageExpanded_Execute);
             cmdPackedExpanded = new Command(cmdPackedExpanded_Execute);
             cmdProductExpanded = new Command(cmdProductExpanded_Execute);
             cmdSave = new Command(cmdSave_Execute);
         }
 
-        public ObservableCollection<wrapCoffeeStock> CoffeeStocks { get; private set; }
-        public ObservableCollection<wrapPackageStock> PackageStocks { get; private set; }
-        public ObservableCollection<wrapPackedStock> PackedStocks { get; private set; }
-        public ObservableCollection<wrapProductStock> ProductStocks { get; private set; }
-
-        public ICommand cmdGreenExpanded { get; }
-        private void cmdGreenExpanded_Execute()
-        {
-            if (CoffeeStocks.Count > 0) return;
-            foreach (var coffeeStock in ContextManager.Context.dCoffeeStocks)
-                CoffeeStocks.Add(new wrapCoffeeStock { Stock = coffeeStock });
-            // I don't understand why, but it doesn't refresh without this
-            OnPropertyChanged("CoffeeStocks");
-        }
+        public ObservableCollection<wrapCoffeeStock> CoffeeStocks { get; }
+        public ObservableCollection<wrapPackageStock> PackageStocks { get; }
+        public ObservableCollection<wrapPackedStock> PackedStocks { get; }
+        public ObservableCollection<wrapProductStock> ProductStocks { get; }
 
         public ICommand cmdRoastedExpanded { get; }
-        private void cmdRoastedExpanded_Execute()
+        public ICommand cmdGreenExpanded { get; }
+        private void cmdCoffeeExpanded_Execute()
         {
-            if (CoffeeStocks.Count > 0) return;
+            CoffeeStocks.Clear();
             foreach (var coffeeStock in ContextManager.Context.dCoffeeStocks)
                 CoffeeStocks.Add(new wrapCoffeeStock { Stock = coffeeStock });
-            OnPropertyChanged("CoffeeStocks");
         }
 
         public ICommand cmdPackageExpanded { get; }
         private void cmdPackageExpanded_Execute()
         {
-            PackageStocks = new ObservableCollection<wrapPackageStock>();
+            PackageStocks.Clear();
             foreach (var packageStock in ContextManager.Context.dPackageStocks)
                 PackageStocks.Add(new wrapPackageStock {Stock = packageStock});
-            OnPropertyChanged("PackageStocks");
         }
 
         public ICommand cmdPackedExpanded { get; }
         private void cmdPackedExpanded_Execute()
         {
-            PackedStocks = new ObservableCollection<wrapPackedStock>();
+            PackedStocks.Clear();
             foreach (var packedStock in ContextManager.Context.dPackedStocks)
                 PackedStocks.Add(new wrapPackedStock {Stock = packedStock});
-            OnPropertyChanged("PackedStocks");
         }
 
         public ICommand cmdProductExpanded { get; }
         private void cmdProductExpanded_Execute()
         {
-           ProductStocks = new ObservableCollection<wrapProductStock>();
+          ProductStocks.Clear();
             foreach (var productStock in ContextManager.Context.dProductStocks)
                 ProductStocks.Add(new wrapProductStock {Stock = productStock});
-            OnPropertyChanged("ProductStocks");
         }
 
         public ICommand cmdSave { get; }
@@ -84,7 +75,13 @@ namespace ViewModels.Windows
             SavePacked();
             SaveProduct();
 
-            ContextManager.Context.SaveChanges();
+            try
+            {
+                ContextManager.Context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private void SaveGreen()
@@ -112,9 +109,13 @@ namespace ViewModels.Windows
                     ContextManager.Context.dTransactions.Add(new dTransaction
                     {
                         Date = DateTime.Now,
-                        Sum = - stock.diffGreenStock * stock.Stock.GreenCost,
-                        Description = "Списание" + stock.diffGreenStock + " кг зелёного кофе, сорта: " + stock.Name
+                        Sum = stock.diffGreenStock * stock.Stock.GreenCost,
+                        Description = "Списание" + stock.diffGreenStock + " кг зелёного кофе, сорта: " + stock.Name,
+                        Account = ContextManager.Context.Accounts.First(),
+                        Participant = ""
                     });
+
+                    stock.Stock.GreenQuantity += stock.diffGreenStock;
                 }
             }
         }
@@ -138,7 +139,9 @@ namespace ViewModels.Windows
                     {
                         Date = DateTime.Now,
                         Sum = - stock.diffRoastedStock * stock.Stock.RoastedCost,
-                        Description = "Списание" + stock.diffGreenStock + " кг жареного кофе, сорта: " + stock.Name
+                        Description = "Списание" + stock.diffGreenStock + " кг жареного кофе, сорта: " + stock.Name,
+                        Account = ContextManager.Context.Accounts.First(),
+                        Participant = ""
                     });
                 }
             }
@@ -163,7 +166,9 @@ namespace ViewModels.Windows
                     {
                         Date = DateTime.Now,
                         Sum = - stock.diffQuantity * stock.Stock.Cost,
-                        Description = "Списание" + stock.diffQuantity + " ед. упаковки: " + stock.Name
+                        Description = "Списание" + stock.diffQuantity + " ед. упаковки: " + stock.Name,
+                        Account = ContextManager.Context.Accounts.First(),
+                        Participant = ""
                     });
                 }
             }
@@ -188,7 +193,9 @@ namespace ViewModels.Windows
                     {
                         Date = DateTime.Now,
                         Sum = - stock.diffQuantity * stock.Stock.Cost,
-                        Description = "Списание" + stock.diffQuantity + " пачек упакованного кофе: " + stock.Name
+                        Description = "Списание" + stock.diffQuantity + " пачек упакованного кофе: " + stock.Name,
+                        Account = ContextManager.Context.Accounts.First(),
+                        Participant = ""
                     });
                 }
             }
@@ -213,7 +220,9 @@ namespace ViewModels.Windows
                     {
                         Date = DateTime.Now,
                         Sum = - stock.diffQuantity * stock.Stock.Cost,
-                        Description = "Списание" + stock.diffQuantity + " ед. сопутствующих товаров: " + stock.Name
+                        Description = "Списание" + stock.diffQuantity + " ед. сопутствующих товаров: " + stock.Name,
+                        Account = ContextManager.Context.Accounts.First(),
+                        Participant = ""
                     });
                 }
             }

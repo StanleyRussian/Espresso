@@ -22,7 +22,8 @@
                       AutoGenerateColumns="False"
                       ColumnWidth="*"
                       Grid.Row="1"
-                      Margin="10">
+                      Margin="10"
+                      IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Purchase.Date}" 
                                         Header="Дата" IsReadOnly="True"/>
@@ -89,7 +90,8 @@
                       AutoGenerateColumns="False"
                       ColumnWidth="*"
                       Grid.Row="1"
-                      Margin="10">
+                      Margin="10"
+                      IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Sale.Date}" Header="Дата" />
                     <DataGridTextColumn Binding="{Binding Sale.Recipient.Name}" Header="Поставщик" />
@@ -105,7 +107,7 @@
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
 
-                                    <DatePicker SelectedDate="{Binding Sale.PaymentDate}"/>
+                                    <DatePicker SelectedDate="{Binding Sale.PaymentDate, UpdateSourceTrigger=PropertyChanged}"/>
                                     <Button Command="{Binding cmdPay}"
                                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=SelectedItem}"
                                             DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext}"

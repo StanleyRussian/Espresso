@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 using Model;
 using Model.Entity;
@@ -8,86 +7,38 @@ using ViewModels.Auxiliary;
 
 namespace ViewModels.Pages.Statistics
 {
-    public class vmStatsTransactions: aTabViewModel
+    public class vmStatsPackedStocks : aTabViewModel
     {
-        public vmStatsTransactions()
+        public vmStatsPackedStocks()
         {
-            Header = "По финансам";
+            Header = "По фасованному кофе";
 
             cmdFilter30Days = new Command(cmdFilter30Days_Execute);
             cmdFilterAll = new Command(cmdFilterAll_Execute);
             cmdFilterCurrentMonth = new Command(cmdFilterCurrentMonth_Execute);
             cmdFilter = new Command(cmdFilter_Execute);
+            cmdRowSelected = new Command(cmdRowSelected_Execute);
         }
 
         protected override void Load()
         {
-            Income = new ObservableCollection<dTransaction>();
-            Outcome = new ObservableCollection<dTransaction>();
-            UnpaidIncome = new ObservableCollection<unpaidOperation>();
-            UnpaidOutcome = new ObservableCollection<unpaidOperation>();
-
             cmdFilterCurrentMonth.Execute(null);
+
+            PackedStocks = new ObservableCollection<dPackedStocks>();
+            Packings = new ObservableCollection<Packing>();
         }
 
         private void Refresh()
         {
-            Income.Clear();
-            Outcome.Clear();
-            UnpaidIncome.Clear();
-            UnpaidOutcome.Clear();
+            PackedStocks.Clear();
+            Packings.Clear();
 
-            var queryTransactions = ContextManager.Context.dTransactions.Where(
-                p => p.Date >= _filterFrom && p.Date <= _filterTo &&
-                     p.Description != "Внутренний перевод");
-            foreach (var transaction in queryTransactions)
-            {
-                if (transaction.Sum>0)
-                    Income.Add(transaction);
-                else
-                    Outcome.Add(transaction);
-            }
-
-            var querySales = ContextManager.Context.Sales.Where(
-                p => p.Date >= _filterFrom && p.Date <= _filterTo && p.Paid == false);
-            foreach (var sale in querySales)
-            {
-                double sum = sale.SaleDetailsCoffee.Sum(detailCoffee => detailCoffee.Price*detailCoffee.Quantity) + 
-                    sale.SaleDetailsProducts.Sum(detailProduct => detailProduct.Price*detailProduct.Quantity);
-
-                UnpaidIncome.Add(new unpaidOperation
-                {
-                    Date = sale.Date,
-                    Sum = sum,
-                    Description = "Неоплаченная продажа " + sale.Recipient.Name + " от " + sale.Date + " числа"
-                });
-            }
-
-            var queryPurchases = ContextManager.Context.CoffeePurchases.Where(
-                p => p.Date >= _filterFrom && p.Date <= _filterTo && p.Paid == false);
-            foreach (var purchase in queryPurchases)
-            {
-                double sum = purchase.CoffeePurchaseDetails.Sum(detailCoffee => detailCoffee.Price*detailCoffee.Quantity);
-                UnpaidOutcome.Add(new unpaidOperation
-                {
-                    Date = purchase.Date,
-                    Sum = -sum,
-                    Description = "Неоплаченная закупка кофе от " + purchase.Date + " числа"
-                });
-            }
+            foreach (var stock in ContextManager.Context.dPackedStocks)
+                PackedStocks.Add(stock);
         }
 
-        public ObservableCollection<dTransaction> Income { get; private set; }
-        public ObservableCollection<dTransaction> Outcome { get; private set; }
-        public ObservableCollection<unpaidOperation> UnpaidIncome { get; private set; }
-        public ObservableCollection<unpaidOperation> UnpaidOutcome { get; private set; }
-
-        public double TotalIncome => Income.Sum(p => p.Sum);
-        public double TotalOutcome => Outcome.Sum(p => p.Sum);
-        public double TotalUnpaidIncome => UnpaidIncome.Sum(p => p.Sum);
-        public double TotalUnpaidOutcome => UnpaidOutcome.Sum(p => p.Sum);
-        public double TotalPaid => TotalIncome + TotalOutcome;
-        public double Total => TotalPaid + TotalUnpaidIncome + TotalUnpaidOutcome;
+        public ObservableCollection<dPackedStocks> PackedStocks;
+        public ObservableCollection<Packing> Packings;
 
         private DateTime _filterFrom;
         public DateTime FilterFrom
@@ -155,18 +106,6 @@ namespace ViewModels.Pages.Statistics
             }
         }
 
-        private Account _filterAccount;
-        public Account FilterAccount
-        {
-            get { return _filterAccount; }
-            set
-            {
-                _filterAccount = value;
-                OnPropertyChanged();
-                Refresh();
-            }
-        }
-
         public ICommand cmdFilter30Days { get; }
         private void cmdFilter30Days_Execute()
         {
@@ -214,13 +153,12 @@ namespace ViewModels.Pages.Statistics
         {
             Refresh();
         }
-    }
 
+        public ICommand cmdRowSelected { get; private set; }
+        private void cmdRowSelected_Execute(object argSelected)
+        {
+            
+        }
 
-    public class unpaidOperation
-    {
-        public DateTime Date { get; set; }
-        public double Sum { get; set; }
-        public string Description { get; set; }
     }
 }

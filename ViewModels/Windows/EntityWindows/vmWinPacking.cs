@@ -7,31 +7,9 @@ namespace ViewModels.Windows.EntityWindows
 {
     public class vmWinPacking : Abstract.aEntityWindowViewModel
     {
-        public vmWinPacking(object argPacking = null)
-        {
-            if (argPacking != null)
-                Packing = argPacking as Packing;
-            else
-            {
-                CreatingNew = true;
-                Refresh();
-            }
-        }
-
-        protected override void Refresh()
-        {
-            Packing = new Packing
-            {
-                Date = DateTime.Now,
-                Mix = ContextManager.ActiveMixes.FirstOrDefault(),
-                Package = ContextManager.ActivePackages.FirstOrDefault()
-            };
-        }
-
-        #region Binding Properties 
+        public vmWinPacking(object argEntity) : base(argEntity) { }
 
         private Packing _packing;
-
         public Packing Packing
         {
             get { return _packing; }
@@ -42,9 +20,20 @@ namespace ViewModels.Windows.EntityWindows
             }
         }
 
-        #endregion
+        protected override void OnOpenEdit(object argEntity)
+        {
+            Packing = argEntity as Packing;
+        }
 
-        #region Commands
+        protected override void OnOpenNew()
+        {
+            Packing = new Packing
+            {
+                Date = DateTime.Now,
+                Mix = ContextManager.ActiveMixes.FirstOrDefault(),
+                Package = ContextManager.ActivePackages.FirstOrDefault()
+            };
+        }
 
         protected override void OnSaveValidation()
         {
@@ -53,8 +42,8 @@ namespace ViewModels.Windows.EntityWindows
 
             if (Packing.Mix.Mix_Details.Any(
                 detail => ContextManager.Context.dCoffeeStocks.First(
-                    p => p.CoffeeSort.Id == detail.CoffeeSort.Id).RoastedQuantity 
-                        < (Packing.Quantity*detail.Ratio*Packing.Package.Capacity)))
+                    p => p.CoffeeSort.Id == detail.CoffeeSort.Id).RoastedQuantity
+                        < (Packing.Quantity * detail.Ratio * Packing.Package.Capacity)))
                 throw new Exception("Недостаточно обжаренного кофе в наличии");
 
             if (ContextManager.Context.dPackageStocks.First(p => p.Package.Id == Packing.Package.Id)
@@ -62,7 +51,12 @@ namespace ViewModels.Windows.EntityWindows
                 throw new Exception("Недостаточно пачек в наличии");
         }
 
-        protected override void OnSaveCreate()
+        protected override void OnSaveEdit()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnSaveNew()
         {
             // Add packing to database
             ContextManager.Context.Packings.Add(Packing);
@@ -104,7 +98,5 @@ namespace ViewModels.Windows.EntityWindows
             ContextManager.Context.dPackageStocks.First(
                 p => p.Package.Id == Packing.Package.Id).Quantity -= Packing.Quantity;
         }
-
-        #endregion
     }
 }

@@ -119,6 +119,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Auxiliary\DataGridRollbackOnUnfocusedBehaviour.cs" />
     <Compile Include="Controls\Combo\ActiveAccounts.xaml.cs">
       <DependentUpon>ActiveAccounts.xaml</DependentUpon>
     </Compile>
@@ -257,14 +258,17 @@
     <Compile Include="Pages\Explore\Suppliers\ParentSuppliers.xaml.cs">
       <DependentUpon>ParentSuppliers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Statistic\StatsPackedStocks.xaml.cs">
+      <DependentUpon>StatsPackedStocks.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Statistic\StatsTransactions.xaml.cs">
       <DependentUpon>StatsTransactions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Statistic\StatsSales.xaml.cs">
       <DependentUpon>StatsSales.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistic\StatsCoffeePurchases.xaml.cs">
-      <DependentUpon>StatsCoffeePurchases.xaml</DependentUpon>
+    <Compile Include="Pages\Statistic\StatsCoffeeStocks.xaml.cs">
+      <DependentUpon>StatsCoffeeStocks.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Unpaid.xaml.cs">
       <DependentUpon>Unpaid.xaml</DependentUpon>
@@ -513,6 +517,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Statistic\StatsPackedStocks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Statistic\StatsTransactions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -521,7 +529,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistic\StatsCoffeePurchases.xaml">
+    <Page Include="Pages\Statistic\StatsCoffeeStocks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
